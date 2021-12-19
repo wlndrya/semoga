@@ -41,7 +41,7 @@
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="hrd-index.html" class="logo d-flex align-items-center">
+					<a href="spv-index.html" class="logo d-flex align-items-center">
 						<img src="assets/img/semogav211.png" height="50 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
@@ -123,10 +123,10 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-profile.html">My Profile</a>
+										<a href="spv-profile.html">My Profile</a>
 									</li>
 									<li>
-										<a href="hrd-company-profile.html">Company Profile</a>
+										<a href="spv-company-profile.html">Company Profile</a>
 									</li>
 								</ul>
 							</div>
@@ -134,34 +134,15 @@
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">HRD Menu</span>
+								<span class="menu-title">Supervisor Menu</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-addsupervisor.html">Add Supervisor</a>
+										<a href="spv-jobdesc.html">Job Description</a>
 									</li>
 									<li>
-										<a href="hrd-feedback.html">Feedback</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Internship</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="hrd-registration.html">Form Registration</a>
-									</li>
-									<li>
-										<a href="hrd-studentlist.html">List Internship</a>
-									</li>
-									<li>
-										<a href="hrd-jobdesc.html">Job Description</a>
+										<a href="spv-feedback.html">Feedback</a>
 									</li>
 								</ul>
 							</div>
@@ -174,25 +155,25 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-logbook.html">Logbook</a>
+										<a href="spv-logbook.html">Logbook</a>
 									</li>
 									<li>
-										<a href="hrd-studentattendance.html">Attendance</a>
+										<a href="spv-studentattendance.html">Attendance</a>
 									</li>
 									<li>
-										<a href="hrd-finalreport.html">Final Report</a>
+										<a href="spv-finalreport.html">Final Report</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="tutorials.html">
+							<a class="nav-link" href="spv-tutorials.html">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="information.html">
+							<a class="nav-link" href="spv-information.html">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -521,36 +502,12 @@
 								<!-- /.card-body -->
 							</div>
 					</div>
+
+					<!--Button Submit-->
 					<div class="modal-footer d-flex justify-content-center">
-						<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal-accept">SUBMIT</button>
-						
-						<!-- Modal Accept -->
-		<div class="modal fade" id="modal-accept" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered"
-			role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title"
-						id="exampleModalLongTitle">Are you sure
-						have filled in correctly?
-					</h5>
-					<button type="button" class="close"
-						data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-footer">
-					<button type="button"
-						class="btn-sm btn-success"
-						data-dismiss="modal">Yes</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Modal Accept -->
+						<button type="button" class="btn btn-secondary btn-sm" id="alert_demo_7">SUBMIT</button>	
 					</div>
+					<!--End Button Submit-->
 				</div>
 				<!--End Evaluation Parameter-->
 			
@@ -665,6 +622,59 @@
 			$('#addRowModal').modal('hide');
 
 		});
+
+			//SweetALert
+			var SweetAlert2Demo = function () {
+            var initDemos = function () {
+
+
+    $('#alert_demo_7').click(function(e) {
+        swal({
+            title: 'Are you sure?',
+            text: "Please check this Feedback to make sure that has been filled in correctly.",
+            type: 'warning',
+            buttons:{
+                confirm: {
+                    text : 'Yes, Im Sure!',
+                    className : 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((Delete) => {
+            if (Delete) {
+                swal({
+                    title: 'Successfull!',
+                    text: 'The Feedback has been published.',
+                    type: 'success',
+                    buttons : {
+                        confirm: {
+                            className : 'btn btn-success'
+                        }
+                    }
+                });
+            } else {
+                swal.close();
+            }
+        });
+    });
+  
+};
+
+return {
+    //== Init
+    init: function () {
+        initDemos();
+    },
+};
+}();
+
+//== Class Initialization
+jQuery(document).ready(function () {
+SweetAlert2Demo.init();
+});
 	</script>
 
 </body>

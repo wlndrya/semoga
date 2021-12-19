@@ -41,7 +41,7 @@
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="hrd-index.html" class="logo d-flex align-items-center">
+					<a href="spv-index.html" class="logo d-flex align-items-center">
 						<img src="assets/img/semogav211.png" height="50 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
@@ -123,10 +123,10 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-profile.html">My Profile</a>
+										<a href="spv-profile.html">My Profile</a>
 									</li>
 									<li>
-										<a href="hrd-company-profile.html">Company Profile</a>
+										<a href="spv-company-profile.html">Company Profile</a>
 									</li>
 								</ul>
 							</div>
@@ -134,34 +134,15 @@
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">HRD Menu</span>
+								<span class="menu-title">Supervisor Menu</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-addsupervisor.html">Add Supervisor</a>
+										<a href="spv-jobdesc.html">Job Description</a>
 									</li>
 									<li>
-										<a href="hrd-feedback.html">Feedback</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Internship</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="hrd-registration.html">Form Registration</a>
-									</li>
-									<li>
-										<a href="hrd-studentlist.html">List Internship</a>
-									</li>
-									<li>
-										<a href="hrd-jobdesc.html">Job Description</a>
+										<a href="spv-feedback.html">Feedback</a>
 									</li>
 								</ul>
 							</div>
@@ -174,25 +155,25 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-logbook.html">Logbook</a>
+										<a href="spv-logbook.html">Logbook</a>
 									</li>
 									<li>
-										<a href="hrd-studentattendance.html">Attendance</a>
+										<a href="spv-studentattendance.html">Attendance</a>
 									</li>
 									<li>
-										<a href="hrd-finalreport.html">Final Report</a>
+										<a href="spv-finalreport.html">Final Report</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="tutorials.html">
+							<a class="nav-link" href="spv-tutorials.html">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="information.html">
+							<a class="nav-link" href="spv-information.html">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -214,6 +195,10 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title"><b>STUDENT ATTENDANCE</b></h4>
+										<a class="btn btn-secondary btn-round ml-auto text-white" id="alert_demo_7">
+											<i class="fa fa-check"></i>
+											Accept
+										</a>
 									</div>
 								</div>
 								<div class="card-body">
@@ -243,7 +228,7 @@
 													<td>09/10/2021</td>
 													<td>10/10/2022</td>
 													<td>1st</td>
-													<td><center><a class="btn btn-success btn-xs text-center text-white">Accepted</a></center></td>
+													<td><center><input type="checkbox" name="vehicle1" value="Bike"></center></td>
 												</tr>
 												<tr>
 													<td>intern001</td>
@@ -256,7 +241,7 @@
 													<td>09/10/2021</td>
 													<td>10/10/2022</td>
 													<td>2nd</td>
-													<td><center><a class="btn btn-warning btn-xs text-center text-white">Requested</a></center></td>
+													<td><center><input type="checkbox" name="vehicle1" value="Bike"></center></td>
 												</tr>
 											</tbody>
 										</table>
@@ -377,6 +362,59 @@
 			$('#addRowModal').modal('hide');
 
 		});
+
+		//SweetALert
+		var SweetAlert2Demo = function () {
+            var initDemos = function () {
+
+
+    $('#alert_demo_7').click(function(e) {
+        swal({
+            title: 'Accept this attendance?',
+            text: "",
+            type: 'warning',
+            buttons:{
+                confirm: {
+                    text : 'Yes, Accepted!',
+                    className : 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((Delete) => {
+            if (Delete) {
+                swal({
+                    title: 'Successfull!',
+                    text: 'The attendance has been accepted',
+                    type: 'success',
+                    buttons : {
+                        confirm: {
+                            className : 'btn btn-success'
+                        }
+                    }
+                });
+            } else {
+                swal.close();
+            }
+        });
+    });
+  
+};
+
+return {
+    //== Init
+    init: function () {
+        initDemos();
+    },
+};
+}();
+
+//== Class Initialization
+jQuery(document).ready(function () {
+SweetAlert2Demo.init();
+});
 	</script>
 
 </body>

@@ -519,38 +519,15 @@
 									</table>
 								</div>
 								<!-- /.card-body -->
+							</form>
 							</div>
 					</div>
+
+					<!--Button Submit-->
 					<div class="modal-footer d-flex justify-content-center">
-						<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal-accept">SUBMIT</button>
-						
-						<!-- Modal Accept -->
-		<div class="modal fade" id="modal-accept" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered"
-			role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title"
-						id="exampleModalLongTitle">Are you sure
-						have filled in correctly?
-					</h5>
-					<button type="button" class="close"
-						data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-footer">
-					<button type="button"
-						class="btn-sm btn-success"
-						data-dismiss="modal">Yes</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Modal Accept -->
+						<button type="button" class="btn btn-secondary btn-sm" id="alert_demo_7">SUBMIT</button>	
 					</div>
+					<!--End Button Submit-->
 				</div>
 				<!--End Evaluation Parameter-->
 			
@@ -665,6 +642,59 @@
 			$('#addRowModal').modal('hide');
 
 		});
+
+		//SweetALert
+		var SweetAlert2Demo = function () {
+            var initDemos = function () {
+
+
+    $('#alert_demo_7').click(function(e) {
+        swal({
+            title: 'Are you sure?',
+            text: "Please check this Feedback to make sure that has been filled in correctly.",
+            type: 'warning',
+            buttons:{
+                confirm: {
+                    text : 'Yes, Im Sure!',
+                    className : 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((Delete) => {
+            if (Delete) {
+                swal({
+                    title: 'Successfull!',
+                    text: 'The Feedback has been published.',
+                    type: 'success',
+                    buttons : {
+                        confirm: {
+                            className : 'btn btn-success'
+                        }
+                    }
+                });
+            } else {
+                swal.close();
+            }
+        });
+    });
+  
+};
+
+return {
+    //== Init
+    init: function () {
+        initDemos();
+    },
+};
+}();
+
+//== Class Initialization
+jQuery(document).ready(function () {
+SweetAlert2Demo.init();
+});
 	</script>
 
 </body>

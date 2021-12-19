@@ -42,7 +42,7 @@
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="spv-index.html" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="50 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/semogav211.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -189,65 +189,46 @@
 			<div class="container">
 				<div class="page-inner">
 
-					<div class="row row-card-no-pd">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title"><b>FINAL REPORT</b></h4>
-										<a class="btn btn-secondary btn-round ml-auto text-white" id="alert_demo_7">
-											<i class="fa fa-check"></i>
-											Accept
-										</a>
-									</div>
-								</div>
-								<div class="card-body">
+					<section class="content">
 
-									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover">
-											<thead>
-												<tr>
-													<th>Intern ID</th>
-													<th>Final Report ID</th>
-													<th>Student ID</th>
-													<th>Full Name</th>
-                                                    <th><center>Detail</center></th>
-													<th><center>Approval</center></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Regist001</td>
-													<td>Report001</td>
-													<td>3311901044</td>
-                                                    <td>Yulia Wulandari</td>
-													<td>
-														<center>
-															<a type="button" style="cursor: pointer;" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-													<td><center><input type="checkbox" name="vehicle1" value="Bike"></center></td>
-												</tr>
-												<tr>
-													<td>Regist002</td>
-                                                    <td>Report002</td>
-													<td>3311901045</td>
-                                                    <td>Seo Changbin</td>
-													<td>
-														<center>
-															<a type="button" style="cursor: pointer;" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-													<td><center><input type="checkbox" name="vehicle1" value="Bike"></center></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
+                        <!-- Default box -->
+                        <div class="card">
+                          <div class="card-body row">
+                            <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                              <div class="">
+								  <p>
+									<img class="alignnone size-full wp-image-6948" style="width: auto; text-align: center;" src="assets/img/polibatamlogo.png" alt="" width="112" height="101">
+								  </p>
+                                <h2><strong>Politeknik Negeri Batam</strong></h2>
+                                <p class="lead mb-3">Jl. Ahmad Yani Batam Kota, Kota Batam, Kepulauan Riau<br>
+                                  Phone: +62-778-469858 Ext.1017<br>
+								  Fax: +62-778-463620
+								  Email: info@polibatam.ac.id
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-7">
+                              <div class="form-group">
+                                <label for="inputName">Name</label>
+                                <input type="text" id="inputName" class="form-control" />
+                              </div>
+                              <div class="form-group">
+                                <label for="inputSubject">Subject</label>
+                                <input type="text" id="inputSubject" class="form-control" />
+                              </div>
+                              <div class="form-group">
+                                <label for="inputMessage">Message</label>
+                                <textarea id="inputMessage" class="form-control" rows="4"></textarea>
+                              </div>
+                              <div class="form-group">
+                                <input type="button" class="btn btn-secondary" value="Send message">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  
+                      </section>
+			
 				</div><!--page inner-->
 			</div><!--container-->
 		</div><!--main-panel-->
@@ -359,59 +340,6 @@
 			$('#addRowModal').modal('hide');
 
 		});
-
-		//SweetALert
-		var SweetAlert2Demo = function () {
-            var initDemos = function () {
-
-
-    $('#alert_demo_7').click(function(e) {
-        swal({
-            title: 'Accept this final report?',
-            text: "",
-            type: 'warning',
-            buttons:{
-                confirm: {
-                    text : 'Yes, Accepted!',
-                    className : 'btn btn-success'
-                },
-                cancel: {
-                    visible: true,
-                    className: 'btn btn-danger'
-                }
-            }
-        }).then((Delete) => {
-            if (Delete) {
-                swal({
-                    title: 'Successfull!',
-                    text: 'The final report has been accepted',
-                    type: 'success',
-                    buttons : {
-                        confirm: {
-                            className : 'btn btn-success'
-                        }
-                    }
-                });
-            } else {
-                swal.close();
-            }
-        });
-    });
-  
-};
-
-return {
-    //== Init
-    init: function () {
-        initDemos();
-    },
-};
-}();
-
-//== Class Initialization
-jQuery(document).ready(function () {
-SweetAlert2Demo.init();
-});
 	</script>
 
 </body>
