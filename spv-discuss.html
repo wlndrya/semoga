@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Sistem Informasi Pengelolaan Magang</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
-			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css']},
-			active: function() {
+			google: {
+				"families": ["Lato:300,400,700,900"]
+			},
+			custom: {
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+					"simple-line-icons"
+				],
+				urls: ['assets/css/fonts.min.css']
+			},
+			active: function () {
 				sessionStorage.fonts = true;
 			}
 		});
@@ -28,21 +36,23 @@
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
+
 <body>
 	<div class="wrapper horizontal-layout-2">
-		
+
 		<div class="main-header" data-background-color="light-blue2">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
-					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+						data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon">
 							<i class="icon-menu"></i>
 						</span>
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="hrd-index.html" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="60 " alt="navbar brand" class="navbar-brand">
+					<a href="spv-index.html" class="logo d-flex align-items-center">
+						<img src="assets/img/semogav211.png" height="60" alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -65,7 +75,8 @@
 							<!-- gatau fungsinya untuk apa -->
 							<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 								<li class="nav-item toggle-nav-search hidden-caret">
-									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
+										aria-expanded="false" aria-controls="search-nav">
 										<i class="fa fa-search"></i>
 									</a>
 								</li>
@@ -80,7 +91,7 @@
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-									<li class="nav-item dropdown hidden-caret">
+								<li class="nav-item dropdown hidden-caret">
 									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
 										aria-expanded="false">
 										<div class="avatar-sm">
@@ -94,7 +105,8 @@
 													<div class="u-text">
 														<a href="profile.html"
 															class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-														<a href="profile.html" class="btn btn-xs btn-danger btn-sm">Logout</a>
+														<a href="profile.html"
+															class="btn btn-xs btn-danger btn-sm">Logout</a>
 													</div>
 												</div>
 											</li>
@@ -123,10 +135,10 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-profile.html">My Profile</a>
+										<a href="spv-profile.html">My Profile</a>
 									</li>
 									<li>
-										<a href="hrd-company-profile.html">Company Profile</a>
+										<a href="spv-company-profile.html">Company Profile</a>
 									</li>
 								</ul>
 							</div>
@@ -134,34 +146,15 @@
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">HRD Menu</span>
+								<span class="menu-title">Supervisor Menu</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-addsupervisor.html">Add Supervisor</a>
+										<a href="spv-jobdesc.html">Job Description</a>
 									</li>
 									<li>
-										<a href="hrd-feedback.html">Feedback</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Internship</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="hrd-registration.html">Form Registration</a>
-									</li>
-									<li>
-										<a href="hrd-studentlist.html">List Internship</a>
-									</li>
-									<li>
-										<a href="hrd-jobdesc.html">Job Description</a>
+										<a href="spv-feedback.html">Feedback</a>
 									</li>
 								</ul>
 							</div>
@@ -174,25 +167,25 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="hrd-logbook.html">Logbook</a>
+										<a href="spv-logbook.html">Logbook</a>
 									</li>
 									<li>
-										<a href="hrd-studentattendance.html">Attendance</a>
+										<a href="spv-studentattendance.html">Attendance</a>
 									</li>
 									<li>
-										<a href="hrd-finalreport.html">Final Report</a>
+										<a href="spv-finalreport.html">Final Report</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="tutorials.html">
+							<a class="nav-link" href="spv-tutorials.html">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="information.html">
+							<a class="nav-link" href="spv-information.html">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -208,80 +201,169 @@
 			<div class="container">
 				<div class="page-inner">
 
-                    <div class="row row-card-no-pd">
+					<!--Category Filters-->
+					<!-- <div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="card-title fw-mediumbold">Topic Filters</div>
+						<div id="myBtnContainer">
+							<button class="btn-cat active onclick="filterSelection('all')">No Category</button>
+							<button class="btn-cat" onclick="filterSelection('cars')"> Job Description</button>
+							<button class="btn-cat" onclick="filterSelection('cars')"> Attendance</button>
+							<button class="btn-cat" onclick="filterSelection('animals')"> Logbook</button>
+							<button class="btn-cat" onclick="filterSelection('fruits')"> Final Report</button>
+							<button class="btn-cat" onclick="filterSelection('colors')"> Feedback</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+					<!--End Category Filters-->
+
+					<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title"><b>JOB DESCRIPTION</b></h4>
+										<h4 class="card-title"><b>FORUM DISCUSSION</b></h4>
+										<button class="btn btn-secondary btn-round ml-auto" data-toggle="modal"
+											data-target="#modal-add">
+											<i class="fa fa-plus"></i>
+											Add New Discussion
+										</button>
+										<!-- Modal Add New Discussion-->
+										<div class="modal fade" id="modal-add" tabindex="-1" role="dialog"
+											aria-labelledby="modal-edit" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered cascading-modal modal-lg"
+												role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="modal-add">
+															ADD DISCUSS</h5>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+
+													<form>
+														<div class="modal-body">
+															<!-- <div class="form-group">
+																<label>Today's Date</label>
+																  <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+																	  <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
+																	  <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+																		  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+																	  </div>
+																  </div>
+															  </div> -->
+															  <div class="form-group">
+																<label for="id_topic">Today's Date</label>
+																<input type="date" class="form-control" id="id_topic"
+																	placeholder="" required>
+															</div>
+															<div class="form-group">
+																<label for="id_topic">What the topic?</label>
+																<input type="text" class="form-control" id="id_topic"
+																	placeholder="" required>
+															</div>
+															<div class="form-group">
+																<label for="id_company">Discussion</label>
+																<textarea class="form-control" rows="10" cols="100"
+																	id="message-text"
+																	placeholder="Fill here..."></textarea>
+															</div>
+														</div>
+														<div
+															class="modal-footer border-top-0 d-flex justify-content-center">
+															<button type="submit"
+																class="btn btn-secondary btn-sm">SEND</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- End Modal -->
 									</div>
 								</div>
 								<div class="card-body">
-
 									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover">
+										<table class="table table-head-bg-white mb-3">
 											<thead>
 												<tr>
-													<th>ID User</th>
-													<th>Supervisor</th>
-													<th>Department</th>
-													<th>Intern Name</th>
-													<th><center>Job Description</center></th>
-												</tr>
-											</thead>
-											<tbody>
+													<th scope="col" style="width: 50%;">Discussion Title</th>
+													<th scope="col">Topic</th>
+													<th scope="col">Date</th>
+													<th scope="col">
+														<center>Member</center>
+													</th>
+													<th scope="col">
+														<center><i class="fas fa-eye fa-lg" title="Viewer"></i></center>
+													</th>
+													<th scope="col">
+														<center><i class="fas fa-comment fa-lg" title="Comment" </i>
+																</center> </th> </tr> </thead> <tbody>
 												<tr>
-													<td>001</td>
-													<td>Kezia Angelina S</td>
-													<td>Quality Control</td>
-													<td>Seo Changbin</td>
+													<td><a href="spv-discuss2.html">Pembuatan Logbook</a></td>
+													<td>Logbook</td>
+													<td>24/01/2022</td>
 													<td>
-														<center>
-															<a type="button" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
+														<center><i class="fas fa-user-circle fa-lg"
+																title="Cyntya Maharani Nurul Istiqomah"></i>
+															</center</td> <td>
+															<center><a
+																	class="btn btn-success btn-xs text-center text-white">6</a>
+															</center>
+													</td>
+													<td>
+														<center><a
+																class="btn btn-success btn-xs text-center text-white">5</a>
 														</center>
 													</td>
 												</tr>
 												<tr>
-													<td>002</td>
-													<td>Cyntya Maharani Nurul Istiqomah</td>
-													<td>IT</td>
-													<td>Hwang Hyunjin</td>
+													<td><a href="spv-discuss3.html">Poin Kehadiran</a></td>
+													<td>Attendance</td>
+													<td>30/02/2022</td>
 													<td>
-														<center>
-															<a type="button" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
+														<center><i class="fas fa-user-circle fa-lg"
+																title="Yulia Wulandari"></i></center>
+													</td>
+													<td>
+														<center><a
+																class="btn btn-success btn-xs text-center text-white">3</a>
+														</center>
+													</td>
+													<td>
+														<center><a
+																class="btn btn-success btn-xs text-center text-white">0</a>
 														</center>
 													</td>
 												</tr>
-												<tr>
-													<td>003</td>
-													<td>Yulia Wulandari</td>
-													<td>Engineering</td>
-													<td>Lee Min Ho</td>
-													<td>
-														<center>
-															<a type="button" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-												</tr>
-											</tbody>
+												</tbody>
 										</table>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-			
-				</div><!--page inner-->
-			</div><!--container-->
-		</div><!--main-panel-->
+
+				</div>
+				<!--page inner-->
+			</div>
+			<!--container-->
+		</div>
+		<!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->
 		<footer class="footer">
 			<div class="container">
 				<div class="copyright ml-auto">
-					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
-				</div>				
+					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a
+						href="http://www.themekita.com">PSTeam</a>
+				</div>
 			</div>
 		</footer>
 		<!-- End Footer -->
@@ -361,7 +443,7 @@
 	<script src="assets/js/demo.js"></script>
 
 	<!-- AdminLTE App -->
-	<script src="../../dist/js/adminlte.min.js"></script>
+	<script src="dist/js/adminlte.min.js"></script>
 
 	<script>
 		// Add Row
@@ -382,7 +464,73 @@
 			$('#addRowModal').modal('hide');
 
 		});
+
+		//Datemask dd/mm/yyyy
+		$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+
+    //Date and time picker
+    $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    })
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
 	</script>
 
 </body>
+
 </html>

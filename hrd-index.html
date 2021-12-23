@@ -281,8 +281,41 @@
 																Purposeful, Inclusive and empowered.</p>
 															<button type="button"
 																class="btn btn-sm btn-secondary ml-auto" href="#"
-																data-toggle="modal" data-target="#modalcompany">Edit
+																data-toggle="modal" data-target="#modal-editcompany">Edit
 																Description</button>
+
+															<!-- Modal Edit Company Profile-->
+										<div class="modal fade" id="modal-editcompany" tabindex="-1" role="dialog"
+										aria-labelledby="modal-edit" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered cascading-modal modal-lg"
+											role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="modal-editcompany">
+														EDIT COMPANY PROFILE</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<form>
+													<div class="modal-body">
+														<div class="form-group">
+															<textarea class="form-control" id="description" placeholder="Company Brief Description..." rows="10" cols="100" onkeyup="charCount(this)"></textarea>
+															<span id="textcount">0</span> of 550 Characters
+														</div>
+													</div>
+													<div
+														class="modal-footer border-top-0 d-flex justify-content-center">
+														<button type="submit"
+															class="btn btn-secondary btn-sm">UPDATE</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									<!-- End Modal Company Profile -->
 
 															<!-- Form Modal Edit Description Company Profile -->
 					<div class="modal fade" id="modalcompany" tabindex="-1" role="dialog"
@@ -476,6 +509,22 @@
 
 	<!-- AdminLTE App -->
 	<script src="../../dist/js/adminlte.min.js"></script>
+
+	<!--Javascript--><!--Maximum Character for Textarea-->
+	<script type="text/javascript">
+		function charCount(textarea){
+			var max=550;
+			var length=textarea.value.length;
+			if(length>max)
+			{
+				textarea.value=textarea.value.substring(0,550);
+			}
+			else
+			{
+				$('#textcount').text(length);
+			}
+		}
+	</script>
 
 	<script>
 		// Add Row

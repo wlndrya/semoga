@@ -138,3 +138,15 @@
   .justify{
     text-align: justify;
   }
+
+  .btn-cat{
+    border-radius: 12px;
+    padding: 8px 8px;
+    background-color: none;
+    border: 3px solid;
+    color: #87A7B3;
+    font-size: 11px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
