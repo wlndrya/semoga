@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Sistem Informasi Pengelolaan Magang</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
-			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css']},
-			active: function() {
+			google: {
+				"families": ["Lato:300,400,700,900"]
+			},
+			custom: {
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+					"simple-line-icons"
+				],
+				urls: ['assets/css/fonts.min.css']
+			},
+			active: function () {
 				sessionStorage.fonts = true;
 			}
 		});
+		// Get the container element
+var btnContainer = document.getElementById("myDIV");
+
+// Get all buttons with class="btn" inside the container
+var btns = btnContainer.getElementsByClassName("link-to");
+
+// Loop through the buttons and add the active class to the current/clicked button
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function () {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
 	</script>
 
 	<!-- CSS Files -->
@@ -28,13 +50,15 @@
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
+
 <body>
 	<div class="wrapper horizontal-layout-2">
-		
+
 		<div class="main-header" data-background-color="light-blue2">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
-					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+						data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon">
 							<i class="icon-menu"></i>
 						</span>
@@ -65,7 +89,8 @@
 							<!-- gatau fungsinya untuk apa -->
 							<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 								<li class="nav-item toggle-nav-search hidden-caret">
-									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
+										aria-expanded="false" aria-controls="search-nav">
 										<i class="fa fa-search"></i>
 									</a>
 								</li>
@@ -80,7 +105,7 @@
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-									<li class="nav-item dropdown hidden-caret">
+								<li class="nav-item dropdown hidden-caret">
 									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
 										aria-expanded="false">
 										<div class="avatar-sm">
@@ -94,7 +119,8 @@
 													<div class="u-text">
 														<a href="profile.html"
 															class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-														<a href="profile.html" class="btn btn-xs btn-danger btn-sm">Logout</a>
+														<a href="profile.html"
+															class="btn btn-xs btn-danger btn-sm">Logout</a>
 													</div>
 												</div>
 											</li>
@@ -112,17 +138,17 @@
 			</div>
 
 			<!-- Menu -->
-			<div class="nav-bottom">
+			<div class="nav-bottom" id="myDIV">
 				<div class="container">
 					<ul class="nav page-navigation page-navigation-info bg-white">
-						<li class="nav-item submenu">
+						<li class="nav-item submenu active">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
 								<span class="menu-title">Profile</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
-									<li>
+									<li class="link-to">
 										<a href="hrd-profile.html">My Profile</a>
 									</li>
 									<li>
@@ -138,7 +164,7 @@
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
-									<li>
+									<li class="link-to">
 										<a href="hrd-addsupervisor.html">Add Supervisor</a>
 									</li>
 									<li>
@@ -208,7 +234,7 @@
 			<div class="container">
 				<div class="page-inner">
 
-                    <div class="row">
+					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
@@ -218,74 +244,131 @@
 								<form id="exampleValidation">
 									<div class="card-body">
 										<div class="form-group form-show-validation row">
-											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Profile Picture <span class="required-label">*</span></label>
+											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Profile Picture
+												<span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<div class="input-file input-file-image">
-													<img class="img-upload-preview img-circle" width="100" height="100" src="http://placehold.it/100x100" alt="preview">
-													<input type="file" class="form-control form-control-file" id="uploadImg" name="uploadImg" accept="image/*" required >
-													<label for="uploadImg" class="btn btn-primary btn-round btn-lg"><i class="fa fa-file-image"></i> Upload a Image</label>
+													<img class="img-upload-preview img-circle" width="100" height="100"
+														src="http://placehold.it/100x100" alt="preview">
+													<input type="file" class="form-control form-control-file"
+														id="uploadImg" name="uploadImg" accept="image/*" required>
+													<label for="uploadImg" class="btn btn-primary btn-round btn-lg"><i
+															class="fa fa-file-image"></i> Upload a Image</label>
 												</div>
-											</div>
-										</div>
-                                        <div class="separator-solid"></div>
-										<div class="form-group form-show-validation row">
-											<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Name <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="username" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Username <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-group">
-													<input type="text" class="form-control" placeholder="Username" aria-label="username" aria-describedby="username-addon" id="username" name="username" required>
-												</div>
-											</div>
-										</div>
-                                        <div class="form-group form-show-validation row">
-											<label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Number Phone <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="phone" placeholder="Enter number phone" required>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="email" class="form-control" id="email" placeholder="Enter Email" required>
-												<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="password" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Password <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="confirmpassword" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Confirm Password <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Enter Password" required>
 											</div>
 										</div>
 										<div class="separator-solid"></div>
+										<!-- <div class="form-group form-show-validation row">
+											<label for="id_user_company" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">User ID
+												<span class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="id_user_company" name="id_user_company"
+													placeholder="Enter your Personal ID" required>
+											</div>
+										</div> -->
 										<div class="form-group form-show-validation row">
-											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Gender <span class="required-label">*</span></label>
+											<label for="id_company"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company ID
+												<span class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<div class="input-group">
+													<input type="text" class="form-control" placeholder=""
+														aria-label="id_company" aria-describedby="username-addon"
+														id="id_company" name="id_company" readonly value="COMPANY001" required>
+												</div>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="fullname"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Full Name <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="user_fullname"
+													placeholder="Enter full name" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="phone"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone/Whatsapp Number <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="user_phone"
+													placeholder="Enter number phone" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="email"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address
+												<span class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="email" class="form-control" id="email"
+													placeholder="Enter Email" required>
+												<small id="emailHelp" class="form-text text-muted">We'll never share
+													your email with anyone else.</small>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="username"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Username <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="username"
+													placeholder="Enter username" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="password"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Password <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="password" class="form-control" id="password"
+													name="password" placeholder="Enter Password" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="confirmpassword"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Confirm Password
+												<span class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="password" class="form-control" id="confirmpassword"
+													name="confirmpassword" placeholder="Enter Password" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="user_type"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">User type <span
+													class="required-label">*</span></label>
+													<div class="col-lg-4 col-md-9 col-sm-8">
+													<select class="form-control" disabled>
+														<option><b>HRD/Human Resources Development</b></option>
+													  </select>
+													  </div>
+										</div>
+										<div class="separator-solid"></div>
+										<div class="form-group form-show-validation row">
+											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Gender <span
+													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
 												<div class="custom-control custom-radio">
-													<input type="radio" id="male" name="gender" class="custom-control-input">
+													<input type="radio" id="male" name="gender"
+														class="custom-control-input">
 													<label class="custom-control-label" for="male">Male</label>
 												</div>
 												<div class="custom-control custom-radio">
-													<input type="radio" id="female" name="gender" class="custom-control-input">
+													<input type="radio" id="female" name="gender"
+														class="custom-control-input">
 													<label class="custom-control-label" for="female">Female</label>
 												</div>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="birth" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Birth <span class="required-label">*</span></label>
+											<label for="birth"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Birth <span
+													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<div class="input-group">
-													<input type="date" class="form-control" id="birth" name="birth" required>
+													<input type="date" class="form-control" id="birth" name="birth"
+														required>
 												</div>
 											</div>
 										</div>
@@ -305,8 +388,8 @@
 										<div class="row">
 											<div class="col-md-12">
 												<button class="btn btn-danger">Edit</button>
-                                                <input class="btn btn-success" type="submit" value="Save">
-											</div>										
+												<input class="btn btn-success" type="submit" value="Save">
+											</div>
 										</div>
 									</div>
 								</form>
@@ -314,21 +397,26 @@
 						</div>
 					</div>
 
-				</div><!--page inner-->
-			</div><!--container-->
-		</div><!--main-panel-->
+				</div>
+				<!--page inner-->
+			</div>
+			<!--container-->
+		</div>
+		<!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->
 		<footer class="footer">
 			<div class="container">
 				<div class="copyright ml-auto">
-					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
-				</div>				
+					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a
+						href="http://www.themekita.com">PSTeam</a>
+				</div>
 			</div>
 		</footer>
 		<!-- End Footer -->
-	</div><!--wrapper horizontal-layout-2-->
+	</div>
+	<!--wrapper horizontal-layout-2-->
 
 	<!--   Core JS Files   -->
 	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
@@ -428,4 +516,5 @@
 	</script>
 
 </body>
+
 </html>

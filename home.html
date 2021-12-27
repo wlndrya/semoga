@@ -16,6 +16,20 @@
 				sessionStorage.fonts = true;
 			}
 		});
+		// Get the container element
+var btnContainer = document.getElementById("myDIV");
+
+// Get all buttons with class="btn" inside the container
+var btns = btnContainer.getElementsByClassName("link-to");
+
+// Loop through the buttons and add the active class to the current/clicked button
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function () {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
 	</script>
 
 	<!-- CSS Files -->
@@ -138,7 +152,7 @@
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
-									<li>
+									<li class="link-to">
 										<a href="hrd-addsupervisor.html">Add Supervisor</a>
 									</li>
 									<li>
@@ -186,13 +200,13 @@
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="tutorials.html">
+							<a class="nav-link" href="hrd-tutorials.html">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="information.html">
+							<a class="nav-link" href="hrd-information.html">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>

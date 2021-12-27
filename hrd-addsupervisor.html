@@ -24,6 +24,20 @@
                 sessionStorage.fonts = true;
             }
         });
+        // Get the container element
+var btnContainer = document.getElementById("myDIV");
+
+// Get all buttons with class="btn" inside the container
+var btns = btnContainer.getElementsByClassName("link-to");
+
+// Loop through the buttons and add the active class to the current/clicked button
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function () {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
     </script>
 
     <!-- CSS Files -->
@@ -68,7 +82,7 @@
                                                 <i class="fa fa-search search-icon"></i>
                                             </button>
                                         </div>
-                                        <input type="text" placeholder="Search ..." class="form-control">
+                                        <input type="text" placeholder="Search ..." class="form-control" required>
                                     </div>
                                 </form>
                             </div>
@@ -124,7 +138,7 @@
             </div>
 
             <!-- Menu -->
-            <div class="nav-bottom">
+            <div class="nav-bottom" id="myDIV">
 				<div class="container">
 					<ul class="nav page-navigation page-navigation-info bg-white">
 						<li class="nav-item submenu">
@@ -134,7 +148,7 @@
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
-									<li>
+									<li class="link-to">
 										<a href="hrd-profile.html">My Profile</a>
 									</li>
 									<li>
@@ -150,7 +164,7 @@
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
-									<li>
+									<li class="link-to">
 										<a href="hrd-addsupervisor.html">Add Supervisor</a>
 									</li>
 									<li>
@@ -225,7 +239,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                                        <h4 class="card-title"><b>LIST SUPERVISOR</b></h4>
+                                        <h4 class="card-title"><b>ADD & LIST SUPERVISOR</b></h4>
                                         <button class="btn btn-secondary btn-round ml-auto" data-toggle="modal"
                                             data-target="#modaladdspv">
                                             <i class="fa fa-plus"></i>
@@ -249,17 +263,9 @@
                                                     </button>
                                                 </div>
 
+                                                <!--modal add supervisor-->
                                                 <form>
                                                     <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="id_company">ID Company</label>
-                                                            <input type="text" class="form-control" id="id_company" placeholder="" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="id_user">ID User</label>
-                                                            <input type="text" class="form-control" id="id_user"
-                                                                aria-describedby="id_user" placeholder="" required>
-                                                        </div>
                                                         <div class="form-group">
                                                             <label for="user_fullname">Full Name</label>
                                                             <input type="text" class="form-control" id="user_fullname"
@@ -288,9 +294,9 @@
                                                     </div>
                                                 </form>
                                                 <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                                <button type="button" class="btn btn-secondary btn-sm"
-                                                    id="alert_demo_3_3">ADD</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" id="alert_demo_3_3">ADD</button>
                                                 </div>
+                                                <!--end modal add supervisor-->
                                             </div>
                                         </div>
                                     </div>
@@ -314,16 +320,6 @@
                                                 <form>
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="id_company">ID Company</label>
-                                                            <input type="text" class="form-control" id="id_company"
-                                                                placeholder="" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="id_user">ID User</label>
-                                                            <input type="text" class="form-control" id="id_user"
-                                                                aria-describedby="id_user" placeholder="" required>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <label for="user_fullname">Full Name</label>
                                                             <input type="text" class="form-control" id="user_fullname"
                                                                 placeholder="">
@@ -339,53 +335,41 @@
                                                                 placeholder="">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="id_user">Total Interns</label>
-                                                            <input type="text" class="form-control" id="id_user"
-                                                                aria-describedby="id_user" placeholder="Example : 1/2/3/4/5" required>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <label for="username">Username</label>
                                                             <input type="text" class="form-control" id="username"
                                                                 placeholder="">
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="password">Password</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                placeholder="">
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="modal-footer border-top-0 d-flex justify-content-center">
-                                                        <button type="submit"
-                                                            class="btn btn-secondary btn-sm">UPDATE</button>
                                                     </div>
                                                 </form>
+                                                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                <button type="button" class="btn btn-secondary btn-sm">UPDATE</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- End Modal -->
 
+                                    <!-- Main table-->
                                     <div class="table-responsive">
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th><center>ID User</center></th>
+                                                    <th><center>Username</center></th>
                                                     <th>Full Name</th>
                                                     <th>Phone</th>
-                                                    <th>Email Address</th>
-                                                    <th><center>Total Interns</center></th>
-                                                    <th style="width: 20%">
+                                                    <th>Email</th>
+                                                    <th><center>Total Intern</center></th>
+                                                    <th>
                                                         <center>Action</center>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>001</td>
-                                                    <td>Kezia Angelina S</td>
-                                                    <td>081267053134</td>
-                                                    <td>sinaga.kezia61@gmail.com</td>
-                                                    <td><center>4</center></td>
+                                                    <td>kezia001</td>
+                                                    <td>Kezia Angelina Sinaga</td>
+                                                    <td>081267053139</td>
+                                                    <td>kezia.sinaga61@gmail.com</td>
+                                                    <td></td>
                                                     <td>
                                                         <div class="form-button-action">
                                                             <button type="button" data-toggle="modal" title="Edit"
@@ -403,11 +387,11 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>002</td>
+                                                    <td>cyntya001</td>
                                                     <td>Cyntya Maharani Nurul Istiqomah</td>
-                                                    <td>08784563214</td>
-                                                    <td>cyntya.maharani@gmail.com</td>
-                                                    <td><center>2</center></td>
+                                                    <td>087826543980</td>
+                                                    <td>cyntyamaharani@gmail.com</td>
+                                                    <td></td>
                                                     <td>
                                                         <div class="form-button-action">
                                                             <button type="button" data-toggle="modal" title="Edit"
@@ -425,11 +409,11 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>003</td>
+                                                    <td>yulia001</td>
                                                     <td>Yulia Wulandari</td>
                                                     <td>085156430801</td>
                                                     <td>yuliawulandari271@gmail.com</td>
-                                                    <td><center>1</center></td>
+                                                    <td></td>
                                                     <td>
                                                         <div class="form-button-action">
                                                             <button type="button" data-toggle="modal" title="Edit"
@@ -449,6 +433,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!--End Main table-->
                                 </div>
                             </div>
                         </div>

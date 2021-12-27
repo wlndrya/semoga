@@ -208,18 +208,204 @@
 			<div class="container">
 				<div class="page-inner">
 
-                    <div class="card">
-						<div class="card-header">
-                            <div class="d-flex align-items-center">
-							<div class="card-title"><b>Company Profile</b></div>
-                            <button class="btn btn-secondary btn-round ml-auto" 
-                            id="alert_demo_7">
-                            <i class="fas fa-paper-plane"></i> Publish
-                        </button>
-                    </div>
-						</div>
-						<div class="card-body">
-							<div id="summernote"></div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title"><b>Company Profile</b></div>
+									<div class="card-category"></a></div>
+								</div>
+								<form id="exampleValidation">
+									<div class="card-body">
+										<div class="form-group form-show-validation row">
+											<label for="id_company"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company ID <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<div class="input-group">
+													<input type="text" class="form-control" placeholder=""
+														aria-label="id_company" aria-describedby="username-addon"
+														id="id_company" name="id_company" readonly value="COMPANY001" required>
+												</div>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="name"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Name <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="name"
+													placeholder="Enter company name" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="type"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Type <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+													<select class="form-control">
+														<option>Agency</option>
+														<option>Design</option>
+														<option>Education</option>
+														<option>Engineering</option>
+														<option>Finance</option>
+														<option>Governmnet</option>
+														<option>Health</option>
+														<option>IT & Telco</option>
+														<option>Logistics</option>
+														<option>Marketing</option>
+														<option>Media</option>
+														<option>Others</option>
+													  </select>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="phone"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone Number <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="phone"
+													placeholder="Enter company phone" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="email"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address
+												<span class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="email" class="form-control" id="email"
+													placeholder="Enter company email" required>
+												<small id="emailHelp" class="form-text text-muted"></small>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="header"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Header <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="header"
+													placeholder="Enter header" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="address"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Address <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="address"
+													placeholder="Enter company address" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="province"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Province <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="province"
+													placeholder="Enter company province" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="city"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">City <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="city"
+													placeholder="Enter company city" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="description"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Description <span
+													class="required-label"></span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<textarea class="form-control" id="description"
+													placeholder="Enter description" required></textarea>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="access_type"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Access Type
+												<span class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<div class="input-group">
+													<input type="text" class="form-control" placeholder=""
+														aria-label="access_type" aria-describedby=""
+														id="access_type" name="access_type" readonly value="1" required>
+												</div>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="status"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Status
+												<span class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<div class="input-group">
+													<input type="text" class="form-control is-valid" placeholder=""
+														aria-label="status" aria-describedby=""
+														id="status" name="status" readonly value="VERIFIED" required><i class="fas fa-check" style="color: green;"></i>
+												</div>
+											</div>
+										</div>
+										<div class="separator-solid"></div>
+										<div class="form-group form-show-validation row">
+											<label for="website"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Website <span
+													class="required-label">*</span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="website"
+													placeholder="Enter link website" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="facebook"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Facebook <span
+													class="required-label"></span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="facebook"
+													placeholder="Enter facebook name" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="twitter"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Twitter <span
+													class="required-label"></span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="twitter"
+													placeholder="Enter username twitter" required>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="instagram"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Instagram <span
+													class="required-label"></span></label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="instagram"
+													placeholder="Enter username instagram" required>
+											</div>
+										</div>
+										<!-- <div class="form-check">
+											<div class="row">
+												<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Agree <span class="required-label">*</span></label>
+												<div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input" id="agree" name="agree" required>
+														<label class="custom-control-label" for="agree">Agree with terms and conditions</label>
+													</div>
+												</div>
+											</div>
+										</div> -->
+									</div><!-- card body -->
+									<div class="card-action">
+										<div class="row">
+											<div class="col-md-12">
+												<button class="btn btn-danger">Edit</button>
+												<input class="btn btn-success" type="submit" value="Save">
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				
