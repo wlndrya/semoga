@@ -1,3 +1,8 @@
+<?php
+//Mengkoneksikan dengan Database
+include 'config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,24 +25,24 @@
                 ],
                 urls: ['assets/css/fonts.min.css']
             },
-            active: function () {
+            active: function() {
                 sessionStorage.fonts = true;
             }
         });
         // Get the container element
-var btnContainer = document.getElementById("myDIV");
+        var btnContainer = document.getElementById("myDIV");
 
-// Get all buttons with class="btn" inside the container
-var btns = btnContainer.getElementsByClassName("link-to");
+        // Get all buttons with class="btn" inside the container
+        var btns = btnContainer.getElementsByClassName("link-to");
 
-// Loop through the buttons and add the active class to the current/clicked button
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function () {
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
+        // Loop through the buttons and add the active class to the current/clicked button
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function() {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
     </script>
 
     <!-- CSS Files -->
@@ -57,8 +62,7 @@ for (var i = 0; i < btns.length; i++) {
         <div class="main-header" data-background-color="light-blue2">
             <div class="nav-top">
                 <div class="container d-flex flex-row">
-                    <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
-                        data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon">
                             <i class="icon-menu"></i>
                         </span>
@@ -89,8 +93,7 @@ for (var i = 0; i < btns.length; i++) {
                             <!-- gatau fungsinya untuk apa -->
                             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                                 <li class="nav-item toggle-nav-search hidden-caret">
-                                    <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
-                                        aria-expanded="false" aria-controls="search-nav">
+                                    <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
                                         <i class="fa fa-search"></i>
                                     </a>
                                 </li>
@@ -106,8 +109,7 @@ for (var i = 0; i < btns.length; i++) {
                                 <!-- end gatau fungsinya untuk apa -->
                                 <!-- Profil -->
                                 <li class="nav-item dropdown hidden-caret">
-                                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
-                                        aria-expanded="false">
+                                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                                         <div class="avatar-sm">
                                             <img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
                                         </div>
@@ -117,10 +119,8 @@ for (var i = 0; i < btns.length; i++) {
                                             <li>
                                                 <div class="user-box">
                                                     <div class="u-text">
-                                                        <a href="profile.html"
-                                                            class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-                                                        <a href="profile.html"
-                                                            class="btn btn-xs btn-danger btn-sm">Logout</a>
+                                                        <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                                        <a href="profile.html" class="btn btn-xs btn-danger btn-sm">Logout</a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -139,93 +139,93 @@ for (var i = 0; i < btns.length; i++) {
 
             <!-- Menu -->
             <div class="nav-bottom" id="myDIV">
-				<div class="container">
-					<ul class="nav page-navigation page-navigation-info bg-white">
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-book-open"></i>
-								<span class="menu-title">Profile</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li class="link-to">
-										<a href="hrd-profile.html">My Profile</a>
-									</li>
-									<li>
-										<a href="hrd-company-profile.html">Company Profile</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">HRD Menu</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li class="link-to">
-										<a href="hrd-addsupervisor.html">Add Supervisor</a>
-									</li>
-									<li>
-										<a href="hrd-feedback.html">Feedback</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Internship</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="hrd-registration.html">Form Registration</a>
-									</li>
-									<li>
-										<a href="hrd-studentlist.html">List Internship</a>
-									</li>
-									<li>
-										<a href="hrd-jobdesc.html">Job Description</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-folder-alt"></i>
-								<span class="menu-title">Internship Files</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="hrd-logbook.html">Logbook</a>
-									</li>
-									<li>
-										<a href="hrd-studentattendance.html">Attendance</a>
-									</li>
-									<li>
-										<a href="hrd-finalreport.html">Final Report</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="tutorials.html">
-								<i class="link-icon icon-screen-desktop"></i>
-								<span class="menu-title">Tutorial</span>
-							</a>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="information.html">
-								<i class="link-icon icon-question"></i>
-								<span class="menu-title">Information</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
+                <div class="container">
+                    <ul class="nav page-navigation page-navigation-info bg-white">
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="#">
+                                <i class="link-icon icon-book-open"></i>
+                                <span class="menu-title">Profile</span>
+                            </a>
+                            <div class="navbar-dropdown animated fadeIn">
+                                <ul>
+                                    <li>
+                                        <a href="index.php?page=hrd-profile">My Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=hrd-company-profile">Company Profile</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="#">
+                                <i class="link-icon icon-grid"></i>
+                                <span class="menu-title">HRD Menu</span>
+                            </a>
+                            <div class="navbar-dropdown animated fadeIn">
+                                <ul>
+                                    <li class="link-to">
+                                        <a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=hrd-feedback">Feedback</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="#">
+                                <i class="link-icon icon-layers"></i>
+                                <span class="menu-title">Internship</span>
+                            </a>
+                            <div class="navbar-dropdown animated fadeIn">
+                                <ul>
+                                    <li>
+                                        <a href="index.php?page=hrd-registration">Form Registration</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=hrd-studentlist">List Internship</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=hrd-jobdesc">Job Description</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="#">
+                                <i class="link-icon icon-folder-alt"></i>
+                                <span class="menu-title">Internship Files</span>
+                            </a>
+                            <div class="navbar-dropdown animated fadeIn">
+                                <ul>
+                                    <li>
+                                        <a href="index.php?page=hrd-logbook">Logbook</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=hrd-studentattendance">Attendance</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=hrd-finalreport">Final Report</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=hrd-tutorial">
+                                <i class="link-icon icon-screen-desktop"></i>
+                                <span class="menu-title">Tutorial</span>
+                            </a>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=hrd-information">
+                                <i class="link-icon icon-question"></i>
+                                <span class="menu-title">Information</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <!-- End Menu -->
         </div>
 
@@ -240,8 +240,7 @@ for (var i = 0; i < btns.length; i++) {
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title"><b>ADD & LIST SUPERVISOR</b></h4>
-                                        <button class="btn btn-secondary btn-round ml-auto" data-toggle="modal"
-                                            data-target="#modaladdspv">
+                                        <button class="btn btn-secondary btn-round ml-auto" data-toggle="modal" data-target="#modaladdspv">
                                             <i class="fa fa-plus"></i>
                                             Add Supervisor
                                         </button>
@@ -250,52 +249,61 @@ for (var i = 0; i < btns.length; i++) {
                                 <div class="card-body">
 
                                     <!-- Form Modal Add Supervisor -->
-                                    <div class="modal fade" id="modaladdspv" tabindex="-1" role="dialog"
-                                        aria-labelledby="modaladdspv" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered cascading-modal modal-lg"
-                                            role="document">
+                                    <div class="modal fade" id="modaladdspv" tabindex="-1" role="dialog" aria-labelledby="modaladdspv" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="modaladdspv">ADD SUPERVISOR</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
 
                                                 <!--modal add supervisor-->
-                                                <form>
+                                                <form method="POST" action="proses_dummy.php?PageAction=add">
                                                     <div class="modal-body">
                                                         <div class="form-group">
+                                                            <label for="is_user_company">User ID</label>
+                                                            <input type="text" class="form-control" id="id_user_company" name="id_user_company" placeholder="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="id_company">Company ID</label>
+                                                            <input type="text" class="form-control" id="id_company" name="id_company" placeholder="">
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label for="user_fullname">Full Name</label>
-                                                            <input type="text" class="form-control" id="user_fullname"
-                                                                placeholder="">
+                                                            <input type="text" class="form-control" id="user_fullname" name="user_fullname" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_phone">Phone</label>
-                                                            <input type="text" class="form-control" id="user_phone"
-                                                                placeholder="">
+                                                            <input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_email">Email Address</label>
-                                                            <input type="email" class="form-control" id="user_email"
-                                                                placeholder="">
+                                                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="username">Username</label>
-                                                            <input type="text" class="form-control" id="username"
-                                                                placeholder="">
+                                                            <input type="text" class="form-control" id="username" name="username" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password">Password</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                placeholder="">
+                                                            <input type="password" class="form-control" id="password" name="password" placeholder="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="user_type">User Type</label>
+                                                            <select class="form-control" name="user_type">
+                                                                <option value="supervisor">SUPERVISOR</option>
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                </form>
-                                                <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                                <button type="button" class="btn btn-secondary btn-sm" id="alert_demo_3_3">ADD</button>
+                                                    <div class="form-group">
+                                                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                    <button type="submit" class="btn btn-secondary btn-sm" name="btn-add" id="btn-add">ADD</button>
                                                 </div>
+                                                    </div>
+                                                </form>
+                                                
                                                 <!--end modal add supervisor-->
                                             </div>
                                         </div>
@@ -303,16 +311,13 @@ for (var i = 0; i < btns.length; i++) {
                                     <!-- End Form Modal Add Supervisor -->
 
                                     <!-- Modal Edit Data Supervisor -->
-                                    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog"
-                                        aria-labelledby="modal-edit" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered cascading-modal modal-lg"
-                                            role="document">
+                                    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="modal-edit">
                                                         EDIT SUPERVISOR DATA</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -321,28 +326,24 @@ for (var i = 0; i < btns.length; i++) {
                                                     <div class="modal-body">
                                                         <div class="form-group">
                                                             <label for="user_fullname">Full Name</label>
-                                                            <input type="text" class="form-control" id="user_fullname"
-                                                                placeholder="">
+                                                            <input type="text" class="form-control" id="user_fullname" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_phone">Phone</label>
-                                                            <input type="text" class="form-control" id="user_phone"
-                                                                placeholder="">
+                                                            <input type="text" class="form-control" id="user_phone" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_email">Email Address</label>
-                                                            <input type="email" class="form-control" id="user_email"
-                                                                placeholder="">
+                                                            <input type="email" class="form-control" id="user_email" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="username">Username</label>
-                                                            <input type="text" class="form-control" id="username"
-                                                                placeholder="">
+                                                            <input type="text" class="form-control" id="username" placeholder="">
                                                         </div>
                                                     </div>
                                                 </form>
                                                 <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                                <button type="button" class="btn btn-secondary btn-sm">UPDATE</button>
+                                                    <button type="button" class="btn btn-secondary btn-sm">UPDATE</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -354,37 +355,36 @@ for (var i = 0; i < btns.length; i++) {
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th><center>Username</center></th>
+                                                    <th>
+                                                        <center>Username</center>
+                                                    </th>
                                                     <th>Full Name</th>
                                                     <th>Phone</th>
                                                     <th>Email</th>
-                                                    <th><center>Total Intern</center></th>
+                                                    <th>
+                                                        <center>Total Intern</center>
+                                                    </th>
                                                     <th>
                                                         <center>Action</center>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                    <td>kezia001</td>
-                                                    <td>Kezia Angelina Sinaga</td>
-                                                    <td>081267053139</td>
-                                                    <td>kezia.sinaga61@gmail.com</td>
-                                                    <td></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <button type="button" data-toggle="modal" title="Edit"
-                                                                data-target="#modal-edit"
-                                                                class="btn btn-link btn-primary btn-lg"
-                                                                data-original-title="Edit">
-                                                                <i class="fa fa-edit fa-lg"></i>
-                                                            </button>
-                                                            <button type="button" title="Delete"
-                                                                class="btn btn-link btn-danger"
-                                                                data-original-title="Delete" id="alert_demo_7">
-                                                                <i class="fa fa-times fa-lg"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
+                                                <td>kezia001</td>
+                                                <td>Kezia Angelina Sinaga</td>
+                                                <td>081267053139</td>
+                                                <td>kezia.sinaga61@gmail.com</td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="form-button-action">
+                                                        <button type="button" data-toggle="modal" title="Edit" data-target="#modal-edit" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
+                                                            <i class="fa fa-edit fa-lg"></i>
+                                                        </button>
+                                                        <button type="button" title="Delete" class="btn btn-link btn-danger" data-original-title="Delete" id="alert_demo_7">
+                                                            <i class="fa fa-times fa-lg"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
                                                 </tr>
                                                 <tr>
                                                     <td>cyntya001</td>
@@ -394,15 +394,10 @@ for (var i = 0; i < btns.length; i++) {
                                                     <td></td>
                                                     <td>
                                                         <div class="form-button-action">
-                                                            <button type="button" data-toggle="modal" title="Edit"
-                                                                data-target="#modal-edit"
-                                                                class="btn btn-link btn-primary btn-lg"
-                                                                data-original-title="Edit">
+                                                            <button type="button" data-toggle="modal" title="Edit" data-target="#modal-edit" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
                                                                 <i class="fa fa-edit fa-lg"></i>
                                                             </button>
-                                                            <button type="button" title="Delete"
-                                                                class="btn btn-link btn-danger"
-                                                                data-original-title="Delete" id="alert_demo_8">
+                                                            <button type="button" title="Delete" class="btn btn-link btn-danger" data-original-title="Delete" id="alert_demo_8">
                                                                 <i class="fa fa-times fa-lg"></i>
                                                             </button>
                                                         </div>
@@ -416,15 +411,10 @@ for (var i = 0; i < btns.length; i++) {
                                                     <td></td>
                                                     <td>
                                                         <div class="form-button-action">
-                                                            <button type="button" data-toggle="modal" title="Edit"
-                                                                data-target="#modal-edit"
-                                                                class="btn btn-link btn-primary btn-lg"
-                                                                data-original-title="Edit">
+                                                            <button type="button" data-toggle="modal" title="Edit" data-target="#modal-edit" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
                                                                 <i class="fa fa-edit fa-lg"></i>
                                                             </button>
-                                                            <button type="button" title="Delete"
-                                                                class="btn btn-link btn-danger"
-                                                                data-original-title="Delete" id="alert_demo_9">
+                                                            <button type="button" title="Delete" class="btn btn-link btn-danger" data-original-title="Delete" id="alert_demo_9">
                                                                 <i class="fa fa-times fa-lg"></i>
                                                             </button>
                                                         </div>
@@ -452,8 +442,7 @@ for (var i = 0; i < btns.length; i++) {
         <footer class="footer">
             <div class="container">
                 <div class="copyright ml-auto">
-                    2021, made with <i class="fa fa-heart heart text-danger"></i> by <a
-                        href="http://www.themekita.com">PSTeam</a>
+                    2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
                 </div>
             </div>
         </footer>
@@ -548,7 +537,7 @@ for (var i = 0; i < btns.length; i++) {
         var action =
             '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
-        $('#addRowButton').click(function () {
+        $('#addRowButton').click(function() {
             $('#add-row').dataTable().fnAddData([
                 $("#addName").val(),
                 $("#addPosition").val(),
@@ -560,132 +549,132 @@ for (var i = 0; i < btns.length; i++) {
         });
 
         //SweetALert
-        var SweetAlert2Demo = function () {
+        var SweetAlert2Demo = function() {
 
-            var initDemos = function () {
+            var initDemos = function() {
 
-               
-				$('#alert_demo_3_3').click(function(e) {
-					swal("Added Data Successfully!", {
-						icon : "success",
-						buttons: {        			
-							confirm: {
-								className : 'btn btn-success'
-							}
-						},
-					});
-				});
+
+                $('#alert_demo_3_3').click(function(e) {
+                    swal("Added Data Successfully!", {
+                        icon: "success",
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-success'
+                            }
+                        },
+                    });
+                });
 
                 $('#alert_demo_7').click(function(e) {
-					swal({
-						title: 'Are you sure?',
-						text: "You won't be able to revert this!",
-						type: 'warning',
-						buttons:{
-							confirm: {
-								text : 'Yes, delete it!',
-								className : 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					}).then((Delete) => {
-						if (Delete) {
-							swal({
-								title: 'Deleted!',
-								text: 'Your file has been deleted.',
-								type: 'success',
-								buttons : {
-									confirm: {
-										className : 'btn btn-success'
-									}
-								}
-							});
-						} else {
-							swal.close();
-						}
-					});
-				});
-                
+                    swal({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        buttons: {
+                            confirm: {
+                                text: 'Yes, delete it!',
+                                className: 'btn btn-success'
+                            },
+                            cancel: {
+                                visible: true,
+                                className: 'btn btn-danger'
+                            }
+                        }
+                    }).then((Delete) => {
+                        if (Delete) {
+                            swal({
+                                title: 'Deleted!',
+                                text: 'Your file has been deleted.',
+                                type: 'success',
+                                buttons: {
+                                    confirm: {
+                                        className: 'btn btn-success'
+                                    }
+                                }
+                            });
+                        } else {
+                            swal.close();
+                        }
+                    });
+                });
+
                 $('#alert_demo_8').click(function(e) {
-					swal({
-						title: 'Are you sure?',
-						text: "You won't be able to revert this!",
-						type: 'warning',
-						buttons:{
-							confirm: {
-								text : 'Yes, delete it!',
-								className : 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					}).then((Delete) => {
-						if (Delete) {
-							swal({
-								title: 'Deleted!',
-								text: 'Your file has been deleted.',
-								type: 'success',
-								buttons : {
-									confirm: {
-										className : 'btn btn-success'
-									}
-								}
-							});
-						} else {
-							swal.close();
-						}
-					});
-				});
+                    swal({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        buttons: {
+                            confirm: {
+                                text: 'Yes, delete it!',
+                                className: 'btn btn-success'
+                            },
+                            cancel: {
+                                visible: true,
+                                className: 'btn btn-danger'
+                            }
+                        }
+                    }).then((Delete) => {
+                        if (Delete) {
+                            swal({
+                                title: 'Deleted!',
+                                text: 'Your file has been deleted.',
+                                type: 'success',
+                                buttons: {
+                                    confirm: {
+                                        className: 'btn btn-success'
+                                    }
+                                }
+                            });
+                        } else {
+                            swal.close();
+                        }
+                    });
+                });
 
                 $('#alert_demo_9').click(function(e) {
-					swal({
-						title: 'Are you sure?',
-						text: "You won't be able to revert this!",
-						type: 'warning',
-						buttons:{
-							confirm: {
-								text : 'Yes, delete it!',
-								className : 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					}).then((Delete) => {
-						if (Delete) {
-							swal({
-								title: 'Deleted!',
-								text: 'Your file has been deleted.',
-								type: 'success',
-								buttons : {
-									confirm: {
-										className : 'btn btn-success'
-									}
-								}
-							});
-						} else {
-							swal.close();
-						}
-					});
-				});
+                    swal({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        buttons: {
+                            confirm: {
+                                text: 'Yes, delete it!',
+                                className: 'btn btn-success'
+                            },
+                            cancel: {
+                                visible: true,
+                                className: 'btn btn-danger'
+                            }
+                        }
+                    }).then((Delete) => {
+                        if (Delete) {
+                            swal({
+                                title: 'Deleted!',
+                                text: 'Your file has been deleted.',
+                                type: 'success',
+                                buttons: {
+                                    confirm: {
+                                        className: 'btn btn-success'
+                                    }
+                                }
+                            });
+                        } else {
+                            swal.close();
+                        }
+                    });
+                });
             };
 
             return {
                 //== Init
-                init: function () {
+                init: function() {
                     initDemos();
                 },
             };
         }();
 
         //== Class Initialization
-        jQuery(document).ready(function () {
+        jQuery(document).ready(function() {
             SweetAlert2Demo.init();
         });
     </script>
