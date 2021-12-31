@@ -1,6 +1,15 @@
 <?php
 //Mengkoneksikan dengan Database
 include 'config.php';
+
+session_start();
+$nik = $_SESSION['user_nik'];
+$role = $_SESSION['role'];
+$id_user_company = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$nama = $_SESSION['nama'];
+$token = $_SESSION['token'];
+
 ?>
 
 <!DOCTYPE html>
@@ -260,7 +269,9 @@ include 'config.php';
                                                 </div>
 
                                                 <!--modal add supervisor-->
-                                                <form method="POST" action="proses_dummy.php?PageAction=add">
+                                                <form method="POST" action="proses_dummy_test.php?PageAction=add">
+                                                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                                <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $id_user_company; ?>">
                                                     <div class="modal-body">
                                                         <div class="form-group">
                                                             <label for="is_user_company">User ID</label>
@@ -288,7 +299,7 @@ include 'config.php';
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password">Password</label>
-                                                            <input type="password" class="form-control" id="password" name="password" placeholder="">
+                                                            <input type="password" class="form-control" readonly id="passwd" name="passwd" placeholder="password sudah default 12345">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_type">User Type</label>
