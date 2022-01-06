@@ -269,37 +269,33 @@ $token = $_SESSION['token'];
                                                 </div>
 
                                                 <!--modal add supervisor-->
-                                                <form method="POST" action="proses_dummy_test.php?PageAction=add">
-                                                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                                                <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $id_user_company; ?>">
+                                                <form method="POST" action="proses_dummy_test.php?PageAction=add_supervisor">
+                                                    <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                                    <!-- <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $id_user_company; ?>"> -->
                                                     <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="is_user_company">User ID</label>
-                                                            <input type="text" class="form-control" id="id_user_company" name="id_user_company" placeholder="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="id_company">Company ID</label>
-                                                            <input type="text" class="form-control" id="id_company" name="id_company" placeholder="">
-                                                        </div>
+                                                        <!-- <div class="form-group">
+                                                            <label for="user_fullname">Company ID</label>
+                                                            <input type="text" class="form-control" readonly id="id_company" name="id_company" placeholder="COMPANY001">
+                                                        </div> -->
                                                         <div class="form-group">
                                                             <label for="user_fullname">Full Name</label>
-                                                            <input type="text" class="form-control" id="user_fullname" name="user_fullname" placeholder="">
+                                                            <input type="text" class="form-control" id="user_fullname" name="user_fullname" placeholder="" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_phone">Phone</label>
-                                                            <input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="">
+                                                            <input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_email">Email Address</label>
-                                                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="">
+                                                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="username">Username</label>
-                                                            <input type="text" class="form-control" id="username" name="username" placeholder="">
+                                                            <input type="text" class="form-control" id="username" name="username" placeholder="" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password">Password</label>
-                                                            <input type="password" class="form-control" readonly id="passwd" name="passwd" placeholder="password sudah default 12345">
+                                                            <input type="password" class="form-control" readonly id="passwd" name="passwd" placeholder="DEFAULT PASSWORD IS 12345">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_type">User Type</label>
@@ -309,59 +305,20 @@ $token = $_SESSION['token'];
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                    <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                                    <button type="submit" class="btn btn-secondary btn-sm" name="btn-add" id="btn-add">ADD</button>
-                                                </div>
+                                                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                            <button type="submit" class="btn btn-secondary btn-sm" name="btn-add" id="btn-add">ADD</button>
+                                                        </div>
                                                     </div>
                                                 </form>
-                                                
+
                                                 <!--end modal add supervisor-->
                                             </div>
                                         </div>
                                     </div>
                                     <!-- End Form Modal Add Supervisor -->
 
-                                    <!-- Modal Edit Data Supervisor -->
-                                    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modal-edit">
-                                                        EDIT SUPERVISOR DATA</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                                <form>
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="user_fullname">Full Name</label>
-                                                            <input type="text" class="form-control" id="user_fullname" placeholder="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="user_phone">Phone</label>
-                                                            <input type="text" class="form-control" id="user_phone" placeholder="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="user_email">Email Address</label>
-                                                            <input type="email" class="form-control" id="user_email" placeholder="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="username">Username</label>
-                                                            <input type="text" class="form-control" id="username" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                                    <button type="button" class="btn btn-secondary btn-sm">UPDATE</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal -->
-
                                     <!-- Main table-->
+                                    <!-- View Data -->
                                     <div class="table-responsive">
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
@@ -373,7 +330,7 @@ $token = $_SESSION['token'];
                                                     <th>Phone</th>
                                                     <th>Email</th>
                                                     <th>
-                                                        <center>Total Intern</center>
+                                                        <center>Intern</center>
                                                     </th>
                                                     <th>
                                                         <center>Action</center>
@@ -381,56 +338,106 @@ $token = $_SESSION['token'];
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <td>kezia001</td>
-                                                <td>Kezia Angelina Sinaga</td>
-                                                <td>081267053139</td>
-                                                <td>kezia.sinaga61@gmail.com</td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="form-button-action">
-                                                        <button type="button" data-toggle="modal" title="Edit" data-target="#modal-edit" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                            <i class="fa fa-edit fa-lg"></i>
-                                                        </button>
-                                                        <button type="button" title="Delete" class="btn btn-link btn-danger" data-original-title="Delete" id="alert_demo_7">
-                                                            <i class="fa fa-times fa-lg"></i>
-                                                        </button>
+                                                <?php
+                                                include 'config.php';
+                                                error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                                // $id_user_company = $_SESSION['id_user_company'];
+                                                // $id_user_company = $_SESSION['id_company'];
+                                                // $view = mysqli_query($conn, "SELECT * FROM user_company WHERE id_user_company = $id_company;");
+                                                $view = mysqli_query($conn, "SELECT * FROM user_company order by id_user_company asc");
+                                                $no = 1;
+                                                while ($data = mysqli_fetch_array($view)) {
+                                                    echo "<tr>
+                                                        <td>" . $data['username'] . "</td>
+                                                        <td>" . $data['user_fullname'] . "</td>
+                                                        <td>" . $data['user_phone'] . "</td>
+                                                        <td>" . $data['user_email'] . "</td>
+                                                        <td>" . $data['totalintern'] . "</td>
+                                                        <td>
+                                                        <a data-toggle = 'modal' type = 'button' title = 'Edit' class = 'btn btn-link btn-primary' data-original-title = 'Edit' data-target = '#myModal" . $data['id_user_company'] . "'><i class='fa fa-edit fa-md'></i></a>
+                                                        <a data-toggle = 'modal' data-target = '#modaldelete$no' title = 'Delete' class = 'btn btn-link btn-danger' data-original-title = 'Delete'><i class='fa fa-times fa-lg'></i></a>
+                                                       </td>
+                                                      </tr>"
+                                                ?>
+
+                                                    <!-- Modal edit Data Supervisor -->
+                                                    <div class="modal fade" id="myModal<?php echo $data['id_user_company'] ?>" role="dialog">
+                                                        <div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="myModal">
+                                                                        EDIT SUPERVISOR DATA</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <form method="POST" action="proses_dummy_test.php?PageAction=update_supervisor">
+
+                                                                    <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                                                    <input type="hidden" readonly id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company'] ?>">
+
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label for="user_fullname">Full Name</label>
+                                                                            <input type="text" class="form-control" id="user_fullname" name="user_fullname" placeholder="" value="<?php echo $data['user_fullname']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="user_phone">Phone</label>
+                                                                            <input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="" value="<?php echo $data['user_phone']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="user_email">Email Address</label>
+                                                                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="" value="<?php echo $data['user_email']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="username">Username</label>
+                                                                            <input type="text" class="form-control" id="username" name="username" placeholder="" value="<?php echo $data['username']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="user_type">User Type</label>
+                                                                            <select class="form-control" name="user_type" value="<?php echo $data['user_type']; ?>">
+                                                                                <option value="supervisor">SUPERVISOR</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                                        <button type="submit" class="btn btn-secondary btn-sm" name="btn-edit" id="btn-edit">UPDATE</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>cyntya001</td>
-                                                    <td>Cyntya Maharani Nurul Istiqomah</td>
-                                                    <td>087826543980</td>
-                                                    <td>cyntyamaharani@gmail.com</td>
-                                                    <td></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <button type="button" data-toggle="modal" title="Edit" data-target="#modal-edit" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                                <i class="fa fa-edit fa-lg"></i>
-                                                            </button>
-                                                            <button type="button" title="Delete" class="btn btn-link btn-danger" data-original-title="Delete" id="alert_demo_8">
-                                                                <i class="fa fa-times fa-lg"></i>
-                                                            </button>
+                                                    <!-- End -->
+
+                                                    <!--Modal Delete-->
+                                                    <div class="modal fade" id="modaldelete<?php echo $no ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure to delete this supervisor?
+                                                                </div>
+                                                                <form action="proses_dummy_test.php?PageAction=delete_supervisor" method="post">
+                                                                    <input type="hidden" name="id_user_company" value="<?php echo $data['id_user_company'] ?>">
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>yulia001</td>
-                                                    <td>Yulia Wulandari</td>
-                                                    <td>085156430801</td>
-                                                    <td>yuliawulandari271@gmail.com</td>
-                                                    <td></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <button type="button" data-toggle="modal" title="Edit" data-target="#modal-edit" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                                <i class="fa fa-edit fa-lg"></i>
-                                                            </button>
-                                                            <button type="button" title="Delete" class="btn btn-link btn-danger" data-original-title="Delete" id="alert_demo_9">
-                                                                <i class="fa fa-times fa-lg"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                <?php //penutup perulangan while
+                                                    $no++;
+                                                }
+                                                ?>
+                                                <!--End Modal Delete-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -576,7 +583,7 @@ $token = $_SESSION['token'];
                     });
                 });
 
-                $('#alert_demo_7').click(function(e) {
+                $('#alert_delete').click(function(e) {
                     swal({
                         title: 'Are you sure?',
                         text: "You won't be able to revert this!",
