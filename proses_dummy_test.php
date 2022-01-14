@@ -46,23 +46,6 @@ if($_GET['PageAction'] == "add_supervisor") {
        echo '<script language="javascript">alert("User Gagal ditambah"); document.location="index.php?page=hrd-addsupervisor";</script>';
      }
    }
-// else{
-// //echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=list_peneliti";</script>';
-//        echo "
-//            <script type='text/javascript'>
-//             setTimeout(function () { 
-//        Swal.fire({
-//          type: 'error',
-//          title: 'Field data cannot be empty',
-//          showConfirmButton: false
-//        });  
-//             },10); 
-//             window.setTimeout(function(){ 
-//              window.location.replace('index.php?page=hrd-addsupervisor');
-//             } ,3000); 
-//            </script>
-//        "; 
-// }
 } else {
 echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-addsupervisor.php";</script>';
 }
@@ -188,4 +171,61 @@ if ($_GET['PageAction'] == "delete_supervisor") {
     echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-index.php";</script>';
    }
    }
+  
+   // Approval Internship
+   if ($_GET['PageAction'] == "approval_internship") {
+    session_start();
+  $token_session = $_SESSION['token'];
+  $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+
+  if ($token_session === $token_post) {
+   
+    $id_applicant    = mysqli_real_escape_string($conn,$_POST['id_applicant']);
+    $id_offer        = mysqli_real_escape_string($conn,$_POST['id_offer']);
+    $id_internship   = mysqli_real_escape_string($conn,$_POST['id_internship']);
+    $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $nim             = mysqli_real_escape_string($conn,$_POST['nim']);
+    $status          = mysqli_escape_string($conn,$_POST['status']);
+    $date            = mysqli_real_escape_string($conn,$_POST['date']);
+    $start_date      = mysqli_real_escape_string($conn,$_POST['start_date']);
+    $end_date        = mysqli_real_escape_string($conn,$_POST['end_date']);
+    $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
+    $id_pembimbing   = mysqli_real_escape_string($conn,$_POST['id_pembimbing']);
+
+    if($_SESSION['id_company'] && $_SESSION['username']) {
+      $update = $conn->query("UPDATE `tb_applicant` SET 
+      `status` = '$status'
+      WHERE `id_applicant` = $id_applicant;");
+
+      if($update){
+        echo '<script type="text/javascript">';
+        echo 'alert("Update Successfully"); document.location="index.php?page=hrd-registration";</script>';
+      }
+      else{
+         //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
+          echo "
+                                     <script type='text/javascript'>
+                                      setTimeout(function () { 
+                                 Swal.fire({
+                                   type: 'error',
+                                   title: 'Data gagal diperbaharui',
+                                   showConfirmButton: false
+                                 });  
+                                      },10); 
+                                      window.setTimeout(function(){ 
+                                        window.history.back();
+                                      } ,3000); 
+                                     </script>
+                                 ";
+                               }
+    }
+    else{
+      echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-registration";</script>';
+     }
+  } else {
+    echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-registration.php";</script>';
+   }
+   }
+  
+
 ?>

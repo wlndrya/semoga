@@ -264,7 +264,11 @@ $token = $_SESSION['token'];
 													<td>" . $data['name'] . "</td>
 													<td><center>" .
 
-														(($data['status'] == "PENDING") ? "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal' data-target='#modal-approve' title='Click to Approve'>PENDING</button>" : (($data['status'] == "YES") ? "<p class='bg-success py-2 my-auto rounded text-center text-white'>APPROVED</p>" : "<button class='bg-danger py-2 my-auto rounded text-center text-white'>DECLINED</button>"))
+														(($data['status']) ? "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														 data-target='#modal-approve' title='Click to Approve'>$data[status]</button>" : 
+
+														(($data['status'] == "YES") ? "<button class='btn btn-success py-2 my-auto rounded text-center text-white'>APPROVED</button>" : 
+														"<button class='bg-danger py-2 my-auto rounded text-center text-white'>DECLINED</button>"))
 
 														. "</center></td>
 												  </tr>"
@@ -283,11 +287,14 @@ $token = $_SESSION['token'];
 																	</button>
 																</div>
 
-																<form method="POST" action="proses_dummy_test.php?PageAction=update_supervisor">
+																<form method="POST" action="proses_dummy_test.php?PageAction=approval_internship">
 
 																	<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
 																	<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company']; ?>">
 																	<input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
+																	<input type="hidden" id="id_applicant" name="id_applicant" value="<?php echo $data['id_applicant']; ?>">
+																	<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $data['id_internship']; ?>">
+																	<input type="hidden" id="id_offer" name="id_offer" value="<?php echo $data['id_offer']; ?>">
 
 																	<div class="modal-body">
 																	<div class="form-group">
@@ -297,14 +304,14 @@ $token = $_SESSION['token'];
 																				<option value="NO">No</option>
 																			</select>
 																		</div>
-																		<div class="form-group">
+																		<!-- <div class="form-group">
 																			<label for="start_date">Start Date</label>
 																			<input type="date" class="form-control" id="start_date" name="start_date" placeholder="" value="<?php echo $data['start_date']; ?>" required>
 																		</div>
 																		<div class="form-group">
 																			<label for="end_date">End Date</label>
 																			<input type="date" class="form-control" id="end_date" name="end_date" placeholder="" value="<?php echo $data['end_date']; ?>" required>
-																		</div>
+																		</div> -->
 																	</div>
 																	<div class="modal-footer border-top-0 d-flex justify-content-center">
 																		<button type="submit" class="btn btn-secondary btn-sm" name="btn-approve" id="btn-approve">ADD</button>
