@@ -37,15 +37,15 @@ body{
 
 .drag-area{
     border: 4px dashed rgb(119, 136, 153);
-    height: 200px;
-    width: 350px;
+    height: 150px;
+    width: 200px;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     align-content: left;
-    animation: border-dance 4s infinite linear;
+    animation: border-dance 4 infinite linear;
   }
 
   @keyframes border-dance {
@@ -60,17 +60,17 @@ body{
     border: 2px solid black;
   }
   .drag-area .icon{
-    font-size: 50px;
+    font-size: 35px;
     color: #48ABF7;
   }
   .drag-area header{
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     color: black;
   }
 
   .drag-area button{
-    padding: 7px 21px;
+    padding: 5px 15px;
     font-size: 12px;
     font-weight: 500;
     border: none;
@@ -153,4 +153,14 @@ body{
     cursor: pointer;
     text-transform: uppercase;
     margin-left: 10px;
+  }
+
+  .textarea{
+    width: 100%;
+    height: 200px;
+    padding: 7px 21px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    resize: none;
   }

@@ -3,11 +3,12 @@
 include 'config.php';
 
 session_start();
-$nik = $_SESSION['user_nik'];
-$role = $_SESSION['role'];
-$id_user_company = $_SESSION['id_user_company'];
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
 $username = $_SESSION['username'];
-$nama = $_SESSION['nama'];
+$name = $_SESSION['user_fullname'];
 $token = $_SESSION['token'];
 
 ?>
@@ -78,7 +79,7 @@ $token = $_SESSION['token'];
                     </button>
                     <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
                     <!-- Logo SEMOGA -->
-                    <a href="hrd-index.html" class="logo d-flex align-items-center">
+                    <a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
                         <img src="assets/img/semogav211.png" height="60 " alt="navbar brand" class="navbar-brand">
                     </a>
                     <!-- End Logo SEMOGA -->
@@ -107,7 +108,7 @@ $token = $_SESSION['token'];
                                     </a>
                                 </li>
                                 <div class="title-name mt-2 text-white">
-                                    <h5><b>YULIA WULANDARI</b></h5>
+                                    <h5><b>Hi,<?php echo $user;?></b></h5>
                                 </div>
                                 <li class="nav-item dropdown hidden-caret">
                                     <div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -146,96 +147,96 @@ $token = $_SESSION['token'];
                 </div>
             </div>
 
-            <!-- Menu -->
-            <div class="nav-bottom" id="myDIV">
-                <div class="container">
-                    <ul class="nav page-navigation page-navigation-info bg-white">
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon icon-book-open"></i>
-                                <span class="menu-title">Profile</span>
-                            </a>
-                            <div class="navbar-dropdown animated fadeIn">
-                                <ul>
-                                    <li>
-                                        <a href="index.php?page=hrd-profile">My Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="index.php?page=hrd-company-profile">Company Profile</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon icon-grid"></i>
-                                <span class="menu-title">HRD Menu</span>
-                            </a>
-                            <div class="navbar-dropdown animated fadeIn">
-                                <ul>
-                                    <li class="link-to">
-                                        <a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
-                                    </li>
-                                    <li>
-                                        <a href="index.php?page=hrd-feedback">Feedback</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon icon-layers"></i>
-                                <span class="menu-title">Internship</span>
-                            </a>
-                            <div class="navbar-dropdown animated fadeIn">
-                                <ul>
-                                    <li>
-                                        <a href="index.php?page=hrd-registration">Form Registration</a>
-                                    </li>
-                                    <li>
-                                        <a href="index.php?page=hrd-studentlist">List Internship</a>
-                                    </li>
-                                    <li>
-                                        <a href="index.php?page=hrd-jobdesc">Job Description</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon icon-folder-alt"></i>
-                                <span class="menu-title">Internship Files</span>
-                            </a>
-                            <div class="navbar-dropdown animated fadeIn">
-                                <ul>
-                                    <li>
-                                        <a href="index.php?page=hrd-logbook">Logbook</a>
-                                    </li>
-                                    <li>
-                                        <a href="index.php?page=hrd-studentattendance">Attendance</a>
-                                    </li>
-                                    <li>
-                                        <a href="index.php?page=hrd-finalreport">Final Report</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="index.php?page=hrd-tutorial">
-                                <i class="link-icon icon-screen-desktop"></i>
-                                <span class="menu-title">Tutorial</span>
-                            </a>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="index.php?page=hrd-information">
-                                <i class="link-icon icon-question"></i>
-                                <span class="menu-title">Information</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End Menu -->
+           <!-- Menu -->
+			<div class="nav-bottom">
+				<div class="container">
+					<ul class="nav page-navigation page-navigation-info bg-white">
+						<li class="nav-item submenu">
+							<a class="nav-link" href="#">
+								<i class="link-icon icon-book-open"></i>
+								<span class="menu-title">Profile</span>
+							</a>
+							<div class="navbar-dropdown animated fadeIn">
+								<ul>
+									<li>
+										<a href="index.php?page=hrd-profile">My Profile</a>
+									</li>
+									<li>
+										<a href="index.php?page=hrd-company-profile">Company Profile</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="#">
+								<i class="link-icon icon-grid"></i>
+								<span class="menu-title">HRD Menu</span>
+							</a>
+							<div class="navbar-dropdown animated fadeIn">
+								<ul>
+									<li class="link-to">
+										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
+									</li>
+									<li>
+										<a href="index.php?page=hrd-feedback">Feedback</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="#">
+								<i class="link-icon icon-layers"></i>
+								<span class="menu-title">Internship</span>
+							</a>
+							<div class="navbar-dropdown animated fadeIn">
+								<ul>
+									<li>
+										<a href="index.php?page=hrd-registration">Form Registration</a>
+									</li>
+									<li>
+										<a href="index.php?page=hrd-studentlist">List Internship</a>
+									</li>
+									<li>
+										<a href="index.php?page=hrd-jobdesc">Job Description</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="#">
+								<i class="link-icon icon-folder-alt"></i>
+								<span class="menu-title">Internship Files</span>
+							</a>
+							<div class="navbar-dropdown animated fadeIn">
+								<ul>
+									<li>
+										<a href="index.php?page=hrd-logbook">Logbook</a>
+									</li>
+									<li>
+										<a href="index.php?page=hrd-studentattendance">Attendance</a>
+									</li>
+									<li>
+										<a href="index.php?page=hrd-finalreport">Final Report</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=hrd-tutorial">
+								<i class="link-icon icon-screen-desktop"></i>
+								<span class="menu-title">Tutorial</span>
+							</a>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=hrd-information">
+								<i class="link-icon icon-question"></i>
+								<span class="menu-title">Information</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- End Menu -->
         </div>
 
         <!-- Main Content -->
@@ -271,12 +272,10 @@ $token = $_SESSION['token'];
                                                 <!--modal add supervisor-->
                                                 <form method="POST" action="proses_dummy_test.php?PageAction=add_supervisor">
                                                     <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                                                    <!-- <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $id_user_company; ?>"> -->
+                                                    <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $id_user_company; ?>">
+                                                    <input type="hidden" id="id_company" name="id_company" value="<?php echo $id_company; ?>">
                                                     <div class="modal-body">
-                                                        <!-- <div class="form-group">
-                                                            <label for="user_fullname">Company ID</label>
-                                                            <input type="text" class="form-control" readonly id="id_company" name="id_company" placeholder="COMPANY001">
-                                                        </div> -->
+                                                    
                                                         <div class="form-group">
                                                             <label for="user_fullname">Full Name</label>
                                                             <input type="text" class="form-control" id="user_fullname" name="user_fullname" placeholder="" required>
@@ -295,11 +294,11 @@ $token = $_SESSION['token'];
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password">Password</label>
-                                                            <input type="password" class="form-control" readonly id="passwd" name="passwd" placeholder="DEFAULT PASSWORD IS 12345">
+                                                            <input type="password" class="form-control" readonly id="password" name="password" placeholder="DEFAULT PASSWORD IS 12345">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="user_type">User Type</label>
-                                                            <select class="form-control" name="user_type">
+                                                            <select class="form-control" id="user_type" name="user_type">
                                                                 <option value="supervisor">SUPERVISOR</option>
                                                             </select>
                                                         </div>
@@ -310,7 +309,6 @@ $token = $_SESSION['token'];
                                                         </div>
                                                     </div>
                                                 </form>
-
                                                 <!--end modal add supervisor-->
                                             </div>
                                         </div>
@@ -341,10 +339,7 @@ $token = $_SESSION['token'];
                                                 <?php
                                                 include 'config.php';
                                                 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                // $id_user_company = $_SESSION['id_user_company'];
-                                                // $id_user_company = $_SESSION['id_company'];
-                                                // $view = mysqli_query($conn, "SELECT * FROM user_company WHERE id_user_company = $id_company;");
-                                                $view = mysqli_query($conn, "SELECT * FROM user_company order by id_user_company asc");
+                                                $view = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company");
                                                 $no = 1;
                                                 while ($data = mysqli_fetch_array($view)) {
                                                     echo "<tr>
@@ -354,18 +349,18 @@ $token = $_SESSION['token'];
                                                         <td>" . $data['user_email'] . "</td>
                                                         <td>" . $data['totalintern'] . "</td>
                                                         <td>
-                                                        <a data-toggle = 'modal' type = 'button' title = 'Edit' class = 'btn btn-link btn-primary' data-original-title = 'Edit' data-target = '#myModal" . $data['id_user_company'] . "'><i class='fa fa-edit fa-md'></i></a>
+                                                        <a data-toggle = 'modal' type = 'button' title = 'Edit' class = 'btn btn-link btn-primary' data-original-title = 'Edit' data-target = '#modaledit" . $data['id_user_company'] . "'><i class='fa fa-edit fa-lg'></i></a>
                                                         <a data-toggle = 'modal' data-target = '#modaldelete$no' title = 'Delete' class = 'btn btn-link btn-danger' data-original-title = 'Delete'><i class='fa fa-times fa-lg'></i></a>
                                                        </td>
                                                       </tr>"
                                                 ?>
 
                                                     <!-- Modal edit Data Supervisor -->
-                                                    <div class="modal fade" id="myModal<?php echo $data['id_user_company'] ?>" role="dialog">
+                                                    <div class="modal fade" id="modaledit<?php echo $data['id_user_company'] ?>" role="dialog">
                                                         <div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="myModal">
+                                                                    <h5 class="modal-title" id="modaledit">
                                                                         EDIT SUPERVISOR DATA</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -375,7 +370,8 @@ $token = $_SESSION['token'];
                                                                 <form method="POST" action="proses_dummy_test.php?PageAction=update_supervisor">
 
                                                                     <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                                                                    <input type="hidden" readonly id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company'] ?>">
+                                                                    <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company']; ?>">
+                                                                    <input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
 
                                                                     <div class="modal-body">
                                                                         <div class="form-group">
@@ -396,7 +392,7 @@ $token = $_SESSION['token'];
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="user_type">User Type</label>
-                                                                            <select class="form-control" name="user_type" value="<?php echo $data['user_type']; ?>">
+                                                                            <select class="form-control" id="user_type" name="user_type" value="<?php echo $data['user_type']; ?>">
                                                                                 <option value="supervisor">SUPERVISOR</option>
                                                                             </select>
                                                                         </div>

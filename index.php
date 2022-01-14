@@ -8,48 +8,51 @@ if (isset($_GET['page'])) {
       include "login.php";
       break;
     case 'hrd-home':
-      include "hrd-index.html";
+      include "hrd-index.php";
       break;
     case 'hrd-profile':
-      include "hrd-profile.html";
+      include "hrd-profile.php";
       break;
     case 'hrd-company-profile':
-      include "hrd-company-profile.html";
+      include "hrd-company-profile.php";
       break;
     case 'hrd-addsupervisor':
       include "hrd-addsupervisor.php";
       break;
     case 'hrd-feedback':
-      include "hrd-feedback1.html";
+      include "hrd-feedback1.php";
+      break;
+    case 'hrd-feedback2':
+      include "hrd-feedback2.php";
       break;
     case 'hrd-registration':
-      include "hrd-registration.html";
+      include "hrd-registration.php";
       break;
     case 'hrd-studentlist':
-      include "hrd-studentlist.html";
+      include "hrd-studentlist.php";
       break;
     case 'hrd-jobdesc':
-      include "hrd-jobdesc.html";
+      include "hrd-jobdesc.php";
       break;
     case 'hrd-logbook':
-      include "hrd-logbook.html";
+      include "hrd-logbook.php";
       break;
     case 'hrd-studentattendance':
-      include "hrd-studentattendance.html";
+      include "hrd-studentattendance.php";
       break;
     case 'hrd-finalreport':
-      include "hrd-finalreport.html";
+      include "hrd-finalreport.php";
       break;
     case 'hrd-tutorial':
-      include "hrd-tutorials.html";
+      include "hrd-tutorials.php";
       break;
     case 'hrd-information':
-      include "hrd-information.html";
+      include "hrd-information.php";
       break;
     default:
       include "errorpage404.html";
       break;
   }
 } else {
-  include "hrd-index.html";
+  include "hrd-index.php";
 }

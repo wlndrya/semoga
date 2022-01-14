@@ -19,19 +19,19 @@ if($_GET['PageAction'] == "add_supervisor") {
 
   if ($token_session === $token_post) {
 
-    $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
+    // $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
     $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
-    $user_fullname   = mysqli_real_escape_string($conn,$_POST['user_fullname']);
+    $name            = mysqli_real_escape_string($conn,$_POST['user_fullname']);
     $user_phone      = mysqli_real_escape_string($conn,$_POST['user_phone']);
     $user_email      = mysqli_real_escape_string($conn,$_POST['user_email']);
     $username        = mysqli_real_escape_string($conn,$_POST['username']);
-    $passwd          = mysqli_real_escape_string($conn,12345);
-    $user_type       = mysqli_real_escape_string($conn,$_POST['user_type']);
+    $password        = mysqli_real_escape_string($conn,12345);
+    $role            = mysqli_real_escape_string($conn,$_POST['user_type']);
 
-  $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT); // hash password
+  $password_hash = password_hash($password, PASSWORD_DEFAULT); // hash password
                         
-  if($_SESSION['nama'] && $_SESSION['user_nik'] != null){
-    $add = $conn->query("INSERT INTO `user_company` (`id_user_company`, `id_company`, `user_fullname`, `user_phone`, `user_email`, `username`, `passwd`, `user_type`) VALUES ('$id_user_company', '$id_company', '$user_fullname', '$user_phone', '$user_email', '$username', '$passwd_hash', '$user_type');");  
+  if($_SESSION['username'] && $_SESSION['id_company'] != null){
+    $add = $conn->query("INSERT INTO `tb_user_company` (`id_user_company`, `id_company`, `user_fullname`, `user_phone`, `user_email`, `username`, `password`, `user_type`) VALUES (NULL, '$id_company', '$name', '$user_phone', '$user_email', '$username', '$password_hash', '$role');");  
     if($add){
        // $passwd_hashed = password_verify($passwd, $passwd_hash);
       // if($passwd_hashed == $passwd){
@@ -42,6 +42,7 @@ if($_GET['PageAction'] == "add_supervisor") {
      }  
      else
      {
+      // echo("Error description: " . $conn -> error);
        echo '<script language="javascript">alert("User Gagal ditambah"); document.location="index.php?page=hrd-addsupervisor";</script>';
      }
    }
@@ -63,7 +64,7 @@ if($_GET['PageAction'] == "add_supervisor") {
 //        "; 
 // }
 } else {
-echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-index.html";</script>';
+echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-addsupervisor.php";</script>';
 }
   }
 
@@ -75,30 +76,34 @@ if ($_GET['PageAction'] == "update_supervisor") {
   $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
 
   if ($token_session === $token_post) {
+   
     $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
-    $user_fullname   = mysqli_real_escape_string($conn,$_POST['user_fullname']);
+    $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $name            = mysqli_real_escape_string($conn,$_POST['user_fullname']);
     $user_phone      = mysqli_real_escape_string($conn,$_POST['user_phone']);
     $user_email      = mysqli_real_escape_string($conn,$_POST['user_email']);
     $username        = mysqli_real_escape_string($conn,$_POST['username']);
-    $user_type       = mysqli_real_escape_string($conn,$_POST['user_type']);
+    $password        = mysqli_real_escape_string($conn,12345);
+    $role            = mysqli_real_escape_string($conn,$_POST['user_type']);
 
-    if($_SESSION['nama'] && $_SESSION['user_nik']) {
-      $update = $conn->query("UPDATE `user_company` SET 
-      `user_fullname` = '$user_fullname',
+    if($_SESSION['id_user_company'] && $_SESSION['username']) {
+      $update = $conn->query("UPDATE `tb_user_company` SET 
+      `user_fullname` = '$name',
       `user_phone` = '$user_phone',
       `user_email` = '$user_email',
       `username` = '$username',
-      `user_type` = '$user_type'
-      WHERE `user_company`.`id_user_company` = $id_user_company;");
+      `user_type` = '$role'
+      WHERE `id_user_company` = $id_user_company;");
+
+      //echo $id_user_company;
 
       if($update){
         echo '<script type="text/javascript">';
         echo 'alert("Update Successfully"); document.location="index.php?page=hrd-addsupervisor";</script>';
       }
-      else
-                               {
-                                 //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
-                                  echo "
+      else{
+         //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
+          echo "
                                      <script type='text/javascript'>
                                       setTimeout(function () { 
                                  Swal.fire({
@@ -120,18 +125,67 @@ if ($_GET['PageAction'] == "update_supervisor") {
   } else {
     echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-addsupervisor.php";</script>';
    }
-}
+    }
+
 
     // Delete Supervisor
 if ($_GET['PageAction'] == "delete_supervisor") {
     //  $id_user_company = $_GET['id_user_company'];
     //  $select = $conn->query("SELECT * FROM `user_company` WHERE id_user_company = '$id_user_company'");
     //  if(mysqli_num_rows($select) != 0){
-     $delete = $conn->query("DELETE FROM user_company WHERE id_user_company = '$_POST[id_user_company]' ");
+     $delete = $conn->query("DELETE FROM tb_user_company WHERE id_user_company = '$_POST[id_user_company]' ");
      if($delete){
-     echo '<script language="javascript">alert("Data berhasil dihapus."); window.history.back();</script>';
+     echo '<script language="javascript">alert("Deleted Successfully!"); window.history.back();</script>';
      }else{
-     echo '<script language="javascript">alert("Data Gagal dihapus."); window.history.back();</script>';
+     echo '<script language="javascript">alert("Deleted Failure!"); window.history.back();</script>';
      }
+  }
+    
+      
+    //Update Description Company
+  if ($_GET['PageAction'] == "update_description") {
+    session_start();
+  $token_session = $_SESSION['token'];
+  $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+
+  if ($token_session === $token_post) {
+   
+    $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $name            = mysqli_real_escape_string($conn,$_POST['name']);
+    $description     = mysqli_escape_string($conn,$_POST['description']);
+
+    if($_SESSION['id_company'] && $_SESSION['username']) {
+      $update = $conn->query("UPDATE `tb_company` SET 
+      `description` = '$description'
+      WHERE `id_company` = $id_company;");
+
+      if($update){
+        echo '<script type="text/javascript">';
+        echo 'alert("Update Successfully"); document.location="index.php?page=hrd-home";</script>';
       }
+      else{
+         //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
+          echo "
+                                     <script type='text/javascript'>
+                                      setTimeout(function () { 
+                                 Swal.fire({
+                                   type: 'error',
+                                   title: 'Data gagal diperbaharui',
+                                   showConfirmButton: false
+                                 });  
+                                      },10); 
+                                      window.setTimeout(function(){ 
+                                        window.history.back();
+                                      } ,3000); 
+                                     </script>
+                                 ";
+                               }
+    }
+    else{
+      echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-home";</script>';
+     }
+  } else {
+    echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-index.php";</script>';
+   }
+   }
 ?>

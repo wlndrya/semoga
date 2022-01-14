@@ -63,91 +63,75 @@
 					<a href="#" id="show-signup" class="link">Sign Up</a>
 					<br>
 					<?php
-					// include "config.php";
-					error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
+    include 'config.php';
+    //include 'Bcrypt.php';
+    error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
 
-					if ($_POST['login']) {
+    //$bcrypt = new Bcrypt(16);
+    
+    if($_POST['login']){
+      
+      $user = mysqli_real_escape_string($conn,$_POST['username']);
+      $pass = mysqli_real_escape_string($conn,$_POST['password']);
+      
+        if($user && $pass){
+        $cek = $conn->query("SELECT * FROM tb_user_company WHERE username = '$user'");
+        
+        if(mysqli_num_rows($cek) != 0){
+          $data = mysqli_fetch_assoc($cek);
+          $user_id = $data['id_user_company'];
+          $username = $data['username'];
+          $name = $data['user_fullname'];
+          $role = $data['user_type'];
+		  $id_company = $data['id_company'];
 
-						$user = $_POST['username'];
-						$pass = $_POST['password'];
-						// $user = mysqli_real_escape_string($conn, $_POST['username']);
-						// $pass = mysqli_real_escape_string($conn, $_POST['password']);
-
-						$data = array(
-							"username"        => $_POST['username'],
-							"password"        => $_POST['password'],
-							"token"           => $_POST['token'],
-						);
-
-						$ch = curl_init('http://sid.polibatam.ac.id/apilogin/web/api/auth/login');
-						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-						curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-						$result = json_decode(curl_exec($ch));
-
-						//echo "<pre>";
-						//print_r($result);
-						//echo "</pre>";
-
-						echo "Status    : " . $result->status . '<br>';
-						echo "Message   : " . $result->message . '<br>';
-
-						if ($result->status == "success") {
-
-							//echo "ID        : ".$result->data->id.'<br>';
-							//echo "Username  : ".$result->data->username.'<br>';
-							//echo "Name      : ".$result->data->name.'<br>';
-							//echo "Email     : ".$result->data->email.'<br>';
-							//echo "Jabatan   : ".$result->data->jabatan.'<br>';
-							$nik = $result->data->nim_nik_unit;
-							$nama = $result->data->name;
-							$email = $result->data->email;
-							$jabatan = $result->data->jabatan;
-
-							if ($user && $pass) {
-
-								session_start();
-								$_SESSION['user_nik'] = $nik;
-								$_SESSION['user_jabatan'] = $jabatan;
-								$_SESSION['nama'] = $nama;
-								$_SESSION['id_company'] = 1;
-
-								$length = 32;
-								$_SESSION['token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $length);
-
-
-								if ($jabatan == "Dosen") {
-									echo "
-										<script type='text/javascript'>
-										setTimeout(function () { 
-										swal({
-													title: 'Login Berhasil',
-													text:  'Harap tunggu anda akan diarahkan ke page Dashboard',
-													type: 'success',
-													timer: 2000,
-													showConfirmButton: true
-												});  
-										},10); 
-										window.setTimeout(function(){ 
-											window.location.replace('index.php?page=dashboard');
-										} ,3000); 
-										</script>
-										";
-								}
-								if ($jabatan == "Mahasiswa") {
-									echo '<script language="javascript">alert("Berhasil"); document.location="index.php?page=hrd-home";</script>';
-								}
-							}
-						} else {
-							echo '<div class="error">ERROR: Yang bertanda * tidak boleh kosong.</div>';
-						}
-					}
-
-					?>
+          $hash   = $data['password'];
+          $verify = password_verify($pass, $hash);
+          
+          if($user == $data['username'] && $verify == 1 ){
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['id_user_company'] = $user_id;
+            $_SESSION['user_fullname'] = $name;
+            $_SESSION['user_type'] = $role;
+			$_SESSION['id_company'] = $id_company;
+            
+            $length = 32;
+            $_SESSION['token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $length);
+            
+            //echo '<script language="javascript">document.location="index.php?page=dashboard";</script>';
+            // if($role == "admin"){
+              echo "
+              <script type='text/javascript'>
+               setTimeout(function () { 
+               swal({
+                          title: 'Login Successful',
+                          text:  'Please wait you will be directed to the Dashboard page',
+                          type: 'success',
+                          timer: 2000,
+                          showConfirmButton: true
+                      });  
+               },10); 
+               window.setTimeout(function(){ 
+                window.location.replace('index.php?page=hrd-home');
+               } ,3000); 
+              </script>
+              ";      
+          }
+          else{
+            echo '<div class="alert alert-success" role="alert">Login Failed. Username and Password Wrong.</div>';
+          }
+        } 
+        else{
+          echo '<div class="alert alert-success" role="alert">Login Failed. Username not Registered</div>';
+        }
+      }else{
+        echo '<div class="error">ERROR.</div>';
+      }
+    }
+    ?>
 				</div>
 			</div>
-
-
 		</div>
 
 		<div class="container container-signup container-transparent animated fadeIn">
