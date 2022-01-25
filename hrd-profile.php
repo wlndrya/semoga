@@ -1,3 +1,18 @@
+<?php
+//Mengkoneksikan dengan Database
+include 'config.php';
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,7 +110,7 @@ for (var i = 0; i < btns.length; i++) {
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi,<?php echo $user;?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -241,50 +256,26 @@ for (var i = 0; i < btns.length; i++) {
 									<div class="card-title"><b>User Profile</b></div>
 									<div class="card-category"></a></div>
 								</div>
-								<form id="exampleValidation">
+								<form id="form_profile" method="POST"  action="proses_dummy_test.php?PageAction=update_hrd" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');">
+								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $_SESSION['id_user_company']; ?>">
+                                <input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
+
 									<div class="card-body">
-										<div class="form-group form-show-validation row">
-											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Profile Picture
-												<span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-file input-file-image">
-													<img class="img-upload-preview img-circle" width="100" height="100"
-														src="http://placehold.it/100x100" alt="preview">
-													<input type="file" class="form-control form-control-file"
-														id="uploadImg" name="uploadImg" accept="image/*" required>
-													<label for="uploadImg" class="btn btn-primary btn-round btn-lg"><i
-															class="fa fa-file-image"></i> Upload a Image</label>
-												</div>
-											</div>
-										</div>
-										<div class="separator-solid"></div>
-										<!-- <div class="form-group form-show-validation row">
-											<label for="id_user_company" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">User ID
-												<span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="id_user_company" name="id_user_company"
-													placeholder="Enter your Personal ID" required>
-											</div>
-										</div> -->
-										<div class="form-group form-show-validation row">
-											<label for="id_company"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company ID
-												<span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-group">
-													<input type="text" class="form-control" placeholder=""
-														aria-label="id_company" aria-describedby="username-addon"
-														id="id_company" name="id_company" readonly value="COMPANY001" required>
-												</div>
-											</div>
-										</div>
+										<?php
+										include 'config.php';
+										//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                        $view = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company AND user_type = 'hrd'");
+										$data = mysqli_fetch_array($view);
+										?>
+										
 										<div class="form-group form-show-validation row">
 											<label for="fullname"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Full Name <span
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Fullname<span
 													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="user_fullname"
-													placeholder="Enter full name" required>
+												<input type="text" class="form-control" name="user_fullname"
+													value="<?php echo $data['user_fullname'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
@@ -292,8 +283,8 @@ for (var i = 0; i < btns.length; i++) {
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone/Whatsapp Number <span
 													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="user_phone"
-													placeholder="Enter number phone" required>
+												<input type="text" class="form-control" name="user_phone"
+												value="<?php echo $data['user_phone'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
@@ -301,8 +292,8 @@ for (var i = 0; i < btns.length; i++) {
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address
 												<span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="email" class="form-control" id="email"
-													placeholder="Enter Email" required>
+												<input type="email" class="form-control" name="user_email"
+												value="<?php echo $data['user_email'] ?>" disabled>
 												<small id="emailHelp" class="form-text text-muted">We'll never share
 													your email with anyone else.</small>
 											</div>
@@ -312,8 +303,8 @@ for (var i = 0; i < btns.length; i++) {
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Username <span
 													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="username"
-													placeholder="Enter username" required>
+												<input type="text" class="form-control" name="username"
+												value="<?php echo $data['username'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
@@ -321,74 +312,26 @@ for (var i = 0; i < btns.length; i++) {
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Password <span
 													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="password" class="form-control" id="password"
-													name="password" placeholder="Enter Password" required>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="confirmpassword"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Confirm Password
-												<span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="password" class="form-control" id="confirmpassword"
-													name="confirmpassword" placeholder="Enter Password" required>
+												<input type="password" class="form-control" readonly id="password"
+													name="password" placeholder="**********" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label for="user_type"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">User type <span
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">User type<span
 													class="required-label">*</span></label>
 													<div class="col-lg-4 col-md-9 col-sm-8">
-													<select class="form-control" disabled>
-														<option><b>HRD/Human Resources Development</b></option>
+													<select class="form-control" id="user_type" name="user_type" disabled>
+														<option value="HRD"><b>HRD/Human Resources Development</b></option>
 													  </select>
 													  </div>
 										</div>
-										<div class="separator-solid"></div>
-										<div class="form-group form-show-validation row">
-											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Gender <span
-													class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
-												<div class="custom-control custom-radio">
-													<input type="radio" id="male" name="gender"
-														class="custom-control-input">
-													<label class="custom-control-label" for="male">Male</label>
-												</div>
-												<div class="custom-control custom-radio">
-													<input type="radio" id="female" name="gender"
-														class="custom-control-input">
-													<label class="custom-control-label" for="female">Female</label>
-												</div>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="birth"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Birth <span
-													class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-group">
-													<input type="date" class="form-control" id="birth" name="birth"
-														required>
-												</div>
-											</div>
-										</div>
-										<!-- <div class="form-check">
-											<div class="row">
-												<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Agree <span class="required-label">*</span></label>
-												<div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" id="agree" name="agree" required>
-														<label class="custom-control-label" for="agree">Agree with terms and conditions</label>
-													</div>
-												</div>
-											</div>
-										</div> -->
 									</div><!-- card body -->
 									<div class="card-action">
 										<div class="row">
 											<div class="col-md-12">
-												<button class="btn btn-danger">Edit</button>
-												<input class="btn btn-success" type="submit" value="Save">
+												<a class="btn btn-danger text-white" id="edit_btn" type="submit">Edit</a>
+												<input class="btn btn-success" id="btn-save" type="submit" value="Save">
 											</div>
 										</div>
 									</div>
@@ -514,6 +457,15 @@ for (var i = 0; i < btns.length; i++) {
 
 		});
 	</script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+    var $inputs = $('#form_profile :input').prop('disabled', true);
+    $('#edit_btn').click(function () {
+        $inputs.prop('disabled', false);
+    });
+    })
+  </script>
 
 </body>
 

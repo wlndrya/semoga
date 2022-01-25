@@ -314,8 +314,9 @@ $token = $_SESSION['token'];
 														$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = '$_SESSION[id_company]'");
 														while ($data = mysqli_fetch_array($view)) {
 														echo $data['description'];
-														echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
-															Description</a>";
+														echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#mymodalcv'> Modal CV</a>";
+														// echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
+														// 	Description</a>";
 														?>
 														
 														<!-- Modal Edit Company Profile-->
@@ -377,6 +378,42 @@ $token = $_SESSION['token'];
 					</div>
 				</div>
 				<!-- End Company Profile -->
+				
+					<!--Modal CV-->
+					<div id="mymodalcv" class="modal fade" role="dialog">
+                          <div class="modal-dialog modal-lg">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"></h4>
+                              </div>
+                              <div class="modal-body" style="height: 600px">
+							  <?php
+							  include 'config.php';
+							  $query = mysqli_query($conn, "SELECT * FROM tb_document WHERE id='5'");
+							  $data = mysqli_fetch_array($query);
+							  ?>
+							  <object
+      type="application/pdf"
+      data="berkas/<?php echo $data['file']?>"
+      width="100%"
+      height="100%"
+	  frameborder="0"
+	  allowtransparency="true"
+    >
+    </object>
+                                
+								
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+						
+					<!--End modal Cv--> 
 
 				<!--Internship-->
 				<div class="row row-card-no-pd">

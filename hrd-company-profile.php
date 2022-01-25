@@ -1,5 +1,15 @@
 <?php
 include 'config.php';
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +105,7 @@ include 'config.php';
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi,<?php echo $user; ?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -238,192 +248,122 @@ include 'config.php';
 									<div class="card-title"><b>Company Profile</b></div>
 									<div class="card-category"></a></div>
 								</div>
-								<form id="exampleValidation">
+								<form id="company_profile" method="POST" action="proses_dummy_test.php?PageAction=update_company" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');">
+									<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+									<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $_SESSION['id_user_company']; ?>">
+									<input type="hidden" id="id_company" name="id_company" value="<?php echo $_SESSION['id_company']; ?>">
+									<input type="hidden" id="id_company" name="access_type" value="<?php echo $_SESSION['access_type']; ?>">
+
 									<div class="card-body">
+										<?php
+										include 'config.php';
+										//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+										$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = $id_company");
+										$data = mysqli_fetch_array($view);
+										?>
 										<div class="form-group form-show-validation row">
-											<label for="id_company"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company ID <span
-													class="required-label">*</span></label>
+											<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Name <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-group">
-													<input type="text" class="form-control" placeholder=""
-														aria-label="id_company" aria-describedby="username-addon"
-														id="id_company" name="id_company" readonly value="COMPANY001" required>
-												</div>
+												<input type="text" class="form-control" id="name" name="name" value="<?php echo $data['name'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="name"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Name <span
-													class="required-label">*</span></label>
+											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Type <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="name"
-													placeholder="Enter company name" required>
+												<select class="form-control" id="type" name="type" value="0">
+													<option value="agency" <?php if ($data['type'] == "agency") echo 'selected="selected"'; ?>>Agency</option>
+													<option value="design" <?php if ($data['type'] == "design") echo 'selected="selected"'; ?>>Design</option>
+													<option value="education" <?php if ($data['type'] == "education") echo 'selected="selected"'; ?>>Education</option>
+													<option value="engineering" <?php if ($data['type'] == "engineering") echo 'selected="selected"'; ?>>Engineering</option>
+													<option value="finance" <?php if ($data['type'] == "finance") echo 'selected="selected"'; ?>>Finance</option>
+													<option value="government" <?php if ($data['type'] == "government") echo 'selected="selected"'; ?>>Government</option>
+													<option value="health" <?php if ($data['type'] == "health") echo 'selected="selected"'; ?>>Health</option>
+													<option value="it" <?php if ($data['type'] == "it") echo 'selected="selected"'; ?>>IT & Telco</option>
+													<option value="logistics" <?php if ($data['type'] == "logistics") echo 'selected="selected"'; ?>>Logistics</option>
+													<option value="marketing" <?php if ($data['type'] == "marketing") echo 'selected="selected"'; ?>>Marketing</option>
+													<option value="media" <?php if ($data['type'] == "media") echo 'selected="selected"'; ?>>Media</option>
+													<option value="others" <?php if ($data['type'] == "others") echo 'selected="selected"'; ?>>Others</option>
+												</select>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="type"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Type <span
-													class="required-label">*</span></label>
+											<label for="phone" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone Number <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-													<select class="form-control">
-														<option>Agency</option>
-														<option>Design</option>
-														<option>Education</option>
-														<option>Engineering</option>
-														<option>Finance</option>
-														<option>Governmnet</option>
-														<option>Health</option>
-														<option>IT & Telco</option>
-														<option>Logistics</option>
-														<option>Marketing</option>
-														<option>Media</option>
-														<option>Others</option>
-													  </select>
+												<input type="text" class="form-control" id="phone" name="phone" value="<?php echo $data['phone'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="phone"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone Number <span
-													class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="phone"
-													placeholder="Enter company phone" required>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="email"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address
+											<label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address
 												<span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="email" class="form-control" id="email"
-													placeholder="Enter company email" required>
+												<input type="email" class="form-control" id="email" name="email" value="<?php echo $data['email'] ?>" disabled>
 												<small id="emailHelp" class="form-text text-muted"></small>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="header"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Header <span
-													class="required-label">*</span></label>
+											<label for="header" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Header <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="header"
-													placeholder="Enter header" required>
+												<input type="text" class="form-control" id="header" name="header" value="<?php echo $data['header'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="address"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Address <span
-													class="required-label">*</span></label>
+											<label for="address" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Address <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="address"
-													placeholder="Enter company address" required>
+												<input type="text" class="form-control" id="address" name="address" value="<?php echo $data['address'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="province"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Province <span
-													class="required-label">*</span></label>
+											<label for="province" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Province <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="province"
-													placeholder="Enter company province" required>
+												<input type="text" class="form-control" id="province" name="province" value="<?php echo $data['province'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="city"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">City <span
-													class="required-label">*</span></label>
+											<label for="city" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">City <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="city"
-													placeholder="Enter company city" required>
+												<input type="text" class="form-control" id="city" name="city" value="<?php echo $data['city'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="description"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Description <span
-													class="required-label"></span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<textarea class="form-control" id="description"
-													placeholder="Enter description" required></textarea>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="access_type"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Access Type
+											<label for="status" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Status
 												<span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<div class="input-group">
-													<input type="text" class="form-control" placeholder=""
-														aria-label="access_type" aria-describedby=""
-														id="access_type" name="access_type" readonly value="1" required>
-												</div>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="status"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Status
-												<span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-group">
-													<input type="text" class="form-control is-valid" placeholder=""
-														aria-label="status" aria-describedby=""
-														id="status" name="status" readonly value="VERIFIED" required><i class="fas fa-check" style="color: green;"></i>
+													<input type="text" class="form-control is-valid" placeholder="" aria-label="status" aria-describedby="" readonly id="status" name="status" value="<?php echo $data['status'] ?>" disabled><i class="fas fa-check" style="color: green;"></i>
 												</div>
 											</div>
 										</div>
 										<div class="separator-solid"></div>
 										<div class="form-group form-show-validation row">
-											<label for="website"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Website <span
-													class="required-label">*</span></label>
+											<label for="website" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Website <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="website"
-													placeholder="Enter link website" required>
+												<input type="text" class="form-control" id="website" name="website" value="<?php echo $data['website'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="facebook"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Facebook <span
-													class="required-label"></span></label>
+											<label for="facebook" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Facebook <span class="required-label"></span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="facebook"
-													placeholder="Enter facebook name" required>
+												<input type="text" class="form-control" id="facebook" name="facebook" value="<?php echo $data['facebook'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="twitter"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Twitter <span
-													class="required-label"></span></label>
+											<label for="twitter" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Twitter <span class="required-label"></span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="twitter"
-													placeholder="Enter username twitter" required>
+												<input type="text" class="form-control" id="twitter" name="twitter" value="<?php echo $data['twitter'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
-											<label for="instagram"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Instagram <span
-													class="required-label"></span></label>
+											<label for="instagram" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Instagram <span class="required-label"></span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="instagram"
-													placeholder="Enter username instagram" required>
+												<input type="text" class="form-control" id="instagram" name="instagram" value="<?php echo $data['instagram'] ?>" disabled>
 											</div>
 										</div>
-										<!-- <div class="form-check">
-											<div class="row">
-												<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Agree <span class="required-label">*</span></label>
-												<div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" id="agree" name="agree" required>
-														<label class="custom-control-label" for="agree">Agree with terms and conditions</label>
-													</div>
-												</div>
-											</div>
-										</div> -->
 									</div><!-- card body -->
 									<div class="card-action">
 										<div class="row">
 											<div class="col-md-12">
-												<button class="btn btn-danger">Edit</button>
-												<input class="btn btn-success" type="submit" value="Save">
+												<a class="btn btn-danger text-white" id="edit_btn" type="submit">Edit</a>
+												<input class="btn btn-success" id="btn-save" type="submit" value="Save">
 											</div>
 										</div>
 									</div>
@@ -431,170 +371,182 @@ include 'config.php';
 							</div>
 						</div>
 					</div>
-				
-				</div><!--page inner-->
-			</div><!--container-->
-		</div><!--main-panel-->
+
+				</div>
+				<!--page inner-->
+			</div>
+			<!--container-->
+		</div>
+		<!--main-panel-->
 		<!-- End Main Content -->
 
-			<!--   Core JS Files   -->
-	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="assets/js/core/popper.min.js"></script>
-	<script src="assets/js/core/bootstrap.min.js"></script>
+		<!--   Core JS Files   -->
+		<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+		<script src="assets/js/core/popper.min.js"></script>
+		<script src="assets/js/core/bootstrap.min.js"></script>
 
-	<!-- jQuery UI -->
-	<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+		<!-- jQuery UI -->
+		<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+		<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 
-	<!-- jQuery Scrollbar -->
-	<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+		<!-- jQuery Scrollbar -->
+		<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
-	<!-- Moment JS -->
-	<script src="assets/js/plugin/moment/moment.min.js"></script>
+		<!-- Moment JS -->
+		<script src="assets/js/plugin/moment/moment.min.js"></script>
 
-	<!-- Chart JS -->
-	<script src="assets/js/plugin/chart.js/chart.min.js"></script>
+		<!-- Chart JS -->
+		<script src="assets/js/plugin/chart.js/chart.min.js"></script>
 
-	<!-- jQuery Sparkline -->
-	<script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+		<!-- jQuery Sparkline -->
+		<script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
 
-	<!-- Chart Circle -->
-	<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+		<!-- Chart Circle -->
+		<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
 
-	<!-- Datatables -->
-	<script src="assets/js/plugin/datatables/datatables.min.js"></script>
+		<!-- Datatables -->
+		<script src="assets/js/plugin/datatables/datatables.min.js"></script>
 
-	<!-- Bootstrap Notify -->
-	<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+		<!-- Bootstrap Notify -->
+		<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 
-	<!-- Bootstrap Toggle -->
-	<script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+		<!-- Bootstrap Toggle -->
+		<script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 
-	<!-- jQuery Vector Maps -->
-	<script src="assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
-	<script src="assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+		<!-- jQuery Vector Maps -->
+		<script src="assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+		<script src="assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 
-	<!-- Google Maps Plugin -->
-	<script src="assets/js/plugin/gmaps/gmaps.js"></script>
+		<!-- Google Maps Plugin -->
+		<script src="assets/js/plugin/gmaps/gmaps.js"></script>
 
-	<!-- Dropzone -->
-	<script src="assets/js/plugin/dropzone/dropzone.min.js"></script>
+		<!-- Dropzone -->
+		<script src="assets/js/plugin/dropzone/dropzone.min.js"></script>
 
-	<!-- Fullcalendar -->
-	<script src="assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
+		<!-- Fullcalendar -->
+		<script src="assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
 
-	<!-- DateTimePicker -->
-	<script src="assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
+		<!-- DateTimePicker -->
+		<script src="assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
 
-	<!-- Bootstrap Tagsinput -->
-	<script src="assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+		<!-- Bootstrap Tagsinput -->
+		<script src="assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
-	<!-- Bootstrap Wizard -->
-	<script src="assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
+		<!-- Bootstrap Wizard -->
+		<script src="assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
 
-	<!-- jQuery Validation -->
-	<script src="assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
+		<!-- jQuery Validation -->
+		<script src="assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
 
-	<!-- Summernote -->
-	<script src="assets/js/plugin/summernote/summernote-bs4.min.js"></script>
+		<!-- Summernote -->
+		<script src="assets/js/plugin/summernote/summernote-bs4.min.js"></script>
 
-	<!-- Select2 -->
-	<script src="assets/js/plugin/select2/select2.full.min.js"></script>
+		<!-- Select2 -->
+		<script src="assets/js/plugin/select2/select2.full.min.js"></script>
 
-	<!-- Sweet Alert -->
-	<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+		<!-- Sweet Alert -->
+		<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
-	<!-- Atlantis JS -->
-	<script src="assets/js/atlantis2.min.js"></script>
+		<!-- Atlantis JS -->
+		<script src="assets/js/atlantis2.min.js"></script>
 
-	<!-- Atlantis DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+		<!-- Atlantis DEMO methods, don't include it in your project! -->
+		<script src="assets/js/demo.js"></script>
 
-	<!-- AdminLTE App -->
-	<script src="../../dist/js/adminlte.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../../dist/js/adminlte.min.js"></script>
 
-	<script>
-		// Add Row
-		$('#add-row').DataTable({
-			"pageLength": 5,
-		});
+		<script>
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
 
-		var action =
-			'<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+			var action =
+				'<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
-		$('#addRowButton').click(function () {
-			$('#add-row').dataTable().fnAddData([
-				$("#addName").val(),
-				$("#addPosition").val(),
-				$("#addOffice").val(),
-				action
-			]);
-			$('#addRowModal').modal('hide');
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+				]);
+				$('#addRowModal').modal('hide');
 
-		});
+			});
 
-        //Summer Note
-        $('#summernote').summernote({
-			placeholder: 'Describe Company Profile . . .',
-			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Times New Roman'],
-			tabsize: 2,
-			height: 300
-		});
+			//Summer Note
+			$('#summernote').summernote({
+				placeholder: 'Describe Company Profile . . .',
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Times New Roman'],
+				tabsize: 2,
+				height: 300
+			});
 
-           //SweetALert
-           var SweetAlert2Demo = function () {
-            var initDemos = function () {
+			//SweetALert
+			var SweetAlert2Demo = function() {
+				var initDemos = function() {
 
 
-    $('#alert_demo_7').click(function(e) {
-        swal({
-            title: 'Publish this Company Profile?',
-            text: "This action will publish this post to other user.",
-            type: 'warning',
-            buttons:{
-                confirm: {
-                    text : 'Yes, post it!',
-                    className : 'btn btn-success'
-                },
-                cancel: {
-                    visible: true,
-                    className: 'btn btn-danger'
-                }
-            }
-        }).then((Delete) => {
-            if (Delete) {
-                swal({
-                    title: 'Posted!',
-                    text: 'Your post has been published.',
-                    type: 'success',
-                    buttons : {
-                        confirm: {
-                            className : 'btn btn-success'
-                        }
-                    }
-                });
-            } else {
-                swal.close();
-            }
-        });
-    });
-  
-};
+					$('#alert_demo_7').click(function(e) {
+						swal({
+							title: 'Publish this Company Profile?',
+							text: "This action will publish this post to other user.",
+							type: 'warning',
+							buttons: {
+								confirm: {
+									text: 'Yes, post it!',
+									className: 'btn btn-success'
+								},
+								cancel: {
+									visible: true,
+									className: 'btn btn-danger'
+								}
+							}
+						}).then((Delete) => {
+							if (Delete) {
+								swal({
+									title: 'Posted!',
+									text: 'Your post has been published.',
+									type: 'success',
+									buttons: {
+										confirm: {
+											className: 'btn btn-success'
+										}
+									}
+								});
+							} else {
+								swal.close();
+							}
+						});
+					});
 
-return {
-    //== Init
-    init: function () {
-        initDemos();
-    },
-};
-}();
+				};
 
-//== Class Initialization
-jQuery(document).ready(function () {
-SweetAlert2Demo.init();
-});
-	</script>
+				return {
+					//== Init
+					init: function() {
+						initDemos();
+					},
+				};
+			}();
 
-<?php
-include 'includes/footer.php';
-?>
+			//== Class Initialization
+			jQuery(document).ready(function() {
+				SweetAlert2Demo.init();
+			});
+		</script>
+
+		<script type="text/javascript">
+			jQuery(function($) {
+				var $inputs = $('#company_profile :input').prop('disabled', true);
+				$('#edit_btn').click(function() {
+					$inputs.prop('disabled', false);
+				});
+			})
+		</script>
+
+		<?php
+		include 'includes/footer.php';
+		?>

@@ -222,9 +222,9 @@
 										<table id="add-row" class="display table table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Intern ID</th>
-													<th>Logbook ID</th>
+													<th>Name</th>
 													<th>Description</th>
+													<th>Documentation</th>
 													<th>Start Date</th>
 													<th>End Date</th>
 													<th>Week</th>
@@ -232,32 +232,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>intern001</td>
-													<td>log001</td>
-													<td>
-														<center>
-															<a type="button" href="logbookstudent.html" style="cursor: pointer;" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-													<td>09/10/2021</td>
-													<td>10/10/2022</td>
-													<td>1st</td>
-													<td><center><a class="btn btn-warning btn-xs text-white">Requested</a></center></td>
-												</tr>
-												<tr>
-													<td>intern001</td>
-													<td>log002</td>
-													<td>
-														<center>
-															<a type="button" href="logbookstudent.html" style="cursor: pointer;" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-													<td>09/10/2021</td>
-													<td>10/10/2022</td>
-													<td>2nd</td>
-													<td><center><a class="btn btn-success btn-xs text-white">Accepted</a></center></td>
-												</tr>
+												
 											</tbody>
 										</table>
 									</div>

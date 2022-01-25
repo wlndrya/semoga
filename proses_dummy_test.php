@@ -7,7 +7,7 @@
   </head>
 
 <?php
-error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
+//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
 include 'config.php';
 
 // Add Supervisor
@@ -38,7 +38,7 @@ if($_GET['PageAction'] == "add_supervisor") {
       //   echo "password :". $passwd;
       // }
       echo '<script type="text/javascript">';
-      echo 'alert("Added Successfully"); document.location="index.php?page=hrd-addsupervisor";</script>';
+      echo 'alert("Successfully Added"); document.location="index.php?page=hrd-addsupervisor";</script>';
      }  
      else
      {
@@ -113,12 +113,10 @@ if ($_GET['PageAction'] == "update_supervisor") {
 
     // Delete Supervisor
 if ($_GET['PageAction'] == "delete_supervisor") {
-    //  $id_user_company = $_GET['id_user_company'];
-    //  $select = $conn->query("SELECT * FROM `user_company` WHERE id_user_company = '$id_user_company'");
-    //  if(mysqli_num_rows($select) != 0){
+
      $delete = $conn->query("DELETE FROM tb_user_company WHERE id_user_company = '$_POST[id_user_company]' ");
      if($delete){
-     echo '<script language="javascript">alert("Deleted Successfully!"); window.history.back();</script>';
+     echo '<script language="javascript">alert("Successfully Deleted!"); window.history.back();</script>';
      }else{
      echo '<script language="javascript">alert("Deleted Failure!"); window.history.back();</script>';
      }
@@ -181,16 +179,7 @@ if ($_GET['PageAction'] == "delete_supervisor") {
   if ($token_session === $token_post) {
    
     $id_applicant    = mysqli_real_escape_string($conn,$_POST['id_applicant']);
-    $id_offer        = mysqli_real_escape_string($conn,$_POST['id_offer']);
-    $id_internship   = mysqli_real_escape_string($conn,$_POST['id_internship']);
-    $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
-    $nim             = mysqli_real_escape_string($conn,$_POST['nim']);
     $status          = mysqli_escape_string($conn,$_POST['status']);
-    $date            = mysqli_real_escape_string($conn,$_POST['date']);
-    $start_date      = mysqli_real_escape_string($conn,$_POST['start_date']);
-    $end_date        = mysqli_real_escape_string($conn,$_POST['end_date']);
-    $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
-    $id_pembimbing   = mysqli_real_escape_string($conn,$_POST['id_pembimbing']);
 
     if($_SESSION['id_company'] && $_SESSION['username']) {
       $update = $conn->query("UPDATE `tb_applicant` SET 
@@ -227,5 +216,215 @@ if ($_GET['PageAction'] == "delete_supervisor") {
    }
    }
   
+   //Edit Update Profile HRD
+   if ($_GET['PageAction'] == "update_hrd") {
+    session_start();
+  $token_session = $_SESSION['token'];
+  $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+
+  if ($token_session === $token_post) {
+   
+    $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
+    $name            = mysqli_real_escape_string($conn,$_POST['user_fullname']);
+    $user_phone      = mysqli_real_escape_string($conn,$_POST['user_phone']);
+    $user_email      = mysqli_escape_string($conn,$_POST['user_email']);
+    $username        = mysqli_real_escape_string($conn,$_POST['username']);
+
+    if($_SESSION) {
+      $update = $conn->query("UPDATE `tb_user_company` SET 
+      `user_fullname` = '$name',
+      `user_phone` = '$user_phone',
+      `user_email` = '$user_email',
+      `username` = '$username'
+      WHERE `id_user_company` = $id_user_company;");
+    }
+    // echo $id_user_company;
+      if($update){
+        echo '<script type="text/javascript">';
+        echo 'alert("Successfully Update"); document.location="index.php?page=hrd-profile";</script>';
+      }
+      else{
+         //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
+          echo "
+                                     <script type='text/javascript'>
+                                      setTimeout(function () { 
+                                 Swal.fire({
+                                   type: 'error',
+                                   title: 'Data gagal diperbaharui',
+                                   showConfirmButton: false
+                                 });  
+                                      },10); 
+                                      window.setTimeout(function(){ 
+                                        window.history.back();
+                                      } ,3000); 
+                                     </script>
+                                 ";
+                               }
+    }
+    else{
+      echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-profile";</script>';
+     }
+  }
+
+  //Update Company Profile
+  if ($_GET['PageAction'] == "update_company") {
+    session_start();
+  $token_session = $_SESSION['token'];
+  $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+
+  if ($token_session === $token_post) {
+   
+    $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
+    $name            = mysqli_real_escape_string($conn,$_POST['name']);
+    $type            = mysqli_real_escape_string($conn,$_POST['type']);
+    $phone           = mysqli_real_escape_string($conn,$_POST['phone']);
+    $email           = mysqli_escape_string($conn,$_POST['email']);
+    $website         = mysqli_real_escape_string($conn,$_POST['website']);
+    $facebook        = mysqli_real_escape_string($conn,$_POST['facebook']);
+    $twitter         = mysqli_real_escape_string($conn,$_POST['twitter']);
+    $instagram       = mysqli_real_escape_string($conn,$_POST['instagram']);
+    $header          = mysqli_real_escape_string($conn,$_POST['header']);
+    $address         = mysqli_real_escape_string($conn,$_POST['address']);
+    $province        = mysqli_real_escape_string($conn,$_POST['province']);
+    $city            = mysqli_real_escape_string($conn,$_POST['city']);
+    $status          = mysqli_real_escape_string($conn,$_POST['status']);
+    $access_type     = mysqli_real_escape_string($conn,$_POST['access_type']);
+
+    if($_SESSION) {
+      $update = $conn->query("UPDATE `tb_company` SET 
+      `name` = '$name',
+      `type` = '$type',
+      `phone` = '$phone',
+      `email` = '$email',
+      `website` = '$website',
+      `facebook` = '$facebook',
+      `twitter` = '$twitter',
+      `instagram` = '$instagram',
+      `header` = '$header',
+      `address` = '$address',
+      `province` = '$province',
+      `city` = '$city',
+      `status` = '$status',
+      `access_type` = '$access_type'
+      WHERE `id_company` = $id_company;");
+    }
+    // echo $id_user_company;
+      if($update){
+        echo '<script type="text/javascript">';
+        echo 'alert("Successfully Update"); document.location="index.php?page=hrd-company-profile";</script>';
+      }
+      else{
+         //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
+          echo "
+                                     <script type='text/javascript'>
+                                      setTimeout(function () { 
+                                 Swal.fire({
+                                   type: 'error',
+                                   title: 'Data gagal diperbaharui',
+                                   showConfirmButton: false
+                                 });  
+                                      },10); 
+                                      window.setTimeout(function(){ 
+                                        window.history.back();
+                                      } ,3000); 
+                                     </script>
+                                 ";
+                               }
+    }
+    else{
+      echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-company-profile";</script>';
+     }
+  }
+
+  //Add Feedback
+  if($_GET['PageAction'] == "add_feedback") {
+
+    session_start();
+    $token_session = $_SESSION['token'];
+    $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+  
+    if ($token_session === $token_post) {
+  
+      // $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
+      $id_internship      = mysqli_real_escape_string($conn,$_POST['id_internship']);
+      $nim                = mysqli_real_escape_string($conn,$_POST['nim']);
+      $position           = mysqli_real_escape_string($conn,$_POST['position']);
+      $intern_comment     = mysqli_real_escape_string($conn,$_POST['intern_comment']);
+      $campus_comment     = mysqli_real_escape_string($conn,$_POST['campus_comment']);
+      $performance        = mysqli_real_escape_string($conn,$_POST['performance']);
+      $recruit_intern     = mysqli_real_escape_string($conn,$_POST['recruit_intern']);
+      $final_grade        = mysqli_real_escape_string($conn,$_POST['final_grade']);
+      $ethics             = mysqli_real_escape_string($conn,$_POST['ethics']);
+      $core_competency    = mysqli_real_escape_string($conn,$_POST['core_competency']);
+      $foreign_languange  = mysqli_real_escape_string($conn,$_POST['foreign_languange']);
+      $information_technology = mysqli_real_escape_string($conn,$_POST['information_technology ']);
+      $communication_skill = mysqli_real_escape_string($conn,$_POST['communication_skill']);
+      $teamwork            = mysqli_real_escape_string($conn,$_POST['teamwork']);
+      $personal_development = mysqli_real_escape_string($conn,$_POST['personal_development']);
+                          
+    if($_SESSION){
+      $add = $conn->query("INSERT INTO `tb_logbook` (`id_internship`, `nim`, `position`, `intern_comment`, `campus_comment`, `performance`, `recruit_intern`, `final_grade`, `ethics`, `core_competency`, `foreign_languange`, `information_technology`, `communication_skill`, `teamwork`, `personal_development`) VALUES ('$id_internship', '$nim', '$position', '$intern_comment', '$campus_comment', '$performance', '$recruit_intern', '$final_grade', '$ethics', '$core_competency', '$foreign_languange', '$information_technology', '$communication_skill', '$teamwork', '$personal_development');");  
+      if($add){
+        echo '<script type="text/javascript">';
+        echo 'alert("Successfully Added"); document.location="index.php?page=hrd-feedback2";</script>';
+       }  
+       else
+       {
+        // echo("Error description: " . $conn -> error);
+         echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=hrd-feedback2";</script>';
+       }
+     }
+  } else {
+  echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-feedback2.php";</script>';
+  }
+    }
+
+  // Add Supervisor Name
+   if ($_GET['PageAction'] == "update_spv") {
+    session_start();
+  $token_session = $_SESSION['token'];
+  $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+
+  if ($token_session === $token_post) {
+   
+    $id_internship      = mysqli_real_escape_string($conn,$_POST['id_internship']);
+    $id_company = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
+    // $name = mysqli_real_escape_string($conn,$_POST['name']);
+
+    if($_SESSION) {
+      $update = $conn->query("UPDATE `tb_internship` SET 
+      `id_user_company` = '$id_user_company'
+      WHERE `id_internship` = $id_internship;");
+    }
+    // echo $id_user_company;
+      if($update){
+        echo '<script type="text/javascript">';
+        echo 'alert("Successfully Update"); document.location="index.php?page=hrd-studentlist";</script>';
+      }
+      else{
+         //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
+          echo "
+                                     <script type='text/javascript'>
+                                      setTimeout(function () { 
+                                 Swal.fire({
+                                   type: 'error',
+                                   title: 'Data gagal diperbaharui',
+                                   showConfirmButton: false
+                                 });  
+                                      },10); 
+                                      window.setTimeout(function(){ 
+                                        window.history.back();
+                                      } ,3000); 
+                                     </script>
+                                 ";
+                               }
+    }
+    else{
+      echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-studentlist";</script>';
+     }
+  }
 
 ?>

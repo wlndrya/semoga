@@ -40,6 +40,7 @@ $token = $_SESSION['token'];
 	</script>
 
 	<!-- CSS Files -->
+	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/atlantis2.css">
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -48,6 +49,15 @@ $token = $_SESSION['token'];
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
+	<style>
+		.option-YES {
+			display: block;
+		}
+
+		.option-NO {
+			display: none;
+		}
+	</style>
 </head>
 
 <body>
@@ -258,22 +268,57 @@ $token = $_SESSION['token'];
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 												$view = mysqli_query($conn, "SELECT * FROM tb_applicant INNER JOIN tb_student_internship ON tb_applicant.nim = tb_student_internship.nim");
 												while ($data = mysqli_fetch_array($view)) {
-													echo "<tr>
-													<td>" . $data['date'] . "</td>
-													<td>" . $data['name'] . "</td>
-													<td>" . $data['name'] . "</td>
-													<td><center>" .
+													// 	echo "<tr>
+													// 	<td>" . $data['date'] . "</td>
+													// 	<td>" . $data['name'] . "</td>
+													// 	<td><center>" .
 
-														(($data['status']) ? "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														 data-target='#modal-approve' title='Click to Approve'>$data[status]</button>" : 
+													// 		($data['status']) ? "<button class='btn btn-secondary py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+													// 		 data-target='#doc-detail' ><i class='fas fa-eye'></i> VIEW</button>" :
+													// 		 "none"
 
-														(($data['status'] == "YES") ? "<button class='btn btn-success py-2 my-auto rounded text-center text-white'>APPROVED</button>" : 
-														"<button class='bg-danger py-2 my-auto rounded text-center text-white'>DECLINED</button>"))
 
-														. "</center></td>
-												  </tr>"
+
+													// 		. "</center></td>
+													// 	<td><center>" .
+
+													// 		(($data['status'] == "PENDING") ? "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+													// 		 data-target='#modal-approve' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> $data[status]</button>" : 
+
+													// 		(($data['status'] == "YES") ? "<button class='btn btn-success py-2 my-auto rounded text-center text-white'>APPROVED</button>" : 
+													// 		"<button class='bg-danger py-2 my-auto rounded text-center text-white'>DECLINED</button>"))
+
+													// 		. "</center></td>
+													//   </tr>"
 
 												?>
+													<tr>
+														<td><?php echo $data['date']; ?></td>
+														<td><?php echo $data['name']; ?></td>
+														<td>
+															<center><?php
+																	if ($data['status']) {
+																		echo "<button class='btn btn-secondary py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+															data-target='#doc-detail' ><i class='fas fa-eye'></i> VIEW</button>";
+																	}
+																	?></center>
+														</td>
+														<td>
+															<center><?php
+																	if ($data['status'] == "PENDING") {
+																		echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='#modal-approve' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> $data[status]</button>";
+																	} elseif ($data['status'] == "YES") {
+																		echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='#modal-approve' title='Click to Approve'><i class='fa fa-check'></i> APPROVED</button>";
+																	} else {
+																		echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='#modal-approve' title='Click to Approve'><i class='fa fa-times'></i> DECLINED</button>";
+																	}
+
+																	?></center>
+														</td>
+													</tr>
 
 													<!-- Modal Approval Status -->
 													<div class="modal fade" id="modal-approve" role="dialog">
@@ -297,21 +342,23 @@ $token = $_SESSION['token'];
 																	<input type="hidden" id="id_offer" name="id_offer" value="<?php echo $data['id_offer']; ?>">
 
 																	<div class="modal-body">
-																	<div class="form-group">
+																		<div class="form-group">
 																			<label for="status">Approval</label>
-																			<select class="form-control" id="status" name="status" value="<?php echo $data['status']; ?>" required>
-																				<option value="YES">Yes</option>
-																				<option value="NO">No</option>
+																			<select class="form-control" id="status_approve" name="status" required>
+																				<option class="option-1" value="YES">Yes</option>
+																				<option class="option-2" value="NO">No</option>
 																			</select>
 																		</div>
-																		<!-- <div class="form-group">
-																			<label for="start_date">Start Date</label>
-																			<input type="date" class="form-control" id="start_date" name="start_date" placeholder="" value="<?php echo $data['start_date']; ?>" required>
+																		<div class="date-approve">
+																			<div class="form-group">
+																				<label for="start_date">Start Date</label>
+																				<input type="date" class="form-control" id="start_date" name="start_date" placeholder="" value="<?php echo $data['start_date']; ?>" required>
+																			</div>
+																			<div class="form-group">
+																				<label for="end_date">End Date</label>
+																				<input type="date" class="form-control" id="end_date" name="end_date" placeholder="" value="<?php echo $data['end_date']; ?>" required>
+																			</div>
 																		</div>
-																		<div class="form-group">
-																			<label for="end_date">End Date</label>
-																			<input type="date" class="form-control" id="end_date" name="end_date" placeholder="" value="<?php echo $data['end_date']; ?>" required>
-																		</div> -->
 																	</div>
 																	<div class="modal-footer border-top-0 d-flex justify-content-center">
 																		<button type="submit" class="btn btn-secondary btn-sm" name="btn-approve" id="btn-approve">ADD</button>
@@ -321,10 +368,6 @@ $token = $_SESSION['token'];
 														</div>
 													</div>
 													<!-- End -->
-													<!-- 
-													<center>
-															<a type="button" style="cursor: pointer;" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center> -->
 												<?php //penutup perulangan while
 												}
 												?>
@@ -352,22 +395,22 @@ $token = $_SESSION['token'];
 									<!-- button cta -->
 									<div class="row">
 										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-secondary" style="width: 100%;">CV </a>
+											<a href="#" class="btn btn-secondary" id="cv" name="cv" data-toggle="modal" data-target="#" style="width: 100%;">CV </a>
 										</div>
 										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-secondary" style="width: 100%;">Registry Form </a>
+											<a href="#" class="btn btn-secondary" id="file1" name="file1" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
 										</div>
 										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-secondary" style="width: 100%;">Optional Files </a>
+											<a href="#" class="btn btn-secondary" id="file2" name="file2" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
 										</div>
 										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-secondary" style="width: 100%;">Optional Files </a>
+											<a href="#" class="btn btn-secondary" id="file3" name="file3" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
 										</div>
 										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-secondary" style="width: 100%;">Optional Files </a>
+											<a href="#" class="btn btn-secondary" id="file4" name="file4" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
 										</div>
 										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-secondary" style="width: 100%;">Optional Files </a>
+											<a href="#" class="btn btn-secondary" id="file5" name="file5" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
 										</div>
 									</div>
 									<!-- end button cta -->
@@ -380,6 +423,26 @@ $token = $_SESSION['token'];
 					<!-- End Modal -->
 
 					<!-- End Modal Area -->
+
+					<!--Modal CV-->
+					<div id="myModalcv" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-lg">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title"></h4>
+								</div>
+								<div class="modal-body" style="height: 600px">
+									<iframe src="viewer.php?file=dXBsb2Fkcy90dWdhc19ha2hpci8zMzExOTAxMDQ0LzgyNl9sYXBvcmFuXzExXzIwMjExMTA0LnBkZg==" frameborder="0" width="100%" height="100%" allowtransparency="true"></iframe>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End modal Cv-->
 
 				</div>
 				<!--page inner-->
@@ -401,7 +464,7 @@ $token = $_SESSION['token'];
 	</div>
 
 	<!--   Core JS Files   -->
-	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+
 	<script src="assets/js/core/popper.min.js"></script>
 	<script src="assets/js/core/bootstrap.min.js"></script>
 
@@ -477,6 +540,15 @@ $token = $_SESSION['token'];
 	<script src="../../dist/js/adminlte.min.js"></script>
 
 	<script>
+		//change value
+		$('select#status_approve').change(function() {
+
+			var className = "date-approve option-" + $(this).val();
+
+			$('.date-approve').removeClass().addClass(className); // remove existing classes and add required classes.
+
+		});
+
 		// Add Row
 		$('#add-row').DataTable({
 			"pageLength": 5,

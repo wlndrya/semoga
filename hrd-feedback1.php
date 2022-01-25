@@ -248,29 +248,83 @@ for (var i = 0; i < btns.length; i++) {
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Internship ID</th>
                                                     <th>Full Name</th>
+                                                    <th>Position</th>
                                                     <th>
-                                                        <center>Give Feedback</center>
+                                                        <center>Feedback</center>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>3311901045</td>
-                                                    <td>Kezia Angelina Sinaga</td>
-                                                    <td><center>
-                                                        <div class="form-button-action">
-                                                            <button type="submit" title="Fill"
-                                                                href="hrd-feedback2.php"
-                                                                class="btn btn-link btn-primary btn-lg"
-                                                                data-original-title="Fill">
-                                                                <i class="fa fa-edit fa-lg"></i>
-                                                            </button>
+                                            <?php
+                                                include 'config.php';
+                                                error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                                $view = mysqli_query($conn, "SELECT * FROM tb_student_feedback INNER JOIN  tb_student_internship ON tb_student_feedback.nim = tb_student_internship.nim");
+                                                $no = 1;
+                                                while ($data = mysqli_fetch_array($view)) {
+                                                    echo "<tr>
+                                                        <td>" . $data['name'] . "</td>
+                                                        <td>" . $data['position'] . "</td>
+                                                        <td>
+                                                        <center><a href = 'index.php?page=hrd-feedback2' type = 'button' title = 'Give Feedback' class = 'btn btn-link btn-primary' data-original-title = 'Give Feedback'><i class='fa fa-edit fa-lg'></i></a></center>
+                                                       </td>
+                                                      </tr>"
+                                                ?>
+                                                   <!-- Modal edit Feedback -->
+                                                   <div class="modal fade" id="modaledit<?php echo $data['id_user_company'] ?>" role="dialog">
+                                                        <div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="modaledit">
+                                                                        EDIT SUPERVISOR DATA</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <form method="POST" action="proses_dummy_test.php?PageAction=update_supervisor">
+
+                                                                    <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                                                    <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company']; ?>">
+                                                                    <input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
+
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label for="user_fullname">Full Name</label>
+                                                                            <input type="text" class="form-control" id="user_fullname" name="user_fullname" placeholder="" value="<?php echo $data['user_fullname']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="user_phone">Phone</label>
+                                                                            <input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="" value="<?php echo $data['user_phone']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="user_email">Email Address</label>
+                                                                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="" value="<?php echo $data['user_email']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="username">Username</label>
+                                                                            <input type="text" class="form-control" id="username" name="username" placeholder="" value="<?php echo $data['username']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="user_type">User Type</label>
+                                                                            <select class="form-control" id="user_type" name="user_type" value="<?php echo $data['user_type']; ?>">
+                                                                                <option value="supervisor">SUPERVISOR</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                                        <button type="submit" class="btn btn-secondary btn-sm" name="btn-edit" id="btn-edit">UPDATE</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
-                                                    </center>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                    <!-- End -->
+
+                                                <?php //penutup perulangan while
+                                                    $no++;
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>

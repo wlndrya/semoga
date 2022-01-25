@@ -339,7 +339,7 @@ $token = $_SESSION['token'];
                                                 <?php
                                                 include 'config.php';
                                                 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                $view = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company");
+                                                $view = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company AND user_type = 'supervisor'");
                                                 $no = 1;
                                                 while ($data = mysqli_fetch_array($view)) {
                                                     echo "<tr>
