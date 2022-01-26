@@ -1,3 +1,18 @@
+<?php
+//Koneksi Database
+include 'config.php';
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +85,7 @@
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi,<?php echo $user;?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -222,47 +237,29 @@
 										<table id="add-row" class="display table table-striped table-hover">
 											<thead>
 												<tr>
-													<th>ID User</th>
-													<th>Supervisor</th>
-													<th>Department</th>
-													<th>Intern Name</th>
+													<th>Student Name</th>
+													<th>Program Study</th>
 													<th><center>Job Description</center></th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>001</td>
-													<td>Kezia Angelina S</td>
-													<td>Quality Control</td>
-													<td>Seo Changbin</td>
-													<td>
-														<center>
-															<a type="button" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-												</tr>
-												<tr>
-													<td>002</td>
-													<td>Cyntya Maharani Nurul Istiqomah</td>
-													<td>IT</td>
-													<td>Hwang Hyunjin</td>
-													<td>
-														<center>
-															<a type="button" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-												</tr>
-												<tr>
-													<td>003</td>
-													<td>Yulia Wulandari</td>
-													<td>Engineering</td>
-													<td>Lee Min Ho</td>
-													<td>
-														<center>
-															<a type="button" data-toggle="modal" data-target="#doc-detail" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-												</tr>
+											<?php
+												include 'config.php';
+												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												$view = mysqli_query($conn, "SELECT * FROM tb_job_description INNER JOIN tb_student_internship ON tb_job_description.nim = tb_student_internship.nim");
+												while ($data = mysqli_fetch_array($view)) {
+													echo "<tr>
+													<td>" . $data['name'] . "</td>
+													<td>" . $data['program_study'] . "</td>
+													<td><center>
+													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal' class='btn-sm btn-secondary text-white'><i class='fas fa-eye'></i> View</a>
+													</td></center>
+													</tr>"
+												?>
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
 											</tbody>
 										</table>
 									</div>
@@ -270,7 +267,37 @@
 							</div>
 						</div>
 					</div>
-			
+
+				<!--Modal CV-->
+				<div id="mymodal" class="modal fade" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title"></h4>
+							</div>
+							<div class="modal-body" style="height: 600px">
+								<?php
+								include 'config.php';
+								$query = mysqli_query($conn, "SELECT * FROM tb_document WHERE id='5'");
+								$data = mysqli_fetch_array($query);
+								?>
+								<object 
+								type="application/pdf" 
+								data="berkas/<?php echo $data['file'] ?>" 
+								width="100%" height="100%" 
+								frameborder="0" 
+								allowtransparency="true">
+								</object>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--End modal Cv-->
 				</div><!--page inner-->
 			</div><!--container-->
 		</div><!--main-panel-->

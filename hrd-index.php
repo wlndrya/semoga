@@ -107,7 +107,7 @@ $token = $_SESSION['token'];
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>Hi,<?php echo $user;?></b></h5>
+									<h5><b>Hi,<?php echo $user; ?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -125,8 +125,7 @@ $token = $_SESSION['token'];
 									</a>
 								</li>
 								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button"  aria-haspopup="true"
-									aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
 								</li>
 								<!-- End Profil -->
@@ -238,7 +237,7 @@ $token = $_SESSION['token'];
 					<!-- <div class="font-header">
 					<p>Overall Statistics</p>
 					</div> -->
-	
+
 					<div class="row">
 						<div class="col-md-4">
 							<div class="card card-dark card-menu text-center">
@@ -273,7 +272,7 @@ $token = $_SESSION['token'];
 							<div class="card card-dark card-menu-intern text-center">
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
-									<?php
+										<?php
 										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company='1'");
 										$hasil = mysqli_num_rows($query);
 
@@ -305,72 +304,72 @@ $token = $_SESSION['token'];
 									<div class="row">
 										<div class="col-md-9">
 											<div style="text-align: justify;">
-											<div class="table-responsive table-hover table-sales">
-												<table class="table">
-												<tbody>
-														<?php
-														include 'config.php';
-														error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-														$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = '$_SESSION[id_company]'");
-														while ($data = mysqli_fetch_array($view)) {
-														echo $data['description'];
-														echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#mymodalcv'> Modal CV</a>";
-														// echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
-														// 	Description</a>";
-														?>
-														
-														<!-- Modal Edit Company Profile-->
-														<div class="modal fade" id="modaledit<?php echo $data['id_company'] ?>" tabindex="-1" role="dialog" aria-labelledby="modaledit" aria-hidden="true">
-															<div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<h5 class="modal-title" id="modaledit">
-																			EDIT COMPANY PROFILE</h5>
-																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																			<span aria-hidden="true">&times;</span>
-																		</button>
-																	</div>
+												<div class="table-responsive table-hover table-sales">
+													<table class="table">
+														<tbody>
+															<?php
+															include 'config.php';
+															error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+															$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = '$_SESSION[id_company]'");
+															while ($data = mysqli_fetch_array($view)) {
+																echo $data['description'];
+																echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#mymodalcv'> Modal CV</a>";
+																// echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
+																// 	Description</a>";
+															?>
 
-																	<form method="POST" action="proses_dummy_test.php?PageAction=update_description">
-																	<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                                                                    <input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
-																		<div class="modal-body">
-																			<div class="form-group">
-																				<textarea class="form-control" id="description" name="description" rows="8" cols="90" onkeyup="charCount(this)" required><?php echo $data['description']; ?></textarea>
-																				<span id="textcount">0</span> of 740 Characters
+																<!-- Modal Edit Company Profile-->
+																<div class="modal fade" id="modaledit<?php echo $data['id_company'] ?>" tabindex="-1" role="dialog" aria-labelledby="modaledit" aria-hidden="true">
+																	<div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h5 class="modal-title" id="modaledit">
+																					EDIT COMPANY PROFILE</h5>
+																				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																					<span aria-hidden="true">&times;</span>
+																				</button>
 																			</div>
+
+																			<form method="POST" action="proses_dummy_test.php?PageAction=update_description">
+																				<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+																				<input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
+																				<div class="modal-body">
+																					<div class="form-group">
+																						<textarea class="form-control" id="description" name="description" rows="8" cols="90" onkeyup="charCount(this)" required><?php echo $data['description']; ?></textarea>
+																						<span id="textcount">0</span> of 740 Characters
+																					</div>
+																				</div>
+																				<div class="modal-footer border-top-0 d-flex justify-content-center">
+																					<button type="submit" class="btn btn-secondary btn-sm" id="btn-update" name="btn-update">UPDATE</button>
+																				</div>
+																			</form>
 																		</div>
-																		<div class="modal-footer border-top-0 d-flex justify-content-center">
-																			<button type="submit" class="btn btn-secondary btn-sm" id="btn-update" name="btn-update">UPDATE</button>
-																		</div>
-																	</form>
+																	</div>
 																</div>
-															</div>
-														</div>
-														<!-- End Modal Company Profile -->
-														<?php //penutup perulangan while
-                                                }
-                                                ?>
-													</div>
-															
-											</tbody>
-											</table>
-										</div>
+																<!-- End Modal Company Profile -->
+															<?php //penutup perulangan while
+															}
+															?>
+												</div>
+
+												</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 									<div class="col-md-3">
-											<div class="center">
-												<div class="drag-area">
-													<div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-													<header>Upload Company Logo</header>
-													<div>
-														<br>
-														<button>Browse File</button>
-														<input type="file" hidden>
-													</div>
-													<script src="assets/js/script.js"></script>
+										<div class="center">
+											<div class="drag-area">
+												<div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+												<header>Upload Company Logo</header>
+												<div>
+													<br>
+													<button>Browse File</button>
+													<input type="file" hidden>
 												</div>
+												<script src="assets/js/script.js"></script>
 											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -378,42 +377,37 @@ $token = $_SESSION['token'];
 					</div>
 				</div>
 				<!-- End Company Profile -->
-				
-					<!--Modal CV-->
-					<div id="mymodalcv" class="modal fade" role="dialog">
-                          <div class="modal-dialog modal-lg">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"></h4>
-                              </div>
-                              <div class="modal-body" style="height: 600px">
-							  <?php
-							  include 'config.php';
-							  $query = mysqli_query($conn, "SELECT * FROM tb_document WHERE id='5'");
-							  $data = mysqli_fetch_array($query);
-							  ?>
-							  <object
-      type="application/pdf"
-      data="berkas/<?php echo $data['file']?>"
-      width="100%"
-      height="100%"
-	  frameborder="0"
-	  allowtransparency="true"
-    >
-    </object>
-                                
-								
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-						
-					<!--End modal Cv--> 
+
+				<!--Modal CV-->
+				<div id="mymodalcv" class="modal fade" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title"></h4>
+							</div>
+							<div class="modal-body" style="height: 600px">
+								<?php
+								include 'config.php';
+								$query = mysqli_query($conn, "SELECT * FROM tb_document WHERE id='5'");
+								$data = mysqli_fetch_array($query);
+								?>
+								<object 
+								type="application/pdf" 
+								data="berkas/<?php echo $data['file'] ?>" 
+								width="100%" height="100%" 
+								frameborder="0" 
+								allowtransparency="true">
+								</object>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--End modal Cv-->
 
 				<!--Internship-->
 				<div class="row row-card-no-pd">
@@ -579,10 +573,10 @@ $token = $_SESSION['token'];
 
 		//GET VALUE TEXTAREA
 		function myFunction() {
-  document.getElementById("myTextarea").value = "<?php echo $data['description']; ?>";
-}
+			document.getElementById("myTextarea").value = "<?php echo $data['description']; ?>";
+		}
 	</script>
 
-<?php
-include 'includes/footer.php';
-?>
+	<?php
+	include 'includes/footer.php';
+	?>

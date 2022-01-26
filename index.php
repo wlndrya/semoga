@@ -10,6 +10,9 @@ if (isset($_GET['page'])) {
     case 'hrd-home':
       include "hrd-index.php";
       break;
+    case 'spv-home':
+      include "spv-index.php";
+      break;
     case 'hrd-profile':
       include "hrd-profile.php";
       break;

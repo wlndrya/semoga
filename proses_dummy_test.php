@@ -178,10 +178,12 @@ if ($_GET['PageAction'] == "delete_supervisor") {
 
   if ($token_session === $token_post) {
    
+    $id_company    = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $status          = mysqli_escape_string($conn,$_POST['status']);
     $id_applicant    = mysqli_real_escape_string($conn,$_POST['id_applicant']);
     $status          = mysqli_escape_string($conn,$_POST['status']);
 
-    if($_SESSION['id_company'] && $_SESSION['username']) {
+    if($_SESSION) {
       $update = $conn->query("UPDATE `tb_applicant` SET 
       `status` = '$status'
       WHERE `id_applicant` = $id_applicant;");

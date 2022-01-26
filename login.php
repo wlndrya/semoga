@@ -100,7 +100,7 @@
             $_SESSION['token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $length);
             
             //echo '<script language="javascript">document.location="index.php?page=dashboard";</script>';
-            // if($role == "admin"){
+            if($role == "HRD"){
               echo "
               <script type='text/javascript'>
                setTimeout(function () { 
@@ -116,7 +116,26 @@
                 window.location.replace('index.php?page=hrd-home');
                } ,3000); 
               </script>
-              ";      
+              "; 
+			} 
+			elseif($role == "supervisor"){
+				echo "
+				<script type='text/javascript'>
+				 setTimeout(function () { 
+				 swal({
+							title: 'Login Successful',
+							text:  'Please wait you will be directed to the Dashboard page',
+							type: 'success',
+							timer: 2000,
+							showConfirmButton: true
+						});
+				 },10); 
+				 window.setTimeout(function(){ 
+				  window.location.replace('index.php?page=spv-home');
+				 } ,3000); 
+				</script>
+				";   
+			  }       
           }
           else{
             echo '<div class="alert alert-success" role="alert">Login Failed. Username and Password Wrong.</div>';

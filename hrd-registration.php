@@ -253,7 +253,7 @@ $token = $_SESSION['token'];
 											<thead>
 												<tr>
 													<th>Date</th>
-													<th>Name</th>
+													<th>Student Name</th>
 													<th>
 														<center>Document Detail</center>
 													</th>
@@ -310,10 +310,10 @@ $token = $_SESSION['token'];
 														data-target='#modal-approve' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> $data[status]</button>";
 																	} elseif ($data['status'] == "YES") {
 																		echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='#modal-approve' title='Click to Approve'><i class='fa fa-check'></i> APPROVED</button>";
-																	} else {
+														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
+																	} elseif ($data['status'] == "NO") {
 																		echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='#modal-approve' title='Click to Approve'><i class='fa fa-times'></i> DECLINED</button>";
+														data-target='' title=''><i class='fa fa-times'></i> DECLINED</button>";
 																	}
 
 																	?></center>
@@ -345,23 +345,23 @@ $token = $_SESSION['token'];
 																		<div class="form-group">
 																			<label for="status">Approval</label>
 																			<select class="form-control" id="status_approve" name="status" required>
-																				<option class="option-1" value="YES">Yes</option>
-																				<option class="option-2" value="NO">No</option>
+																				<option value="YES">Yes</option>
+																				<option value="NO">No</option>
 																			</select>
 																		</div>
 																		<div class="date-approve">
 																			<div class="form-group">
 																				<label for="start_date">Start Date</label>
-																				<input type="date" class="form-control" id="start_date" name="start_date" placeholder="" value="<?php echo $data['start_date']; ?>" required>
+																				<input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo $data['start_date']; ?>" required>
 																			</div>
 																			<div class="form-group">
 																				<label for="end_date">End Date</label>
-																				<input type="date" class="form-control" id="end_date" name="end_date" placeholder="" value="<?php echo $data['end_date']; ?>" required>
+																				<input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo $data['end_date']; ?>" required>
 																			</div>
 																		</div>
 																	</div>
 																	<div class="modal-footer border-top-0 d-flex justify-content-center">
-																		<button type="submit" class="btn btn-secondary btn-sm" name="btn-approve" id="btn-approve">ADD</button>
+																		<button type="submit" class="btn btn-secondary btn-sm" name="btn" id="btn">ADD</button>
 																	</div>
 																</form>
 															</div>

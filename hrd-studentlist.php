@@ -3,10 +3,12 @@
 include 'config.php';
 
 session_start();
-$id_user_company = $_SESSION['id_user_company'];
+$user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
-$role = $_SESSION['role'];
-$nama = $_SESSION['nama'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
 $token = $_SESSION['token'];
 
 ?>
@@ -89,7 +91,7 @@ $token = $_SESSION['token'];
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi,<?php echo $user;?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
