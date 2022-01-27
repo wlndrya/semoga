@@ -97,7 +97,7 @@ $token = $_SESSION['token'];
 								</li>
 								<a style="text-decoration: none;" href="spv-profile.html">
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi,<?php echo $user; ?></b></h5>
 								</div>
 							</a>
 								<li class="nav-item dropdown hidden-caret">
@@ -206,46 +206,6 @@ $token = $_SESSION['token'];
         <div class="main-panel">
             <div class="container">
                 <div class="page-inner">
-
-                    <!-- Student -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Student</h4>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <!-- text input -->
-                                        <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" class="form-control" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Student ID</label>
-                                            <input type="text" class="form-control" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Study Program</label>
-                                            <input type="text" class="form-control" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Company/Institution</label>
-                                            <input type="text" class="form-control" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- End Student -->
 
                     <!-- Task Type Parameter -->
                     <div class="card">

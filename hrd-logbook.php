@@ -223,12 +223,11 @@
 											<thead>
 												<tr>
 													<th>Name</th>
-													<th>Description</th>
-													<th>Documentation</th>
 													<th>Start Date</th>
 													<th>End Date</th>
 													<th>Week</th>
-													<th><center>Approval</center></th>
+													<th>Logbook</th>
+													<th><center>Supervisor Approval</center></th>
 												</tr>
 											</thead>
 											<tbody>

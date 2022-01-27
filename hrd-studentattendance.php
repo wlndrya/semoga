@@ -1,3 +1,18 @@
+<?php
+//Mengkoneksikan dengan Database
+include 'config.php';
+// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +85,7 @@
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi,<?php echo $user; ?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -222,42 +237,51 @@
 										<table id="add-row" class="display table table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Intern ID</th>
-													<th>Attendance ID</th>
-													<th>Description</th>
-													<th>Start Date</th>
-													<th>End Date</th>
-													<th><center>Month</center></th>
-													<th><center>Approval</center></th>
+													<th>Student Name</th>
+													<th><center>Week</center></th>
+													<th><center>Attendance</center></th>
+													<th><center>Supervisor Approval</center></th>
 												</tr>
 											</thead>
 											<tbody>
+											<?php
+												include 'config.php';
+												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												$view = mysqli_query($conn, "SELECT * FROM tb_attendance LEFT JOIN tb_student_internship ON tb_attendance.nim = tb_student_internship.nim 
+												WHERE id_company = '$_SESSION[id_company]'");
+												while ($data = mysqli_fetch_array($view)) {
+													// echo $id_company;
+												?>
 												<tr>
-													<td>intern001</td>
-													<td>attend1</td>
-													<td>
-														<center>
-															<a type="button" href="logbookstudent.html" style="cursor: pointer;" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-													<td>01/10/2021</td>
-													<td>30/10/2022</td>
-													<td>October</td>
-													<td><center><a class="btn btn-success btn-xs text-center text-white">Accepted</a></center></td>
+													<td><?php echo $data['name']?></td>
+													<td><?php echo $data['week']?></td>
+													<td><?php echo "<center>
+													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn-sm btn-secondary text-white'><i class='fas fa-eye'></i> View</a>
+													</td></center>"?></td>
+													<td><?php echo "<center> $data[approval_spv] </center>"?></td>
 												</tr>
-												<tr>
-													<td>intern001</td>
-													<td>attend002</td>
-													<td>
-														<center>
-															<a type="button" href="logbookstudent.html" style="cursor: pointer;" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-													<td>01/11/2021</td>
-													<td>30/10/2022</td>
-													<td>November</td>
-													<td><center><a class="btn btn-warning btn-xs text-center text-white">Requested</a></center></td>
-												</tr>
+												<!-- <div id="mymodal<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-lg"> -->
+														<!-- Modal content-->
+														<!-- <div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title"></h4>
+															</div>
+															<div class="modal-body" style="height: 600px">
+																<object type="application/pdf" data="berkas/<?php echo $data['final_report'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																</object>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															</div>
+														</div> -->
+													<!-- </div>
+												</div> -->
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
 											</tbody>
 										</table>
 									</div>

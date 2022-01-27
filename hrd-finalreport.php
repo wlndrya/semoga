@@ -15,18 +15,24 @@ $token = $_SESSION['token'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Sistem Informasi Pengelolaan Magang</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
-			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css']},
+			google: {
+				"families": ["Lato:300,400,700,900"]
+			},
+			custom: {
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+				urls: ['assets/css/fonts.min.css']
+			},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -43,9 +49,10 @@ $token = $_SESSION['token'];
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
+
 <body>
 	<div class="wrapper horizontal-layout-2">
-		
+
 		<div class="main-header" data-background-color="light-blue2">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
@@ -95,9 +102,8 @@ $token = $_SESSION['token'];
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-									<li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
-										aria-expanded="false">
+								<li class="nav-item dropdown hidden-caret">
+									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 										<div class="avatar-sm">
 											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
 										</div>
@@ -107,8 +113,7 @@ $token = $_SESSION['token'];
 											<li>
 												<div class="user-box">
 													<div class="u-text">
-														<a href="profile.html"
-															class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+														<a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
 														<a href="profile.html" class="btn btn-xs btn-danger btn-sm">Logout</a>
 													</div>
 												</div>
@@ -239,24 +244,44 @@ $token = $_SESSION['token'];
 												<tr>
 													<th>Date</th>
 													<th>Student Name</th>
-                                                    <th><center>Detail</center></th>
+													<th>
+														<center>Detail</center>
+													</th>
 												</tr>
 											</thead>
 											<tbody>
-											<?php
+												<?php
 												include 'config.php';
-												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 												$view = mysqli_query($conn, "SELECT * FROM tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim
 												WHERE status='YES' AND id_company = '$_SESSION[id_company]'");
 												while ($data = mysqli_fetch_array($view)) {
-													echo "<tr>
-													<td>" . $data['date_finalreport'] . "</td>
-													<td>" . $data['name'] . "</td>
-													<td><center>
-													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal' class='btn-sm btn-secondary text-white'><i class='fas fa-eye'></i> View</a>
-													</td></center>
-													</tr>"
 												?>
+												<tr>
+													<td><?php echo $data['date_finalreport']?></td>
+													<td><?php echo $data['name']?></td>
+													<td><?php echo "<center>
+													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn-sm btn-secondary text-white'><i class='fas fa-eye'></i> View</a>
+													</td></center>"?></td>
+												</tr>
+												<div id="mymodal<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-lg">
+														<!-- Modal content-->
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title"></h4>
+															</div>
+															<div class="modal-body" style="height: 600px">
+																<object type="application/pdf" data="berkas/<?php echo $data['final_report'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																</object>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
 												<?php //penutup perulangan while
 													$no++;
 												}
@@ -269,39 +294,13 @@ $token = $_SESSION['token'];
 						</div>
 					</div>
 					<!--Modal CV-->
-					<div id="mymodal" class="modal fade" role="dialog">
-					<div class="modal-dialog modal-lg">
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title"></h4>
-							</div>
-							<div class="modal-body" style="height: 600px">
-								<?php
-								include 'config.php';
-								$query = mysqli_query($conn, "SELECT * FROM tb_document WHERE id='5'");
-								//SELECT * FROM tb_internship WHERE id
-								$data = mysqli_fetch_array($query);
-								?>
-								<object 
-								type="application/pdf" 
-								data="berkas/<?php echo $data['file'] ?>" 
-								width="100%" height="100%" 
-								frameborder="0" 
-								allowtransparency="true">
-								</object>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
+					<!--End modal Cv-->
 				</div>
-				<!--End modal Cv-->
-				</div><!--page inner-->
-			</div><!--container-->
-		</div><!--main-panel-->
+				<!--page inner-->
+			</div>
+			<!--container-->
+		</div>
+		<!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->
@@ -309,7 +308,7 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="copyright ml-auto">
 					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
-				</div>				
+				</div>
 			</div>
 		</footer>
 		<!-- End Footer -->
@@ -400,7 +399,7 @@ $token = $_SESSION['token'];
 		var action =
 			'<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
-		$('#addRowButton').click(function () {
+		$('#addRowButton').click(function() {
 			$('#add-row').dataTable().fnAddData([
 				$("#addName").val(),
 				$("#addPosition").val(),
@@ -413,4 +412,5 @@ $token = $_SESSION['token'];
 	</script>
 
 </body>
+
 </html>

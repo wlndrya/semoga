@@ -265,7 +265,7 @@ $token = $_SESSION['token'];
 											<tbody>
 												<?php
 												include 'config.php';
-												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 												$view = mysqli_query($conn, "SELECT * FROM tb_applicant INNER JOIN tb_student_internship ON tb_applicant.nim = tb_student_internship.nim");
 												while ($data = mysqli_fetch_array($view)) {
 													// 	echo "<tr>
@@ -298,8 +298,8 @@ $token = $_SESSION['token'];
 														<td>
 															<center><?php
 																	if ($data['status']) {
-																		echo "<button class='btn btn-secondary py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-															data-target='#doc-detail' ><i class='fas fa-eye'></i> VIEW</button>";
+																		echo "<button class='btn btn-secondary py-2 my-auto mx-auto rounded text-center text-white' data-toggle='#modalreport'
+															data-target='#doc-detail". $data['nim']."' ><i class='fas fa-eye'></i> VIEW</button>";
 																	}
 																	?></center>
 														</td>
@@ -320,69 +320,8 @@ $token = $_SESSION['token'];
 														</td>
 													</tr>
 
-													<!-- Modal Approval Status -->
-													<div class="modal fade" id="modal-approve" role="dialog">
-														<div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="modaledit">
-																		APPROVAL INTERNSHIP</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-
-																<form method="POST" action="proses_dummy_test.php?PageAction=approval_internship">
-
-																	<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-																	<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company']; ?>">
-																	<input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
-																	<input type="hidden" id="id_applicant" name="id_applicant" value="<?php echo $data['id_applicant']; ?>">
-																	<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $data['id_internship']; ?>">
-																	<input type="hidden" id="id_offer" name="id_offer" value="<?php echo $data['id_offer']; ?>">
-
-																	<div class="modal-body">
-																		<div class="form-group">
-																			<label for="status">Approval</label>
-																			<select class="form-control" id="status_approve" name="status" required>
-																				<option value="YES">Yes</option>
-																				<option value="NO">No</option>
-																			</select>
-																		</div>
-																		<div class="date-approve">
-																			<div class="form-group">
-																				<label for="start_date">Start Date</label>
-																				<input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo $data['start_date']; ?>" required>
-																			</div>
-																			<div class="form-group">
-																				<label for="end_date">End Date</label>
-																				<input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo $data['end_date']; ?>" required>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="modal-footer border-top-0 d-flex justify-content-center">
-																		<button type="submit" class="btn btn-secondary btn-sm" name="btn" id="btn">ADD</button>
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div>
-													<!-- End -->
-												<?php //penutup perulangan while
-												}
-												?>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Modal Area -->
-
-					<!-- Modal Document Detail -->
-					<div class="modal fade" id="doc-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+													<!-- Modal Document Detail -->
+					<div class="modal fade" id="doc-detail<?php echo $data['nim']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -421,6 +360,70 @@ $token = $_SESSION['token'];
 						</div>
 					</div>
 					<!-- End Modal -->
+
+													<!-- Modal Approval Status -->
+													<div class="modal fade" id="modal-approve" role="dialog">
+														<div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="modaledit">
+																		APPROVAL INTERNSHIP</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+
+																<form method="POST" action="proses_dummy_test.php?PageAction=approval_internship">
+
+																	<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+																	<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company']; ?>">
+																	<input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
+																	<input type="hidden" id="id_applicant" name="id_applicant" value="<?php echo $data['id_applicant']; ?>">
+																	<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $data['id_internship']; ?>">
+																	<input type="hidden" id="id_offer" name="id_offer" value="<?php echo $data['id_offer']; ?>">
+
+																	<div class="modal-body">
+																		<div class="form-group">
+																			<label for="status">Approval</label>
+																			<select class="form-control" id="status_approve" name="status" required>
+																				<option value="YES">Yes</option>
+																				<option value="NO">No</option>
+																			</select>
+																		</div>
+																		<div class="date-approve">
+																			<div class="form-group">
+																				<label for="start_date">Start Date</label>
+																				<input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo $data['start_date']; ?>">
+																			</div>
+																			<div class="form-group">
+																				<label for="end_date">End Date</label>
+																				<input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo $data['end_date']; ?>">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-footer border-top-0 d-flex justify-content-center">
+																		<button type="submit" class="btn btn-secondary btn-sm" name="btn" id="btn">UPDATE</button>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+													<!-- End -->
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Modal Area -->
+
+					
+					<?php //penutup perulangan while
+												}
+												?>
 
 					<!-- End Modal Area -->
 

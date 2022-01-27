@@ -1,3 +1,18 @@
+<?php
+include 'config.php';
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
+// session_unset();
+// session_destroy();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +97,7 @@
 								</li>
 								<a style="text-decoration: none;" href="spv-profile.html">
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi,<?php echo $user; ?></b></h5>
 								</div>
 							</a>
 								<li class="nav-item dropdown hidden-caret">
