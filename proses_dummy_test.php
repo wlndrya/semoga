@@ -132,7 +132,7 @@ if ($_GET['PageAction'] == "delete_supervisor") {
   if ($token_session === $token_post) {
    
     $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
-    $name            = mysqli_real_escape_string($conn,$_POST['name']);
+    // $name            = mysqli_real_escape_string($conn,$_POST['name']);
     $description     = mysqli_escape_string($conn,$_POST['description']);
 
     if($_SESSION['id_company'] && $_SESSION['username']) {

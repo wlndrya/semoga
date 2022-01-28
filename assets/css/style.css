@@ -61,7 +61,7 @@ body{
   }
   .drag-area .icon{
     font-size: 35px;
-    color: #48ABF7;
+    color:  #776ff3;
   }
   .drag-area header{
     font-size: 15px;
@@ -75,7 +75,7 @@ body{
     font-weight: 500;
     border: none;
     outline: none;
-    background: #48ABF7;
+    background: #776ff3;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -101,7 +101,7 @@ body{
   }
 
   .nav-link:hover{
-    border-bottom: 3px solid #48ABF7;
+    border-bottom: 3px solid #776ff3;
     padding: 6px 0; 
   }
 
@@ -123,16 +123,16 @@ body{
     color: white;
   }
 
-  .card-menu{
-    background: linear-gradient(to right, #125D98, #87A7B3);
+  .card-menu-left{
+    background: linear-gradient(to right, #33539e, #acc0fe);
   }
 
-  .card-menu-spv{
-    background: linear-gradient(to right, #28B5B5, #87A7B3);
+  .card-menu-center{
+    background: linear-gradient(to right, #776ff3, #554fad);
   }
 
-  .card-menu-intern{
-    background: linear-gradient(to right, #7267CB, #87A7B3);
+  .card-menu-right{
+    background: linear-gradient(to right, #acc0fe, #33539e);
   }
 
   .btn-main{

@@ -213,7 +213,7 @@ $token = $_SESSION['token'];
 					</div> -->
 					<div class="row">
 						<div class="col-md-4">
-							<div class="card card-dark card-menu text-center">
+							<div class="card card-dark card-menu-left text-center">
 								<div class="card-body pb-0">
 									<h1 class="mb-2">3</h1>
 									<p><b>INTERNSHIP STUDENTS</b></p>
@@ -226,7 +226,7 @@ $token = $_SESSION['token'];
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card card-dark card-menu-spv text-center">
+							<div class="card card-dark card-menu-center text-center">
 								<div class="card-body pb-0">
 									<div class="h1 fw-bold float-right"></div>
 									<h1 class="mb-2">2</h1>
@@ -240,7 +240,7 @@ $token = $_SESSION['token'];
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card card-dark card-menu-intern text-center">
+							<div class="card card-dark card-menu-right text-center">
 								<div class="card-body pb-0">
 									<h1 class="mb-2">2</h1>
 									<p><b>UNACCEPTED DOCUMENT</b></p>

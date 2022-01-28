@@ -298,8 +298,8 @@ $token = $_SESSION['token'];
 														<td>
 															<center><?php
 																	if ($data['status']) {
-																		echo "<button class='btn btn-secondary py-2 my-auto mx-auto rounded text-center text-white' data-toggle='#modalreport'
-															data-target='#doc-detail". $data['nim']."' ><i class='fas fa-eye'></i> VIEW</button>";
+																		echo "<button class='btn btn-secondary py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+															data-target='#doc-detail' ><i class='fas fa-eye'></i> VIEW</button>";
 																	}
 																	?></center>
 														</td>
@@ -321,7 +321,7 @@ $token = $_SESSION['token'];
 													</tr>
 
 													<!-- Modal Document Detail -->
-					<div class="modal fade" id="doc-detail<?php echo $data['nim']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal fade" id="doc-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">

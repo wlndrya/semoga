@@ -226,12 +226,65 @@
 													<th>Start Date</th>
 													<th>End Date</th>
 													<th>Week</th>
-													<th>Logbook</th>
+													<th><center>Logbook</center></th>
 													<th><center>Supervisor Approval</center></th>
 												</tr>
 											</thead>
 											<tbody>
-												
+											<?php
+												include 'config.php';
+												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												$view = mysqli_query($conn, "SELECT * FROM tb_logbook INNER JOIN tb_student_internship ON tb_logbook.nim = tb_student_internship.nim 
+												");
+												while ($data = mysqli_fetch_array($view)) {
+													// echo $id_company;
+												?>
+												<tr>
+													<td><?php echo $data['name']?></td>
+													<td><?php echo $data['start_date']?></td>
+													<td><?php echo $data['end_date']?></td>
+													<td><?php echo $data['week_num']?></td>
+													<td><?php echo "<center>
+													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn-sm btn-secondary text-white'><i class='fas fa-eye'></i> View</a>
+													</td></center>"?></td>
+													<td>
+													<center><?php
+																	if ($data['approval_spv'] == "Pending") {
+																		echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> PENDING</button>";
+																	} elseif ($data['approval_spv'] == "Yes") {
+																		echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
+																	} elseif ($data['approval_spv'] == "No") {
+																		echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title=''><i class='fa fa-times'></i> DECLINED</button>";
+																	}
+
+																	?></center>
+													</td>
+												</tr>
+												<!-- <div id="mymodal<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-lg"> -->
+														<!-- Modal content-->
+														<!-- <div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title"></h4>
+															</div>
+															<div class="modal-body" style="height: 600px">
+																<object type="application/pdf" data="berkas/<?php echo $data['final_report'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																</object>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															</div>
+														</div> -->
+													<!-- </div>
+												</div> -->
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
 											</tbody>
 										</table>
 									</div>

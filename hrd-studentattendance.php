@@ -11,6 +11,7 @@ $user_id = $_SESSION['id_user_company'];
 $username = $_SESSION['username'];
 $name = $_SESSION['user_fullname'];
 $token = $_SESSION['token'];
+$id_internship = $_SESSION['id_internship'];
 
 ?>
 <!DOCTYPE html>
@@ -246,9 +247,9 @@ $token = $_SESSION['token'];
 											<tbody>
 											<?php
 												include 'config.php';
-												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * FROM tb_attendance LEFT JOIN tb_student_internship ON tb_attendance.nim = tb_student_internship.nim 
-												WHERE id_company = '$_SESSION[id_company]'");
+												// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												$view = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_student_internship ON tb_attendance.nim = tb_student_internship.nim 
+												");
 												while ($data = mysqli_fetch_array($view)) {
 													// echo $id_company;
 												?>
@@ -258,7 +259,21 @@ $token = $_SESSION['token'];
 													<td><?php echo "<center>
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn-sm btn-secondary text-white'><i class='fas fa-eye'></i> View</a>
 													</td></center>"?></td>
-													<td><?php echo "<center> $data[approval_spv] </center>"?></td>
+													<td>
+													<center><?php
+																	if ($data['approval_spv'] == "Pending") {
+																		echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> PENDING</button>";
+																	} elseif ($data['approval_spv'] == "Yes") {
+																		echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
+																	} elseif ($data['approval_spv'] == "No") {
+																		echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title=''><i class='fa fa-times'></i> DECLINED</button>";
+																	}
+
+																	?></center>
+													</td>
 												</tr>
 												<!-- <div id="mymodal<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-lg"> -->

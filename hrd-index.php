@@ -68,7 +68,7 @@ $token = $_SESSION['token'];
 <body>
 	<div class="wrapper horizontal-layout-2">
 
-		<div class="main-header" data-background-color="light-blue2">
+		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +107,7 @@ $token = $_SESSION['token'];
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>Hi,<?php echo $user; ?></b></h5>
+									<h5><b>Hi, <?php echo $user; ?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -117,13 +117,13 @@ $token = $_SESSION['token'];
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-								<li class="nav-item dropdown hidden-caret">
+								<!-- <li class="nav-item dropdown hidden-caret">
 									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 										<div class="avatar-sm">
 											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
 										</div>
 									</a>
-								</li>
+								</li> -->
 								<li class="nav-item dropdown hidden-caret">
 									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
@@ -139,7 +139,7 @@ $token = $_SESSION['token'];
 			<!-- Menu -->
 			<div class="nav-bottom">
 				<div class="container">
-					<ul class="nav page-navigation page-navigation-info bg-white">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
@@ -240,7 +240,7 @@ $token = $_SESSION['token'];
 
 					<div class="row">
 						<div class="col-md-4">
-							<div class="card card-dark card-menu text-center">
+							<div class="card card-dark card-menu-left text-center">
 								<div class="card-body pb-0">
 									<h1 class="mb-2">7</h1>
 									<p><b>APPLICANT</b></p>
@@ -251,7 +251,7 @@ $token = $_SESSION['token'];
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card card-dark card-menu-spv text-center">
+							<div class="card card-dark card-menu-center text-center">
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
 										<?php
@@ -269,7 +269,7 @@ $token = $_SESSION['token'];
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card card-dark card-menu-intern text-center">
+							<div class="card card-dark card-menu-right text-center">
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
 										<?php
@@ -295,7 +295,7 @@ $token = $_SESSION['token'];
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row">
-										<h4 class="card-title"><b>Company Profile</b></h4>
+										<h4 class="card-title"><b>COMPANY PROFILE</b></h4>
 										<div class="card-tools">
 										</div>
 									</div>
@@ -313,9 +313,9 @@ $token = $_SESSION['token'];
 															$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = '$_SESSION[id_company]'");
 															while ($data = mysqli_fetch_array($view)) {
 																echo $data['description'];
-																echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#mymodalcv'> Modal CV</a>";
-																// echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
-																// 	Description</a>";
+																// echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#mymodalcv'> Modal CV</a>";
+																echo "</br></br><a type='button' class='btn btn-md btn-modify ml-auto text-white' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
+																	Description</a>";
 															?>
 
 																<!-- Modal Edit Company Profile-->
@@ -415,7 +415,7 @@ $token = $_SESSION['token'];
 						<div class="card">
 							<div class="card-header">
 								<div class="d-flex align-items-center">
-									<h4 class="card-title"><b>Internship</b></h4>
+									<h4 class="card-title"><b>INTERNSHIP</b></h4>
 								</div>
 							</div>
 							<div class="card-body">
@@ -558,7 +558,7 @@ $token = $_SESSION['token'];
 		});
 
 		var action =
-			'<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+			'<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-secondary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
 		$('#addRowButton').click(function() {
 			$('#add-row').dataTable().fnAddData([

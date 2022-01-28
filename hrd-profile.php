@@ -69,7 +69,7 @@ for (var i = 0; i < btns.length; i++) {
 <body>
 	<div class="wrapper horizontal-layout-2">
 
-		<div class="main-header" data-background-color="light-blue2">
+		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
@@ -121,12 +121,6 @@ for (var i = 0; i < btns.length; i++) {
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
 								<li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
-										aria-expanded="false">
-										<div class="avatar-sm">
-											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
-										</div>
-									</a>
 									<ul class="dropdown-menu dropdown-user animated fadeIn">
 										<div class="dropdown-user-scroll scrollbar-outer">
 											<li>
