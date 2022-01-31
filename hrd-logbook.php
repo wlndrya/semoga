@@ -1,3 +1,17 @@
+<?php
+//Koneksi Database
+include 'config.php';
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +45,7 @@
 <body>
 	<div class="wrapper horizontal-layout-2">
 		
-		<div class="main-header" data-background-color="light-blue2">
+		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +56,7 @@
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="60 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -70,7 +84,7 @@
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi, <?php echo $user;?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -80,28 +94,9 @@
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-									<li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
-										aria-expanded="false">
-										<div class="avatar-sm">
-											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
-										</div>
+								<li class="nav-item dropdown hidden-caret">
+									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
-									<ul class="dropdown-menu dropdown-user animated fadeIn">
-										<div class="dropdown-user-scroll scrollbar-outer">
-											<li>
-												<div class="user-box">
-													<div class="u-text">
-														<a href="profile.html"
-															class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-														<a href="profile.html" class="btn btn-xs btn-danger btn-sm">Logout</a>
-													</div>
-												</div>
-											</li>
-											<li>
-											</li>
-										</div>
-									</ul>
 								</li>
 								<!-- End Profil -->
 							</ul>
@@ -114,7 +109,7 @@
 			<!-- Menu -->
 			<div class="nav-bottom">
 				<div class="container">
-					<ul class="nav page-navigation page-navigation-info bg-white">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
@@ -142,48 +137,22 @@
 										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
 									</li>
 									<li>
-										<a href="index.php?page=hrd-feedback">Feedback</a>
+										<a href="index.php?page=hrd-registration">Internship Registration</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=hrd-studentlist">
 								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Internship</span>
+								<span class="menu-title">Student Internship</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="index.php?page=hrd-registration">Form Registration</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-studentlist">List Internship</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-jobdesc">Job Description</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=hrd-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="index.php?page=hrd-logbook">Logbook</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-studentattendance">Attendance</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-finalreport">Final Report</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-tutorial">
@@ -213,7 +182,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title"><b>LOGBOOK</b></h4>
+										<h4 class="card-title"><b>INTERNSHIP FILES</b></h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -222,12 +191,9 @@
 										<table id="add-row" class="display table table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Name</th>
-													<th>Start Date</th>
-													<th>End Date</th>
-													<th>Week</th>
+													<th>Student Name</th>
 													<th><center>Logbook</center></th>
-													<th><center>Supervisor Approval</center></th>
+													<th><center>Attendance</center></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -241,13 +207,16 @@
 												?>
 												<tr>
 													<td><?php echo $data['name']?></td>
-													<td><?php echo $data['start_date']?></td>
+													<!-- <td><?php echo $data['start_date']?></td>
 													<td><?php echo $data['end_date']?></td>
-													<td><?php echo $data['week_num']?></td>
+													<td><?php echo $data['week_num']?></td> -->
 													<td><?php echo "<center>
-													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn-sm btn-secondary text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = 'index.php?page=hrd-detail-logbook' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</td></center>"?></td>
-													<td>
+													<td><?php echo "<center>
+													<a href = 'index.php?page=hrd-detail-attendance' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													</td></center>"?></td>
+													<!-- <td>
 													<center><?php
 																	if ($data['approval_spv'] == "Pending") {
 																		echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
@@ -261,7 +230,7 @@
 																	}
 
 																	?></center>
-													</td>
+													</td> -->
 												</tr>
 												<!-- <div id="mymodal<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-lg"> -->

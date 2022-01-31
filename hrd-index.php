@@ -79,7 +79,7 @@ $token = $_SESSION['token'];
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="60 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -167,48 +167,22 @@ $token = $_SESSION['token'];
 										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
 									</li>
 									<li>
-										<a href="index.php?page=hrd-feedback">Feedback</a>
+										<a href="index.php?page=hrd-registration">Internship Registration</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=hrd-studentlist">
 								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Internship</span>
+								<span class="menu-title">Student Internship</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="index.php?page=hrd-registration">Form Registration</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-studentlist">List Internship</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-jobdesc">Job Description</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=hrd-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="index.php?page=hrd-logbook">Logbook</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-studentattendance">Attendance</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-finalreport">Final Report</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-tutorial">
@@ -340,7 +314,7 @@ $token = $_SESSION['token'];
 																					</div>
 																				</div>
 																				<div class="modal-footer border-top-0 d-flex justify-content-center">
-																					<button type="submit" class="btn btn-secondary btn-sm" id="btn-update" name="btn-update">UPDATE</button>
+																					<button type="submit" class="btn btn-modify btn-sm text-white" id="btn-update" name="btn-update">UPDATE</button>
 																				</div>
 																			</form>
 																		</div>

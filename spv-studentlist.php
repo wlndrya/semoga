@@ -1,18 +1,41 @@
+<?php
+include 'config.php';
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
+// session_unset();
+// session_destroy();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Sistem Informasi Pengelolaan Magang</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
-			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css']},
-			active: function() {
+			google: {
+				"families": ["Lato:300,400,700,900"]
+			},
+			custom: {
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+					"simple-line-icons"
+				],
+				urls: ['assets/css/fonts.min.css']
+			},
+			active: function () {
 				sessionStorage.fonts = true;
 			}
 		});
@@ -28,10 +51,11 @@
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
+
 <body>
 	<div class="wrapper horizontal-layout-2">
-		
-		<div class="main-header" data-background-color="light-blue2">
+
+	<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,8 +65,8 @@
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="spv-index.html" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="60" alt="navbar brand" class="navbar-brand">
+					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
+						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -65,16 +89,13 @@
 							<!-- gatau fungsinya untuk apa -->
 							<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 								<li class="nav-item toggle-nav-search hidden-caret">
-									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
-										aria-expanded="false" aria-controls="search-nav">
+									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
 										<i class="fa fa-search"></i>
 									</a>
 								</li>
-								<a style="text-decoration: none;" href="spv-profile.html">
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi, <?php echo $user; ?></b></h5>
 								</div>
-							</a>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
 										<div class="quick-actions-scroll scrollbar-outer">
@@ -83,20 +104,18 @@
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-								<li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="" href="spv-profile.html"
-										aria-expanded="false">
+								<!-- <li class="nav-item dropdown hidden-caret">
+									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 										<div class="avatar-sm">
 											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
 										</div>
 									</a>
-								</li>
-								<!-- End Profil -->
+								</li> -->
 								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="#" id="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
 								</li>
+								<!-- End Profil -->
 							</ul>
 						</div>
 					</nav>
@@ -107,7 +126,7 @@
 			<!-- Menu -->
 			<div class="nav-bottom">
 				<div class="container">
-					<ul class="nav page-navigation page-navigation-info bg-white">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
@@ -116,57 +135,34 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="spv-profile.html">My Profile</a>
+										<a href="index.php?page=spv-profile">My Profile</a>
 									</li>
 									<li>
-										<a href="spv-company-profile.html">Company Profile</a>
+										<a href="index.php?page=spv-company-profile">Company Profile</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">Supervisor Menu</span>
+							<a class="nav-link" href="index.php?page=spv-studentlist">
+								<i class="link-icon icon-layers"></i>
+								<span class="menu-title">Student Internship</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="spv-jobdesc.html">Job Description</a>
-									</li>
-									<li>
-										<a href="spv-feedback.html">Feedback</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=spv-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="spv-logbook.html">Logbook</a>
-									</li>
-									<li>
-										<a href="spv-studentattendance.html">Attendance</a>
-									</li>
-									<li>
-										<a href="spv-finalreport.html">Final Report</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="spv-tutorials.html">
+							<a class="nav-link" href="index.php?page=spv-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="spv-information.html">
+							<a class="nav-link" href="index.php?page=spv-information">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -182,22 +178,128 @@
 			<div class="container">
 				<div class="page-inner">
 
-					<h4>Berikut adalah video panduan penggunaan aplikasi: </h4>
-					<div class="embed-responsive embed-responsive-16by9">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/6TEK1EDMGbc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<div class="row row-card-no-pd">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title"><b>STUDENT INTERNSHIP</b></h4>
+										<!-- <button class="btn btn-secondary btn-round ml-auto" data-toggle="modal"
+                                            data-target="#modaladd">
+                                            <i class="fa fa-plus"></i>
+                                            Add Intern
+                                        </button> -->
+									</div>
+								</div>
+								<div class="card-body">
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover">
+											<thead>
+												<tr>
+													<th>Student Name</th>
+													<th><center>Start Date</center></th>
+													<th><center>End Date</center></th>
+													<th><center>Registration File</center></th>
+													<th><center>Final Report</center></th>
+													<th><center>Job Description</center></th>
+													<th><center>Feedback</center></th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												include 'config.php';
+												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) LEFT JOIN tb_user_company ON tb_user_company.id_user_company = tb_internship.id_user_company WHERE status='YES' AND tb_user_company.id_company = '$_SESSION[id_company]' ");
+												$no = 1;
+												while ($data = mysqli_fetch_array($view)) {
+													echo "<tr>
+													<td>" . $data['name'] . "</td>
+													<td>" . $data['start_date'] . "</td>
+													<td>" . $data['end_date'] . "</td>
+													<td><center>
+													<a href = '#' type='button' data-toggle='modal' data-target='#doc-detail' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													</center></td>
+													<td><center>
+													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													</center></td>
+													<td><center>
+													<a href = 'index.php?page=spv-addjobdesc' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
+													</center></td>
+													<td><center>
+													<a href = 'index.php?page=spv-feedback2' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
+													</center></td>
+													</tr>"
+												?>
+
+										<!-- Modal Document Detail -->
+					<div class="modal fade" id="doc-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Choose Document</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<!-- button cta -->
+									<div class="row">
+										<div class="col-sm-4 p-2">
+											<a href="#" class="btn btn-modify text-white" id="cv" name="cv" data-toggle="modal" data-target="#" style="width: 100%;">CV </a>
+										</div>
+										<div class="col-sm-4 p-2">
+											<a href="#" class="btn btn-modify text-white" id="file1" name="file1" data-toggle="modal" data-target="#" style="width: 100%;">Transcripts</a>
+										</div>
+										<div class="col-sm-4 p-2">
+											<a href="#" class="btn btn-modify text-white" id="file2" name="file2" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
+										</div>
+										<div class="col-sm-4 p-2">
+											<a href="#" class="btn btn-modify text-white" id="file3" name="file3" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
+										</div>
+										<div class="col-sm-4 p-2">
+											<a href="#" class="btn btn-modify text-white" id="file4" name="file4" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
+										</div>
+										<div class="col-sm-4 p-2">
+											<a href="#" class="btn btn-modify text-white" id="file5" name="file5" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
+										</div>
+									</div>
+									<!-- end button cta -->
+								</div>
+								<div class="modal-footer">
+								</div>
+							</div>
 						</div>
-			
-				</div><!--page inner-->
-			</div><!--container-->
-		</div><!--main-panel-->
+					</div>
+					<!-- End Modal -->
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
+												<!--End Modal Delete-->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!--page inner-->
+			</div>
+			<!--container-->
+		</div>
+		<!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->
 		<footer class="footer">
 			<div class="container">
 				<div class="copyright ml-auto">
-					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
-				</div>				
+					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a
+						href="http://www.themekita.com">PSTeam</a>
+				</div>
 			</div>
 		</footer>
 		<!-- End Footer -->
@@ -301,4 +403,5 @@
 	</script>
 
 </body>
+
 </html>

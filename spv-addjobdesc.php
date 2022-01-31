@@ -35,7 +35,7 @@ $token = $_SESSION['token'];
                 ],
                 urls: ['assets/css/fonts.min.css']
             },
-            active: function () {
+            active: function() {
                 sessionStorage.fonts = true;
             }
         });
@@ -55,151 +55,114 @@ $token = $_SESSION['token'];
 <body>
     <div class="wrapper horizontal-layout-2">
 
-        <div class="main-header" data-background-color="light-blue2">
+        <div class="main-header" data-background-color="purple">
             <div class="nav-top">
                 <div class="container d-flex flex-row">
-                    <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
-                        data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon">
                             <i class="icon-menu"></i>
                         </span>
                     </button>
                     <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
                     <!-- Logo SEMOGA -->
-                    <a href="spv-index.html" class="logo d-flex align-items-center">
-                        <img src="assets/img/semogav211.png" height="60 " alt="navbar brand" class="navbar-brand">
+                    <a href="index.php?page=spv-home" class="logo d-flex align-items-center">
+                        <img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
                     </a>
                     <!-- End Logo SEMOGA -->
 
                     <!-- Navbar Header -->
                     <nav class="navbar navbar-header navbar-expand-lg p-0">
 
-						<div class="container-fluid p-0">
-							<div class="collapse" id="search-nav">
-								<form class="navbar-left navbar-form nav-search ml-md-3">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<button type="submit" class="btn btn-search pr-1">
-												<i class="fa fa-search search-icon"></i>
-											</button>
-										</div>
-										<input type="text" placeholder="Search ..." class="form-control">
-									</div>
-								</form>
-							</div>
-							<!-- gatau fungsinya untuk apa -->
-							<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-								<li class="nav-item toggle-nav-search hidden-caret">
-									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
-										aria-expanded="false" aria-controls="search-nav">
-										<i class="fa fa-search"></i>
-									</a>
-								</li>
-								<a style="text-decoration: none;" href="spv-profile.html">
-								<div class="title-name mt-2 text-white">
-									<h5><b>Hi,<?php echo $user; ?></b></h5>
-								</div>
-							</a>
-								<li class="nav-item dropdown hidden-caret">
-									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
-										<div class="quick-actions-scroll scrollbar-outer">
-										</div>
-									</div>
-								</li>
-								<!-- end gatau fungsinya untuk apa -->
-								<!-- Profil -->
-								<li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="" href="spv-profile.html"
-										aria-expanded="false">
-										<div class="avatar-sm">
-											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
-										</div>
-									</a>
-								</li>
-								<!-- End Profil -->
-								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="#" id="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</nav>
+                        <div class="container-fluid p-0">
+                            <div class="collapse" id="search-nav">
+                                <form class="navbar-left navbar-form nav-search ml-md-3">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button type="submit" class="btn btn-search pr-1">
+                                                <i class="fa fa-search search-icon"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" placeholder="Search ..." class="form-control">
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- gatau fungsinya untuk apa -->
+                            <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                                <li class="nav-item toggle-nav-search hidden-caret">
+                                    <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </li>
+                                <div class="title-name mt-2 text-white">
+                                    <h5><b>Hi, <?php echo $user; ?></b></h5>
+                                </div>
+                                <li class="nav-item dropdown hidden-caret">
+                                    <div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
+                                        <div class="quick-actions-scroll scrollbar-outer">
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- end gatau fungsinya untuk apa -->
+                                <li class="nav-item dropdown hidden-caret">
+                                    <a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+                                    </a>
+                                </li>
+                                <!-- End Profil -->
+                            </ul>
+                        </div>
+                    </nav>
                     <!-- End Navbar -->
                 </div>
             </div>
 
             <!-- Menu -->
-            <div class="nav-bottom">
-                <div class="container">
-                    <ul class="nav page-navigation page-navigation-info bg-white">
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon icon-book-open"></i>
-                                <span class="menu-title">Profile</span>
-                            </a>
-                            <div class="navbar-dropdown animated fadeIn">
-                                <ul>
-                                    <li>
-                                        <a href="spv-profile.html">My Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="spv-company-profile.html">Company Profile</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon icon-grid"></i>
-                                <span class="menu-title">Supervisor Menu</span>
-                            </a>
-                            <div class="navbar-dropdown animated fadeIn">
-                                <ul>
-                                    <li>
-                                        <a href="spv-jobdesc.html">Job Description</a>
-                                    </li>
-                                    <li>
-                                        <a href="spv-feedback.html">Feedback</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon icon-folder-alt"></i>
-                                <span class="menu-title">Internship Files</span>
-                            </a>
-                            <div class="navbar-dropdown animated fadeIn">
-                                <ul>
-                                    <li>
-                                        <a href="spv-logbook.html">Logbook</a>
-                                    </li>
-                                    <li>
-                                        <a href="spv-studentattendance.html">Attendance</a>
-                                    </li>
-                                    <li>
-                                        <a href="spv-finalreport.html">Final Report</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="spv-tutorials.html">
-                                <i class="link-icon icon-screen-desktop"></i>
-                                <span class="menu-title">Tutorial</span>
-                            </a>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="spv-information.html">
-                                <i class="link-icon icon-question"></i>
-                                <span class="menu-title">Information</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End Menu -->
+			<div class="nav-bottom">
+				<div class="container">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
+						<li class="nav-item submenu">
+							<a class="nav-link" href="#">
+								<i class="link-icon icon-book-open"></i>
+								<span class="menu-title">Profile</span>
+							</a>
+							<div class="navbar-dropdown animated fadeIn">
+								<ul>
+									<li>
+										<a href="index.php?page=spv-profile">My Profile</a>
+									</li>
+									<li>
+										<a href="index.php?page=spv-company-profile">Company Profile</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=spv-studentlist">
+								<i class="link-icon icon-layers"></i>
+								<span class="menu-title">Student Internship</span>
+							</a>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=spv-logbook">
+								<i class="link-icon icon-folder-alt"></i>
+								<span class="menu-title">Internship Files</span>
+							</a>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=spv-tutorial">
+								<i class="link-icon icon-screen-desktop"></i>
+								<span class="menu-title">Tutorial</span>
+							</a>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=spv-information">
+								<i class="link-icon icon-question"></i>
+								<span class="menu-title">Information</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- End Menu -->
         </div>
 
         <!-- Main Content -->
@@ -404,20 +367,19 @@ $token = $_SESSION['token'];
                                             <textarea class="form-control" rows="3" placeholder=""></textarea>
                                         </div>
                                         <div>
-                                            <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry 
-                                                to determine what type of work will be provided to students during the internship</b></p>
+                                            <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry
+                                                    to determine what type of work will be provided to students during the internship</b></p>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
-                                </form>
+                            </form>
                         </div>
                         <!--End Card Body-->
 
                         <!--Button Submit-->
                         <div class="modal-footer d-flex justify-content-center">
-                            <button type="button" class="btn btn-secondary btn-sm"
-                                id="alert_demo_7">SUBMIT</button>
+                            <button type="button" class="btn btn-modify text-white" id="alert_demo_7">SUBMIT</button>
                             <!--End Button Submit-->
 
                         </div>
@@ -436,8 +398,7 @@ $token = $_SESSION['token'];
         <footer class="footer">
             <div class="container">
                 <div class="copyright ml-auto">
-                    2021, made with <i class="fa fa-heart heart text-danger"></i> by <a
-                        href="http://www.themekita.com">PSTeam</a>
+                    2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
                 </div>
             </div>
         </footer>
@@ -529,7 +490,7 @@ $token = $_SESSION['token'];
         var action =
             '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
-        $('#addRowButton').click(function () {
+        $('#addRowButton').click(function() {
             $('#add-row').dataTable().fnAddData([
                 $("#addName").val(),
                 $("#addPosition").val(),
@@ -540,59 +501,59 @@ $token = $_SESSION['token'];
 
         });
 
-        
-           //SweetALert
-           var SweetAlert2Demo = function () {
-            var initDemos = function () {
+
+        //SweetALert
+        var SweetAlert2Demo = function() {
+            var initDemos = function() {
 
 
-    $('#alert_demo_7').click(function(e) {
-        swal({
-            title: 'Are you sure?',
-            text: "Please check this Job Description to make sure that has been filled in correctly.",
-            type: 'warning',
-            buttons:{
-                confirm: {
-                    text : 'Yes, Im Sure!',
-                    className : 'btn btn-success'
-                },
-                cancel: {
-                    visible: true,
-                    className: 'btn btn-danger'
-                }
-            }
-        }).then((Delete) => {
-            if (Delete) {
-                swal({
-                    title: 'Successfull!',
-                    text: 'The Job Description has been published.',
-                    type: 'success',
-                    buttons : {
-                        confirm: {
-                            className : 'btn btn-success'
+                $('#alert_demo_7').click(function(e) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: "Please check this Job Description to make sure that has been filled in correctly.",
+                        type: 'warning',
+                        buttons: {
+                            confirm: {
+                                text: 'Yes, Im Sure!',
+                                className: 'btn btn-success'
+                            },
+                            cancel: {
+                                visible: true,
+                                className: 'btn btn-danger'
+                            }
                         }
-                    }
+                    }).then((Delete) => {
+                        if (Delete) {
+                            swal({
+                                title: 'Successfull!',
+                                text: 'The Job Description has been published.',
+                                type: 'success',
+                                buttons: {
+                                    confirm: {
+                                        className: 'btn btn-success'
+                                    }
+                                }
+                            });
+                        } else {
+                            swal.close();
+                        }
+                    });
                 });
-            } else {
-                swal.close();
-            }
+
+            };
+
+            return {
+                //== Init
+                init: function() {
+                    initDemos();
+                },
+            };
+        }();
+
+        //== Class Initialization
+        jQuery(document).ready(function() {
+            SweetAlert2Demo.init();
         });
-    });
-  
-};
-
-return {
-    //== Init
-    init: function () {
-        initDemos();
-    },
-};
-}();
-
-//== Class Initialization
-jQuery(document).ready(function () {
-SweetAlert2Demo.init();
-});
     </script>
 
 </body>

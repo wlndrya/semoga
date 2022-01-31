@@ -32,12 +32,12 @@
 <body class="login">
 	<div class="wrapper wrapper-login wrapper-login-full p-0">
 		<div class="login-aside w-50 d-flex flex-column align-items-center justify-content-center text-center bg-secondary-gradient">
-			<h1 class="title fw-bold text-white mb-3">Join Our Comunity</h1>
-			<p class="subtitle text-white op-7">Ayo bergabung dengan komunitas kami untuk masa depan yang lebih baik</p>
+			<h1 class="title fw-bold text-white mb-3">Internship Management System</h1>
+			<p class="subtitle text-white op-7">POLITEKNIK NEGERI BATAM</p>
 		</div>
 		<div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
 			<div class="container container-login container-transparent animated fadeIn">
-				<h3 class="text-center">Sign In To SIKOMA</h3>
+				<h3 class="text-center">LOGIN</h3>
 				<form action="" method="post">
 					<input type="hidden" name="token" value="9Kylnkoreo7zASjqMh4eEx0Hx9b4h5e2"></input>
 					<div class="login-form">
@@ -59,8 +59,8 @@
 						</div>
 				</form>
 				<div class="login-account">
-					<span class="msg">Don't have an account yet ?</span>
-					<a href="#" id="show-signup" class="link">Sign Up</a>
+					<!-- <span class="msg">Don't have an account yet ?</span> -->
+					<!-- <a href="#" id="show-signup" class="link">Sign Up</a> -->
 					<br>
 					<?php
     include 'config.php';

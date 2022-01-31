@@ -81,7 +81,7 @@ for (var i = 0; i < btns.length; i++) {
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="60 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -110,7 +110,7 @@ for (var i = 0; i < btns.length; i++) {
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>Hi,<?php echo $user;?></b></h5>
+									<h5><b>Hi, <?php echo $user;?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -121,22 +121,8 @@ for (var i = 0; i < btns.length; i++) {
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
 								<li class="nav-item dropdown hidden-caret">
-									<ul class="dropdown-menu dropdown-user animated fadeIn">
-										<div class="dropdown-user-scroll scrollbar-outer">
-											<li>
-												<div class="user-box">
-													<div class="u-text">
-														<a href="profile.html"
-															class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-														<a href="profile.html"
-															class="btn btn-xs btn-danger btn-sm">Logout</a>
-													</div>
-												</div>
-											</li>
-											<li>
-											</li>
-										</div>
-									</ul>
+									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+									</a>
 								</li>
 								<!-- End Profil -->
 							</ul>
@@ -149,7 +135,7 @@ for (var i = 0; i < btns.length; i++) {
 			<!-- Menu -->
 			<div class="nav-bottom" id="myDIV">
 				<div class="container">
-					<ul class="nav page-navigation page-navigation-info bg-white">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
@@ -177,48 +163,22 @@ for (var i = 0; i < btns.length; i++) {
 										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
 									</li>
 									<li>
-										<a href="index.php?page=hrd-feedback">Feedback</a>
+										<a href="index.php?page=hrd-registration">Internship Registration</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=hrd-studentlist">
 								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Internship</span>
+								<span class="menu-title">Student Internship</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="index.php?page=hrd-registration">Form Registration</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-studentlist">List Internship</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-jobdesc">Job Description</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=hrd-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="index.php?page=hrd-logbook">Logbook</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-studentattendance">Attendance</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-finalreport">Final Report</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-tutorial">
@@ -247,7 +207,7 @@ for (var i = 0; i < btns.length; i++) {
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title"><b>User Profile</b></div>
+									<div class="card-title"><b>Profile</b></div>
 									<div class="card-category"></a></div>
 								</div>
 								<form id="form_profile" method="POST"  action="proses_dummy_test.php?PageAction=update_hrd" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');">

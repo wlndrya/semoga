@@ -31,7 +31,7 @@
 <body>
 	<div class="wrapper horizontal-layout-2">
 		
-		<div class="main-header" data-background-color="light-blue2">
+		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,8 +41,8 @@
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="spv-index.html" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="60" alt="navbar brand" class="navbar-brand">
+					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
+						<img src="assets/img/profile1.png" height="60" alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -65,16 +65,13 @@
 							<!-- gatau fungsinya untuk apa -->
 							<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 								<li class="nav-item toggle-nav-search hidden-caret">
-									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
-										aria-expanded="false" aria-controls="search-nav">
+									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
 										<i class="fa fa-search"></i>
 									</a>
 								</li>
-								<a style="text-decoration: none;" href="spv-profile.html">
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi, <?php echo $user; ?></b></h5>
 								</div>
-							</a>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
 										<div class="quick-actions-scroll scrollbar-outer">
@@ -83,20 +80,18 @@
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-								<li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="" href="spv-profile.html"
-										aria-expanded="false">
+								<!-- <li class="nav-item dropdown hidden-caret">
+									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 										<div class="avatar-sm">
 											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
 										</div>
 									</a>
-								</li>
-								<!-- End Profil -->
+								</li> -->
 								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="#" id="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
 								</li>
+								<!-- End Profil -->
 							</ul>
 						</div>
 					</nav>
@@ -107,7 +102,7 @@
 			<!-- Menu -->
 			<div class="nav-bottom">
 				<div class="container">
-					<ul class="nav page-navigation page-navigation-info bg-white">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
@@ -116,57 +111,34 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="spv-profile.html">My Profile</a>
+										<a href="index.php?page=spv-profile">My Profile</a>
 									</li>
 									<li>
-										<a href="spv-company-profile.html">Company Profile</a>
+										<a href="index.php?page=spv-company-profile">Company Profile</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">Supervisor Menu</span>
+							<a class="nav-link" href="index.php?page=spv-studentlist">
+								<i class="link-icon icon-layers"></i>
+								<span class="menu-title">Student Internship</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="spv-jobdesc.html">Job Description</a>
-									</li>
-									<li>
-										<a href="spv-feedback.html">Feedback</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=spv-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="spv-logbook.html">Logbook</a>
-									</li>
-									<li>
-										<a href="spv-studentattendance.html">Attendance</a>
-									</li>
-									<li>
-										<a href="spv-finalreport.html">Final Report</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="spv-tutorials.html">
+							<a class="nav-link" href="index.php?page=spv-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="spv-information.html">
+							<a class="nav-link" href="index.php?page=spv-information">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -182,22 +154,11 @@
 			<div class="container">
 				<div class="page-inner">
 
-                    <div class="card">
-						<div class="card-body">
-							<div class="text-center">
-							<h4><b>PT. SCHNEIDER ELECTRIC MANUFACTURING</b></h4><br>
-							<p><img class="size-large wp-image-17070 aligncenter" src="assets/img/companylogo.jpg" alt="" width="550" height="338"></p><br>
+					<h4>Berikut adalah video panduan penggunaan aplikasi: </h4>
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/6TEK1EDMGbc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
-							<p class="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed cras ornare arcu dui vivamus. Duis at tellus at urna condimentum. Adipiscing vitae proin sagittis nisl rhoncus mattis. Nibh tortor id aliquet lectus proin nibh nisl. Nulla malesuada pellentesque elit eget gravida cum. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Imperdiet dui accumsan sit amet nulla facilisi. Vestibulum morbi blandit cursus risus at ultrices mi tempus imperdiet. Faucibus ornare suspendisse sed nisi lacus sed viverra tellus in. Et magnis dis parturient montes nascetur ridiculus mus mauris vitae. Etiam erat velit scelerisque in dictum non consectetur a erat. Ullamcorper velit sed ullamcorper morbi. Suspendisse sed nisi lacus sed viverra tellus in hac habitasse. Vitae et leo duis ut diam. Maecenas sed enim ut sem viverra. Ut porttitor leo a diam sollicitudin tempor id. At erat pellentesque adipiscing commodo elit at.
-
-								Porttitor lacus luctus accumsan tortor.</p>
-
-							<p class="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed cras ornare arcu dui vivamus. Duis at tellus at urna condimentum. Adipiscing vitae proin sagittis nisl rhoncus mattis. Nibh tortor id aliquet lectus proin nibh nisl. Nulla malesuada pellentesque elit eget gravida cum. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Imperdiet dui accumsan sit amet nulla facilisi. Vestibulum morbi blandit cursus risus at ultrices mi tempus imperdiet. Faucibus ornare suspendisse sed nisi lacus sed viverra tellus in. Et magnis dis parturient montes nascetur ridiculus mus mauris vitae. Etiam erat velit scelerisque in dictum non consectetur a erat. Ullamcorper velit sed ullamcorper morbi. Suspendisse sed nisi lacus sed viverra tellus in hac habitasse. Vitae et leo duis ut diam. Maecenas sed enim ut sem viverra. Ut porttitor leo a diam sollicitudin tempor id. At erat pellentesque adipiscing commodo elit at.
-
-								Porttitor lacus luctus accumsan tortor.</p>
-						</div>
-					</div>
-				
+			
 				</div><!--page inner-->
 			</div><!--container-->
 		</div><!--main-panel-->
@@ -309,67 +270,6 @@
 			$('#addRowModal').modal('hide');
 
 		});
-
-        //Summer Note
-        $('#summernote').summernote({
-			placeholder: 'Describe Company Profile . . .',
-			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Times New Roman'],
-			tabsize: 2,
-			height: 300
-		});
-
-           //SweetALert
-           var SweetAlert2Demo = function () {
-            var initDemos = function () {
-
-
-    $('#alert_demo_7').click(function(e) {
-        swal({
-            title: 'Publish this Company Profile?',
-            text: "This action will publish this post to other user.",
-            type: 'warning',
-            buttons:{
-                confirm: {
-                    text : 'Yes, post it!',
-                    className : 'btn btn-success'
-                },
-                cancel: {
-                    visible: true,
-                    className: 'btn btn-danger'
-                }
-            }
-        }).then((Delete) => {
-            if (Delete) {
-                swal({
-                    title: 'Posted!',
-                    text: 'Your post has been published.',
-                    type: 'success',
-                    buttons : {
-                        confirm: {
-                            className : 'btn btn-success'
-                        }
-                    }
-                });
-            } else {
-                swal.close();
-            }
-        });
-    });
-  
-};
-
-return {
-    //== Init
-    init: function () {
-        initDemos();
-    },
-};
-}();
-
-//== Class Initialization
-jQuery(document).ready(function () {
-SweetAlert2Demo.init();
-});
 	</script>
 
 </body>

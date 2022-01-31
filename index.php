@@ -16,17 +16,23 @@ if (isset($_GET['page'])) {
     case 'hrd-profile':
       include "hrd-profile.php";
       break;
+    case 'spv-profile':
+      include "spv-profile.php";
+      break;
     case 'hrd-company-profile':
       include "hrd-company-profile.php";
       break;
-    case 'hrd-addsupervisor':
-      include "hrd-addsupervisor.php";
+    case 'spv-company-profile':
+      include "spv-company-profile.php";
       break;
-    case 'hrd-feedback':
-      include "hrd-feedback1.php";
+      case 'hrd-addsupervisor':
+      include "hrd-addsupervisor.php";
       break;
     case 'hrd-feedback2':
       include "hrd-feedback2.php";
+      break;
+    case 'spv-feedback2':
+      include "spv-feedback2.php";
       break;
     case 'hrd-registration':
       include "hrd-registration.php";
@@ -34,23 +40,56 @@ if (isset($_GET['page'])) {
     case 'hrd-studentlist':
       include "hrd-studentlist.php";
       break;
+    case 'spv-studentlist':
+      include "spv-studentlist.php";
+      break;
     case 'hrd-jobdesc':
       include "hrd-jobdesc.php";
+      break;
+    case 'spv-addjobdesc':
+      include "spv-addjobdesc.php";
       break;
     case 'hrd-logbook':
       include "hrd-logbook.php";
       break;
-    case 'hrd-studentattendance':
-      include "hrd-studentattendance.php";
+    case 'spv-logbook':
+      include "spv-logbook.php";
       break;
-    case 'hrd-finalreport':
-      include "hrd-finalreport.php";
+    case 'hrd-detail-logbook':
+      include "hrd-detail-logbook.php";
+      break;
+    case 'hrd-detail2-logbook':
+      include "hrd-detail2-logbook.php";
+      break;
+    case 'spv-detail-logbook':
+      include "spv-detail-logbook.php";
+      break;
+    case 'spv-detail2-logbook':
+      include "spv-detail2-logbook.php";
+      break;
+    case 'hrd-detail-attendance':
+      include "hrd-detail-attendance.php";
+      break;
+    case 'spv-detail-attendance':
+      include "spv-detail-attendance.php";
+      break;
+    case 'spv-detail2-attendance':
+      include "spv-detail2-attendance.php";
       break;
     case 'hrd-tutorial':
       include "hrd-tutorials.php";
       break;
+    case 'spv-tutorial':
+      include "spv-tutorials.php";
+      break;
     case 'hrd-information':
       include "hrd-information.php";
+      break;
+    case 'spv-information':
+      include "spv-information.php";
+      break;
+    case 'spv-discuss':
+      include "spv-discuss.php";
       break;
     default:
       include "errorpage404.html";

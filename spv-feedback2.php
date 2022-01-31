@@ -126,50 +126,34 @@ $token = $_SESSION['token'];
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="index.php?page=hrd-profile">My Profile</a>
+										<a href="index.php?page=spv-profile">My Profile</a>
 									</li>
 									<li>
-										<a href="index.php?page=hrd-company-profile">Company Profile</a>
+										<a href="index.php?page=spv-company-profile">Company Profile</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">HRD Menu</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li class="link-to">
-										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-registration">Internship Registration</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-studentlist">
+							<a class="nav-link" href="index.php?page=spv-studentlist">
 								<i class="link-icon icon-layers"></i>
 								<span class="menu-title">Student Internship</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-logbook">
+							<a class="nav-link" href="index.php?page=spv-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-tutorial">
+							<a class="nav-link" href="index.php?page=spv-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-information">
+							<a class="nav-link" href="index.php?page=spv-information">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>

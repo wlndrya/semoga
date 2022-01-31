@@ -1,5 +1,4 @@
 <?php
-//Koneksi Database
 include 'config.php';
 
 session_start();
@@ -11,6 +10,8 @@ $username = $_SESSION['username'];
 $name = $_SESSION['user_fullname'];
 $token = $_SESSION['token'];
 
+// session_unset();
+// session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,8 +63,8 @@ $token = $_SESSION['token'];
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
-						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
+					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
+						<img src="assets/img/profile1.png" height="60" alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -91,7 +92,7 @@ $token = $_SESSION['token'];
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>Hi, <?php echo $user;?></b></h5>
+									<h5><b>Hi, <?php echo $user; ?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -100,7 +101,6 @@ $token = $_SESSION['token'];
 									</div>
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
-								<!-- Profil -->
 								<li class="nav-item dropdown hidden-caret">
 									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
@@ -125,50 +125,34 @@ $token = $_SESSION['token'];
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="index.php?page=hrd-profile">My Profile</a>
+										<a href="index.php?page=spv-profile">My Profile</a>
 									</li>
 									<li>
-										<a href="index.php?page=hrd-company-profile">Company Profile</a>
+										<a href="index.php?page=spv-company-profile">Company Profile</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">HRD Menu</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li class="link-to">
-										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
-									</li>
-									<li>
-										<a href="index.php?page=hrd-registration">Internship Registration</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-studentlist">
+							<a class="nav-link" href="index.php?page=spv-studentlist">
 								<i class="link-icon icon-layers"></i>
 								<span class="menu-title">Student Internship</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-logbook">
+							<a class="nav-link" href="index.php?page=spv-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-tutorial">
+							<a class="nav-link" href="index.php?page=spv-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-information">
+							<a class="nav-link" href="index.php?page=spv-information">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -183,131 +167,126 @@ $token = $_SESSION['token'];
 		<div class="main-panel">
 			<div class="container">
 				<div class="page-inner">
-
-					<div class="row row-card-no-pd">
+				<div class="row">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title"><b>STUDENT INTERNSHIP</b></h4>
-										<!-- <button class="btn btn-secondary btn-round ml-auto" data-toggle="modal"
-                                            data-target="#modaladd">
-                                            <i class="fa fa-plus"></i>
-                                            Add Intern
-                                        </button> -->
-									</div>
+									<div class="card-title"><b>Company Profile</b></div>
+									<div class="card-category"></a></div>
 								</div>
-								<div class="card-body">
+								<form id="company_profile" method="POST" action="proses_dummy_test.php?PageAction=update_company" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');">
+									<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+									<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $_SESSION['id_user_company']; ?>">
+									<input type="hidden" id="id_company" name="id_company" value="<?php echo $_SESSION['id_company']; ?>">
+									<input type="hidden" id="id_company" name="access_type" value="<?php echo $_SESSION['access_type']; ?>">
 
-									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover">
-											<thead>
-												<tr>
-													<th>Student Name</th>
-													<th><center>Start Date</center></th>
-													<th><center>End Date</center></th>
-													<th><center>Supervisor</center></th>
-													<th><center>Job Description</center></th>
-													<th><center>Final Report</center></th>
-													<th><center>Feedback</center></th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-												include 'config.php';
-												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) LEFT JOIN tb_user_company ON tb_user_company.id_user_company = tb_internship.id_user_company WHERE status='YES' AND tb_user_company.id_company = '$_SESSION[id_company]' ");
-												$no = 1;
-												while ($data = mysqli_fetch_array($view)) {
-													echo "<tr>
-													<td>" . $data['name'] . "</td>
-													<td>" . $data['start_date'] . "</td>
-													<td>" . $data['end_date'] . "</td>
-													<td>" . $data['user_fullname'] . "</td>
-													<td><center>
-													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
-													</center></td>
-													<td><center>
-													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
-													</center></td>
-													<td><center>
-													<a href = 'index.php?page=hrd-feedback2' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
-													</center></td>
-													</tr>"
-												?>
-
-													<!--Modal Add Supervisor Name-->
-													<!-- <td><center>
-													<a href = '#' data-toggle = 'modal' type = 'button' title = 'Add Supervisor' class = 'btn btn-link btn-secondary' data-original-title = 'Add Supervisor' data-target = '#modal-edit" . $data['id_internship'] . "'><i class='fa fa-edit fa-md'></i></a>
-													</center></td>
-													<div class="modal fade" id="modal-edit<?php echo $data['id_internship'] ?>" tabindex="-1" role="dialog" aria-labelledby="modaladdspv" aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="modaladdspv">Add Supervisor for Student Internship</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-
-																<form method="POST" action="proses_dummy_test.php?PageAction=update_spv">
-
-																	<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                                                                    <input type="hidden" id="id_internship" name="id_internship" value="<?php echo $data['id_internship']; ?>">
-                                                                    <input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
-																	<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company']; ?>">
-
-																	<div class="modal-body">
-																		<div class="form-group">
-																			<label for="name">Student Name</label>
-																			<input type="text" class="form-control" id="name" name="name" value="<?php echo $data['name'] ?>" disabled>
-																		</div>
-																		<div class="form-group">
-																			<label for="studyprogram">Start Date</label>
-																			<input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo $data['start_date'] ?>" disabled>
-																		</div>
-																		<div class="form-group">
-																			<label for="studyprogram">End Date</label>
-																			<input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo $data['end_date'] ?>" disabled>
-																		</div>
-																		<div class="form-group">
-																			<label>Supervisor</label>
-																			<select class="form-control" id="id_user_company" name="id_user_company" value="0">
-																				<option></option>
-																				<?php
-																				$sql = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company AND user_type = 'supervisor'");
-																				if (mysqli_num_rows($sql) != 0) {
-																					while ($row = mysqli_fetch_assoc($sql)) {
-																						echo '<option value=' . $row["id_user_company"] . '>' . $row['user_fullname'] . ' </option>';
-																					}
-																				}
-																				?>
-																			</select>
-																		</div>
-																	</div>
-																	<div class="modal-footer border-top-0 d-flex justify-content-center">
-																		<button type="submit" class="btn btn-secondary btn-sm" name="btn-add" id="btn-add">UPDATE</button>
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div> -->
-												<?php //penutup perulangan while
-													$no++;
-												}
-												?>
-												<!--End Modal Delete-->
-											</tbody>
-										</table>
-									</div>
-								</div>
+									<div class="card-body">
+										<?php
+										include 'config.php';
+										//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+										$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = $id_company");
+										$data = mysqli_fetch_array($view);
+										?>
+										<div class="form-group form-show-validation row">
+											<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Name</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="name" name="name" value="<?php echo $data['name'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Type</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<select class="form-control" id="type" name="type" value="0">
+													<option value="agency" <?php if ($data['type'] == "agency") echo 'selected="selected"'; ?>>Agency</option>
+													<option value="design" <?php if ($data['type'] == "design") echo 'selected="selected"'; ?>>Design</option>
+													<option value="education" <?php if ($data['type'] == "education") echo 'selected="selected"'; ?>>Education</option>
+													<option value="engineering" <?php if ($data['type'] == "engineering") echo 'selected="selected"'; ?>>Engineering</option>
+													<option value="finance" <?php if ($data['type'] == "finance") echo 'selected="selected"'; ?>>Finance</option>
+													<option value="government" <?php if ($data['type'] == "government") echo 'selected="selected"'; ?>>Government</option>
+													<option value="health" <?php if ($data['type'] == "health") echo 'selected="selected"'; ?>>Health</option>
+													<option value="it" <?php if ($data['type'] == "it") echo 'selected="selected"'; ?>>IT & Telco</option>
+													<option value="logistics" <?php if ($data['type'] == "logistics") echo 'selected="selected"'; ?>>Logistics</option>
+													<option value="marketing" <?php if ($data['type'] == "marketing") echo 'selected="selected"'; ?>>Marketing</option>
+													<option value="media" <?php if ($data['type'] == "media") echo 'selected="selected"'; ?>>Media</option>
+													<option value="others" <?php if ($data['type'] == "others") echo 'selected="selected"'; ?>>Others</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="phone" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone Number</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="phone" name="phone" value="<?php echo $data['phone'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="email" class="form-control" id="email" name="email" value="<?php echo $data['email'] ?>" disabled>
+												<small id="emailHelp" class="form-text text-muted"></small>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="header" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Header</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="header" name="header" value="<?php echo $data['header'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="address" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Address</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="address" name="address" value="<?php echo $data['address'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="province" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Province</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="province" name="province" value="<?php echo $data['province'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="city" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">City</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="city" name="city" value="<?php echo $data['city'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="status" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Status</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<div class="input-group">
+													<input type="text" class="form-control is-valid" placeholder="" aria-label="status" aria-describedby="" readonly id="status" name="status" value="<?php echo $data['status'] ?>" disabled><i class="fas fa-check" style="color: green;"></i>
+												</div>
+											</div>
+										</div>
+										<div class="separator-solid"></div>
+										<div class="form-group form-show-validation row">
+											<label for="website" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Website</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="website" name="website" value="<?php echo $data['website'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="facebook" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Facebook</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="facebook" name="facebook" value="<?php echo $data['facebook'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="twitter" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Twitter</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="twitter" name="twitter" value="<?php echo $data['twitter'] ?>" disabled>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="instagram" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Instagram</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="instagram" name="instagram" value="<?php echo $data['instagram'] ?>" disabled>
+											</div>
+										</div>
+									</div><!-- card body -->
+								</form>
 							</div>
 						</div>
 					</div>
-
-					<!-- Modal Area -->
-
-					<!-- End Modal Area -->
 
 				</div>
 				<!--page inner-->
@@ -424,19 +403,27 @@ $token = $_SESSION['token'];
 
 		});
 
+		//Summer Note
+		$('#summernote').summernote({
+			placeholder: 'Describe Company Profile . . .',
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Times New Roman'],
+			tabsize: 2,
+			height: 300
+		});
+
 		//SweetALert
 		var SweetAlert2Demo = function() {
-
 			var initDemos = function() {
+
 
 				$('#alert_demo_7').click(function(e) {
 					swal({
-						title: 'Delete this intern?',
-						text: "",
+						title: 'Publish this Company Profile?',
+						text: "This action will publish this post to other user.",
 						type: 'warning',
 						buttons: {
 							confirm: {
-								text: 'Yes!',
+								text: 'Yes, post it!',
 								className: 'btn btn-success'
 							},
 							cancel: {
@@ -444,44 +431,24 @@ $token = $_SESSION['token'];
 								className: 'btn btn-danger'
 							}
 						}
-					})
+					}).then((Delete) => {
+						if (Delete) {
+							swal({
+								title: 'Posted!',
+								text: 'Your post has been published.',
+								type: 'success',
+								buttons: {
+									confirm: {
+										className: 'btn btn-success'
+									}
+								}
+							});
+						} else {
+							swal.close();
+						}
+					});
 				});
 
-				$('#alert_demo_8').click(function(e) {
-					swal({
-						title: 'Delete this intern?',
-						text: "",
-						type: 'warning',
-						buttons: {
-							confirm: {
-								text: 'Yes!',
-								className: 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					})
-				});
-
-				$('#alert_demo_9').click(function(e) {
-					swal({
-						title: 'Delete this intern?',
-						text: "",
-						type: 'warning',
-						buttons: {
-							confirm: {
-								text: 'Yes!',
-								className: 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					})
-				});
 			};
 
 			return {

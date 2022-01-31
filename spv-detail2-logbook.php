@@ -1,4 +1,5 @@
 <?php
+//Koneksi Database
 include 'config.php';
 
 session_start();
@@ -10,32 +11,22 @@ $username = $_SESSION['username'];
 $name = $_SESSION['user_fullname'];
 $token = $_SESSION['token'];
 
-// session_unset();
-// session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Sistem Informasi Pengelolaan Magang</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
-			google: {
-				"families": ["Lato:300,400,700,900"]
-			},
-			custom: {
-				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-					"simple-line-icons"
-				],
-				urls: ['assets/css/fonts.min.css']
-			},
-			active: function () {
+			google: {"families":["Lato:300,400,700,900"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css']},
+			active: function() {
 				sessionStorage.fonts = true;
 			}
 		});
@@ -51,11 +42,10 @@ $token = $_SESSION['token'];
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
-
 <body>
 	<div class="wrapper horizontal-layout-2">
-
-	<div class="main-header" data-background-color="purple">
+		
+		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -177,214 +167,119 @@ $token = $_SESSION['token'];
 		<div class="main-panel">
 			<div class="container">
 				<div class="page-inner">
+                <div class="row">
 
-					<!-- Overall Statistics -->
-					<!-- <div class="font-header">
-					<p>Overall Statistics</p>
-					</div> -->
-					<div class="row">
-						<div class="col-md-4">
-							<div class="card card-dark card-menu-left text-center">
-								<div class="card-body pb-0">
-									<h1 class="mb-2">3</h1>
-									<p><b>INTERNSHIP STUDENTS</b></p>
-									<div class="pull-in sparkline-fix chart-as-background">
-										<div id="lineChart"><canvas width="327" height="70"
-												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card card-dark card-menu-center text-center">
-								<div class="card-body pb-0">
-									<div class="h1 fw-bold float-right"></div>
-									<h1 class="mb-2">2</h1>
-									<p><b>LECTURER</b></p>
-									<div class="pull-in sparkline-fix chart-as-background">
-										<div id="lineChart2"><canvas width="327" height="70"
-												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card card-dark card-menu-right text-center">
-								<div class="card-body pb-0">
-									<h1 class="mb-2">2</h1>
-									<p><b>UNACCEPTED DOCUMENT</b></p>
-									<div class="pull-in sparkline-fix chart-as-background">
-										<div id="lineChart3"><canvas width="327" height="70"
-												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Overall Statisctics -->
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-head-row">
+                <h4 class="card-title intern-title">Detail Logbook</h4>
+            </div>
+        </div>
+        <div class="card-body">
 
-					<!-- Company Profile -->
-					<div class="row row-card-no-pd">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-head-row">
-										<h4 class="card-title"><b>Company Profile</b></h4>
-										<div class="card-tools">
-										</div>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="row">
-										<div class="col-md-9">
-											<div class="table-responsive table-hover table-sales">
-												<table class="table">
-													<tbody>
-														<div style="text-align: justify;">
-															<p><b>PT. Schneider Electric</b> We drive digital
-																transformation by integrating world-leading energy and
-																process technologies, endpoints to the cloud that
-																connect products, controls, software and services across
-																the lifecycle, enabling integrated enterprise management
-																of homes, buildings, data centers, infrastructure and
-																industry.
-																We are a global company that upholds local values ​​the
-																most. We strongly support openness standards and a
-																passionate partnership ecosystem with the values ​​of
-																Purposeful, Inclusive and empowered.</p>
+            <div class="table-responsive">
+                <table id="basic-datatables" class="display table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <center>No</center>
+                            </th>
+                            <th>
+                                <center>Company</center>
+                            </th>
+                            <th>
+                                <center>Address Company</center>
+                            </th>
+                            <th>
+                                <center>Phone Number</center>
+                            </th>
+                            <th>
+                                <center>Mentor</center>
+                            </th>
+                            <th>
+                                <center>Position</center>
+                            </th>
+                            <th>
+                                <center>Phone Number</center>
+                            </th>
+                            <th>
+                                <center>Date</center>
+                            </th>
+                            <th>
+                                <center>Details of Activities</center>
+                            </th>
+                            <th>
+                                <center>Activity Attachment</center>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>PT. Panasonic Industrial Devices Batam</td>
+                            <td>Baloi Permai, Batam City, Riau Islands 29444, Indonesia</td>
+                            <td>(0778) 463688</td>
+                            <td>Supardianto, S.ST., M.Eng.</td>
+                            <td>Pembimbing Magang</td>
+                            <td>123456780</td>
+                            <td>10/11/2020</td>
+                            <td>Konten kreator, Videographer, Fotographer</td>
+                            <td>"upload lampiran berupa pdf"</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>PT. Panasonic Industrial Devices Batam</td>
+                            <td>Baloi Permai, Batam City, Riau Islands 29444, Indonesia</td>
+                            <td>(0778) 463688</td>
+                            <td>Supardianto, S.ST., M.Eng.</td>
+                            <td>Pembimbing Magang</td>
+                            <td>123456780</td>
+                            <td>10/11/2020</td>
+                            <td>Konten kreator, Videographer, Fotographer</td>
+                            <td>"upload lampiran berupa pdf"</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>PT. Panasonic Industrial Devices Batam</td>
+                            <td>Baloi Permai, Batam City, Riau Islands 29444, Indonesia</td>
+                            <td>(0778) 463688</td>
+                            <td>Supardianto, S.ST., M.Eng.</td>
+                            <td>Pembimbing Magang</td>
+                            <td>123456780</td>
+                            <td>10/11/2020</td>
+                            <td>Konten kreator, Videographer, Fotographer</td>
+                            <td>"upload lampiran berupa pdf"</td>
+                        </tr>
 
-															<!-- Form Modal Edit Description Company Profile -->
-															<div class="modal fade" id="modalcompany" tabindex="-1"
-																role="dialog" aria-labelledby="exampleModalLongTitle"
-																aria-hidden="true">
-																<div class="modal-dialog" role="document">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h5 class="modal-title"
-																				id="exampleModalLongTitle">EDIT COMPANY
-																				PROFILE</h5>
-																			<button type="button" class="close"
-																				data-dismiss="modal" aria-label="Close">
-																				<span aria-hidden="true">&times;</span>
-																			</button>
-																		</div>
-																		<div class="modal-body">
-																			<p><b>PT. Schneider Electric</b> We drive
-																				digital transformation by integrating
-																				world-leading energy and process
-																				technologies, endpoints to the cloud
-																				that
-																				connect products, controls, software and
-																				services across the lifecycle, enabling
-																				integrated enterprise management of
-																				homes, buildings, data centers,
-																				infrastructure and industry.
-																				We are a global company that upholds
-																				local values ​​the most. We strongly
-																				support openness standards and a
-																				passionate partnership ecosystem with
-																				the
-																				values ​​of Purposeful, Inclusive and
-																				empowered.</p>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" id="btn-save"
-																				class="btn btn-secondary ml-auto">Save
-																				Changes</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<!-- End Form Edit Description Company Profile -->
-														</div>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<center>
-												<div class="center">
-													<div class="drag-area">
-														<div class="icon"><i class="fas fa-users"></i></div>
-														<header>Company Logo</header>
-													</div>
-												</div>
-											</center>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Company Profile -->
+                    </tbody>
 
-					<!--Internship-->
-					<div class="row row-card-no-pd">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title"><b>Internship</b></h4>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover">
-											<thead>
-												<tr>
-													<th>FULL NAME</th>
-													<th>STUDY PROGRAM</th>
-													<th>PERIOD</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Kezia Angelina S</td>
-													<td>Informatics</td>
-													<td>2021</td>
-												</tr>
-												<tr>
-													<td>Cyntya Maharani Nurul Istiqomah</td>
-													<td>Informatics</td>
-													<td>2021</td>
-												</tr>
-												<tr>
-													<td>Yulia Wulandari</td>
-													<td>Informatics</td>
-													<td>2021</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--End Internship-->
+                </table>
+            </div>
 
-				</div>
-				<!--page inner-->
-			</div>
-			<!--container-->
-		</div>
-		<!--main-panel-->
+        </div>
+    </div>
+
+
+
+</div>
+
+
+</div>
+
+				</div><!--page inner-->
+			</div><!--container-->
+		</div><!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->
 		<footer class="footer">
 			<div class="container">
 				<div class="copyright ml-auto">
-					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a
-						href="http://www.themekita.com">PSTeam</a>
-				</div>
+					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
+				</div>				
 			</div>
 		</footer>
-		<a class="float" href="index.php?page=spv-discuss" style="text-decoration: none; color: white; cursor: pointer;">
-			<span><i class="far fa-comments my-float"></i></span>
-			</a>
 		<!-- End Footer -->
 	</div>
 
@@ -483,8 +378,11 @@ $token = $_SESSION['token'];
 			$('#addRowModal').modal('hide');
 
 		});
+
+        $(document).ready(function() {
+            $('#basic-datatables').DataTable({});
+        });
 	</script>
 
 </body>
-
 </html>

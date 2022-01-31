@@ -1,3 +1,17 @@
+<?php
+//Koneksi Database
+include 'config.php';
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +45,7 @@
 <body>
 	<div class="wrapper horizontal-layout-2">
 		
-		<div class="main-header" data-background-color="light-blue2">
+		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,8 +55,8 @@
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="spv-index.html" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="60" alt="navbar brand" class="navbar-brand">
+					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
+						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -65,16 +79,13 @@
 							<!-- gatau fungsinya untuk apa -->
 							<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 								<li class="nav-item toggle-nav-search hidden-caret">
-									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
-										aria-expanded="false" aria-controls="search-nav">
+									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
 										<i class="fa fa-search"></i>
 									</a>
 								</li>
-								<a style="text-decoration: none;" href="spv-profile.html">
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi, <?php echo $user;?></b></h5>
 								</div>
-							</a>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
 										<div class="quick-actions-scroll scrollbar-outer">
@@ -84,19 +95,10 @@
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
 								<li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="" href="spv-profile.html"
-										aria-expanded="false">
-										<div class="avatar-sm">
-											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
-										</div>
+									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
 								</li>
 								<!-- End Profil -->
-								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="#" id="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
-									</a>
-								</li>
 							</ul>
 						</div>
 					</nav>
@@ -107,7 +109,7 @@
 			<!-- Menu -->
 			<div class="nav-bottom">
 				<div class="container">
-					<ul class="nav page-navigation page-navigation-info bg-white">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
@@ -116,10 +118,10 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="spv-profile.html">My Profile</a>
+										<a href="index.php?page=hrd-profile">My Profile</a>
 									</li>
 									<li>
-										<a href="spv-company-profile.html">Company Profile</a>
+										<a href="index.php?page=hrd-company-profile">Company Profile</a>
 									</li>
 								</ul>
 							</div>
@@ -127,46 +129,39 @@
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">Supervisor Menu</span>
+								<span class="menu-title">HRD Menu</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
-									<li>
-										<a href="spv-jobdesc.html">Job Description</a>
+									<li class="link-to">
+										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
 									</li>
 									<li>
-										<a href="spv-feedback.html">Feedback</a>
+										<a href="index.php?page=hrd-registration">Internship Registration</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=hrd-studentlist">
+								<i class="link-icon icon-layers"></i>
+								<span class="menu-title">Student Internship</span>
+							</a>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=hrd-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="spv-logbook.html">Logbook</a>
-									</li>
-									<li>
-										<a href="spv-studentattendance.html">Attendance</a>
-									</li>
-									<li>
-										<a href="spv-finalreport.html">Final Report</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="spv-tutorials.html">
+							<a class="nav-link" href="index.php?page=hrd-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="spv-information.html">
+							<a class="nav-link" href="index.php?page=hrd-information">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -181,112 +176,105 @@
 		<div class="main-panel">
 			<div class="container">
 				<div class="page-inner">
+                <div class="row">
 
-                    <div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-title"><b>User Profile</b></div>
-									<div class="card-category"></a></div>
-								</div>
-								<form id="exampleValidation">
-									<div class="card-body">
-										<div class="form-group form-show-validation row">
-											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Profile Picture <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-file input-file-image">
-													<img class="img-upload-preview img-circle" width="100" height="100" src="http://placehold.it/100x100" alt="preview">
-													<input type="file" class="form-control form-control-file" id="uploadImg" name="uploadImg" accept="image/*" required >
-													<label for="uploadImg" class="btn btn-primary btn-round btn-lg"><i class="fa fa-file-image"></i> Upload a Image</label>
-												</div>
-											</div>
-										</div>
-                                        <div class="separator-solid"></div>
-										<div class="form-group form-show-validation row">
-											<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Name <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="username" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Username <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-group">
-													<input type="text" class="form-control" placeholder="Username" aria-label="username" aria-describedby="username-addon" id="username" name="username" required>
-												</div>
-											</div>
-										</div>
-                                        <div class="form-group form-show-validation row">
-											<label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Number Phone <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="phone" placeholder="Enter number phone" required>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="email" class="form-control" id="email" placeholder="Enter Email" required>
-												<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="password" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Password <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="confirmpassword" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Confirm Password <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Enter Password" required>
-											</div>
-										</div>
-										<div class="separator-solid"></div>
-										<div class="form-group form-show-validation row">
-											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Gender <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
-												<div class="custom-control custom-radio">
-													<input type="radio" id="male" name="gender" class="custom-control-input">
-													<label class="custom-control-label" for="male">Male</label>
-												</div>
-												<div class="custom-control custom-radio">
-													<input type="radio" id="female" name="gender" class="custom-control-input">
-													<label class="custom-control-label" for="female">Female</label>
-												</div>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="birth" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Birth <span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<div class="input-group">
-													<input type="date" class="form-control" id="birth" name="birth" required>
-												</div>
-											</div>
-										</div>
-										<!-- <div class="form-check">
-											<div class="row">
-												<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Agree <span class="required-label">*</span></label>
-												<div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" id="agree" name="agree" required>
-														<label class="custom-control-label" for="agree">Agree with terms and conditions</label>
-													</div>
-												</div>
-											</div>
-										</div> -->
-									</div><!-- card body -->
-									<div class="card-action">
-										<div class="row">
-											<div class="col-md-12">
-												<button class="btn btn-danger">Edit</button>
-                                                <input class="btn btn-success" type="submit" value="Save">
-											</div>										
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-head-row">
+                <h4 class="card-title intern-title">Detail Logbook</h4>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table id="basic-datatables" class="display table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <center>No</center>
+                            </th>
+                            <th>
+                                <center>Company</center>
+                            </th>
+                            <th>
+                                <center>Address Company</center>
+                            </th>
+                            <th>
+                                <center>Phone Number</center>
+                            </th>
+                            <th>
+                                <center>Mentor</center>
+                            </th>
+                            <th>
+                                <center>Position</center>
+                            </th>
+                            <th>
+                                <center>Phone Number</center>
+                            </th>
+                            <th>
+                                <center>Date</center>
+                            </th>
+                            <th>
+                                <center>Details of Activities</center>
+                            </th>
+                            <th>
+                                <center>Activity Attachment</center>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>PT. Panasonic Industrial Devices Batam</td>
+                            <td>Baloi Permai, Batam City, Riau Islands 29444, Indonesia</td>
+                            <td>(0778) 463688</td>
+                            <td>Supardianto, S.ST., M.Eng.</td>
+                            <td>Pembimbing Magang</td>
+                            <td>123456780</td>
+                            <td>10/11/2020</td>
+                            <td>Konten kreator, Videographer, Fotographer</td>
+                            <td>"upload lampiran berupa pdf"</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>PT. Panasonic Industrial Devices Batam</td>
+                            <td>Baloi Permai, Batam City, Riau Islands 29444, Indonesia</td>
+                            <td>(0778) 463688</td>
+                            <td>Supardianto, S.ST., M.Eng.</td>
+                            <td>Pembimbing Magang</td>
+                            <td>123456780</td>
+                            <td>10/11/2020</td>
+                            <td>Konten kreator, Videographer, Fotographer</td>
+                            <td>"upload lampiran berupa pdf"</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>PT. Panasonic Industrial Devices Batam</td>
+                            <td>Baloi Permai, Batam City, Riau Islands 29444, Indonesia</td>
+                            <td>(0778) 463688</td>
+                            <td>Supardianto, S.ST., M.Eng.</td>
+                            <td>Pembimbing Magang</td>
+                            <td>123456780</td>
+                            <td>10/11/2020</td>
+                            <td>Konten kreator, Videographer, Fotographer</td>
+                            <td>"upload lampiran berupa pdf"</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+</div>
 
 				</div><!--page inner-->
 			</div><!--container-->
@@ -302,7 +290,7 @@
 			</div>
 		</footer>
 		<!-- End Footer -->
-	</div><!--wrapper horizontal-layout-2-->
+	</div>
 
 	<!--   Core JS Files   -->
 	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
@@ -378,7 +366,7 @@
 	<script src="assets/js/demo.js"></script>
 
 	<!-- AdminLTE App -->
-	<script src="dist/js/adminlte.min.js"></script>
+	<script src="../../dist/js/adminlte.min.js"></script>
 
 	<script>
 		// Add Row
@@ -399,6 +387,10 @@
 			$('#addRowModal').modal('hide');
 
 		});
+
+        $(document).ready(function() {
+            $('#basic-datatables').DataTable({});
+        });
 	</script>
 
 </body>

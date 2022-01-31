@@ -1,3 +1,18 @@
+<?php
+//Koneksi Database
+include 'config.php';
+
+session_start();
+$user = $_SESSION['user_fullname'];
+$id_company = $_SESSION['id_company'];
+$role = $_SESSION['user_type'];
+$user_id = $_SESSION['id_user_company'];
+$username = $_SESSION['username'];
+$name = $_SESSION['user_fullname'];
+$token = $_SESSION['token'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +46,7 @@
 <body>
 	<div class="wrapper horizontal-layout-2">
 		
-		<div class="main-header" data-background-color="light-blue2">
+		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,8 +56,8 @@
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="spv-index.html" class="logo d-flex align-items-center">
-						<img src="assets/img/semogav211.png" height="60" alt="navbar brand" class="navbar-brand">
+					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
+						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -65,16 +80,13 @@
 							<!-- gatau fungsinya untuk apa -->
 							<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 								<li class="nav-item toggle-nav-search hidden-caret">
-									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
-										aria-expanded="false" aria-controls="search-nav">
+									<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
 										<i class="fa fa-search"></i>
 									</a>
 								</li>
-								<a style="text-decoration: none;" href="spv-profile.html">
 								<div class="title-name mt-2 text-white">
-									<h5><b>YULIA WULANDARI</b></h5>
+									<h5><b>Hi, <?php echo $user; ?></b></h5>
 								</div>
-							</a>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
 										<div class="quick-actions-scroll scrollbar-outer">
@@ -83,20 +95,18 @@
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-								<li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="" href="spv-profile.html"
-										aria-expanded="false">
+								<!-- <li class="nav-item dropdown hidden-caret">
+									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 										<div class="avatar-sm">
 											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
 										</div>
 									</a>
-								</li>
-								<!-- End Profil -->
+								</li> -->
 								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="#" id="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
 								</li>
+								<!-- End Profil -->
 							</ul>
 						</div>
 					</nav>
@@ -104,10 +114,10 @@
 				</div>
 			</div>
 
-			<!-- Menu -->
-			<div class="nav-bottom">
+			  <!-- Menu -->
+			  <div class="nav-bottom">
 				<div class="container">
-					<ul class="nav page-navigation page-navigation-info bg-white">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
@@ -116,57 +126,34 @@
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="spv-profile.html">My Profile</a>
+										<a href="index.php?page=spv-profile">My Profile</a>
 									</li>
 									<li>
-										<a href="spv-company-profile.html">Company Profile</a>
+										<a href="index.php?page=spv-company-profile">Company Profile</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">Supervisor Menu</span>
+							<a class="nav-link" href="index.php?page=spv-studentlist">
+								<i class="link-icon icon-layers"></i>
+								<span class="menu-title">Student Internship</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="spv-jobdesc.html">Job Description</a>
-									</li>
-									<li>
-										<a href="spv-feedback.html">Feedback</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="index.php?page=spv-logbook">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="spv-logbook.html">Logbook</a>
-									</li>
-									<li>
-										<a href="spv-studentattendance.html">Attendance</a>
-									</li>
-									<li>
-										<a href="spv-finalreport.html">Final Report</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="spv-tutorials.html">
+							<a class="nav-link" href="index.php?page=spv-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="spv-information.html">
+							<a class="nav-link" href="index.php?page=spv-information">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -182,68 +169,66 @@
 			<div class="container">
 				<div class="page-inner">
 
-					<div class="row row-card-no-pd">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title"><b>STUDENT ATTENDANCE</b></h4>
-										<a class="btn btn-secondary btn-round ml-auto text-white" id="alert_demo_7">
-											<i class="fa fa-check"></i>
-											Accept
-										</a>
-									</div>
-								</div>
-								<div class="card-body">
+                <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="card">
+                                <div class="card-body">
 
-									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover">
-											<thead>
-												<tr>
-													<th>Intern ID</th>
-													<th>Attendance ID</th>
-													<th>Description</th>
-													<th>Start Date</th>
-													<th>End Date</th>
-													<th>Month</th>
-													<th><center>Approval</center></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>intern001</td>
-													<td>attend1</td>
-													<td>
-														<center>
-															<a type="button" href="logbookstudent.html" style="cursor: pointer;" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-													<td>01/10/2021</td>
-													<td>30/10/2022</td>
-													<td>October</td>
-													<td><center><input type="checkbox" name="vehicle1" value="Bike"></center></td>
-												</tr>
-												<tr>
-													<td>intern001</td>
-													<td>attend002</td>
-													<td>
-														<center>
-															<a type="button" href="logbookstudent.html" style="cursor: pointer;" class="btn-sm btn-secondary text-white"><i class="fas fa-eye"></i> View</a>
-														</center>
-													</td>
-													<td>01/10/2021</td>
-													<td>30/10/2022</td>
-													<td>November</td>
-													<td><center><input type="checkbox" name="vehicle1" value="Bike"></center></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="attendance-datatables" class="display table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Date</th>
+                                                        <th>Check In</th>
+                                                        <th>Check Out</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>17 November 2021</td>
+                                                        <td>07.00</td>
+                                                        <td>17.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>18 November 2021</td>
+                                                        <td>07.00</td>
+                                                        <td>17.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>19 November 2021</td>
+                                                        <td>07.00</td>
+                                                        <td>17.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>20 November 2021</td>
+                                                        <td>07.00</td>
+                                                        <td>17.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>17 November 2021</td>
+                                                        <td>07.00</td>
+                                                        <td>17.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    
 				</div><!--page inner-->
 			</div><!--container-->
 		</div><!--main-panel-->
@@ -355,9 +340,12 @@
 			$('#addRowModal').modal('hide');
 
 		});
+		$(document).ready(function() {
+                $('#basic-datatables').DataTable({});
+            });
 
-		//SweetALert
-		var SweetAlert2Demo = function () {
+	 //SweetAlert
+	 var SweetAlert2Demo = function () {
             var initDemos = function () {
 
 
@@ -409,6 +397,12 @@ jQuery(document).ready(function () {
 SweetAlert2Demo.init();
 });
 	</script>
+
+<script>
+        $(document).ready(function() {
+            $('#attendance-datatables').DataTable({});
+        });
+    </script>
 
 </body>
 </html>
