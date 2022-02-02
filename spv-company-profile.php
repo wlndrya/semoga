@@ -2,14 +2,14 @@
 include 'config.php';
 
 session_start();
-// if($_SESSION['status_login'] != 'login'){
-// 	echo "
-// 	<script>
-// 		alert('YOU ARE NOT LOGIN!');
-// 		window.location.replace('index.php?page=login');
-// 	</script>
-//               "; 
-// 			}
+if($_SESSION['login_status'] != 'login'){
+	echo "
+	<script>
+		alert('YOU ARE NOT LOGIN!');
+		window.location.replace('index.php?page=login');
+	</script>
+              "; 
+			}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -204,7 +204,7 @@ $token = $_SESSION['token'];
 										<div class="form-group form-show-validation row">
 											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Type</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<select class="form-control" id="type" name="type" value="0">
+												<select class="form-control" id="type" name="type" value="0" disabled>
 													<option value="agency" <?php if ($data['type'] == "agency") echo 'selected="selected"'; ?>>Agency</option>
 													<option value="design" <?php if ($data['type'] == "design") echo 'selected="selected"'; ?>>Design</option>
 													<option value="education" <?php if ($data['type'] == "education") echo 'selected="selected"'; ?>>Education</option>
