@@ -2,6 +2,14 @@
 include 'config.php';
 
 session_start();
+if($_SESSION['status_login'] != 'login'){
+	echo "
+	<script>
+		alert('YOU ARE NOT LOGIN!');
+		window.location.replace('index.php?page=login');
+	</script>
+              "; 
+			}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -230,7 +238,7 @@ $token = $_SESSION['token'];
 												<div class="modal-content">
 													<div class="modal-header">
 														<h5 class="modal-title" id="modal-add">
-															ADD DISCUSS</h5>
+															ADD NEW DISCUSSION</h5>
 														<button type="button" class="close" data-dismiss="modal"
 															aria-label="Close">
 															<span aria-hidden="true">&times;</span>
@@ -264,6 +272,20 @@ $token = $_SESSION['token'];
 																	placeholder="" required>
 															</div>
 															<div class="form-group">
+																<label>Who is join with this discussion?</label>
+																<select class="form-control" id="id_user_company" name="id_user_company" value="0">
+																<option></option>
+																	<?php
+																	$sql = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company AND user_type = 'supervisor'");
+																	if (mysqli_num_rows($sql) != 0) {
+																	while ($row = mysqli_fetch_assoc($sql)) {
+																	echo '<option value=' . $row["id_user_company"] . '>' . $row['user_fullname'] . ' </option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>
+															<div class="form-group">
 																<label for="id_company">Discussion</label>
 																<textarea class="form-control" rows="10" cols="100"
 																	id="message-text"
@@ -273,7 +295,7 @@ $token = $_SESSION['token'];
 														<div
 															class="modal-footer border-top-0 d-flex justify-content-center">
 															<button type="submit"
-																class="btn btn-secondary btn-sm">SEND</button>
+																class="btn btn-modify btn-sm text-white">SEND</button>
 														</div>
 													</form>
 												</div>
@@ -297,7 +319,7 @@ $token = $_SESSION['token'];
 											</thead> 
 											<tbody>
 												<tr>
-													<td><a href="spv-discuss2.html">Pembuatan Logbook</a></td>
+													<td><a href="spv-discuss2.php">Pembuatan Logbook</a></td>
 													<td>Logbook</td>
 													<td>24/01/2022</td>
 													<td>
@@ -315,7 +337,7 @@ $token = $_SESSION['token'];
 													</td>
 												</tr>
 												<tr>
-													<td><a href="spv-discuss3.html">Poin Kehadiran</a></td>
+													<td><a href="spv-discuss3.php">Poin Kehadiran</a></td>
 													<td>Attendance</td>
 													<td>30/02/2022</td>
 													<td>

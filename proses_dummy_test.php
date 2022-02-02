@@ -178,19 +178,31 @@ if ($_GET['PageAction'] == "delete_supervisor") {
 
   if ($token_session === $token_post) {
    
-    $id_company    = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
+    $id_user_company      = mysqli_real_escape_string($conn,$_POST['id_user_company']);
     $status          = mysqli_escape_string($conn,$_POST['status']);
     $id_applicant    = mysqli_real_escape_string($conn,$_POST['id_applicant']);
-    $status          = mysqli_escape_string($conn,$_POST['status']);
+    $id_internship   = mysqli_escape_string($conn,$_POST['id_internship']);
+    $start_date      = mysqli_real_escape_string($conn,$_POST['start_date']);
+    $end_date        = mysqli_real_escape_string($conn,$_POST['end_date']);
+    
 
     if($_SESSION) {
-      $update = $conn->query("UPDATE `tb_applicant` SET 
+      $updateStatus = $conn->query("UPDATE `tb_applicant` SET 
       `status` = '$status'
       WHERE `id_applicant` = $id_applicant;");
 
-      if($update){
+      if($updateStatus){
+        $updateCompany = $conn->query("UPDATE `tb_internship` SET 
+      `id_user_company` = '$id_user_company',
+      `start_date` = '$start_date',
+      `end_date` = '$end_date'
+      WHERE `id_internship` = $id_internship;");
+
+      if($updateCompany){
         echo '<script type="text/javascript">';
         echo 'alert("Update Successfully"); document.location="index.php?page=hrd-registration";</script>';
+      }
       }
       else{
          //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
@@ -383,50 +395,5 @@ if ($_GET['PageAction'] == "delete_supervisor") {
   }
     }
 
-  // Add Supervisor Name
-   if ($_GET['PageAction'] == "update_spv") {
-    session_start();
-  $token_session = $_SESSION['token'];
-  $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
-
-  if ($token_session === $token_post) {
-   
-    $id_internship      = mysqli_real_escape_string($conn,$_POST['id_internship']);
-    $id_company = mysqli_real_escape_string($conn,$_POST['id_company']);
-    $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
-    // $name = mysqli_real_escape_string($conn,$_POST['name']);
-
-    if($_SESSION) {
-      $update = $conn->query("UPDATE `tb_internship` SET 
-      `id_user_company` = '$id_user_company'
-      WHERE `id_internship` = $id_internship;");
-    }
-    // echo $id_user_company;
-      if($update){
-        echo '<script type="text/javascript">';
-        echo 'alert("Successfully Update"); document.location="index.php?page=hrd-studentlist";</script>';
-      }
-      else{
-         //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
-          echo "
-                                     <script type='text/javascript'>
-                                      setTimeout(function () { 
-                                 Swal.fire({
-                                   type: 'error',
-                                   title: 'Data gagal diperbaharui',
-                                   showConfirmButton: false
-                                 });  
-                                      },10); 
-                                      window.setTimeout(function(){ 
-                                        window.history.back();
-                                      } ,3000); 
-                                     </script>
-                                 ";
-                               }
-    }
-    else{
-      echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-studentlist";</script>';
-     }
-  }
 
 ?>

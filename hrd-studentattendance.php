@@ -4,6 +4,14 @@ include 'config.php';
 // error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
 session_start();
+if($_SESSION['status_login'] != 'login'){
+	echo "
+	<script>
+		alert('YOU ARE NOT LOGIN!');
+		window.location.replace('index.php?page=login');
+	</script>
+              "; 
+			}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];

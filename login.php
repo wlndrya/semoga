@@ -1,3 +1,10 @@
+<?php
+session_start();
+// if($_SESSION['login_status'] == "login"){
+// 	print_r($_SESSION);
+// }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,6 +102,7 @@
             $_SESSION['user_fullname'] = $name;
             $_SESSION['user_type'] = $role;
 			$_SESSION['id_company'] = $id_company;
+			$_SESSION['login_status'] = "login";
             
             $length = 32;
             $_SESSION['token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $length);

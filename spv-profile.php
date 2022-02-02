@@ -2,6 +2,14 @@
 include 'config.php';
 
 session_start();
+if($_SESSION['status_login'] != 'login'){
+	echo "
+	<script>
+		alert('YOU ARE NOT LOGIN!');
+		window.location.replace('index.php?page=login');
+	</script>
+              "; 
+			}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -13,6 +21,7 @@ $token = $_SESSION['token'];
 // session_unset();
 // session_destroy();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +58,6 @@ $token = $_SESSION['token'];
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
-
 <body>
 	<div class="wrapper horizontal-layout-2">
 

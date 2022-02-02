@@ -3,6 +3,14 @@
 include 'config.php';
 
 session_start();
+if($_SESSION['status_login'] != 'login'){
+	echo "
+	<script>
+		alert('YOU ARE NOT LOGIN!');
+		window.location.replace('index.php?page=login');
+	</script>
+              "; 
+			}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -324,7 +332,7 @@ $token = $_SESSION['token'];
 															<div class="modal-content">
 																<div class="modal-header">
 																	<h5 class="modal-title" id="modaledit">
-																		APPROVAL INTERNSHIP</h5>
+																		APPROVAL INTERNSHIP REGISTRATION</h5>
 																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																		<span aria-hidden="true">&times;</span>
 																	</button>
@@ -333,7 +341,7 @@ $token = $_SESSION['token'];
 																<form method="POST" action="proses_dummy_test.php?PageAction=approval_internship">
 
 																	<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-																	<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company']; ?>">
+																	<!-- <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $data['id_user_company']; ?>"> -->
 																	<input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
 																	<input type="hidden" id="id_applicant" name="id_applicant" value="<?php echo $data['id_applicant']; ?>">
 																	<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $data['id_internship']; ?>">

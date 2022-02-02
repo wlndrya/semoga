@@ -2,7 +2,7 @@
 //Koneksi Database
 include 'config.php';
 
-session_start();
+session_start(); 
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
