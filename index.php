@@ -94,6 +94,9 @@ if (isset($_GET['page'])) {
     case 'spv-discuss':
       include "spv-discuss.php";
       break;
+    case 'print_jobdesc':
+      include "print_jobdesc.php";
+      break;
     default:
       include "errorpage404.html";
       break;
