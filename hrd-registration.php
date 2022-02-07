@@ -3,14 +3,14 @@
 include 'config.php';
 
 session_start();
-// if($_SESSION['status_login'] != 'login'){
-// 	echo "
-// 	<script>
-// 		alert('YOU ARE NOT LOGIN!');
-// 		window.location.replace('index.php?page=login');
-// 	</script>
-//               "; 
-// 			}
+if($_SESSION['login_status'] != 'login'){
+	echo "
+	<script>
+		alert('YOU ARE NOT LOGIN!');
+		window.location.replace('index.php?page=login');
+	</script>
+              "; 
+			}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -121,7 +121,7 @@ $token = $_SESSION['token'];
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
 								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+									<a class="nav-link dropdown-toggle" href="index.php?page=logout" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
 								</li>
 								<!-- End Profil -->

@@ -2,6 +2,14 @@
 include 'config.php';
 
 session_start();
+if($_SESSION['login_status'] != 'login'){
+	echo "
+	<script>
+		alert('YOU ARE NOT LOGIN!');
+		window.location.replace('index.php?page=login');
+	</script>
+              "; 
+			}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -112,7 +120,7 @@ $token = $_SESSION['token'];
 									</a>
 								</li> -->
 								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+									<a class="nav-link dropdown-toggle" href="index.php?page=logout" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
 								</li>
 								<!-- End Profil -->
@@ -224,7 +232,7 @@ $token = $_SESSION['token'];
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													<td><center>
-													<a href = 'index.php?page=spv-addjobdesc' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
+													<a href = 'index.php?page=spv-addjobdesc&id=". $data['id_internship'] ."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
 													</center></td>
 													<td><center>
 													<a href = 'index.php?page=spv-feedback2' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>

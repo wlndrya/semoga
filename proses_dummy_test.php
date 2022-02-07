@@ -395,5 +395,34 @@ if ($_GET['PageAction'] == "delete_supervisor") {
   }
     }
 
+    //Add and Update Job Description
+    if($_GET['PageAction'] == "add_jobdesc") {
+
+      session_start();
+      $token_session = $_SESSION['token'];
+      $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+    
+      $id                = mysqli_real_escape_string($conn,$_POST['id']);
+      $description     = $_POST['description'];
+      $another = $_POST['another_jobdesc'];
+      $goals = $_POST['goals'];
+
+      $final_desc = implode(',',$description);
+                                  
+      if($_SESSION){
+        $add = $conn->query("INSERT INTO tb_job_description (id_jobdesc,id_internship, description, another_jobdesc, expected_goal) VALUES (NULL,'$id','$final_desc','$another', '$goals');");  
+        if($add){
+          echo '<script type="text/javascript">';
+          echo 'alert("Successfully Added"); document.location="index.php?page=spv-studentlist";</script>';
+         }  
+         else
+         {
+          echo("Error description: " . $conn -> error);
+           //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
+         }
+       }
+    } 
+    //   }
+    
 
 ?>

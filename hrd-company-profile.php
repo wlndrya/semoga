@@ -124,7 +124,7 @@ $token = $_SESSION['token'];
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
 								<li class="nav-item dropdown hidden-caret">
-									<a class="nav-link dropdown-toggle" href="index.php?page=login" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
+									<a class="nav-link dropdown-toggle" href="index.php?page=logout" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
 								</li>
 								<!-- End Profil -->
@@ -294,7 +294,7 @@ $token = $_SESSION['token'];
 												<span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<div class="input-group">
-													<input type="text" class="form-control is-valid" placeholder="" aria-label="status" aria-describedby="" readonly id="status" name="status" value="<?php echo $data['status'] ?>" disabled><i class="fas fa-check" style="color: green;"></i>
+													<input type="text" class="form-control is-valid" placeholder="" aria-label="status" aria-describedby="" readonly id="status" name="status" value="<?php echo $data['status'] ?>" disabled>
 												</div>
 											</div>
 										</div>
