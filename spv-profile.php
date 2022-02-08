@@ -186,13 +186,13 @@ $token = $_SESSION['token'];
 								<form id="form_profile" method="POST"  action="proses_dummy_test.php?PageAction=update_spv" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');">
 								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
                                 <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $_SESSION['id_user_company']; ?>">
-                                <input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
+                                <input type="hidden" id="id_company" name="id_company" value="<?php echo $_SESSION['id_company']; ?>">
 
 									<div class="card-body">
 										<?php
 										include 'config.php';
 										//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                        $view = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company AND user_type = 'hrd'");
+                                        $view = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_user_company = $user_id AND id_company = $id_company");
 										$data = mysqli_fetch_array($view);
 										?>
 										

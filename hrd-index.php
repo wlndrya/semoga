@@ -284,7 +284,7 @@ $token = $_SESSION['token'];
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="col-md-9">
+										<div class="col-md-12">
 											<div style="text-align: justify;">
 												<div class="table-responsive table-hover table-sales">
 													<table class="table">
@@ -296,7 +296,7 @@ $token = $_SESSION['token'];
 															while ($data = mysqli_fetch_array($view)) {
 																echo $data['description'];
 																// echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#mymodalcv'> Modal CV</a>";
-																echo "</br></br><a type='button' class='btn btn-md btn-modify ml-auto text-white' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
+																echo "</br></br><a type='button' class='btn btn-sm btn-modify ml-auto text-white' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
 																	Description</a>";
 															?>
 
@@ -318,7 +318,7 @@ $token = $_SESSION['token'];
 																				<div class="modal-body">
 																					<div class="form-group">
 																						<textarea class="form-control" id="description" name="description" rows="8" cols="90" onkeyup="charCount(this)" required><?php echo $data['description']; ?></textarea>
-																						<span id="textcount">0</span> of 740 Characters
+																						<span id="textcount">0</span> of 1000 Characters
 																					</div>
 																				</div>
 																				<div class="modal-footer border-top-0 d-flex justify-content-center">
@@ -339,7 +339,7 @@ $token = $_SESSION['token'];
 											</div>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<!-- <div class="col-md-3">
 										<div class="center">
 											<div class="drag-area">
 												<div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
@@ -352,7 +352,7 @@ $token = $_SESSION['token'];
 												<script src="assets/js/script.js"></script>
 											</div>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -523,10 +523,10 @@ $token = $_SESSION['token'];
 	<!--Maximum Character for Textarea-->
 	<script type="text/javascript">
 		function charCount(textarea) {
-			var max = 740;
+			var max = 1000;
 			var length = textarea.value.length;
 			if (length > max) {
-				textarea.value = textarea.value.substring(0, 740);
+				textarea.value = textarea.value.substring(0, 1000);
 			} else {
 				$('#textcount').text(length);
 			}

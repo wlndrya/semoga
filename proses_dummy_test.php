@@ -196,7 +196,8 @@ if ($_GET['PageAction'] == "delete_supervisor") {
         $updateCompany = $conn->query("UPDATE `tb_internship` SET 
       `id_user_company` = '$id_user_company',
       `start_date` = '$start_date',
-      `end_date` = '$end_date'
+      `end_date` = '$end_date',
+      `status` = '$status'
       WHERE `id_internship` = $id_internship;");
 
       if($updateCompany){
