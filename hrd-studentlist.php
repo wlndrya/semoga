@@ -233,7 +233,7 @@ $token = $_SESSION['token'];
 													<td>" . $data['end_date'] . "</td>
 													<td>" . $data['user_fullname'] . "</td>
 													<td><center>
-													<a href = 'index.php?page=print_jobdesc' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = 'index.php?page=print_jobdesc&id=". $data['id_internship'] ."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													<td><center>
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>

@@ -1,97 +1,98 @@
-<!-- <?php
-// include 'config';
-// include 'fpdf/fpdf.php';
+<?php
 
-//Grab Variables
-// $student_name = $_POST['name'];
-// $nim = $_POST['nim'];
-// $company = $_POST['name'];
+use Mpdf\Tag\Tr;
 
-// class PDF extends FPDF
-// {
-// Page header
-// function Header()
-// {
-//     //Logo
-//    $this->Image('assets/img/polibatamlogo.png',1,0.5,2);
-// }
-// };
+require_once __DIR__ . '/vendor/autoload.php';
+require 'config.php';
 
-//Create PDF
-// $pdf = new PDF("P","cm","A4");
-// $pdf->SetMargins(0.5,1,1);
-// $pdf->AliasNbPages();
-// $pdf->AddPage();
-// $pdf->SetFont('Arial','B',14);
-// $pdf->Cell(20,0,"JOB DESCRIPTION STUDENT INTERNSHIP 2022",0,20,'C');
-// $pdf->SetLineWidth(0.1);
-// $pdf->Line(0.5,2.5,20.5,2.5);
-// $pdf->SetLineWidth(0);
-// $pdf->ln(1);
-// $pdf->SetFont('Arial','B',12);
-// $pdf->Cell(20,0,"POLITEKNIK NEGERI BATAM",0,20,'C');
-// $pdf->ln(2);
+ob_start();
 
-//Student Identity
-// $pdf->SetFont('Arial','B',10);
-// $pdf->Cell(100,0,"A. INTERNSHIP STUDENT IDENTITY",0,0);
-// $pdf->Ln(1); //Line Break
-// $pdf->SetFont('Arial','',9);
-// $pdf->Cell(10	,1,'NAME			:',1,0);
-// $pdf->Cell(10	,1,'NIM				:',1,1);
-// $pdf->Cell(10	,1,'STUDY PROGRAM	:',1,0);
-// $pdf->Cell(10	,1,'COMPANY			:',1,1);
+$id = $_GET['id'];
+?>
 
-// $query=mysqli_query($conn,"select * from tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim");
-// while($data=mysqli_fetch_array($query)){
-// 	$pdf->Cell(10,1,$data['name'],1,0);
-// 	$pdf->Cell(10,1,$data['nim'],1, 0);
-	// $pdf->Cell(4.5, 0.8, $data['name'], 1, 0, 'C');
-// }
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JOB DESCRIPTION</title>
+    </head>
+    <body>
+	<link rel="stylesheet" href="assets/css/style.css">
+        <div style="margin-left: 20px">
+		<table>
+		<tr>
+			<td><center><img src="assets/img/polibatamlogo.png" width="85px"><center></td>
+			<td>
+				<center>
+					<font size="6"><b>JOB DESCRIPTION STUDENT INTERNSHIP 2022</b></font><br>
+					<font size="5">POLITEKNIK NEGERI BATAM</font><br>
+					<font size="1"><i>Batam Centre, Jl. Ahmad Yani, Tlk. Tering, Kec. Batam Kota, Kota Batam, Kepulauan Riau 29461</i></font>
+				</center>
+			</td>
+		</tr>
+	</table>
+		</div>
+		<hr width="0px" style = "border-bottom: 10px">
+		<p class="heading">A. Student Internship Identity</p>
+		<!--Student Internship Identity-->
+		<table class="identity-text">
+			<?php
+			include 'config.php';
+			$view = mysqli_query($conn, "SELECT * FROM tb_job_description LEFT JOIN tb_internship ON tb_job_description.id_internship = tb_internship.id_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim LEFT JOIN tb_company ON tb_internship.id_company = tb_company.id_company WHERE tb_job_description.id_internship = $id;");
+			while ($data = mysqli_fetch_array($view)){
+				echo "
+				<tr>
+				<td>Name</td>
+				<td>: " . $data['name'] . "</td>
+				</tr>
+				<tr>
+				<td>NIM</td>
+				<td>: " . $data['nim'] . "</td>
+				</tr>
+				<tr>
+				<td>Study Program</td>
+				<td>: " . $data['study_program'] . "</td>
+				</tr>
+				<tr>
+				<td>Company Name</td>
+				<td>: " . $data['company_name'] . "</td>
+				</tr>
+				"
+			?>
+		</table>
 
-//Task Type Parameters
-// $pdf->Ln(1);
-// $pdf->SetFont('Arial','B',10);
-// $pdf->Cell(100,0,"B. TASK TYPE PARAMETERS",0,0);
-// $pdf->Ln(1); //Line Break
-// $pdf->SetFont('Arial','',9);
-// $pdf->Cell(20	,4,'1.	Type of work	:',1,1,'L','T');
-// $pdf->Cell(20	,4,'2.	Other field of work can be described as follows	:',1,1);
-// $pdf->Cell(20	,4,'3.	During the internship process, student are expected to contribute in the form of	:',1,1);
+		<p class="heading">B. Task Type Parameter</p>
 
-//Notes
-// $pdf->Ln(1);
-// $pdf->SetFont('Arial','B',10);
-// $pdf->Cell(10,0,"NOTES :",20,0);
-// $pdf->Ln(0.5); //Line Break
-// $pdf->Cell(10,0,"This form must be filled out by the student internship supervisor from the industry to determine what type of work will be 
-// provided to students during the internship",20,0,'J');
+		<!--Task Type Parameter-->
+		<?php
+		echo "
+		<div style='background-color: white; border: 1px solid #17202A; height: 20%; margin: 10px 0px; padding: 5px; text-align: left; width: auto;'>
+		<div style='padding:20px'>
+		<p class='sub-heading'>1. Type of Work :</p><br><p class='sub-content'> " . $data['description_jobdesc'] ."</p></div>
+		</div>
+		<div style='background-color: white; border: 1px solid #17202A; height: 20%; margin: 10px 0px; text-align: left; width: auto;'>
+		<div style='padding: 20px'>
+		<p class='sub-heading'>2. To other work can be explained as follows :</p><br><p class='sub-content'>" . $data['another_jobdesc'] ."</p>
+		</div>
+		</div>
+		<div style='background-color: white; border: 1px solid #17202A; height: 20%; margin: 10px 0px; text-align: left; width: auto;'>
+		<div style='padding: 20px'>
+		<p class='sub-heading'>3. During the internship, students are expected to contribute in the form of :</p><br>
+		<p class='sub-content'>" . $data['expected_goal'] ."</p></div>
+		</div>
+		"
+		?>
 
-// $pdf->Cell(59, 5,'',1,1);//End of Line
-// $pdf->Cell(7, 0.8, 'NIS', 1, 0, 'C');
-// $pdf->Cell(9, 0.8, 'Nama Mahasiswa', 1, 0, 'C');
-// $pdf->Cell(4.5, 0.8, 'Jenis Kelamin', 1, 0, 'C');
-// $pdf->Cell(4.5, 0.8, 'Telepon', 1, 0, 'C');
-// $pdf->Cell(2, 0.8, 'Alamat', 1, 1, 'C');
+		<!--Menutup Perulangan While-->
+			<?php
+			}
+			?>
+	</body>
+</html>
 
-// $no=1;
-// $query=mysqli_query($conn,"select * from siswa");
-// while($data=mysqli_fetch_array($query)){
-// 	$pdf->Cell(1, 0.8, $no, 1, 0, 'C');
-// 	$pdf->Cell(7, 0.8, $data['nis'], 1, 0,'C');
-// 	$pdf->Cell(9, 0.8, $data['nama'], 1, 0,'C');
-// 	$pdf->Cell(4.5, 0.8, $data['jk'], 1, 0, 'C');
-// 	$pdf->Cell(4.5, 0.8, $data['telepon'], 1, 0, 'C');
-// 	$pdf->Cell(2, 0.8, $data['alamat'], 1, 1,'C');
-// 	$no++;}
-
-// $pdf->SetFont('Arial','',9);
-// $query=mysqli_query($conn,"select * from tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim");
-// while($data=mysqli_fetch_array($query)){
-// 	$pdf->Cell(9, 0.8, $data['name'], 1, 0,'C');
-// 	$pdf->Cell(4.5, 0.8, $data['nim'], 1, 0, 'C');
-	// $pdf .= '<strong>Name</strong>' . $nim . '<br />';
-	// $pdf .= '<strong>Name</strong>' . $company . '<br />';
-// }
-// $pdf->Output("JobDescription.pdf","I");
-?> -->
+<?php
+$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4','margin_top' => 10, 'margin_bottom' => 10, 'margin_left' => 20, 'margin_right' => 20]);
+$html = ob_get_contents();
+ob_end_clean();
+$mpdf->WriteHTML(utf8_encode($html));
+$mpdf->Output("Job-Description.pdf" ,'I');
+?>
