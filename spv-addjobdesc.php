@@ -220,7 +220,7 @@ $token = $_SESSION['token'];
                                                     <td>Database</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="description[]" value="Database">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="description_jobdesc[]" value="Database">
                                                             <label class="custom-control-label" for="customCheck1">Checked</label>
                                                         </div>
                                                     </td>
@@ -230,7 +230,7 @@ $token = $_SESSION['token'];
                                                     <td>Data Analysis</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck2" name="description[]" value="Data Analysis">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck2" name="description_jobdesc[]" value="Data Analysis">
                                                             <label class="custom-control-label" for="customCheck2">Checked</label>
                                                         </div>
                                                     </td>
@@ -240,7 +240,7 @@ $token = $_SESSION['token'];
                                                     <td>Information Systems</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck3" name="description[]" value="Information Systems">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck3" name="description_jobdesc[]" value="Information Systems">
                                                             <label class="custom-control-label" for="customCheck3">Checked</label>
                                                         </div>
                                                     </td>
@@ -250,7 +250,7 @@ $token = $_SESSION['token'];
                                                     <td>Desktop Apps</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck4" name="description[]" value="Desktop Apps">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck4" name="description_jobdesc[]" value="Desktop Apps">
                                                             <label class="custom-control-label" for="customCheck4">Checked</label>
                                                         </div>
                                                     </td>
@@ -260,7 +260,7 @@ $token = $_SESSION['token'];
                                                     <td>Apps and Web Design</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck5" name="description[]" value="Apps and Web Design">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck5" name="description_jobdesc[]" value="Apps and Web Design">
                                                             <label class="custom-control-label" for="customCheck5">Checked</label>
                                                         </div>
                                                     </td>
@@ -270,7 +270,7 @@ $token = $_SESSION['token'];
                                                     <td>Mobile Application</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck6" name="description[]" value="Mobile Application">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck6" name="description_jobdesc[]" value="Mobile Application">
                                                             <label class="custom-control-label" for="customCheck6">Checked</label>
                                                         </div>
                                                     </td>
@@ -280,7 +280,7 @@ $token = $_SESSION['token'];
                                                     <td>Apps Design</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck7" name="description[]" value="Apps Design">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck7" name="description_jobdesc[]" value="Apps Design">
                                                             <label class="custom-control-label" for="customCheck7">Checked</label>
                                                         </div>
                                                     </td>
@@ -290,7 +290,7 @@ $token = $_SESSION['token'];
                                                     <td>Use of Framework</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck8" name="description[]" value="Use of Framework">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck8" name="description_jobdesc[]" value="Use of Framework">
                                                             <label class="custom-control-label" for="customCheck8">Checked</label>
                                                         </div>
                                                     </td>
@@ -300,7 +300,7 @@ $token = $_SESSION['token'];
                                                     <td>Network</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck9" name="description[]" value="Network">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck9" name="description_jobdesc[]" value="Network">
                                                             <label class="custom-control-label" for="customCheck9">Checked</label>
                                                         </div>
                                                     </td>
@@ -310,7 +310,7 @@ $token = $_SESSION['token'];
                                                     <td>Troubleshooting</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck10" name="description[]" value="Troubleshooting">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck10" name="description_jobdesc[]" value="Troubleshooting">
                                                             <label class="custom-control-label" for="customCheck10">Checked</label>
                                                         </div>
                                                     </td>
@@ -320,7 +320,7 @@ $token = $_SESSION['token'];
                                                     <td>Hardware</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck11" name="description[]" value="Hardware">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck11" name="description_jobdesc[]" value="Hardware">
                                                             <label class="custom-control-label" for="customCheck11">Checked</label>
                                                         </div>
                                                     </td>
@@ -330,7 +330,7 @@ $token = $_SESSION['token'];
                                                     <td>Multimedia and Simulation</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck12" name="description[]" value="Multimedia and Simulation">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck12" name="description_jobdesc[]" value="Multimedia and Simulation">
                                                             <label class="custom-control-label" for="customCheck12">Checked</label>
                                                         </div>
                                                     </td>
@@ -340,7 +340,7 @@ $token = $_SESSION['token'];
                                                     <td>Animation and Live Film making</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck13" name="description[]" value="Animation and live film making">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck13" name="description_jobdesc[]" value="Animation and live film making">
                                                             <label class="custom-control-label" for="customCheck13">Checked</label>
                                                         </div>
                                                     </td>
@@ -350,7 +350,7 @@ $token = $_SESSION['token'];
                                                     <td>Print or digital media layout design</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck14" name="description[]" value="Print or digital media layout design">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck14" name="description_jobdesc[]" value="Print or digital media layout design">
                                                             <label class="custom-control-label" for="customCheck14">Checked</label>
                                                         </div>
                                                     </td>
@@ -360,7 +360,7 @@ $token = $_SESSION['token'];
                                                     <td>Game Development</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck15" name="description[]" value="Game Development">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck15" name="description_jobdesc[]" value="Game Development">
                                                             <label class="custom-control-label" for="customCheck15">Checked</label>
                                                         </div>
                                                     </td>
@@ -370,7 +370,7 @@ $token = $_SESSION['token'];
                                                     <td>Broadcasting or Production crew</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck16" name="description[]" value="Broadcasting or production crew">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck16" name="description_jobdesc[]" value="Broadcasting or production crew">
                                                             <label class="custom-control-label" for="customCheck16">Checked</label>
                                                         </div>
                                                     </td>
@@ -379,11 +379,11 @@ $token = $_SESSION['token'];
                                         </table>
                                         <div class="form-group">
                                             <p>2. To other work can be explained as follows : </p>
-                                            <textarea class="form-control" rows="3" id="description" name="another_jobdesc" value=""></textarea>
+                                            <textarea class="form-control" rows="3" id="another_jobdesc" name="another_jobdesc"><?php echo $data['another_jobdesc']; ?></textarea>
                                         </div>
                                         <div class="form-group">
                                             <p>3. During the internship process, students are expected to contribute in the form of : </p>
-                                            <textarea class="form-control" rows="3" id="description" name="goals" value=""></textarea>
+                                            <textarea class="form-control" rows="3" id="expected_goal" name="expected_goal"><?php echo $data['expected_goal'] ?></textarea>
                                         </div>
                                         <div>
                                             <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry

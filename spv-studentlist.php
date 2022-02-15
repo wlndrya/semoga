@@ -235,7 +235,7 @@ $token = $_SESSION['token'];
 													<a href = 'index.php?page=spv-addjobdesc&id=". $data['id_internship'] ."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
 													</center></td>
 													<td><center>
-													<a href = 'index.php?page=spv-feedback2' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
+													<a href = 'index.php?page=spv-feedback2&id=". $data['id_internship']."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
 													</center></td>
 													</tr>"
 												?>

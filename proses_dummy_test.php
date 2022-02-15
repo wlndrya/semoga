@@ -353,48 +353,68 @@ if ($_GET['PageAction'] == "delete_supervisor") {
      }
   }
 
-  //Add Feedback
-  if($_GET['PageAction'] == "add_feedback") {
+  //Add Feedback from industry
+  if($_GET['PageAction'] == "add_feedback2") {
 
     session_start();
     $token_session = $_SESSION['token'];
     $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
   
-    if ($token_session === $token_post) {
-  
-      // $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
-      $id_internship      = mysqli_real_escape_string($conn,$_POST['id_internship']);
-      $nim                = mysqli_real_escape_string($conn,$_POST['nim']);
-      $position           = mysqli_real_escape_string($conn,$_POST['position']);
-      $intern_comment     = mysqli_real_escape_string($conn,$_POST['intern_comment']);
-      $campus_comment     = mysqli_real_escape_string($conn,$_POST['campus_comment']);
-      $performance        = mysqli_real_escape_string($conn,$_POST['performance']);
-      $recruit_intern     = mysqli_real_escape_string($conn,$_POST['recruit_intern']);
-      $final_grade        = mysqli_real_escape_string($conn,$_POST['final_grade']);
-      $ethics             = mysqli_real_escape_string($conn,$_POST['ethics']);
-      $core_competency    = mysqli_real_escape_string($conn,$_POST['core_competency']);
-      $foreign_languange  = mysqli_real_escape_string($conn,$_POST['foreign_languange']);
-      $information_technology = mysqli_real_escape_string($conn,$_POST['information_technology ']);
-      $communication_skill = mysqli_real_escape_string($conn,$_POST['communication_skill']);
-      $teamwork            = mysqli_real_escape_string($conn,$_POST['teamwork']);
-      $personal_development = mysqli_real_escape_string($conn,$_POST['personal_development']);
-                          
+    $id                = mysqli_real_escape_string($conn,$_POST['id']);
+    $catatan_utk_mahasiswa  = mysqli_real_escape_string($conn,$_POST['catatan_utk_mahasiswa']);
+    $catatan_utk_poltek     = mysqli_real_escape_string($conn,$_POST['catatan_utk_poltek']);
+    $layak_diterima         = mysqli_real_escape_string($conn,$_POST['layak_diterima']);
+    $langsung_diterima      = mysqli_real_escape_string($conn,$_POST['langsung_diterima']);
+                                
     if($_SESSION){
-      $add = $conn->query("INSERT INTO `tb_logbook` (`id_internship`, `nim`, `position`, `intern_comment`, `campus_comment`, `performance`, `recruit_intern`, `final_grade`, `ethics`, `core_competency`, `foreign_languange`, `information_technology`, `communication_skill`, `teamwork`, `personal_development`) VALUES ('$id_internship', '$nim', '$position', '$intern_comment', '$campus_comment', '$performance', '$recruit_intern', '$final_grade', '$ethics', '$core_competency', '$foreign_languange', '$information_technology', '$communication_skill', '$teamwork', '$personal_development');");  
+      $add = $conn->query("INSERT INTO tb_industry_feedback (id_industry_feedback, id_internship, catatan_utk_mahasiswa, catatan_utk_poltek, layak_diterima, langsung_diterima) VALUES (NULL,'$id','$catatan_utk_mahasiswa','$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima');");  
       if($add){
         echo '<script type="text/javascript">';
-        echo 'alert("Successfully Added"); document.location="index.php?page=hrd-feedback2";</script>';
+        echo 'alert("Successfully Added"); document.location="index.php?page=spv-feedback2";</script>';
        }  
        else
        {
-        // echo("Error description: " . $conn -> error);
-         echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=hrd-feedback2";</script>';
+        echo("Error description: " . $conn -> error);
+         //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
        }
      }
-  } else {
-  echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-feedback2.php";</script>';
-  }
-    }
+  } 
+
+  //Add Feedback
+  // if($_GET['PageAction'] == "add_feedback") {
+
+  //   session_start();
+  //   $token_session = $_SESSION['token'];
+  //   $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+  
+  //     $id_industry_feedback   = mysqli_real_escape_string($conn,$_POST['id_industry_feedback']);
+  //     $id                = mysqli_real_escape_string($conn,$_POST['id']);
+  //     $catatan_utk_mahasiswa  = mysqli_real_escape_string($conn,$_POST['catatan_utk_mahasiswa']);
+  //     $catatan_utk_poltek     = mysqli_real_escape_string($conn,$_POST['catatan_utk_poltek']);
+  //     $layak_diterima         = mysqli_real_escape_string($conn,$_POST['layak_diterima']);
+  //     $langsung_diterima      = mysqli_real_escape_string($conn,$_POST['langsung_diterima']);
+  //     // $nilai_akhir            = mysqli_real_escape_string($conn,$_POST['nilai_akhir']);
+  //     // $etika                  = mysqli_real_escape_string($conn,$_POST['etika']);
+  //     // $keahlian_kompetensi    = mysqli_real_escape_string($conn,$_POST['keahlian_kompetensi']);
+  //     // $keahlian_bahasa        = mysqli_real_escape_string($conn,$_POST['keahlian_bahasa']);
+  //     // $penggunaan_ti          = mysqli_real_escape_string($conn,$_POST['penggunaan_ti']);
+  //     // $komunikasi             = mysqli_real_escape_string($conn,$_POST['komunikasi']);
+  //     // $kerjasama              = mysqli_real_escape_string($conn,$_POST['kerjasama']);
+  //     // $pengembangan_diri      = mysqli_real_escape_string($conn,$_POST['pengembangan_diri']);
+  //     // $date                   = mysqli_real_escape_string($conn,$_POST['date']);
+                          
+  //   if($_SESSION){
+  //     $add = $conn->query("INSERT INTO `tb_industry_feedback` (`id_industry_feedback`, `id_internship`, `catatan_utk_mahasiswa`, `catatan_utk_poltek`, `layak_diterima`, `langsung_diterima`) VALUES ('', '$id', '$catatan_utk_mahasiswa', '$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima');");  
+  //     if($add){
+  //       echo '<script type="text/javascript">';
+  //       echo 'alert("Successfully Added"); document.location="index.php?page=spv-feedback2";</script>';
+  //      }  
+  //      else
+  //      {
+  //       echo("Error description: " . $conn -> error);
+  //      }
+  //    }
+  //   }
 
     //Add and Update Job Description
     if($_GET['PageAction'] == "add_jobdesc") {
@@ -404,14 +424,14 @@ if ($_GET['PageAction'] == "delete_supervisor") {
       $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
     
       $id                = mysqli_real_escape_string($conn,$_POST['id']);
-      $description     = $_POST['description'];
+      $description     = $_POST['description_jobdesc'];
       $another = $_POST['another_jobdesc'];
-      $goals = $_POST['goals'];
+      $goals = $_POST['expected_goal'];
 
       $final_desc = implode(',',$description);
                                   
       if($_SESSION){
-        $add = $conn->query("INSERT INTO tb_job_description (id_jobdesc,id_internship, description, another_jobdesc, expected_goal) VALUES (NULL,'$id','$final_desc','$another', '$goals');");  
+        $add = $conn->query("INSERT INTO tb_job_description (id_jobdesc,id_internship, description_jobdesc, another_jobdesc, expected_goal) VALUES (NULL,'$id','$final_desc','$another', '$goals');");  
         if($add){
           echo '<script type="text/javascript">';
           echo 'alert("Successfully Added"); document.location="index.php?page=spv-studentlist";</script>';

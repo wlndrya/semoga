@@ -2,14 +2,14 @@
 include 'config.php';
 
 session_start();
-if($_SESSION['login_status'] != 'login'){
+if ($_SESSION['login_status'] != 'login') {
 	echo "
 	<script>
 		alert('YOU ARE NOT LOGIN!');
 		window.location.replace('index.php?page=login');
 	</script>
-              "; 
-			}
+              ";
+}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -177,68 +177,70 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="page-inner">
 
-				<form method="POST" action="proses_dummy_test.php?PageAction=add_feedback">
-					<!-- Overall Comments -->
-					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">Overall Comments</h3>
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body">
-							<form>
+					<form method="POST" action="proses_dummy_test.php?PageAction=add_feedback2">
+					<?php
+                                $view = mysqli_query($conn, "SELECT * FROM tb_industry_feedback WHERE nim = $nim");
+                                $data = mysqli_fetch_array($view);
+                                echo $nim;
+                                ?>
+						<!-- Overall Comments -->
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Overall Comments</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
 								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-								<input type="hidden" id="id_company" name="id_company" value="<?php echo $id_company; ?>">
+								<input type="hidden" value="<?php echo $_GET['id']?>" name="id">
+								<input type="hidden" id="id_industry_feedback" name="id_industry_feedback" value="<?php echo $id_industry_feedback; ?>">
 								<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
-								<input type="hidden" id="nim" name="nim" value="<?php echo $nim; ?>">
 								<div class="row">
 									<div class="col-sm-6">
 										<!-- textarea -->
 										<div class="form-group">
 											<label>1.Overall comments for the intern :</label>
-											<textarea class="form-control" rows="3" name="intern_comment" id="intern_comment"></textarea>
+											<textarea class="form-control" rows="3" name="catatan_utk_mahasiswa" id="catatan_utk_mahasiswa"></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>2. Overall comments for Politeknik Negeri Batam :</label>
-											<textarea class="form-control" rows="3" name="campus_comment" id="campus_comment"></textarea>
+											<textarea class="form-control" rows="3" name="catatan_utk_poltek" id="catatan_utk_poltek"></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>3. Does the student’s internship performance meet the requirement<br>
 												for being new employee in your company/institution?</label>
-											<textarea class="form-control" rows="3" name="performance" id="performance"></textarea>
+											<textarea class="form-control" rows="3" name="layak_diterima" id="layak_diterima"></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>4. Does your company intend to recruit the intern immediately<br>
 												he/she finished their internship?</label>
-											<textarea class="form-control" rows="3" name="recruit_intern" id="recruit_intern"></textarea>
+											<textarea class="form-control" rows="3" name="langsung_diterima" id="langsung_diterima"></textarea>
 										</div>
 									</div>
 								</div><!-- Row -->
-						</form>
-					</div>
-					</div>
-					<!--End Overall Comments -->
-
-					<!-- Evaluation Parameter -->
-					<div class="card">
-						<div class="card-header">
-							<h4 class="card-title">Evaluation Parameter</h4>
+							</div>
 						</div>
-						<!-- /.card-header -->
-						<div class="card-body">
-							<form>
+						<!--End Overall Comments -->
+
+						<!-- Evaluation Parameter -->
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Evaluation Parameter</h4>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-12">
 										<!-- text input -->
 										<div class="form-group">
 											<label>1. Final grade for student based on overall internship process (range 1 –
 												100): </label>
-											<input type="text" class="form-control" name="final_grade" id="final_grade">
+											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir">
 										</div>
 										<div class="form-group">
 											<label><b>2. Please Put tick checklist in the appropriate column in the following table
@@ -513,35 +515,32 @@ $token = $_SESSION['token'];
 										</table>
 									</div>
 									<!-- /.card-body -->
-									
-							</form>
-						</div>
-					</div>
+								</div>
+							</div>
 
-<!--Button Submit-->
-<div class="modal-footer d-flex justify-content-center">
-<button type="submit" class="btn btn-modify text-white" name="btn-submit" id="btn-submit">SUBMIT</button>
-</div>
-<!--End Button Submit-->
-				</form>
-
+							<!--Button Submit-->
+							<div class="modal-footer d-flex justify-content-center">
+								<button type="submit" class="btn btn-modify text-white" name="btn-submit" id="btn-submit">SUBMIT</button>
+							</div>
+							<!--End Button Submit-->
+					</form>
+				</div>
+				<!--page inner-->
 			</div>
-			<!--page inner-->
+			<!--container-->
 		</div>
-		<!--container-->
-	</div>
-	<!--main-panel-->
-	<!-- End Main Content -->
+		<!--main-panel-->
+		<!-- End Main Content -->
 
-	<!-- Footer -->
-	<footer class="footer">
-		<div class="container">
-			<div class="copyright ml-auto">
-				2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
+		<!-- Footer -->
+		<footer class="footer">
+			<div class="container">
+				<div class="copyright ml-auto">
+					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
+				</div>
 			</div>
-		</div>
-	</footer>
-	<!-- End Footer -->
+		</footer>
+		<!-- End Footer -->
 	</div>
 
 	<!--   Core JS Files   -->
