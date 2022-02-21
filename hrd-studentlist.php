@@ -239,7 +239,7 @@ $token = $_SESSION['token'];
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													<td><center>
-													<a href = 'index.php?page=hrd-feedback2' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
+													<a href = 'index.php?page=hrd-feedback2&id=". $data['id_internship'] ."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
 													</center></td>
 													</tr>"
 												?>
@@ -251,10 +251,18 @@ $token = $_SESSION['token'];
 																<h4 class="modal-title">Final Report</h4>
 																<button type="button" class="close" data-dismiss="modal">&times;</button>
 															</div>
+															<?php
+																if($data['final_report']) :
+															?>
 															<div class="modal-body" style="height: 600px">
-																<object type="application/pdf" data="berkas/<?php echo $data['final_report'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																<object type="application/pdf" data="berkas/<?php echo $data['final_report'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="false">
 																</object>
 															</div>
+															<?php
+															else :
+															?>
+															<h2 class="p-5 mx-auto">Final report is not available!</h2>
+															<?php endif;?>
 															<div class="modal-footer">
 																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 															</div>

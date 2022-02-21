@@ -114,7 +114,9 @@ if ($_GET['PageAction'] == "update_supervisor") {
     // Delete Supervisor
 if ($_GET['PageAction'] == "delete_supervisor") {
 
-     $delete = $conn->query("DELETE FROM tb_user_company WHERE id_user_company = '$_POST[id_user_company]' ");
+  $id_user_company      = mysqli_real_escape_string($conn,$_POST['id_user_company']);
+
+     $delete = $conn->query("DELETE FROM tb_user_company WHERE `id_user_company` = $id_user_company;");
      if($delete){
      echo '<script language="javascript">alert("Successfully Deleted!"); window.history.back();</script>';
      }else{
@@ -353,24 +355,33 @@ if ($_GET['PageAction'] == "delete_supervisor") {
      }
   }
 
-  //Add Feedback from industry
+  //Add Feedback from industry Supervisor
   if($_GET['PageAction'] == "add_feedback2") {
 
     session_start();
     $token_session = $_SESSION['token'];
     $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
   
-    $id                = mysqli_real_escape_string($conn,$_POST['id']);
+    $id                     = mysqli_real_escape_string($conn,$_POST['id']);
     $catatan_utk_mahasiswa  = mysqli_real_escape_string($conn,$_POST['catatan_utk_mahasiswa']);
     $catatan_utk_poltek     = mysqli_real_escape_string($conn,$_POST['catatan_utk_poltek']);
     $layak_diterima         = mysqli_real_escape_string($conn,$_POST['layak_diterima']);
     $langsung_diterima      = mysqli_real_escape_string($conn,$_POST['langsung_diterima']);
+    $nilai_akhir            = mysqli_real_escape_string($conn,$_POST['nilai_akhir']);
+    $etika                  = mysqli_real_escape_string($conn,$_POST['etika']);
+    $keahlian_kompetensi    = mysqli_real_escape_string($conn,$_POST['keahlian_kompetensi']);
+    $keahlian_bahasa        = mysqli_real_escape_string($conn,$_POST['keahlian_bahasa']);
+    $penggunaan_ti          = mysqli_real_escape_string($conn,$_POST['penggunaan_ti']);
+    $komunikasi             = mysqli_real_escape_string($conn,$_POST['komunikasi']);
+    $kerjasama              = mysqli_real_escape_string($conn,$_POST['kerjasama']);
+    $pengembangan_diri      = mysqli_real_escape_string($conn,$_POST['pengembangan_diri']);
+    $date                   = mysqli_real_escape_string($conn,$_POST['date']);
                                 
     if($_SESSION){
-      $add = $conn->query("INSERT INTO tb_industry_feedback (id_industry_feedback, id_internship, catatan_utk_mahasiswa, catatan_utk_poltek, layak_diterima, langsung_diterima) VALUES (NULL,'$id','$catatan_utk_mahasiswa','$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima');");  
+      $add = $conn->query("INSERT INTO tb_industry_feedback (id_industry_feedback, id_internship, catatan_utk_mahasiswa, catatan_utk_poltek, layak_diterima, langsung_diterima, nilai_akhir, etika, keahlian_kompetensi, keahlian_bahasa, penggunaan_ti, komunikasi, kerjasama, pengembangan_diri, date) VALUES (NULL,'$id','$catatan_utk_mahasiswa','$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima', '$nilai_akhir', '$etika', '$keahlian_kompetensi' , '$keahlian_bahasa', '$penggunaan_ti', '$komunikasi', '$kerjasama', '$pengembangan_diri', '$date');");  
       if($add){
         echo '<script type="text/javascript">';
-        echo 'alert("Successfully Added"); document.location="index.php?page=spv-feedback2";</script>';
+        echo 'alert("Successfully Added"); document.location="index.php?page=spv-studentlist";</script>';
        }  
        else
        {
@@ -380,41 +391,41 @@ if ($_GET['PageAction'] == "delete_supervisor") {
      }
   } 
 
-  //Add Feedback
-  // if($_GET['PageAction'] == "add_feedback") {
+  //Add Feedback from industry HRD
+  if($_GET['PageAction'] == "add_feedback2hrd") {
 
-  //   session_start();
-  //   $token_session = $_SESSION['token'];
-  //   $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+    session_start();
+    $token_session = $_SESSION['token'];
+    $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
   
-  //     $id_industry_feedback   = mysqli_real_escape_string($conn,$_POST['id_industry_feedback']);
-  //     $id                = mysqli_real_escape_string($conn,$_POST['id']);
-  //     $catatan_utk_mahasiswa  = mysqli_real_escape_string($conn,$_POST['catatan_utk_mahasiswa']);
-  //     $catatan_utk_poltek     = mysqli_real_escape_string($conn,$_POST['catatan_utk_poltek']);
-  //     $layak_diterima         = mysqli_real_escape_string($conn,$_POST['layak_diterima']);
-  //     $langsung_diterima      = mysqli_real_escape_string($conn,$_POST['langsung_diterima']);
-  //     // $nilai_akhir            = mysqli_real_escape_string($conn,$_POST['nilai_akhir']);
-  //     // $etika                  = mysqli_real_escape_string($conn,$_POST['etika']);
-  //     // $keahlian_kompetensi    = mysqli_real_escape_string($conn,$_POST['keahlian_kompetensi']);
-  //     // $keahlian_bahasa        = mysqli_real_escape_string($conn,$_POST['keahlian_bahasa']);
-  //     // $penggunaan_ti          = mysqli_real_escape_string($conn,$_POST['penggunaan_ti']);
-  //     // $komunikasi             = mysqli_real_escape_string($conn,$_POST['komunikasi']);
-  //     // $kerjasama              = mysqli_real_escape_string($conn,$_POST['kerjasama']);
-  //     // $pengembangan_diri      = mysqli_real_escape_string($conn,$_POST['pengembangan_diri']);
-  //     // $date                   = mysqli_real_escape_string($conn,$_POST['date']);
-                          
-  //   if($_SESSION){
-  //     $add = $conn->query("INSERT INTO `tb_industry_feedback` (`id_industry_feedback`, `id_internship`, `catatan_utk_mahasiswa`, `catatan_utk_poltek`, `layak_diterima`, `langsung_diterima`) VALUES ('', '$id', '$catatan_utk_mahasiswa', '$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima');");  
-  //     if($add){
-  //       echo '<script type="text/javascript">';
-  //       echo 'alert("Successfully Added"); document.location="index.php?page=spv-feedback2";</script>';
-  //      }  
-  //      else
-  //      {
-  //       echo("Error description: " . $conn -> error);
-  //      }
-  //    }
-  //   }
+    $id                     = mysqli_real_escape_string($conn,$_POST['id']);
+    $catatan_utk_mahasiswa  = mysqli_real_escape_string($conn,$_POST['catatan_utk_mahasiswa']);
+    $catatan_utk_poltek     = mysqli_real_escape_string($conn,$_POST['catatan_utk_poltek']);
+    $layak_diterima         = mysqli_real_escape_string($conn,$_POST['layak_diterima']);
+    $langsung_diterima      = mysqli_real_escape_string($conn,$_POST['langsung_diterima']);
+    $nilai_akhir            = mysqli_real_escape_string($conn,$_POST['nilai_akhir']);
+    $etika                  = mysqli_real_escape_string($conn,$_POST['etika']);
+    $keahlian_kompetensi    = mysqli_real_escape_string($conn,$_POST['keahlian_kompetensi']);
+    $keahlian_bahasa        = mysqli_real_escape_string($conn,$_POST['keahlian_bahasa']);
+    $penggunaan_ti          = mysqli_real_escape_string($conn,$_POST['penggunaan_ti']);
+    $komunikasi             = mysqli_real_escape_string($conn,$_POST['komunikasi']);
+    $kerjasama              = mysqli_real_escape_string($conn,$_POST['kerjasama']);
+    $pengembangan_diri      = mysqli_real_escape_string($conn,$_POST['pengembangan_diri']);
+    $date                   = mysqli_real_escape_string($conn,$_POST['date']);
+                                
+    if($_SESSION){
+      $add = $conn->query("INSERT INTO tb_industry_feedback (id_industry_feedback, id_internship, catatan_utk_mahasiswa, catatan_utk_poltek, layak_diterima, langsung_diterima, nilai_akhir, etika, keahlian_kompetensi, keahlian_bahasa, penggunaan_ti, komunikasi, kerjasama, pengembangan_diri, date) VALUES (NULL,'$id','$catatan_utk_mahasiswa','$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima', '$nilai_akhir', '$etika', '$keahlian_kompetensi' , '$keahlian_bahasa', '$penggunaan_ti', '$komunikasi', '$kerjasama', '$pengembangan_diri', '$date');");  
+      if($add){
+        echo '<script type="text/javascript">';
+        echo 'alert("Successfully Added"); document.location="index.php?page=hrd-studentlist";</script>';
+       }  
+       else
+       {
+        echo("Error description: " . $conn -> error);
+         //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
+       }
+     }
+  } 
 
     //Add and Update Job Description
     if($_GET['PageAction'] == "add_jobdesc") {
@@ -428,7 +439,10 @@ if ($_GET['PageAction'] == "delete_supervisor") {
       $another = $_POST['another_jobdesc'];
       $goals = $_POST['expected_goal'];
 
-      $final_desc = implode(',',$description);
+      $final_desc = json_encode($description);
+      //$checked = explode(',',$description);
+
+      //print_r($description);
                                   
       if($_SESSION){
         $add = $conn->query("INSERT INTO tb_job_description (id_jobdesc,id_internship, description_jobdesc, another_jobdesc, expected_goal) VALUES (NULL,'$id','$final_desc','$another', '$goals');");  
@@ -444,6 +458,52 @@ if ($_GET['PageAction'] == "delete_supervisor") {
        }
     } 
     //   }
-    
+
+    //Update Approval Supervisor for Logbook
+    if ($_GET['PageAction'] == "add_approve") {
+      session_start();
+    $token_session = $_SESSION['token'];
+    $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+  
+    if ($token_session === $token_post) {
+     
+      $id               = mysqli_real_escape_string($conn,$_POST['id']);
+      $id_logbook      = mysqli_real_escape_string($conn,$_POST['id_logbook']);
+      $approval_spv    = mysqli_real_escape_string($conn,$_POST['approval_spv']);
+  
+      if($_SESSION) {
+        $update = $conn->query("UPDATE `tb_logbook` SET 
+        `approval_spv` = '$approval_spv'
+        WHERE `id_logbook` = $id_logbook;");
+      }
+      // echo $id_user_company;
+        if($update){
+          // echo '<script type="text/javascript">';
+          // echo 'alert("Successfully Update"); document.location="index.php?page=spv-detail-logbook";</script>';
+          echo("Error description: " . $conn -> error);
+        }
+        else{
+           //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
+            echo "
+                                       <script type='text/javascript'>
+                                        setTimeout(function () { 
+                                   Swal.fire({
+                                     type: 'error',
+                                     title: 'Data gagal diperbaharui',
+                                     showConfirmButton: false
+                                   });  
+                                        },10); 
+                                        window.setTimeout(function(){ 
+                                          window.history.back();
+                                        } ,3000); 
+                                       </script>
+                                   ";
+                                 }
+      }
+      else{
+        echo("Error description: " . $conn -> error);
+       }
+    }
+  
 
 ?>

@@ -46,6 +46,28 @@ $token = $_SESSION['token'];
         });
     </script>
 
+<script type="text/javascript">  
+            function selects(){  
+                var ele=document.getElementsByName('approval_spv');  
+                for(var i=0; i<ele.length; i++){  
+                    if(ele[i].type=='checkbox'){  
+                            ele[i].checked=true; 
+                    }
+                    // if(ele[i].type=='checkbox' && ele[i].checked==true){
+                    //     ele[i].checked=false;
+                    // } 
+                }  
+            } 
+            // function deSelect(){  
+            //     var ele=document.getElementsByName('chk');  
+            //     for(var i=0; i<ele.length; i++){  
+            //         if(ele[i].type=='checkbox')  
+            //             ele[i].checked=false;  
+                      
+            //     }  
+            // }              
+ </script>
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/atlantis2.css">
@@ -176,116 +198,94 @@ $token = $_SESSION['token'];
             <div class="container">
                 <div class="page-inner">
 
+                <form action="proses_dummy_test.php?PageAction=add_approve" method="post">
+                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                <input type="hidden" value="<?php echo $_GET['id']?>" name="id">
+				<input type="hidden" id="id_logbook" name="id_logbook" value="<?php echo $data['id_logbook']; ?>">
+                <input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
+                <input type="hidden" id="nim" name="nim" value="<?php echo $data['nim']; ?>">
                     <div class="row">
-
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-head-row">
-                                        <h4 class="card-title intern-title">`Adam Firdaus` Detail Logbook</h4>
-                                        <a class="btn btn-modify btn-round ml-auto text-white" id="alert_demo_7">
-                                            <i class="fa fa-check"></i>
-                                            Accept
-                                        </a>
+                                        <h4 class="card-title intern-title">Detail Logbook</h4>
+                                        <input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
+                                            Accept">
+                                            
+                                        </input>
+                                        <br>
+                                        
                                     </div>
                                 </div>
                                 <div class="card-body">
-
                                     <div class="table-responsive">
+                                        <form action="">
                                         <table id="basic-datatables" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>
-                                                        <center>No</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Week</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Start Date</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>End Date</center>
-                                                    </th>
+                                                    <th>Week</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date </th>
                                                     <th style="width: 10px;">
                                                         <center>Action</center>
                                                     </th>
-                                                    <th style="width: 10px;">
-                                                        <center>Approval</center>
+                                                    <th >
+                                                    <span>Approval <input type="checkbox" onclick="selects()" value="YES" name="approval_spv" /></span>
                                                     </th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <center>1</center>
-                                                    </td>
-                                                    <td>
-                                                        <center>1</center>
-                                                    </td>
-                                                    <td>
-                                                        <center>1 Jan 2022</center>
-                                                    </td>
-                                                    <td>
-                                                        <center>31 Jan 2022</center>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <a href="index.php?page=spv-detail2-logbook" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                                <i class="icon-magnifier"></i>
-                                                            </a>
-                                                            <button type="button" id="alert_demo_7" title="Print" class="btn btn-link btn-warning" data-original-title="Delete">
-                                                                <i class="icon-printer"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <center><input type="checkbox" name="vehicle1" value="Bike"></center>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <center>2</center>
-                                                    </td>
-                                                    <td>
-                                                        <center>2</center>
-                                                    </td>
-                                                    <td>
-                                                        <center>1 Feb 2022</center>
-                                                    </td>
-                                                    <td>
-                                                        <center>28 Feb 2022</center>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <a href="index.php?page=spv-detail2-logbook" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                                <i class="icon-magnifier"></i>
-                                                            </a>
-                                                            <button type="button" id="alert_demo_7" title="Print" class="btn btn-link btn-warning" data-original-title="Delete">
-                                                                <i class="icon-printer"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <center><input type="checkbox" name="vehicle1" value="Bike"></center>
-                                                    </td>
-                                                </tr>
+                                                <?php
+												include 'config.php';
+												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                                $id = $_GET['id'];
+												$view = mysqli_query($conn, "SELECT * FROM tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE tb_logbook.id_internship = $id;");
+												while ($data = mysqli_fetch_array($view)) {
+													// echo $id_company;
+												?>
+												<tr>
+													<td><?php echo $data['week_num']?></td>
+													<td><?php echo $data['startdate']?></td>
+													<td><?php echo $data['enddate']?></td>
+													<td><?php echo "<center>
+													<a href = 'index.php?page=spv-detail2-logbook' type='button' title='View Detail' class='btn btn-link btn-primary btn-lg'><i class='icon-magnifier'></i></a>
+													</td></center>"?></td>
+													<td><?php echo "<center>
+													<input type='checkbox' name='approval_spv[]' value='".$data['id']."'></input>
+													</td></center>"?></td>
+													<!-- <td>
+													<center><?php
+																	if ($data['approval_spv'] == "Pending") {
+																		echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> PENDING</button>";
+																	} elseif ($data['approval_spv'] == "Yes") {
+																		echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
+																	} elseif ($data['approval_spv'] == "No") {
+																		echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title=''><i class='fa fa-times'></i> DECLINED</button>";
+																	}
+
+																	?></center>
+													</td> -->
+												</tr>
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
                                             </tbody>
 
                                         </table>
+                                        </form>
                                     </div>
 
                                 </div>
                             </div>
-
-
-
                         </div>
-
-
                     </div>
-
+                    </form>
                 </div>
                 <!--page inner-->
             </div>
@@ -313,6 +313,7 @@ $token = $_SESSION['token'];
     <!-- jQuery UI -->
     <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- jQuery Scrollbar -->
     <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>

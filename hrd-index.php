@@ -224,7 +224,14 @@ $token = $_SESSION['token'];
 						<div class="col-md-4">
 							<div class="card card-dark card-menu-left text-center">
 								<div class="card-body pb-0">
-									<h1 class="mb-2">7</h1>
+									<h1 class="mb-2">
+									<?php
+										$query = mysqli_query($conn, "SELECT * FROM tb_applicant WHERE id_company = $id_company");
+										$hasil = mysqli_num_rows($query);
+
+										echo $hasil;
+										?>
+									</h1>
 									<p><b>APPLICANT</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas></div>
@@ -255,7 +262,7 @@ $token = $_SESSION['token'];
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
 										<?php
-										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company='1'");
+										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company= $id_company AND status='YES'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
@@ -333,7 +340,6 @@ $token = $_SESSION['token'];
 															}
 															?>
 												</div>
-
 												</tbody>
 												</table>
 											</div>
@@ -360,38 +366,7 @@ $token = $_SESSION['token'];
 				</div>
 				<!-- End Company Profile -->
 
-				<!--Modal CV-->
-				<div id="mymodalcv" class="modal fade" role="dialog">
-					<div class="modal-dialog modal-lg">
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title"></h4>
-							</div>
-							<div class="modal-body" style="height: 600px">
-								<?php
-								include 'config.php';
-								$query = mysqli_query($conn, "SELECT * FROM tb_document WHERE id='5'");
-								$data = mysqli_fetch_array($query);
-								?>
-								<object 
-								type="application/pdf" 
-								data="berkas/<?php echo $data['file'] ?>" 
-								width="100%" height="100%" 
-								frameborder="0" 
-								allowtransparency="true">
-								</object>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--End modal Cv-->
-
-				<!--Internship-->
+				<!-- Tabel Internship-->
 				<div class="row row-card-no-pd">
 					<div class="col-md-12">
 						<div class="card">
@@ -405,27 +380,24 @@ $token = $_SESSION['token'];
 									<table id="add-row" class="display table table-striped table-hover">
 										<thead>
 											<tr>
-												<th>FULL NAME</th>
+												<th>STUDENT NAME</th>
 												<th>STUDY PROGRAM</th>
-												<th>PERIOD</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>Kezia Angelina S</td>
-												<td>Informatics</td>
-												<td>2021</td>
-											</tr>
-											<tr>
-												<td>Cyntya Maharani Nurul Istiqomah</td>
-												<td>Informatics</td>
-												<td>2021</td>
-											</tr>
-											<tr>
-												<td>Yulia Wulandari</td>
-												<td>Informatics</td>
-												<td>2021</td>
-											</tr>
+										<?php
+                                                include 'config.php';
+                                                error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                                $view = mysqli_query($conn, "SELECT * FROM tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE id_company = $id_company AND status = 'YES'");
+                                                while ($data = mysqli_fetch_array($view)) {
+                                                    echo "<tr>
+                                                        <td>" . $data['name'] . "</td>
+                                                        <td>" . $data['study_program'] . "</td>
+                                                      </tr>"
+                                                ?>
+																<?php //penutup perulangan while
+															}
+															?>
 										</tbody>
 									</table>
 								</div>

@@ -18,6 +18,8 @@ $username = $_SESSION['username'];
 $name = $_SESSION['user_fullname'];
 $token = $_SESSION['token'];
 
+// $checked = $_GET['checked']; 
+
 // session_unset();
 // session_destroy();
 ?>
@@ -178,7 +180,18 @@ $token = $_SESSION['token'];
             <div class="container">
                 <div class="page-inner">
 
+                <?php
+					include 'config.php';
+					$id = $_GET['id'];
+					$view = mysqli_query($conn, "SELECT * FROM tb_job_description WHERE id_internship = $id");
+                    // $description_jobdesc = (count($_POST['description_jobdesc']) > 0) ? implode('-', $_POST['description_jobdesc']) : ""; 
+					 //print_r($view->num_rows);
+					if($view->num_rows > 0):
+					foreach($view as $data) :
+				?>
+                    <!--Tampilan View Data-->
                     <!-- Task Type Parameter -->
+                    
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Task Type Parameter</h4>
@@ -188,11 +201,305 @@ $token = $_SESSION['token'];
                             <!-- <form id="job_description" method="POST" action="proses_dummy_test.php?PageAction=update_jobdesc" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');"> -->
                             
                             <div class="row">
-                                <?php
-                                $view = mysqli_query($conn, "SELECT * FROM tb_job_description WHERE nim = $nim");
-                                $data = mysqli_fetch_array($view);
-                                echo $nim;
-                                ?>
+                                    <div class="col-sm-12">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <p>1. put a checklist in the checklist column on the appropriate type
+                                                    of work.</p>
+                                        </div>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">No</th>
+                                                    <th>Type of work</th>
+                                                    <th>
+                                                        <center>Checklist</center>
+                                                    </th><br>
+                                                </tr>
+                                            </thead>
+                                            <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
+                                                <input type="hidden" value="<?php echo $_GET['id']?>" name="id">
+                                                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+							                    <input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
+                                                <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $id_jobdesc ?>">
+                                            <tbody>
+                                                <tr>
+                                                    <td>1.</td>
+                                                    <td>Database</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="description_jobdesc[]" value="Database" 
+                                                            <?php 
+                                                                if(in_array('Database',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck1">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2.</td>
+                                                    <td>Data Analysis</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck2" name="description_jobdesc[]" value="Data Analysis"
+                                                            <?php 
+                                                                if(in_array('Data Analysis',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck2">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3.</td>
+                                                    <td>Information Systems</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck3" name="description_jobdesc[]" value="Information Systems"
+                                                            <?php 
+                                                                if(in_array('Information Systems',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck3">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4.</td>
+                                                    <td>Desktop Apps</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck4" name="description_jobdesc[]" value="Desktop Apps"
+                                                            <?php 
+                                                                if(in_array('Desktop Apps',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck4">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5.</td>
+                                                    <td>Apps and Web Design</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck5" name="description_jobdesc[]" value="Apps and Web Design"
+                                                            <?php 
+                                                                if(in_array('Apps and Web Design',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck5">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6.</td>
+                                                    <td>Mobile Application</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck6" name="description_jobdesc[]" value="Mobile Application"
+                                                            <?php 
+                                                                if(in_array('Mobile Application',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck6">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>7.</td>
+                                                    <td>Apps Design</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck7" name="description_jobdesc[]" value="Apps Design"
+                                                            <?php 
+                                                                if(in_array('Apps Design',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck7">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>8.</td>
+                                                    <td>Use of Framework</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck8" name="description_jobdesc[]" value="Use of Framework"
+                                                            <?php 
+                                                                if(in_array('Use of Framework',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck8">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>9.</td>
+                                                    <td>Network</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck9" name="description_jobdesc[]" value="Network"
+                                                            <?php 
+                                                                if(in_array('Network',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck9">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10.</td>
+                                                    <td>Troubleshooting</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck10" name="description_jobdesc[]" value="Troubleshooting"
+                                                            <?php 
+                                                                if(in_array('Troubleshooting',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck10">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>11.</td>
+                                                    <td>Hardware</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck11" name="description_jobdesc[]" value="Hardware"
+                                                            <?php 
+                                                                if(in_array('Hardware',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck11">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12.</td>
+                                                    <td>Multimedia and Simulation</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck12" name="description_jobdesc[]" value="Multimedia and Simulation"
+                                                            <?php 
+                                                                if(in_array('Multimedia and Simulation',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck12">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>13.</td>
+                                                    <td>Animation and Live Film making</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck13" name="description_jobdesc[]" value="Animation and live film making"
+                                                            <?php 
+                                                                if(in_array('Animation and live film making',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck13">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>14.</td>
+                                                    <td>Print or digital media layout design</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck14" name="description_jobdesc[]" value="Print or digital media layout design"
+                                                            <?php 
+                                                                if(in_array('Print or digital media layout design',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck14">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>15.</td>
+                                                    <td>Game Development</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck15" name="description_jobdesc[]" value="Game Development"
+                                                            <?php 
+                                                                if(in_array('Game Development',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck15">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16.</td>
+                                                    <td>Broadcasting or Production crew</td>
+                                                    <td class="text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck16" name="description_jobdesc[]" value="Broadcasting or production crew"
+                                                            <?php 
+                                                                if(in_array('Broadcasting or production crew',json_decode($data['description_jobdesc']))){
+                                                                    echo 'checked';
+                                                                }
+                                                            ?>>
+                                                            <label class="custom-control-label" for="customCheck16">Checked</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="form-group">
+                                            <p>2. To other work can be explained as follows : </p>
+                                            <textarea class="form-control" rows="3" id="another_jobdesc" name="another_jobdesc"><?php echo $data['another_jobdesc']; ?></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>3. During the internship process, students are expected to contribute in the form of : </p>
+                                            <textarea class="form-control" rows="3" id="expected_goal" name="expected_goal"><?php echo $data['expected_goal'] ?></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                            <!-- </form> -->
+                            </form>
+
+                        </div>
+                        <!--End Card Body-->
+                    </div>
+                    <!--End Evaluation Parameter-->
+
+                    <?php
+						endforeach;
+						else :
+						?>
+                
+                <!--Tampilan input data-->
+                <!-- Task Type Parameter -->
+                <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Task Type Parameter</h4>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <!-- <form id="job_description" method="POST" action="proses_dummy_test.php?PageAction=update_jobdesc" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');"> -->
+                            
+                            <div class="row">
                                     <div class="col-sm-12">
                                         <!-- text input -->
                                         <div class="form-group">
@@ -405,6 +712,11 @@ $token = $_SESSION['token'];
                         <!--End Card Body-->
                     </div>
                     <!--End Evaluation Parameter-->
+
+                    <?php
+						endif;
+						?>
+						</div>
 
                 </div>
                 <!--page inner-->

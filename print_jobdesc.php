@@ -67,7 +67,7 @@ $id = $_GET['id'];
 		echo "
 		<div style='background-color: white; border: 1px solid #17202A; height: 20%; margin: 10px 0px; padding: 5px; text-align: left; width: auto;'>
 		<div style='padding:20px'>
-		<p class='sub-heading'>1. Type of Work :</p><br><p class='sub-content'> " . $data['description_jobdesc'] ."</p></div>
+		<p class='sub-heading'>1. Type of Work :</p><br><p class='sub-content'> " . json_decode($data['description_jobdesc']) ."</p></div>
 		</div>
 		<div style='background-color: white; border: 1px solid #17202A; height: 20%; margin: 10px 0px; text-align: left; width: auto;'>
 		<div style='padding: 20px'>

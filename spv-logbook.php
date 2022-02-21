@@ -215,7 +215,7 @@ $token = $_SESSION['token'];
 													<td><?php echo $data['end_date']?></td>
 													<td><?php echo $data['week_num']?></td> -->
 													<td><?php echo "<center>
-													<a href = 'index.php?page=spv-detail-logbook' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = 'index.php?page=spv-detail-logbook&id=". $data['id_internship'] ."' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</td></center>"?></td>
 													<td><?php echo "<center>
 													<a href = 'index.php?page=spv-detail-attendance' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>

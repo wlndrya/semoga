@@ -193,72 +193,84 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="page-inner">
 
-				<form method="POST" action="proses_dummy_test.php?PageAction=add_feedback">
-					<!-- Overall Comments -->
-					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">Overall Comments</h3>
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body">
-							<form>
+				<form method="POST" action="proses_dummy_test.php?PageAction=add_feedback2hrd">
+					<?php
+						include 'config.php';
+						$id = $_GET['id'];
+						$view = mysqli_query($conn, "SELECT * FROM tb_industry_feedback WHERE id_internship = $id");
+						//print_r($view->num_rows);
+						if($view->num_rows > 0):
+						foreach($view as $data) :
+						?>
+							<!-- <pre><?php 
+							// print_r($data)
+							?></pre> -->
+							<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Overall Comments</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
 								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-								<input type="hidden" id="id_company" name="id_company" value="<?php echo $id_company; ?>">
+								<input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
+								<input type="hidden" id="id_industry_feedback" name="id_industry_feedback" value="<?php echo $id_industry_feedback; ?>">
 								<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
-								<input type="hidden" id="nim" name="nim" value="<?php echo $nim; ?>">
+								<?php
+								$mydate = getdate(date("U"));
+								?>
+								<input type="hidden" id="date" name="date" value="<?php echo "$mydate[year]-$mydate[mon]-$mydate[mday]"; ?>">
+
 								<div class="row">
 									<div class="col-sm-6">
 										<!-- textarea -->
 										<div class="form-group">
-											<label>1.Overall comments for the intern :</label>
-											<textarea class="form-control" rows="3" name="intern_comment" id="intern_comment"></textarea>
+											<p><b>1.Overall comments for the intern :</b></p>
+											<textarea class="form-control" rows="3" name="catatan_utk_mahasiswa" id="catatan_utk_mahasiswa"><?php echo $data['catatan_utk_mahasiswa'] ?></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>2. Overall comments for Politeknik Negeri Batam :</label>
-											<textarea class="form-control" rows="3" name="campus_comment" id="campus_comment"></textarea>
+											<p><b>2. Overall comments for Politeknik Negeri Batam :</b></p>
+											<textarea class="form-control" rows="3" name="catatan_utk_poltek" id="catatan_utk_poltek"><?php echo $data['catatan_utk_poltek'] ?></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>3. Does the student’s internship performance meet the requirement<br>
-												for being new employee in your company/institution?</label>
-											<textarea class="form-control" rows="3" name="performance" id="performance"></textarea>
+											<p><b>3. Does the student’s internship performance meet the requirement for being new employee in your company/institution?</b></p>
+											<textarea class="form-control" rows="3" name="layak_diterima" id="layak_diterima"><?php echo $data['layak_diterima'] ?></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>4. Does your company intend to recruit the intern immediately<br>
-												he/she finished their internship?</label>
-											<textarea class="form-control" rows="3" name="recruit_intern" id="recruit_intern"></textarea>
+											<p><b>4. Does your company intend to recruit the intern immediately
+												he/she finished their internship?</b></p>
+											<textarea class="form-control" rows="3" name="langsung_diterima" id="langsung_diterima"><?php echo $data['langsung_diterima'] ?></textarea>
 										</div>
 									</div>
 								</div><!-- Row -->
-						</form>
-					</div>
-					</div>
-					<!--End Overall Comments -->
 
-					<!-- Evaluation Parameter -->
-					<div class="card">
-						<div class="card-header">
-							<h4 class="card-title">Evaluation Parameter</h4>
+							</div>
 						</div>
-						<!-- /.card-header -->
-						<div class="card-body">
-							<form>
+						<!--End Overall Comments -->
+
+						<!-- Evaluation Parameter -->
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Evaluation Parameter</h4>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-12">
 										<!-- text input -->
 										<div class="form-group">
-											<label>1. Final grade for student based on overall internship process (range 1 –
-												100): </label>
-											<input type="text" class="form-control" name="final_grade" id="final_grade">
+											<p><b>1. Final grade for student based on overall internship process (range 1 –
+												100): </b></p>
+											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir" value="<?php echo $data['nilai_akhir'] ?>">
 										</div>
 										<div class="form-group">
-											<label><b>2. Please Put tick checklist in the appropriate column in the following table
-													based on the rubric provided in the subsequent table</b></label>
+											<p><b>2. Please select in the appropriate column in the following table
+												based on the rubric provided in the subsequent table</b></p>
 										</div>
 										<table class="table table-bordered">
 											<thead>
@@ -284,112 +296,112 @@ $token = $_SESSION['token'];
 													<td>1.</td>
 													<td>Ethics</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="4" type="radio">
+														<input class="form-check-input ml-1" name="etika" value="4" <?php if($data['etika']=='4') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="3" type="radio">
+														<input class="form-check-input ml-1" name="etika" value="3" <?php if($data['etika']=='3') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="2" type="radio">
+														<input class="form-check-input ml-1" name="etika" value="2" <?php if($data['etika']=='2') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="1" type="radio">
+														<input class="form-check-input ml-1" name="etika" value="1" <?php if($data['etika']=='1') echo 'checked'?> type="radio">
 													</td>
 												</tr>
 												<tr>
 													<td>2.</td>
 													<td>Core Competency Skills</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="4" type="radio">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="4" <?php if($data['keahlian_kompetensi']=='4') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="3" type="radio">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="3" <?php if($data['keahlian_kompetensi']=='3') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="2" type="radio">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="2" <?php if($data['keahlian_kompetensi']=='2') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="1" type="radio">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="1" <?php if($data['keahlian_kompetensi']=='1') echo 'checked'?> type="radio">
 													</td>
 												</tr>
 												<tr>
 													<td>3.</td>
 													<td>Foreign Language Proficiency</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="4" type="radio">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="4" <?php if($data['keahlian_bahasa']=='4') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="3" type="radio">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="3" <?php if($data['keahlian_bahasa']=='3') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="2" type="radio">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="2" <?php if($data['keahlian_bahasa']=='2') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="1" type="radio">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="1" <?php if($data['keahlian_bahasa']=='1') echo 'checked'?> type="radio">
 													</td>
 												</tr>
 												<tr>
 													<td>4.</td>
 													<td>Information Technology Literacy</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="4" type="radio">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="4" <?php if($data['penggunaan_ti']=='4') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="3" type="radio">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="3" <?php if($data['penggunaan_ti']=='3') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="2" type="radio">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="2" <?php if($data['penggunaan_ti']=='2') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="1" type="radio">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="1" <?php if($data['penggunaan_ti']=='1') echo 'checked'?> type="radio">
 													</td>
 												</tr>
 												<tr>
 													<td>5.</td>
 													<td>Communication Skill</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="4" type="radio">
+														<input class="form-check-input ml-1" name="komunikasi" value="4" <?php if($data['komunikasi']=='4') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="3" type="radio">
+														<input class="form-check-input ml-1" name="komunikasi" value="3" <?php if($data['komunikasi']=='3') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="2" type="radio">
+														<input class="form-check-input ml-1" name="komunikasi" value="2" <?php if($data['komunikasi']=='2') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="1" type="radio">
+														<input class="form-check-input ml-1" name="komunikasi" value="1" <?php if($data['komunikasi']=='1') echo 'checked'?> type="radio">
 													</td>
 												</tr>
 												<tr>
 													<td>6.</td>
 													<td>Teamwork</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="4" type="radio">
+														<input class="form-check-input ml-1" name="kerjasama" value="4" <?php if($data['kerjasama']=='4') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="3" type="radio">
+														<input class="form-check-input ml-1" name="kerjasama" value="3" <?php if($data['kerjasama']=='3') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="2" type="radio">
+														<input class="form-check-input ml-1" name="kerjasama" value="2" <?php if($data['kerjasama']=='2') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="1" type="radio">
+														<input class="form-check-input ml-1" name="kerjasama" value="1" <?php if($data['kerjasama']=='1') echo 'checked'?> type="radio">
 													</td>
 												</tr>
 												<tr>
 													<td>7.</td>
 													<td>Personal Development</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="4" type="radio">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="4" <?php if($data['pengembangan_diri']=='4') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="3" type="radio">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="3" <?php if($data['pengembangan_diri']=='3') echo 'checked'?>  type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="2" type="radio">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="2" <?php if($data['pengembangan_diri']=='2') echo 'checked'?> type="radio">
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="1" type="radio">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="1" <?php if($data['pengembangan_diri']=='1') echo 'checked'?> type="radio">
 													</td>
 												</tr>
 											</tbody>
@@ -529,16 +541,365 @@ $token = $_SESSION['token'];
 										</table>
 									</div>
 									<!-- /.card-body -->
-									
-							</form>
-						</div>
-					</div>
+								</div>
+							</div>
+						<?php
+						endforeach;
+						else :
+						?>
 
-<!--Button Submit-->
-<div class="modal-footer d-flex justify-content-center">
-<button type="submit" class="btn btn-modify text-white" name="btn-submit" id="btn-submit">SUBMIT</button>
-</div>
-<!--End Button Submit-->
+						<!--Tampilan input data-->
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Overall Comments</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+								<input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
+								<input type="hidden" id="id_industry_feedback" name="id_industry_feedback" value="<?php echo $id_industry_feedback; ?>">
+								<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
+								<?php
+								$mydate = getdate(date("U"));
+								?>
+								<input type="hidden" id="date" name="date" value="<?php echo "$mydate[year]-$mydate[mon]-$mydate[mday]"; ?>">
+
+								<div class="row">
+									<div class="col-sm-6">
+										<!-- textarea -->
+										<div class="form-group">
+											<p>1.Overall comments for the intern :</p>
+											<textarea class="form-control" rows="3" name="catatan_utk_mahasiswa" id="catatan_utk_mahasiswa"><?php echo $data['catatan_utk_mahasiswa'] ?></textarea>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>2. Overall comments for Politeknik Negeri Batam :</p>
+											<textarea class="form-control" rows="3" name="catatan_utk_poltek" id="catatan_utk_poltek"></textarea>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>3. Does the student’s internship performance meet the requirement<br>
+												for being new employee in your company/institution?</p>
+											<textarea class="form-control" rows="3" name="layak_diterima" id="layak_diterima"></textarea>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>4. Does your company intend to recruit the intern immediately<br>
+												he/she finished their internship?</p>
+											<textarea class="form-control" rows="3" name="langsung_diterima" id="langsung_diterima"></textarea>
+										</div>
+									</div>
+								</div><!-- Row -->
+
+							</div>
+						</div>
+						<!--End Overall Comments -->
+
+						<!-- Evaluation Parameter -->
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Evaluation Parameter</h4>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-12">
+										<!-- text input -->
+										<div class="form-group">
+											<p>1. Final grade for student based on overall internship process (range 1 –
+												100): </p>
+											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir">
+										</div>
+										<div class="form-group">
+											<p>2. Please select in the appropriate column in the following table
+												based on the rubric provided in the subsequent table</p>
+										</div>
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th style="width: 10px">No</th>
+													<th>Parameters</th>
+													<th style="width: 40px">Excellent<br>
+														<center>4</center>
+													</th>
+													<th style="width: 40px">Good<br>
+														<center>3</center>
+													</th>
+													<th style="width: 40px">Fair<br>
+														<center>2</center>
+													</th>
+													<th style="width: 40px">Poor<br>
+														<center>1</center>
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>1.</td>
+													<td>Ethics</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="etika" value="4" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="etika" value="3" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="etika" value="2" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="etika" value="1" type="radio">
+													</td>
+												</tr>
+												<tr>
+													<td>2.</td>
+													<td>Core Competency Skills</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="4" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="3" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="2" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="1" type="radio">
+													</td>
+												</tr>
+												<tr>
+													<td>3.</td>
+													<td>Foreign Language Proficiency</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="4" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="3" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="2" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="1" type="radio">
+													</td>
+												</tr>
+												<tr>
+													<td>4.</td>
+													<td>Information Technology Literacy</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="4" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="3" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="2" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="1" type="radio">
+													</td>
+												</tr>
+												<tr>
+													<td>5.</td>
+													<td>Communication Skill</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="komunikasi" value="4" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="komunikasi" value="3" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="komunikasi" value="2" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="komunikasi" value="1" type="radio">
+													</td>
+												</tr>
+												<tr>
+													<td>6.</td>
+													<td>Teamwork</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="kerjasama" value="4" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="kerjasama" value="3" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="kerjasama" value="2" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="kerjasama" value="1" type="radio">
+													</td>
+												</tr>
+												<tr>
+													<td>7.</td>
+													<td>Personal Development</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="4" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="3" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="2" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="1" type="radio">
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="form-group">
+											<label><b><u>Rubric</u></b></label>
+										</div>
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>Parameters</th>
+													<th>
+														<center>Excellent</center>
+														<center>76-100</center>
+													</th>
+													<th>
+														<center>Good</center>
+														<center>51-75</center>
+													</th>
+													<th>
+														<center>Fair</center>
+														<center>26-50</center>
+													</th>
+													<th>
+														<center>Poor</center>
+														<center>0-25</center>
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><b>Ethics</b></td>
+													<td>
+														<p>Attitude and behavior can be set as role model for others, personality that meets professional ethics</p>
+													</td>
+													<td>
+														<p>Attitude and behavior meet the standard ethics and able to peform good personality</p>
+													</td>
+													<td>
+														<p>Attitude and behavior are acceptable, and do not have negative impact for the organization</p>
+													</td>
+													<td>
+														<p>Demontrates bad attitude and behavior, and has negative impact on the organization</p>
+													</td>
+												</tr>
+												<tr>
+													<td><b>Core Competency Skills</b></td>
+													<td>
+														<p>Able to demonstrate exceptional core competencies and provide value added for the organization</p>
+													</td>
+													<td>
+														<p>Able to demonstrate core competencies well, however has not contributed to provide value added for the organization</p>
+													</td>
+													<td>
+														<p>Able to demonstrate sufficient core competencies, but still need significant improvement</p>
+													</td>
+													<td>
+														<p>Failed to demonstrate core competencies as required in the field</p>
+													</td>
+												</tr>
+												<tr>
+													<td><b>Foreign Language Proficiency</b></td>
+													<td>
+														<p>Able to communicate both orally and in writing using one of foreign languages fluently in accordance with best practices</p>
+													</td>
+													<td>
+														<p>Able to communicate both orally and in writing using one of foreign languages moderately</p>
+													</td>
+													<td>
+														<p>Able to communicate both orally and in writing using one of foreign language mixed with a local language</p>
+													</td>
+													<td>
+														<p>Unable to communicate both orally and in writing using one of foreign language</p>
+													</td>
+												</tr>
+												<tr>
+													<td><b>Information Technology Literacy</b></td>
+													<td>
+														<p>Able to recognize, access, evaluate, synthesize, and use information technology application to improve job performance</p>
+													</td>
+													<td>
+														<p>Quickly adapt with the information technology in the organization</p>
+													</td>
+													<td>
+														<p>Do not find him/herself in trouble with the information technology in the organization</p>
+													</td>
+													<td>
+														<p>Unable to use information technology in the organization</p>
+													</td>
+												</tr>
+												<tr>
+													<td><b>Communication Skill</b></td>
+													<td>
+														<p>Able to effectively deliver ideas to others both orally and in writing, actively listen in conversation, give and receive critical feedback and speak in public.</p>
+													</td>
+													<td>
+														<p>Able to understand and deliver ideas to others both orally and in writing</p>
+													</td>
+													<td>
+														<p>There is no misunderstanding when delivering and receiving ideas to/from coworker</p>
+													</td>
+													<td>
+														<p>Unable to understand others and fail to deliver ideas</p>
+													</td>
+												</tr>
+												<tr>
+													<td><b>Teamwork</b></td>
+													<td>
+														<p>Able to lead a teamwork, achieve the goals, receive support from the team member, and resolve conflict</p>
+													</td>
+													<td>
+														<p>Able to provide evidence in collaborating with other team member, accomplish assigned works, and contribute to the team</p>
+													</td>
+													<td>
+														<p>Able to provide evidence in collaborating with other team members, accomplish assigned work</p>
+													</td>
+													<td>
+														<p>Gives negative effects to the team</p>
+													</td>
+												</tr>
+												<tr>
+													<td><b>Personal Development</b></td>
+													<td>
+														<p>Willing to learn new things, take an initiative to improve themselves</p>
+													</td>
+													<td>
+														<p>Willing to learn new things with a slight supervision</p>
+													</td>
+													<td>
+														<p>Does not show resistance to learn new things, however needs to be encouraged</p>
+													</td>
+													<td>
+														<p>Does not show signs of willingness and initiative to learn new things</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!-- /.card-body -->
+								</div>
+							</div>
+
+							<!--Button Submit-->
+							<div class="modal-footer d-flex justify-content-center">
+								<button type="submit" class="btn btn-modify text-white" name="btn-submit" id="btn-submit">SUBMIT</button>
+							</div>
+							<!--End Button Submit-->
+							
+						<?php
+						endif;
+						?>
+						<!--End Tampilan Input Data-->
+						</div>
 				</form>
 
 			</div>
