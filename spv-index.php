@@ -194,7 +194,14 @@ $token = $_SESSION['token'];
 						<div class="col-md-4">
 							<div class="card card-dark card-menu-left text-center">
 								<div class="card-body pb-0">
-									<h1 class="mb-2">3</h1>
+									<h1 class="mb-2">
+									<?php
+										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_user_company = $user_id");
+										$hasil = mysqli_num_rows($query);
+
+										echo $hasil;
+										?>
+									</h1>
 									<p><b>INTERNSHIP STUDENTS</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart"><canvas width="327" height="70"
@@ -208,7 +215,14 @@ $token = $_SESSION['token'];
 							<div class="card card-dark card-menu-center text-center">
 								<div class="card-body pb-0">
 									<div class="h1 fw-bold float-right"></div>
-									<h1 class="mb-2">2</h1>
+									<h1 class="mb-2">
+									<?php
+										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_user_company = $user_id");
+										$hasil = mysqli_num_rows($query);
+
+										echo $hasil;
+										?>
+									</h1>
 									<p><b>LECTURER</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart2"><canvas width="327" height="70"
@@ -221,8 +235,15 @@ $token = $_SESSION['token'];
 						<div class="col-md-4">
 							<div class="card card-dark card-menu-right text-center">
 								<div class="card-body pb-0">
-									<h1 class="mb-2">2</h1>
-									<p><b>UNACCEPTED DOCUMENT</b></p>
+									<h1 class="mb-2">
+									<?php
+										$query = mysqli_query($conn, "SELECT * FROM tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE approval_spv = 'Pending'");
+										$hasil = mysqli_num_rows($query);
+
+										echo $hasil;
+										?>
+									</h1>
+									<p><b>APPROVE DOCUMENT</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart3"><canvas width="327" height="70"
 												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>

@@ -188,6 +188,7 @@ $token = $_SESSION['token'];
 
 					<section class="content">
 
+						<form method="POST" action="proses_dummy_test?PageAction=send_email">
                         <!-- Default box -->
                         <div class="card">
                           <div class="card-body row">
@@ -223,6 +224,7 @@ $token = $_SESSION['token'];
                             </div>
                           </div>
                         </div>
+						</form>
                   
                       </section>
 			

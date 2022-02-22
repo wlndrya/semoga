@@ -229,7 +229,7 @@ $token = $_SESSION['token'];
 										<div class="form-group form-show-validation row">
 											<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Name <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="name" name="name" value="<?php echo $data['company_name'] ?>" disabled>
+												<input type="text" class="form-control" id="company_name" name="company_name" value="<?php echo $data['company_name'] ?>" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
