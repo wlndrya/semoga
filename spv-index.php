@@ -217,7 +217,7 @@ $token = $_SESSION['token'];
 									<div class="h1 fw-bold float-right"></div>
 									<h1 class="mb-2">
 									<?php
-										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_user_company = $user_id");
+										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_user_company = $user_id AND nik != 'NULL'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;

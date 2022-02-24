@@ -214,7 +214,6 @@ $token = $_SESSION['token'];
                                         <h4 class="card-title intern-title">Detail Logbook</h4>
                                         <input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
                                             Accept">
-                                            
                                         </input>
                                         <br>
                                         
@@ -230,10 +229,13 @@ $token = $_SESSION['token'];
                                                     <th>Start Date</th>
                                                     <th>End Date </th>
                                                     <th style="width: 10px;">
-                                                        <center>Action</center>
+                                                        <center>Detail of Activities</center>
+                                                    </th>
+                                                    <th style="width: 10px;">
+                                                        <center>Documentation</center>
                                                     </th>
                                                     <th >
-                                                    <span>Approval <input type="checkbox" onclick="selects()" name="approval_spv" value="YES" /></span>
+                                                    <span><center>Approval<input type="checkbox" onclick="selects()" name="approval_spv" value="YES"></center></span>
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -251,9 +253,8 @@ $token = $_SESSION['token'];
 													<td><?php echo $data['week_num']?></td>
 													<td><?php echo $data['startdate']?></td>
 													<td><?php echo $data['enddate']?></td>
-													<td><?php echo "<center>
-													<a href = 'index.php?page=spv-detail2-logbook' type='button' title='View Detail' class='btn btn-link btn-primary btn-lg'><i class='icon-magnifier'></i></a>
-													</td></center>"?></td>
+													<td><?php echo $data['description']?></td>
+                                                    <td><?php echo $data['documentation']?></td>
 													<td>
                                                         <center>
                                                         <?php
@@ -270,21 +271,6 @@ $token = $_SESSION['token'];
                                                     ?>
                                                         </center>
                                                     </td>
-													<!-- <td>
-													<center><?php
-														// 			if ($data['approval_spv'] == "Pending") {
-														// 				echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														// data-target='' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> PENDING</button>";
-														// 			} elseif ($data['approval_spv'] == "YES") {
-														// 				echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														// data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
-														// 			} elseif ($data['approval_spv'] == "No") {
-														// 				echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														// data-target='' title=''><i class='fa fa-times'></i> DECLINED</button>";
-														// 			}
-
-																	?></center>
-													</td> -->
 												</tr>
 												<?php //penutup perulangan while
 													$no++;

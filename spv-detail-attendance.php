@@ -3,14 +3,14 @@
 include 'config.php';
 
 session_start();
-if($_SESSION['login_status'] != 'login'){
+if ($_SESSION['login_status'] != 'login') {
 	echo "
 	<script>
 		alert('YOU ARE NOT LOGIN!');
 		window.location.replace('index.php?page=login');
 	</script>
-              "; 
-			}
+              ";
+}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -23,18 +23,24 @@ $token = $_SESSION['token'];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Sistem Informasi Pengelolaan Magang</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
-			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css']},
+			google: {
+				"families": ["Lato:300,400,700,900"]
+			},
+			custom: {
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+				urls: ['assets/css/fonts.min.css']
+			},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -51,9 +57,10 @@ $token = $_SESSION['token'];
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
+
 <body>
 	<div class="wrapper horizontal-layout-2">
-		
+
 		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
@@ -122,8 +129,8 @@ $token = $_SESSION['token'];
 				</div>
 			</div>
 
-			  <!-- Menu -->
-			  <div class="nav-bottom">
+			<!-- Menu -->
+			<div class="nav-bottom">
 				<div class="container">
 					<ul class="nav page-navigation page-navigation-secondary bg-white">
 						<li class="nav-item submenu">
@@ -177,99 +184,104 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="page-inner">
 
-                  <!-- recap -->
-                  <div class="card">
-                                <div class="card-header">
-                                    <div class="card-head-row">
-                                        <h4 class="card-title intern-title">`Adam Firdaus` Attendance Recap</h4>
-                                        <a class="btn btn-modify btn-round ml-auto text-white" id="alert_demo_7">
-                                            <i class="fa fa-check"></i>
-                                            Accept
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
+					<!-- recap -->
+					<div class="card">
+						<div class="card-header">
+							<div class="card-head-row">
+								<h4 class="card-title intern-title">Attendance Recap</h4>
+								<input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
+                                            Accept">
+								</input>
+								<br>
 
-                                    <div class="table-responsive">
-                                        <table id="basic-datatables" class="display table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <center>Week</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Present</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Absent</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Paid Leave</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Unpaid Leave</center>
-                                                    </th>
-                                                    <th style="width: 10px;">
-                                                        <center>Action</center>
-                                                    </th>
-                                                    <th style="width: 10px;">
-                                                        <center>Approval</center>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><center>1</center></td>
-                                                    <td><center>5</center></td>
-													<td><center>0</center></td>
-													<td><center>0</center></td>
-													<td><center>0</center></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <a href="index.php?page=spv-detail2-attendance" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                                <i class="icon-magnifier"></i>
-                                                            </a>
-                                                            <button type="button" id="alert_demo_7" title="Print" class="btn btn-link btn-warning" data-original-title="Delete">
-                                                                <i class="icon-printer"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <center><input type="checkbox" name="vehicle1" value="Bike"></center>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-													<td><center>2</center></td>
-                                                    <td><center>3</center></td>
-													<td><center>1</center></td>
-													<td><center>0</center></td>
-													<td><center>1</center></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <a href="index.php?page=spv-detail2-attendance" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                                <i class="icon-magnifier"></i>
-                                                            </a>
-                                                            <button type="button" id="alert_demo_7" title="Print" class="btn btn-link btn-warning" data-original-title="Delete">
-                                                                <i class="icon-printer"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <center><input type="checkbox" name="vehicle1" value="Bike"></center>
-                                                    </td>
-                                                </tr>
+							</div>
+						</div>
+						<div class="card-body">
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+							<div class="table-responsive">
+								<table id="basic-datatables" class="display table table-striped table-hover">
+									<thead>
+										<tr>
+											<th>
+												<center>Week</center>
+											</th>
+											<th>
+												<center>Present</center>
+											</th>
+											<th>
+												<center>Absent</center>
+											</th>
+											<th>
+												<center>Paid Leave</center>
+											</th>
+											<th>
+												<center>Unpaid Leave</center>
+											</th>
+											<th style="width: 10px;">
+												<center>Action</center>
+											</th>
+											<th style="width: 10px;">
+												<center>Approval</center>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										include 'config.php';
+										error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+										$id = $_GET['id'];
+										$view = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE tb_attendance.id_internship = $id;");
+										while ($data = mysqli_fetch_array($view)) {
+										?>
+											<tr>
+												<td><?php echo $data['week'] ?></td>
+												<td><?php
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE type_attendance = 'Present'");
+													$hasil = mysqli_num_rows($query);
 
-                                </div>
-                            </div>
-                            <!-- end recap -->
-                    
-				</div><!--page inner-->
-			</div><!--container-->
-		</div><!--main-panel-->
+													echo $hasil;
+													?>
+												</td>
+												<td><?php
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE type_attendance = 'Absent'");
+													$hasil = mysqli_num_rows($query);
+
+													echo $hasil;
+													?>
+												</td>
+												<td><?php
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE type_attendance = 'Paid Leave'");
+													$hasil = mysqli_num_rows($query);
+
+													echo $hasil;
+													?>
+												</td>
+												<td><?php
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE type_attendance = 'Unpaid Leave'");
+													$hasil = mysqli_num_rows($query);
+
+													echo $hasil;
+													?>
+												</td>
+											</tr>
+										<?php //penutup perulangan while
+											$no++;
+										}
+										?>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+					<!-- end recap -->
+
+				</div>
+				<!--page inner-->
+			</div>
+			<!--container-->
+		</div>
+		<!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->
@@ -277,7 +289,7 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="copyright ml-auto">
 					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
-				</div>				
+				</div>
 			</div>
 		</footer>
 		<!-- End Footer -->
@@ -368,7 +380,7 @@ $token = $_SESSION['token'];
 		var action =
 			'<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
-		$('#addRowButton').click(function () {
+		$('#addRowButton').click(function() {
 			$('#add-row').dataTable().fnAddData([
 				$("#addName").val(),
 				$("#addPosition").val(),
@@ -379,68 +391,69 @@ $token = $_SESSION['token'];
 
 		});
 		$(document).ready(function() {
-                $('#basic-datatables').DataTable({});
-            });
+			$('#basic-datatables').DataTable({});
+		});
 
-	 //SweetAlert
-	 var SweetAlert2Demo = function () {
-            var initDemos = function () {
+		//SweetAlert
+		var SweetAlert2Demo = function() {
+			var initDemos = function() {
 
 
-    $('#alert_demo_7').click(function(e) {
-        swal({
-            title: 'Accept this attendance?',
-            text: "",
-            type: 'warning',
-            buttons:{
-                confirm: {
-                    text : 'Yes, Accepted!',
-                    className : 'btn btn-success'
-                },
-                cancel: {
-                    visible: true,
-                    className: 'btn btn-danger'
-                }
-            }
-        }).then((Delete) => {
-            if (Delete) {
-                swal({
-                    title: 'Successfull!',
-                    text: 'The attendance has been accepted',
-                    type: 'success',
-                    buttons : {
-                        confirm: {
-                            className : 'btn btn-success'
-                        }
-                    }
-                });
-            } else {
-                swal.close();
-            }
-        });
-    });
-  
-};
+				$('#alert_demo_7').click(function(e) {
+					swal({
+						title: 'Accept this attendance?',
+						text: "",
+						type: 'warning',
+						buttons: {
+							confirm: {
+								text: 'Yes, Accepted!',
+								className: 'btn btn-success'
+							},
+							cancel: {
+								visible: true,
+								className: 'btn btn-danger'
+							}
+						}
+					}).then((Delete) => {
+						if (Delete) {
+							swal({
+								title: 'Successfull!',
+								text: 'The attendance has been accepted',
+								type: 'success',
+								buttons: {
+									confirm: {
+										className: 'btn btn-success'
+									}
+								}
+							});
+						} else {
+							swal.close();
+						}
+					});
+				});
 
-return {
-    //== Init
-    init: function () {
-        initDemos();
-    },
-};
-}();
+			};
 
-//== Class Initialization
-jQuery(document).ready(function () {
-SweetAlert2Demo.init();
-});
+			return {
+				//== Init
+				init: function() {
+					initDemos();
+				},
+			};
+		}();
+
+		//== Class Initialization
+		jQuery(document).ready(function() {
+			SweetAlert2Demo.init();
+		});
 	</script>
 
-<script>
-        $(document).ready(function() {
-            $('#attendance-datatables').DataTable({});
-        });
-    </script>
+	<script>
+		$(document).ready(function() {
+			$('#attendance-datatables').DataTable({});
+		});
+	</script>
 
 </body>
+
 </html>

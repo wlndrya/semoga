@@ -124,8 +124,10 @@ if ($_GET['PageAction'] == "update_spv") {
     $user_phone      = mysqli_real_escape_string($conn,$_POST['user_phone']);
     $user_email      = mysqli_real_escape_string($conn,$_POST['user_email']);
     $username        = mysqli_real_escape_string($conn,$_POST['username']);
-    $password        = mysqli_real_escape_string($conn,12345);
+    $password        = mysqli_real_escape_string($conn,$_POST['password']);
     $role            = mysqli_real_escape_string($conn,$_POST['user_type']);
+
+    $password_hash = password_hash($password, PASSWORD_DEFAULT); // hash password
 
     if($_SESSION['id_user_company'] && $_SESSION['username']) {
       $update = $conn->query("UPDATE `tb_user_company` SET 
@@ -133,6 +135,7 @@ if ($_GET['PageAction'] == "update_spv") {
       `user_phone` = '$user_phone',
       `user_email` = '$user_email',
       `username` = '$username',
+      `password` = '$password_hash',
       `user_type` = '$role'
       WHERE `id_user_company` = $id_user_company;");
 
@@ -253,6 +256,9 @@ if ($_GET['PageAction'] == "delete_supervisor") {
         $updateStatus = mysqli_query($conn, "UPDATE `tb_internship` SET `status` = '$status' WHERE `id_internship` = $id_internship");
         if($updateStatus){
           $updateCompany = mysqli_query($conn, "UPDATE `tb_applicant` SET  `status_applicant` = '$status' WHERE `id_applicant` =  $id_applicant");
+        }if($updateCompany){
+          echo '<script type="text/javascript">';
+          echo 'alert("Update Successfully"); document.location="index.php?page=hrd-registration";</script>';
         }else{
           echo $conn -> error;
         }
@@ -557,40 +563,9 @@ if ($_GET['PageAction'] == "delete_supervisor") {
       }
       // echo $id_user_company;
         if($update){
-          // echo '<script type="text/javascript">';
-          // echo 'alert("Successfully Update"); document.location="index.php?page=spv-detail-logbook";</script>';
-          echo "
-          <script type='text/javascript'>
-           setTimeout(function () { 
-      Swal.fire({
-        type: 'error',
-        title: 'Data gagal diperbaharui',
-        showConfirmButton: false
-      });  
-           },10); 
-           window.setTimeout(function(){ 
-             window.history.back();
-           } ,3000); 
-          </script>
-      ";
+          echo '<script type="text/javascript">';
+          echo 'alert("Successfully Update"); document.location="index.php?page=spv-detail-logbook";</script>';
         }
-        else{
-           //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
-            echo "
-                                       <script type='text/javascript'>
-                                        setTimeout(function () { 
-                                   Swal.fire({
-                                     type: 'error',
-                                     title: 'Data gagal diperbaharui',
-                                     showConfirmButton: false
-                                   });  
-                                        },10); 
-                                        window.setTimeout(function(){ 
-                                          window.history.back();
-                                        } ,3000); 
-                                       </script>
-                                   ";
-                                 }
       }
       else{
         echo("Error description: " . $conn -> error);

@@ -226,7 +226,7 @@ $token = $_SESSION['token'];
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
 									<?php
-										$query = mysqli_query($conn, "SELECT * FROM tb_applicant WHERE id_company = $id_company");
+										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company = $id_company AND status = 'PENDING'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
