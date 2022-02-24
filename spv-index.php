@@ -237,7 +237,8 @@ $token = $_SESSION['token'];
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
 									<?php
-										$query = mysqli_query($conn, "SELECT * FROM tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE approval_spv = 'Pending'");
+									//belumselesai-harusnya tblogbook+tbattendance,inihanyalogbook aja
+										$query = mysqli_query($conn, "SELECT * FROM (tb_logbook LEFT JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship) WHERE id_user_company = $user_id AND approval_spv = 'Pending'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
@@ -261,87 +262,33 @@ $token = $_SESSION['token'];
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row">
-										<h4 class="card-title"><b>Company Profile</b></h4>
+										<h4 class="card-title"><b>COMPANY PROFILE</b></h4>
 										<div class="card-tools">
 										</div>
 									</div>
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="col-md-9">
-											<div class="table-responsive table-hover table-sales">
-												<table class="table">
-													<tbody>
-														<div style="text-align: justify;">
-															<p><b>PT. Schneider Electric</b> We drive digital
-																transformation by integrating world-leading energy and
-																process technologies, endpoints to the cloud that
-																connect products, controls, software and services across
-																the lifecycle, enabling integrated enterprise management
-																of homes, buildings, data centers, infrastructure and
-																industry.
-																We are a global company that upholds local values ​​the
-																most. We strongly support openness standards and a
-																passionate partnership ecosystem with the values ​​of
-																Purposeful, Inclusive and empowered.</p>
-
-															<!-- Form Modal Edit Description Company Profile -->
-															<div class="modal fade" id="modalcompany" tabindex="-1"
-																role="dialog" aria-labelledby="exampleModalLongTitle"
-																aria-hidden="true">
-																<div class="modal-dialog" role="document">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h5 class="modal-title"
-																				id="exampleModalLongTitle">EDIT COMPANY
-																				PROFILE</h5>
-																			<button type="button" class="close"
-																				data-dismiss="modal" aria-label="Close">
-																				<span aria-hidden="true">&times;</span>
-																			</button>
-																		</div>
-																		<div class="modal-body">
-																			<p><b>PT. Schneider Electric</b> We drive
-																				digital transformation by integrating
-																				world-leading energy and process
-																				technologies, endpoints to the cloud
-																				that
-																				connect products, controls, software and
-																				services across the lifecycle, enabling
-																				integrated enterprise management of
-																				homes, buildings, data centers,
-																				infrastructure and industry.
-																				We are a global company that upholds
-																				local values ​​the most. We strongly
-																				support openness standards and a
-																				passionate partnership ecosystem with
-																				the
-																				values ​​of Purposeful, Inclusive and
-																				empowered.</p>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" id="btn-save"
-																				class="btn btn-secondary ml-auto">Save
-																				Changes</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<!-- End Form Edit Description Company Profile -->
-														</div>
-													</tbody>
+										<div class="col-md-12">
+											<div style="text-align: justify;">
+												<div class="table-responsive table-hover table-sales">
+													<table class="table">
+														<tbody>
+															<?php
+															include 'config.php';
+															error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+															$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = '$_SESSION[id_company]'");
+															while ($data = mysqli_fetch_array($view)) {
+																echo $data['description'];
+															?>
+																<!-- End Modal Company Profile -->
+															<?php //penutup perulangan while
+															}
+															?>
+												</div>
+												</tbody>
 												</table>
 											</div>
-										</div>
-										<div class="col-md-3">
-											<center>
-												<div class="center">
-													<div class="drag-area">
-														<div class="icon"><i class="fas fa-users"></i></div>
-														<header>Company Logo</header>
-													</div>
-												</div>
-											</center>
 										</div>
 									</div>
 								</div>
@@ -349,49 +296,47 @@ $token = $_SESSION['token'];
 						</div>
 					</div>
 					<!-- End Company Profile -->
+					</div>
 
 					<!--Internship-->
 					<div class="row row-card-no-pd">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title"><b>Internship</b></h4>
-									</div>
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<div class="d-flex align-items-center">
+									<h4 class="card-title"><b>STUDENT INTERNSHIP</b></h4>
 								</div>
-								<div class="card-body">
-									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover">
-											<thead>
-												<tr>
-													<th>FULL NAME</th>
-													<th>STUDY PROGRAM</th>
-													<th>PERIOD</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Kezia Angelina S</td>
-													<td>Informatics</td>
-													<td>2021</td>
-												</tr>
-												<tr>
-													<td>Cyntya Maharani Nurul Istiqomah</td>
-													<td>Informatics</td>
-													<td>2021</td>
-												</tr>
-												<tr>
-													<td>Yulia Wulandari</td>
-													<td>Informatics</td>
-													<td>2021</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="add-row" class="display table table-striped table-hover">
+										<thead>
+											<tr>
+												<th>STUDENT NAME</th>
+												<th>STUDY PROGRAM</th>
+											</tr>
+										</thead>
+										<tbody>
+										<?php
+                                                include 'config.php';
+                                                error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                                $view = mysqli_query($conn, "SELECT * FROM tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE id_user_company = $user_id");
+                                                while ($data = mysqli_fetch_array($view)) {
+                                                    echo "<tr>
+                                                        <td>" . $data['name'] . "</td>
+                                                        <td>" . $data['study_program'] . "</td>
+                                                      </tr>"
+                                                ?>
+																<?php //penutup perulangan while
+															}
+															?>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
 					<!--End Internship-->
 
 				</div>

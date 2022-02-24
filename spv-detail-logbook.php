@@ -48,9 +48,11 @@ $token = $_SESSION['token'];
 
 <script type="text/javascript">  
             function selects(){  
-                var ele=document.getElementsByName('approval_spv');  
+                var ele=document.getElementsByName('approval_spv[]');  
+                // console.log('ele',ele);
                 for(var i=0; i<ele.length; i++){  
                     if(ele[i].type=='checkbox'){  
+                        console.log(ele[i].checked);
                             ele[i].checked=true; 
                     }
                     // if(ele[i].type=='checkbox' && ele[i].checked==true){
@@ -220,7 +222,7 @@ $token = $_SESSION['token'];
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <form action="">
+                                        <form method="POST" action="proses_dummy_test.php?PageAction=add_approve">
                                         <table id="basic-datatables" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
@@ -231,7 +233,7 @@ $token = $_SESSION['token'];
                                                         <center>Action</center>
                                                     </th>
                                                     <th >
-                                                    <span>Approval <input type="checkbox" onclick="selects()" value="YES" name="approval_spv" /></span>
+                                                    <span>Approval <input type="checkbox" onclick="selects()" name="approval_spv" value="YES" /></span>
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -252,21 +254,34 @@ $token = $_SESSION['token'];
 													<td><?php echo "<center>
 													<a href = 'index.php?page=spv-detail2-logbook' type='button' title='View Detail' class='btn btn-link btn-primary btn-lg'><i class='icon-magnifier'></i></a>
 													</td></center>"?></td>
-													<td><?php echo "<center>
-													<input type='checkbox' name='approval_spv[]' value='".$data['id']."'></input>
-													</td></center>"?></td>
+													<td>
+                                                        <center>
+                                                        <?php
+                                                    
+                                                    if($data['approval_spv'] == "Pending"){
+                                                        echo "<center>
+                                                        <input type='checkbox' name='approval_spv[]' value='".$data['id_logbook']."'></input>
+                                                        </td></center>";
+                                                    }else{
+                                                        echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
+                                                    }
+                                                    
+                                                    ?>
+                                                        </center>
+                                                    </td>
 													<!-- <td>
 													<center><?php
-																	if ($data['approval_spv'] == "Pending") {
-																		echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> PENDING</button>";
-																	} elseif ($data['approval_spv'] == "Yes") {
-																		echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
-																	} elseif ($data['approval_spv'] == "No") {
-																		echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='' title=''><i class='fa fa-times'></i> DECLINED</button>";
-																	}
+														// 			if ($data['approval_spv'] == "Pending") {
+														// 				echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														// data-target='' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> PENDING</button>";
+														// 			} elseif ($data['approval_spv'] == "YES") {
+														// 				echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														// data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
+														// 			} elseif ($data['approval_spv'] == "No") {
+														// 				echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														// data-target='' title=''><i class='fa fa-times'></i> DECLINED</button>";
+														// 			}
 
 																	?></center>
 													</td> -->

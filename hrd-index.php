@@ -372,7 +372,7 @@ $token = $_SESSION['token'];
 						<div class="card">
 							<div class="card-header">
 								<div class="d-flex align-items-center">
-									<h4 class="card-title"><b>INTERNSHIP</b></h4>
+									<h4 class="card-title"><b>STUDENT INTERNSHIP</b></h4>
 								</div>
 							</div>
 							<div class="card-body">

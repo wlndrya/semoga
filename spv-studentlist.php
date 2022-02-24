@@ -218,7 +218,7 @@ $token = $_SESSION['token'];
 												<?php
 												include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) LEFT JOIN tb_user_company ON tb_user_company.id_user_company = tb_internship.id_user_company WHERE status='YES' AND tb_user_company.id_company = '$_SESSION[id_company]' ");
+												$view = mysqli_query($conn, "SELECT * from (tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) WHERE id_user_company = $user_id");
 												$no = 1;
 												while ($data = mysqli_fetch_array($view)) {
 													echo "<tr>
@@ -226,10 +226,10 @@ $token = $_SESSION['token'];
 													<td>" . $data['start_date'] . "</td>
 													<td>" . $data['end_date'] . "</td>
 													<td><center>
-													<a href = '#' type='button' data-toggle='modal' data-target='#doc-detail' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = '#' type='button' data-toggle='modal' data-target='#doc-detail". $data['nim'] ."' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													<td><center>
-													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													<td><center>
 													<a href = 'index.php?page=spv-addjobdesc&id=". $data['id_internship'] ."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
@@ -240,8 +240,39 @@ $token = $_SESSION['token'];
 													</tr>"
 												?>
 
+												<div id="mymodal<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-lg">
+														<!-- Modal content-->
+														<div class="modal-content">
+															<div class="modal-header">
+																<h4 class="modal-title">Final Report</h4>
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+															</div>
+															<?php
+																if($data['final_report']) :
+															?>
+															<div class="modal-body" style="height: 600px">
+																<object type="application/pdf" data="berkas/<?php echo $data['final_report'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="false">
+																</object>
+															</div>
+															<?php
+															else :
+															?>
+															<h2 class="p-5 mx-auto">Final report is not available!</h2>
+															<?php endif;?>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
+
 										<!-- Modal Document Detail -->
-					<div class="modal fade" id="doc-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal fade" id="doc-detail<?php echo $data['nim'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -253,24 +284,27 @@ $token = $_SESSION['token'];
 								<div class="modal-body">
 									<!-- button cta -->
 									<div class="row">
-										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-modify text-white" id="cv" name="cv" data-toggle="modal" data-target="#" style="width: 100%;">CV </a>
+										<?php
+										$view = mysqli_query($conn, "SELECT * FROM tb_applicant INNER JOIN tb_internship ON tb_applicant.nim = tb_internship.nim");
+										$no = 1;
+										while ($data = mysqli_fetch_array($view)) {
+										echo "
+										<div class='col-sm-4 p-2'>
+										<a href='#' type='button' class='btn btn-modify text-white' data-toggle='modal' data-target='#myModal" . $data['nim'] . "' style='width: 100%;'>CV</a>
 										</div>
-										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-modify text-white" id="file1" name="file1" data-toggle="modal" data-target="#" style="width: 100%;">Transcripts</a>
+										<div class='col-sm-4 p-2'>
+										<a href='#' class='btn btn-modify text-white' data-toggle='modal' data-target='#myModal1" . $data['nim'] . "' style='width: 100%;'>Transcripts</a>
 										</div>
-										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-modify text-white" id="file2" name="file2" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
+										<div class='col-sm-4 p-2'>
+										<a href='#' class='btn btn-modify text-white' data-toggle='modal' data-target='#myModal2" . $data['nim'] . "' style='width: 100%;'>Optional File</a>
 										</div>
-										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-modify text-white" id="file3" name="file3" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
+										<div class='col-sm-4 p-2'>
+										<a href='#' class='btn btn-modify text-white' data-toggle='modal' data-target='#myModal3" . $data['nim'] . "' style='width: 100%;'>Optional File</a>
 										</div>
-										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-modify text-white" id="file4" name="file4" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
-										</div>
-										<div class="col-sm-4 p-2">
-											<a href="#" class="btn btn-modify text-white" id="file5" name="file5" data-toggle="modal" data-target="#" style="width: 100%;">Optional Files </a>
-										</div>
+										<div class='col-sm-4 p-2'>
+										<a href='#' class='btn btn-modify text-white' data-toggle='modal' data-target='#myModal4" . $data['nim'] . "' style='width: 100%;'>Optional File</a>
+										</div>"
+										?>
 									</div>
 									<!-- end button cta -->
 								</div>
@@ -279,12 +313,116 @@ $token = $_SESSION['token'];
 							</div>
 						</div>
 					</div>
-					<!-- End Modal -->
-												<?php //penutup perulangan while
+
+						<!--Modal View CV-->
+						<div id="myModal<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+														<div class="modal-dialog modal-lg">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title">Curriculum Vitae</h4>
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																</div>
+																<div class="modal-body" style="height: 600px">
+																	<object type="application/pdf" data="berkas/<?php echo $data['file1'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																	</object>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!--End Modal View CV-->
+
+													<!--Modal View Transcript-->
+													<div id="myModal1<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+														<div class="modal-dialog modal-lg">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title">Transcripts</h4>
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																</div>
+																<div class="modal-body" style="height: 600px">
+																	<object type="application/pdf" data="berkas/<?php echo $data['file2'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																	</object>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!--End Modal View Transcript-->
+
+													<!--Modal View Optional Files 1-->
+													<div id="myModal2<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+														<div class="modal-dialog modal-lg">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title">Optional File</h4>
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																</div>
+																<div class="modal-body" style="height: 600px">
+																	<object type="application/pdf" data="berkas/<?php echo $data['file3'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																	</object>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!--End Modal View Optional Files-->
+
+													<!--Modal View Optional Files 2-->
+													<div id="myModal3<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+														<div class="modal-dialog modal-lg">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title">Optional File</h4>
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																</div>
+																<div class="modal-body" style="height: 600px">
+																	<object type="application/pdf" data="berkas/<?php echo $data['file4'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																	</object>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!--End Modal View Optional Files-->
+
+													<!--Modal View Optional Files 3-->
+													<div id="myModal4<?php echo $data['nim'] ?>" class="modal fade" role="dialog">
+														<div class="modal-dialog modal-lg">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title">Optional File</h4>
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																</div>
+																<div class="modal-body" style="height: 600px">
+																	<object type="application/pdf" data="berkas/<?php echo $data['file5'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																	</object>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!--End Modal View Optional Files-->
+					<?php //penutup perulangan while
 													$no++;
 												}
 												?>
-												<!--End Modal Delete-->
+					<!-- End Modal -->
 											</tbody>
 										</table>
 									</div>

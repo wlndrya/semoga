@@ -239,8 +239,9 @@ if ($_GET['PageAction'] == "delete_supervisor") {
   if ($token_session === $token_post) {
    
     $id_company      = mysqli_real_escape_string($conn,$_POST['id_company']);
-    $id_user_company      = mysqli_real_escape_string($conn,$_POST['id_user_company']);
+    $id_user_company = mysqli_real_escape_string($conn,$_POST['id_user_company']);
     $status          = mysqli_escape_string($conn,$_POST['status']);
+    // $status_applicant = mysqli_escape_string($conn,$_POST['status_applicant']);
     $id_applicant    = mysqli_real_escape_string($conn,$_POST['id_applicant']);
     $id_internship   = mysqli_escape_string($conn,$_POST['id_internship']);
     $start_date      = mysqli_real_escape_string($conn,$_POST['start_date']);
@@ -248,48 +249,61 @@ if ($_GET['PageAction'] == "delete_supervisor") {
     
 
     if($_SESSION) {
-      $updateStatus = $conn->query("UPDATE `tb_applicant` SET 
-      `status` = '$status'
-      WHERE `id_applicant` = $id_applicant;");
+      if($status == "NO"){
+        $updateStatus = mysqli_query($conn, "UPDATE `tb_internship` SET `status` = '$status' WHERE `id_internship` = $id_internship");
+        if($updateStatus){
+          $updateCompany = mysqli_query($conn, "UPDATE `tb_applicant` SET  `status_applicant` = '$status' WHERE `id_applicant` =  $id_applicant");
+        }else{
+          echo $conn -> error;
+        }
+      }else{
+        $updateStatus = $conn->query("UPDATE `tb_internship` SET 
+        `id_user_company` = '$id_user_company',
+        `start_date` = '$start_date',
+        `end_date` = '$end_date',
+        `status` = '$status'
+        WHERE `id_internship` = $id_internship;");
 
-      if($updateStatus){
-        $updateCompany = $conn->query("UPDATE `tb_internship` SET 
-      `id_user_company` = '$id_user_company',
-      `start_date` = '$start_date',
-      `end_date` = '$end_date',
-      `status` = '$status'
-      WHERE `id_internship` = $id_internship;");
+        if($updateStatus){
+          $updateCompany = $conn->query("UPDATE `tb_applicant` SET
+          `status_applicant` = '$status'
+          WHERE `id_applicant` = $id_applicant;");
 
-      if($updateCompany){
-        echo '<script type="text/javascript">';
-        echo 'alert("Update Successfully"); document.location="index.php?page=hrd-registration";</script>';
+          if($updateCompany){
+            echo '<script type="text/javascript">';
+            echo 'alert("Update Successfully"); document.location="index.php?page=hrd-registration";</script>';
+            // echo("Error description: " . $conn -> error);
+          }
+        }
+
       }
-      }
-      else{
-         //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
-          echo "
-                                     <script type='text/javascript'>
-                                      setTimeout(function () { 
-                                 Swal.fire({
-                                   type: 'error',
-                                   title: 'Data gagal diperbaharui',
-                                   showConfirmButton: false
-                                 });  
-                                      },10); 
-                                      window.setTimeout(function(){ 
-                                        window.history.back();
-                                      } ,3000); 
-                                     </script>
-                                 ";
-                               }
-    }
-    else{
-      echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-registration";</script>';
-     }
-  } else {
-    echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-registration.php";</script>';
+    } 
+  //else{
+  //        //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
+  //         echo "
+  //                                    <script type='text/javascript'>
+  //                                     setTimeout(function () { 
+  //                                Swal.fire({
+  //                                  type: 'error',
+  //                                  title: 'Data gagal diperbaharui',
+  //                                  showConfirmButton: false
+  //                                });  
+  //                                     },10); 
+  //                                     window.setTimeout(function(){ 
+  //                                       window.history.back();
+  //                                     } ,3000); 
+  //                                    </script>
+  //                                ";
+  //                              }
+  //   }
+  //   else{
+  //     echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-registration";</script>';
+  //    }
+  // } else {
+  //   echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-registration.php";</script>';
+  //  }
    }
-   }
+  }
   
    //Edit Update Profile HRD
    if ($_GET['PageAction'] == "update_hrd") {
@@ -522,23 +536,43 @@ if ($_GET['PageAction'] == "delete_supervisor") {
       session_start();
     $token_session = $_SESSION['token'];
     $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
+    $id = $_POST['approval_spv'];
+    $finalizado = implode(",", $id);
+
+
+    // echo "<pre>";
+    // print_r($id);
+    // echo "</pre>";
   
     if ($token_session === $token_post) {
      
-      $id               = mysqli_real_escape_string($conn,$_POST['id']);
-      $id_logbook      = mysqli_real_escape_string($conn,$_POST['id_logbook']);
-      $approval_spv    = mysqli_real_escape_string($conn,$_POST['approval_spv']);
+      // $id               = mysqli_real_escape_string($conn,$_POST['id']);
+      // $id_logbook      = mysqli_real_escape_string($conn,$_POST['id_logbook']);
+      // $approval_spv    = mysqli_real_escape_string($conn,$_POST['approval_spv']);
   
       if($_SESSION) {
         $update = $conn->query("UPDATE `tb_logbook` SET 
-        `approval_spv` = '$approval_spv'
-        WHERE `id_logbook` = $id_logbook;");
+        `approval_spv` = 'YES'
+        WHERE `id_logbook` IN ($finalizado);");
       }
       // echo $id_user_company;
         if($update){
           // echo '<script type="text/javascript">';
           // echo 'alert("Successfully Update"); document.location="index.php?page=spv-detail-logbook";</script>';
-          echo("Error description: " . $conn -> error);
+          echo "
+          <script type='text/javascript'>
+           setTimeout(function () { 
+      Swal.fire({
+        type: 'error',
+        title: 'Data gagal diperbaharui',
+        showConfirmButton: false
+      });  
+           },10); 
+           window.setTimeout(function(){ 
+             window.history.back();
+           } ,3000); 
+          </script>
+      ";
         }
         else{
            //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
