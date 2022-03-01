@@ -237,7 +237,7 @@ for (var i = 0; i < btns.length; i++) {
 													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="text" class="form-control" name="user_fullname"
-													value="<?php echo $data['user_fullname'] ?>" disabled>
+													value="<?php echo $data['user_fullname'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
@@ -246,7 +246,7 @@ for (var i = 0; i < btns.length; i++) {
 													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="text" class="form-control" name="user_phone"
-												value="<?php echo $data['user_phone'] ?>" disabled>
+												value="<?php echo $data['user_phone'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
@@ -255,7 +255,7 @@ for (var i = 0; i < btns.length; i++) {
 												<span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="email" class="form-control" name="user_email"
-												value="<?php echo $data['user_email'] ?>" disabled>
+												value="<?php echo $data['user_email'] ?>" disabled required>
 												<small id="emailHelp" class="form-text text-muted">We'll never share
 													your email with anyone else.</small>
 											</div>
@@ -266,7 +266,7 @@ for (var i = 0; i < btns.length; i++) {
 													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="text" class="form-control" name="username"
-												value="<?php echo $data['username'] ?>" disabled>
+												value="<?php echo $data['username'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
@@ -274,8 +274,8 @@ for (var i = 0; i < btns.length; i++) {
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Password <span
 													class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="password" class="form-control" readonly id="password"
-													name="password" placeholder="**********" disabled>
+												<input type="password" class="form-control" id="password"
+													name="password" placeholder="*****" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">

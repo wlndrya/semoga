@@ -284,30 +284,6 @@ if ($_GET['PageAction'] == "delete_supervisor") {
 
       }
     } 
-  //else{
-  //        //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
-  //         echo "
-  //                                    <script type='text/javascript'>
-  //                                     setTimeout(function () { 
-  //                                Swal.fire({
-  //                                  type: 'error',
-  //                                  title: 'Data gagal diperbaharui',
-  //                                  showConfirmButton: false
-  //                                });  
-  //                                     },10); 
-  //                                     window.setTimeout(function(){ 
-  //                                       window.history.back();
-  //                                     } ,3000); 
-  //                                    </script>
-  //                                ";
-  //                              }
-  //   }
-  //   else{
-  //     echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-registration";</script>';
-  //    }
-  // } else {
-  //   echo '<script language="javascript">alert("Error: CSRF Protection"); document.location="hrd-registration.php";</script>';
-  //  }
    }
   }
   
@@ -325,13 +301,17 @@ if ($_GET['PageAction'] == "delete_supervisor") {
     $user_phone      = mysqli_real_escape_string($conn,$_POST['user_phone']);
     $user_email      = mysqli_escape_string($conn,$_POST['user_email']);
     $username        = mysqli_real_escape_string($conn,$_POST['username']);
+    $password        = mysqli_real_escape_string($conn,$_POST['password']);
+
+    $password_hash = password_hash($password, PASSWORD_DEFAULT); // hash password
 
     if($_SESSION) {
       $update = $conn->query("UPDATE `tb_user_company` SET 
       `user_fullname` = '$name',
       `user_phone` = '$user_phone',
       `user_email` = '$user_email',
-      `username` = '$username'
+      `username` = '$username',
+      `password` = '$password_hash'
       WHERE `id_user_company` = $id_user_company;");
     }
     // echo $id_user_company;
@@ -573,48 +553,4 @@ if ($_GET['PageAction'] == "delete_supervisor") {
     }
 
 // Email Information
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\Exception;
-
-  include('assets/PHPMailer-master/src/Exception.php');
-  include('assets/PHPMailer-master/src/PHPMailer.php');
-  include('assets/PHPMailer-master/src/SMTP.php');
-
-if ($_GET['PageAction'] == "send_email") {
-
-  $id_user_company               = mysqli_real_escape_string($conn,$_POST['id_user_company']);
-  $user_fullname     = mysqli_real_escape_string($conn,$_POST['user_fullname']);
-  $user_email    = mysqli_real_escape_string($conn,$_POST['user_email']);
-  $subject = mysqli_real_escape_string($conn,$_POST['subject']);
-  $question = mysqli_real_escape_string($conn,$_POST['question']);
-  $email_penerima = 'pinkmylovely@gmail.com';
-
-  $mail = new PHPMailer;
-  $mail->isSMTP();
-
-  $mail->Host = 'smtp.gmail.com';
-  $mail->Name = $user_email; //EmailPengirim
-  $mail->Port = 465;
-  $mail->SMTPAuth = true;
-  $mail->SMTPSecure = 'ssl';
-  $mail->SMTPDebug = 2;
-
-  $mail->setFrom($user_email, $user_fullname);
-  $mail->addAddress($email_penerima);
-  $mail->isHTML(true);
-  $mail->Subject = $subject;
-  $mail->Body = $question;
-
-  $send = $mail->send();
-
-  if($send){
-    echo '<script type="text/javascript">';
-    echo 'alert("Email sent successfully"); document.location="index.php?page=hrd-information";</script>';
-   }  
-   else
-   {
-    echo("Error description: " . $conn -> error);
-     //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
-   }
-  }
 ?>

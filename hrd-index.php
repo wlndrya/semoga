@@ -199,7 +199,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-information">
+							<a class="nav-link" href="index.php?page=hrd-information&id_user_company=<?php echo $user_id; ?>">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
