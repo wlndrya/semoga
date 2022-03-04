@@ -7,7 +7,7 @@
   </head>
 
 <?php
-//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
 include 'config.php';
 
 // Add Supervisor
@@ -522,9 +522,9 @@ if ($_GET['PageAction'] == "delete_supervisor") {
       session_start();
     $token_session = $_SESSION['token'];
     $token_post    = mysqli_real_escape_string($conn,$_POST['token']);
-    $id = $_POST['approval_spv'];
-    $finalizado = implode(",", $id);
-
+    $id            = mysqli_real_escape_string($conn,$_POST['id_internship']);
+    $approval_spv  = $_POST['approval_spv'];
+    $finalizado    = implode(",", $approval_spv);
 
     // echo "<pre>";
     // print_r($id);
@@ -532,7 +532,7 @@ if ($_GET['PageAction'] == "delete_supervisor") {
   
     if ($token_session === $token_post) {
      
-      // $id               = mysqli_real_escape_string($conn,$_POST['id']);
+  
       // $id_logbook      = mysqli_real_escape_string($conn,$_POST['id_logbook']);
       // $approval_spv    = mysqli_real_escape_string($conn,$_POST['approval_spv']);
   
@@ -543,8 +543,7 @@ if ($_GET['PageAction'] == "delete_supervisor") {
       }
       // echo $id_user_company;
         if($update){
-          echo '<script type="text/javascript">';
-          echo 'alert("Successfully Update"); document.location="index.php?page=spv-detail-logbook";</script>';
+          echo '<script language="javascript">alert("Approved Successfully!"); window.history.back();</script>';
         }
       }
       else{

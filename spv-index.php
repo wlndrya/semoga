@@ -217,13 +217,13 @@ $token = $_SESSION['token'];
 									<div class="h1 fw-bold float-right"></div>
 									<h1 class="mb-2">
 									<?php
-										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_user_company = $user_id AND nik != 'NULL'");
+										$query = mysqli_query($conn, "SELECT * FROM (tb_logbook LEFT JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship)  WHERE approval_spv = 'Pending' AND tb_internship.id_user_company = $user_id");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
 										?>
 									</h1>
-									<p><b>LECTURER</b></p>
+									<p><b>APPROVE LOGBOOK</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart2"><canvas width="327" height="70"
 												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
@@ -237,14 +237,13 @@ $token = $_SESSION['token'];
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
 									<?php
-									//belumselesai-harusnya tblogbook+tbattendance,inihanyalogbook aja
-										$query = mysqli_query($conn, "SELECT * FROM (tb_logbook LEFT JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship) WHERE id_user_company = $user_id AND approval_spv = 'Pending'");
+										$query = mysqli_query($conn, "SELECT * FROM (tb_attendance LEFT JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship) WHERE approval_spv = 'Pending' AND tb_internship.id_user_company = $user_id");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
 										?>
 									</h1>
-									<p><b>APPROVE DOCUMENT</b></p>
+									<p><b>APPROVE ATTENDANCE</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart3"><canvas width="327" height="70"
 												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>

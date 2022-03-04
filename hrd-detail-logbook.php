@@ -191,7 +191,7 @@ $token = $_SESSION['token'];
     <div class="card">
         <div class="card-header">
             <div class="card-head-row">
-                <h4 class="card-title intern-title">`Adam Firdaus` Detail Logbook</h4>
+                <h4 class="card-title intern-title">Detail Logbook</h4>
             </div>
         </div>
         <div class="card-body">

@@ -1,15 +1,54 @@
 <?php
+$id = 30;
+			include 'config.php';
+			$view = mysqli_query($conn, "SELECT * FROM tb_job_description LEFT JOIN tb_internship ON tb_job_description.id_internship = tb_internship.id_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim LEFT JOIN tb_company ON tb_internship.id_company = tb_company.id_company WHERE tb_job_description.id_internship = $id;");
+			
+            echo "<pre>";
+            print_r($view);
+            echo "</pre>";
+
+			if($view->num_rows > 0){
+                while ($data = mysqli_fetch_array($view)) {
+				
+                    echo "
+                    <tr>
+                    <td>Name</td>
+                    <td>: " . $data['name'] . "</td>
+                    </tr>
+                    <tr>
+                    <td>NIM</td>
+                    <td>: " . $data['nim'] . "</td>
+                    </tr>
+                    <tr>
+                    <td>Study Program</td>
+                    <td>: " . $data['study_program'] . "</td>
+                    </tr>
+                    <tr>
+                    <td>Company Name</td>
+                    <td>: " . $data['company_name'] . "</td>
+                    </tr>
+                    ";
+                }
+            }else{
+                echo 'kosong';
+            }
+			?>
+
+            //backup
+
+
+
+
+
+            <?php
+
 use Mpdf\Tag\Tr;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require 'config.php';
 
 ob_start();
-	$id = $_GET['id'];
-
-	include 'config.php';
-		$view = mysqli_query($conn, "SELECT * FROM tb_job_description LEFT JOIN tb_internship ON tb_job_description.id_internship = tb_internship.id_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim LEFT JOIN tb_company ON tb_internship.id_company = tb_company.id_company WHERE tb_job_description.id_internship = $id;");
-		if($view->num_rows > 0) :
+$id = $_GET['id'];
 ?>
 
 <!DOCTYPE html>
@@ -91,18 +130,14 @@ ob_start();
 	?>
 
 	<?php
-		$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4', 'margin_top' => 10, 'margin_bottom' => 10, 'margin_left' => 20, 'margin_right' => 20]);
-		$html = ob_get_contents();
-		ob_end_clean();
-		$mpdf->WriteHTML(utf8_encode($html));
-		$mpdf->Output("Job-Description.pdf", 'I');
-	?>
+$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4', 'margin_top' => 10, 'margin_bottom' => 10, 'margin_left' => 20, 'margin_right' => 20]);
+$html = ob_get_contents();
+ob_end_clean();
+$mpdf->WriteHTML(utf8_encode($html));
+$mpdf->Output("Job-Description.pdf", 'I');
+
+?>
 
 </body>
 </html>
-<?php
-	else:
-		echo "<script>alert('Job Description Not Assigned Yet !'); history.back()</script>";
-	endif;
 
-?>

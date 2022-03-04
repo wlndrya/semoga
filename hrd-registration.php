@@ -312,10 +312,18 @@ $token = $_SESSION['token'];
 																	<h4 class="modal-title">Curriculum Vitae</h4>
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
+																<?php
+																if($data['file1']) :
+																?>
 																	<div class="modal-body" style="height: 600px">
 																		<object type="application/pdf" data="berkas/<?php echo $data['file1'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
 																		</object>
 																	</div>
+																	<?php
+																	else :
+																	?>
+																	<h2 class="p-5 mx-auto">CV is not available!</h2>
+																<?php endif;?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -333,10 +341,18 @@ $token = $_SESSION['token'];
 																	<h4 class="modal-title">Transcripts</h4>
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
+																<?php
+																if($data['file2']) :
+																?>
 																<div class="modal-body" style="height: 600px">
 																	<object type="application/pdf" data="berkas/<?php echo $data['file2'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
 																	</object>
 																</div>
+																<?php
+																	else :
+																	?>
+																	<h2 class="p-5 mx-auto">Transcript is not available!</h2>
+																<?php endif;?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -354,10 +370,18 @@ $token = $_SESSION['token'];
 																	<h4 class="modal-title">Optional File</h4>
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
+																<?php
+																if($data['file3']) :
+																?>
 																<div class="modal-body" style="height: 600px">
 																	<object type="application/pdf" data="berkas/<?php echo $data['file3'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
 																	</object>
 																</div>
+																<?php
+																	else :
+																	?>
+																	<h2 class="p-5 mx-auto">File is not available!</h2>
+																<?php endif;?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -375,10 +399,18 @@ $token = $_SESSION['token'];
 																	<h4 class="modal-title">Optional File</h4>
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
+																<?php
+																if($data['file4']) :
+																?>
 																<div class="modal-body" style="height: 600px">
 																	<object type="application/pdf" data="berkas/<?php echo $data['file4'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
 																	</object>
 																</div>
+																<?php
+																	else :
+																	?>
+																	<h2 class="p-5 mx-auto">File is not available!</h2>
+																<?php endif;?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>

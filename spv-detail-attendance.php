@@ -230,38 +230,58 @@ $token = $_SESSION['token'];
 										include 'config.php';
 										error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 										$id = $_GET['id'];
-										$view = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE tb_attendance.id_internship = $id;");
+										$view = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE tb_attendance.id_internship = $id GROUP BY tb_attendance.week;");
 										while ($data = mysqli_fetch_array($view)) {
 										?>
 											<tr>
 												<td><?php echo $data['week'] ?></td>
 												<td><?php
-													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE type_attendance = 'Present'");
+												$week = $data['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Present' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
 													$hasil = mysqli_num_rows($query);
 
 													echo $hasil;
 													?>
 												</td>
 												<td><?php
-													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE type_attendance = 'Absent'");
+												$week = $data['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Absent' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
 													$hasil = mysqli_num_rows($query);
 
 													echo $hasil;
 													?>
 												</td>
 												<td><?php
-													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE type_attendance = 'Paid Leave'");
+												$week = $data['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Paid Leave' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
 													$hasil = mysqli_num_rows($query);
 
 													echo $hasil;
 													?>
 												</td>
 												<td><?php
-													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE type_attendance = 'Unpaid Leave'");
+												$week = $data['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Unpaid Leave' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
 													$hasil = mysqli_num_rows($query);
 
 													echo $hasil;
 													?>
+												</td>
+												<td>
+												</td>
+												<td>
+												<center>
+                                                        <?php
+                                                    if($data['approval_spv'] == "Pending"){
+                                                        echo "<center>
+                                                        <input type='checkbox' id='select' name='approval_spv[]' value='".$data['id_attendance']."'></input>
+                                                        </td></center>";
+                                                    }else{
+                                                        echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title='' disabled><i class='fa fa-check'></i> APPROVED</button>";
+                                                    }
+                                                    ?>
+                                                        </center>
 												</td>
 											</tr>
 										<?php //penutup perulangan while

@@ -46,28 +46,59 @@ $token = $_SESSION['token'];
         });
     </script>
 
-<script type="text/javascript">  
+<script type="text/javascript">
+    
             function selects(){  
                 var ele=document.getElementsByName('approval_spv[]');  
                 // console.log('ele',ele);
                 for(var i=0; i<ele.length; i++){  
-                    if(ele[i].type=='checkbox'){  
+                    if(ele[i].type=='checkbox' && ele[i].checked==false){  
+                        // if(ele.[i].checked=false){
+                        //     console.log('false');
+                        // }
                         console.log(ele[i].checked);
                             ele[i].checked=true; 
+                    }else if(ele[i].type=='checkbox' && ele[i].checked==true){  
+                        // if(ele.[i].checked=false){
+                        //     console.log('false');
+                        // }
+                        console.log(ele[i].checked);
+                            ele[i].checked=false; 
+                    }else{
+                        return null;
                     }
-                    // if(ele[i].type=='checkbox' && ele[i].checked==true){
-                    //     ele[i].checked=false;
-                    // } 
-                }  
-            } 
-            // function deSelect(){  
-            //     var ele=document.getElementsByName('chk');  
+
+                    // if(ele[i].type == 'checkbox'){
+                    //     cons
+                    // }
+               
+                    // else{
+                    //     for(var i=0; i<ele.length; i++){
+
+                    //         console.log(ele[i].checked);
+                    //         ele[i].checked=false;
+                    //     }
+                    // }
+                // }
+                // for(var i=0; i<ele.length; i++){
+                //     if(ele[i].type=='checkbox'){  
+                //         console.log(ele[i].checked);
+                //             ele[i].checked=false; 
+                //     }
+                // }
+            }
+            }
+            
+            // function deselects(){  
+            //     var ele=document.getElementsByName('approval_spv[]');  
+            //     // console.log('ele',ele);
             //     for(var i=0; i<ele.length; i++){  
-            //         if(ele[i].type=='checkbox')  
-            //             ele[i].checked=false;  
-                      
-            //     }  
-            // }              
+            //         if(ele[i].type=='checkbox'){  
+            //             console.log(ele[i].checked);
+            //                 ele[i].checked=false; 
+            //         }
+            //     }
+            // }        
  </script>
 
     <!-- CSS Files -->
@@ -216,12 +247,11 @@ $token = $_SESSION['token'];
                                             Accept">
                                         </input>
                                         <br>
-                                        
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <form method="POST" action="proses_dummy_test.php?PageAction=add_approve">
+                                        <form>
                                         <table id="basic-datatables" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
@@ -235,7 +265,10 @@ $token = $_SESSION['token'];
                                                         <center>Documentation</center>
                                                     </th>
                                                     <th >
-                                                    <span><center>Approval<input type="checkbox" onclick="selects()" name="approval_spv" value="YES"></center></span>
+                                                    <span><center>Approval<br>
+                                                    <input type="checkbox" onclick="selects()" name="approval_spv" value="YES"></center>
+                                                    <!-- <button onclick="deselects()" name="approval_spv">UnCheck All</center> -->
+                                                    </span>
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -261,13 +294,12 @@ $token = $_SESSION['token'];
                                                     
                                                     if($data['approval_spv'] == "Pending"){
                                                         echo "<center>
-                                                        <input type='checkbox' name='approval_spv[]' value='".$data['id_logbook']."'></input>
+                                                        <input type='checkbox' id='select' name='approval_spv[]' value='".$data['id_logbook']."'></input>
                                                         </td></center>";
                                                     }else{
                                                         echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
+														data-target='' title='' disabled><i class='fa fa-check'></i> APPROVED</button>";
                                                     }
-                                                    
                                                     ?>
                                                         </center>
                                                     </td>
@@ -461,6 +493,23 @@ SweetAlert2Demo.init();
 });
     </script>
 
-</body>
+<script>
+(function() {
+    $('form > input#select').keyup(function() {
+        var empty = false;
+        $('form > input').each(function() {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
 
+        if (empty) {
+            $('#acc_data').attr('disabled', 'disabled');
+        } else {
+            $('#acc_data').removeAttr('disabled');
+        }
+    });
+})()
+</script>
+</body>
 </html>
