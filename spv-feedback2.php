@@ -71,7 +71,7 @@ $token = $_SESSION['token'];
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
+					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
 						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
@@ -556,27 +556,27 @@ $token = $_SESSION['token'];
 										<!-- textarea -->
 										<div class="form-group">
 											<p>1.Overall comments for the intern :</p>
-											<textarea class="form-control" rows="3" name="catatan_utk_mahasiswa" id="catatan_utk_mahasiswa"><?php echo $data['catatan_utk_mahasiswa'] ?></textarea>
+											<textarea class="form-control" rows="3" name="catatan_utk_mahasiswa" id="catatan_utk_mahasiswa" required></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<p>2. Overall comments for Politeknik Negeri Batam :</p>
-											<textarea class="form-control" rows="3" name="catatan_utk_poltek" id="catatan_utk_poltek"></textarea>
+											<textarea class="form-control" rows="3" name="catatan_utk_poltek" id="catatan_utk_poltek" required></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<p>3. Does the student’s internship performance meet the requirement<br>
 												for being new employee in your company/institution?</p>
-											<textarea class="form-control" rows="3" name="layak_diterima" id="layak_diterima"></textarea>
+											<textarea class="form-control" rows="3" name="layak_diterima" id="layak_diterima" required></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<p>4. Does your company intend to recruit the intern immediately<br>
 												he/she finished their internship?</p>
-											<textarea class="form-control" rows="3" name="langsung_diterima" id="langsung_diterima"></textarea>
+											<textarea class="form-control" rows="3" name="langsung_diterima" id="langsung_diterima" required></textarea>
 										</div>
 									</div>
 								</div><!-- Row -->
@@ -598,7 +598,7 @@ $token = $_SESSION['token'];
 										<div class="form-group">
 											<p>1. Final grade for student based on overall internship process (range 1 –
 												100): </p>
-											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir">
+											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir" required>
 										</div>
 										<div class="form-group">
 											<p>2. Please select in the appropriate column in the following table

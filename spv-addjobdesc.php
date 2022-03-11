@@ -228,7 +228,7 @@ $token = $_SESSION['token'];
                                                     <td>Database</td>
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="description_jobdesc[]" value="Database" 
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="description_jobdesc[]" value="Database"
                                                             <?php 
                                                                 if(in_array('Database',json_decode($data['description_jobdesc']))){
                                                                     echo 'checked';
@@ -461,17 +461,18 @@ $token = $_SESSION['token'];
                                                             ?>>
                                                             <label class="custom-control-label" for="customCheck16">Checked</label>
                                                         </div>
-                                                    </td>
+                                                    </td>\
+
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <div class="form-group">
                                             <p>2. To other work can be explained as follows : </p>
-                                            <textarea class="form-control" rows="3" id="another_jobdesc" name="another_jobdesc"><?php echo $data['another_jobdesc']; ?></textarea>
+                                            <textarea class="form-control" rows="3" id="another_jobdesc" name="another_jobdesc" required></textarea>
                                         </div>
                                         <div class="form-group">
                                             <p>3. During the internship process, students are expected to contribute in the form of : </p>
-                                            <textarea class="form-control" rows="3" id="expected_goal" name="expected_goal"><?php echo $data['expected_goal'] ?></textarea>
+                                            <textarea class="form-control" rows="3" id="expected_goal" name="expected_goal" required></textarea>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -686,11 +687,11 @@ $token = $_SESSION['token'];
                                         </table>
                                         <div class="form-group">
                                             <p>2. To other work can be explained as follows : </p>
-                                            <textarea class="form-control" rows="3" id="another_jobdesc" name="another_jobdesc"><?php echo $data['another_jobdesc']; ?></textarea>
+                                            <textarea class="form-control" required rows="3" id="another_jobdesc" name="another_jobdesc"><?php echo $data['another_jobdesc']; ?></textarea>
                                         </div>
                                         <div class="form-group">
                                             <p>3. During the internship process, students are expected to contribute in the form of : </p>
-                                            <textarea class="form-control" rows="3" id="expected_goal" name="expected_goal"><?php echo $data['expected_goal'] ?></textarea>
+                                            <textarea class="form-control" rows="3" required id="expected_goal" name="expected_goal"><?php echo $data['expected_goal'] ?></textarea>
                                         </div>
                                         <div>
                                             <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry
