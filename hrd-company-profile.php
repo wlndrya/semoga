@@ -178,7 +178,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-logbook">
+							<a class="nav-link" href="index.php?page=hrd-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
@@ -217,7 +217,7 @@ $token = $_SESSION['token'];
 									<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
 									<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $_SESSION['id_user_company']; ?>">
 									<input type="hidden" id="id_company" name="id_company" value="<?php echo $_SESSION['id_company']; ?>">
-									<input type="hidden" id="id_company" name="access_type" value="<?php echo $_SESSION['access_type']; ?>">
+									<input type="hidden" id="access_type" name="access_type" value="<?php echo $_SESSION['access_type']; ?>">
 
 									<div class="card-body">
 										<?php

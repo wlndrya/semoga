@@ -157,7 +157,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-logbook">
+							<a class="nav-link" href="index.php?page=hrd-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
@@ -201,9 +201,6 @@ $token = $_SESSION['token'];
                     <thead>
                         <tr>
                             <th>
-                                <center>No</center>
-                            </th>
-                            <th>
                                 <center>Week</center>
                             </th>
                             <th>
@@ -212,47 +209,40 @@ $token = $_SESSION['token'];
                             <th>
                                 <center>End Date</center>
                             </th>
+							<th>
+                                <center>Details of Activities</center>
+                            </th>
+							<th>
+                                <center>Documentation</center>
+                            </th>
                             <th style="width: 10px;">
-                                <center>Action</center>
+                                <center>Status</center>
                             </th>
                         </tr>
                     </thead>
-
-                    <tbody>
-                        <tr>
-                            <td><center>1</center></td>
-                            <td><center>1</center></td>
-                            <td><center>1 Jan 2022</center></td>
-                            <td><center>31 Jan 2022</center></td>
-                            <td>
-                                <div class="form-button-action">
-                                    <a href="index.php?page=hrd-detail2-logbook" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                    <button type="button" id="alert_demo_7" title="Print" class="btn btn-link btn-warning" data-original-title="Delete">
-                                        <i class="icon-printer"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><center>2</center></td>
-                            <td><center>2</center></td>
-                            <td><center>1 Feb 2022</center></td>
-                            <td><center>28 Feb 2022</center></td>
-                            <td>
-                                <div class="form-button-action">
-                                    <a href="index.php?page=hrd-detail2-logbook" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                    <button type="button" id="alert_demo_7" title="Print" class="btn btn-link btn-warning" data-original-title="Delete">
-                                        <i class="icon-printer"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-
+					<tbody>
+							<?php
+							include 'config.php';
+							error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+							$view = mysqli_query($conn, "SELECT * from tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE id_internship = '30'");
+							while ($data = mysqli_fetch_array($view)) {
+							echo "<tr>
+							<td>" . $data['week_num'] . "</td>
+							<td>" . $data['startdate'] . "</td>
+							<td>" . $data['enddate'] . "</td>
+							<td>" . $data['description'] . "</td>
+							<td>" . $data['documentation'] . "</td>
+							<td><center>
+							<a href = 'index.php?page=print_jobdesc&id=". $data['id_internship'] ."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+							</center></td>
+							</tr>"
+							?>
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
+												<!--End Modal Delete-->
+											</tbody>
                 </table>
             </div>
 

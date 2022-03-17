@@ -35,11 +35,38 @@ if ($_GET['PageAction'] == "add_supervisor") {
         // if($passwd_hashed == $passwd){
         //   echo "password :". $passwd;
         // }
-        echo '<script type="text/javascript">';
-        echo 'alert("Successfully Added"); document.location="index.php?page=hrd-addsupervisor";</script>';
+        echo "
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Success',
+            text: 'Added Succcesfully!',
+            icon: 'success',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=hrd-addsupervisor');
+         } ,2000); 
+        </script>
+        ";
       } else {
         // echo("Error description: " . $conn -> error);
-        echo '<script language="javascript">alert("User Gagal ditambah"); document.location="index.php?page=hrd-addsupervisor";</script>';
+        echo "
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Failure!',
+            text: 'Failed to added!',
+            icon: 'error',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=hrd-addsupervisor');
+         } ,3000); 
+        </script>
+        ";
       }
     }
   } else {
@@ -77,24 +104,38 @@ if ($_GET['PageAction'] == "update_supervisor") {
       //echo $id_user_company;
 
       if ($update) {
-        echo '<script type="text/javascript">';
-        echo 'alert("Update Successfully"); document.location="index.php?page=hrd-addsupervisor";</script>';
-      } else {
-        //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
         echo "
-                                     <script type='text/javascript'>
-                                      setTimeout(function () { 
-                                 Swal.fire({
-                                   type: 'error',
-                                   title: 'Data gagal diperbaharui',
-                                   showConfirmButton: false
-                                 });  
-                                      },10); 
-                                      window.setTimeout(function(){ 
-                                        window.history.back();
-                                      } ,3000); 
-                                     </script>
-                                 ";
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Success',
+            text: 'Updated Succcesfully!',
+            icon: 'success',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=hrd-addsupervisor');
+         } ,2000); 
+        </script>
+        ";
+      } else {
+        // echo("Error description: " . $conn -> error);
+        echo "
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Error!',
+            text: 'Failed to updated!',
+            icon: 'error',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=hrd-addsupervisor');
+         } ,3000); 
+        </script>
+        ";
       }
     } else {
       echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-addsupervisor";</script>';
@@ -171,9 +212,38 @@ if ($_GET['PageAction'] == "delete_supervisor") {
 
   $delete = $conn->query("DELETE FROM tb_user_company WHERE `id_user_company` = $id_user_company;");
   if ($delete) {
-    echo '<script language="javascript">alert("Successfully Deleted!"); window.history.back();</script>';
+    echo "
+    <script type='text/javascript'>
+     setTimeout(function () { 
+      swal({
+        title: 'Success',
+        text: 'Deleted Succcesfully!',
+        icon: 'success',
+        buttons: false
+      }); 
+     },10); 
+     window.setTimeout(function(){ 
+      window.location.replace('index.php?page=hrd-addsupervisor');
+     } ,2000); 
+    </script>
+    ";
   } else {
-    echo '<script language="javascript">alert("Deleted Failure!"); window.history.back();</script>';
+    // echo("Error description: " . $conn -> error);
+    echo "
+    <script type='text/javascript'>
+     setTimeout(function () { 
+      swal({
+        title: 'Error!',
+        text: 'Failed to deleted!',
+        icon: 'error',
+        buttons: false
+      }); 
+     },10); 
+     window.setTimeout(function(){ 
+      window.location.replace('index.php?page=hrd-addsupervisor');
+     } ,3000); 
+    </script>
+    ";
   }
 }
 
@@ -218,7 +288,7 @@ if ($_GET['PageAction'] == "update_description") {
          setTimeout(function () { 
           swal({
             title: 'Error',
-            text: 'Updated Successfully !',
+            text: 'Failed to update!',
             icon: 'error',
             buttons: false
           }); 
@@ -262,8 +332,21 @@ if ($_GET['PageAction'] == "approval_internship") {
           $updateCompany = mysqli_query($conn, "UPDATE `tb_applicant` SET  `status_applicant` = '$status' WHERE `id_applicant` =  $id_applicant");
         }
         if ($updateCompany) {
-          echo '<script type="text/javascript">';
-          echo 'alert("Update Successfully"); document.location="index.php?page=hrd-registration";</script>';
+          echo "
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Success',
+            text: 'Approved Succcesfully!',
+            icon: 'success',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=hrd-registration');
+         } ,2000); 
+        </script>
+        ";
         } else {
           echo $conn->error;
         }
@@ -281,8 +364,21 @@ if ($_GET['PageAction'] == "approval_internship") {
           WHERE `id_applicant` = $id_applicant;");
 
           if ($updateCompany) {
-            echo '<script type="text/javascript">';
-            echo 'alert("Update Successfully"); document.location="index.php?page=hrd-registration";</script>';
+            echo "
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Success',
+            text: 'Approved Succcesfully!',
+            icon: 'success',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=hrd-registration');
+         } ,2000); 
+        </script>
+        ";
             // echo("Error description: " . $conn -> error);
           }
         }
@@ -354,7 +450,7 @@ if ($_GET['PageAction'] == "update_company") {
 
     $id_company      = mysqli_real_escape_string($conn, $_POST['id_company']);
     $id_user_company = mysqli_real_escape_string($conn, $_POST['id_user_company']);
-    $company_name            = mysqli_real_escape_string($conn, $_POST['company_name']);
+    $company_name    = mysqli_real_escape_string($conn, $_POST['company_name']);
     $type            = mysqli_real_escape_string($conn, $_POST['type']);
     $phone           = mysqli_real_escape_string($conn, $_POST['phone']);
     $email           = mysqli_escape_string($conn, $_POST['email']);
@@ -385,28 +481,42 @@ if ($_GET['PageAction'] == "update_company") {
       `city` = '$city',
       `status` = '$status',
       `access_type` = '$access_type'
-      WHERE `id_company` = $id_company;");
+      WHERErrr `id_company` = $id_company;");
     }
     // echo $id_user_company;
     if ($update) {
-      echo '<script type="text/javascript">';
-      echo 'alert("Successfully Update"); document.location="index.php?page=hrd-company-profile";</script>';
+      echo "
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Success',
+          text: 'Updated Succcesfully!',
+          icon: 'success',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.location.replace('index.php?page=hrd-company-profile');
+       } ,2000); 
+      </script>
+      ";
     } else {
       //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
       echo "
-                                     <script type='text/javascript'>
-                                      setTimeout(function () { 
-                                 Swal.fire({
-                                   type: 'error',
-                                   title: 'Data gagal diperbaharui',
-                                   showConfirmButton: false
-                                 });  
-                                      },10); 
-                                      window.setTimeout(function(){ 
-                                        window.history.back();
-                                      } ,3000); 
-                                     </script>
-                                 ";
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Error',
+          text: 'Failed to update!',
+          icon: 'error',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.location.replace('index.php?page=hrd-company-profile');
+       } ,3000); 
+      </script>
+      ";
     }
   } else {
     echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-company-profile";</script>';

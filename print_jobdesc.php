@@ -102,7 +102,23 @@ ob_start();
 </html>
 <?php
 	else:
-		echo "<script>alert('Job Description Not Assigned Yet !'); history.back()</script>";
+		echo "
+		<script type='text/javascript'>
+		 setTimeout(function () { 
+		  swal({
+			title: '',
+			text: 'Job description has not been assigned!',
+			buttons: true
+		  }); 
+		 },10); 
+		 window.setTimeout(function(){ 
+		  window.location.replace('index.php?page=hrd-studentlist');
+		 } ,4000); 
+		</script>
+		";
 	endif;
 
 ?>
+
+<!-- Sweet Alert -->
+<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>

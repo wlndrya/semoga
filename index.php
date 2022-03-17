@@ -52,8 +52,8 @@ if (isset($_GET['page'])) {
     case 'spv-addjobdesc':
       include "spv-addjobdesc.php";
       break;
-    case 'hrd-logbook':
-      include "hrd-logbook.php";
+    case 'hrd-document':
+      include "hrd-document.php";
       break;
     case 'spv-logbook':
       include "spv-logbook.php";

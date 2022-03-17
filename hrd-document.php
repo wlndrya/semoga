@@ -157,7 +157,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-logbook">
+							<a class="nav-link" href="index.php?page=hrd-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
@@ -208,17 +208,14 @@ $token = $_SESSION['token'];
 											<?php
 												include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * FROM tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE id_company = $id_company");
+												$view = mysqli_query($conn, "SELECT * FROM tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE id_company = $id_company AND status = 'YES'");
 												while ($data = mysqli_fetch_array($view)) {
 													// echo $id_company;
 												?>
 												<tr>
 													<td><?php echo $data['name']?></td>
-													<!-- <td><?php echo $data['start_date']?></td>
-													<td><?php echo $data['end_date']?></td>
-													<td><?php echo $data['week_num']?></td> -->
 													<td><?php echo "<center>
-													<a href = 'index.php?page=hrd-detail-logbook' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = 'index.php?page=hrd-detail-logbook&id=". $data['id_internship'] ."' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</td></center>"?></td>
 													<td><?php echo "<center>
 													<a href = 'index.php?page=hrd-detail-attendance' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
