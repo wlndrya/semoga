@@ -44,7 +44,9 @@ session_start();
 		</div>
 		<div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
 			<div class="container container-login container-transparent animated fadeIn">
-				<h3 class="text-center">LOGIN</h3>
+				<div class="w3-card-4 text-center">
+					<img src="assets/img/imagelogin.png" height="170" alt="Logo">
+				</div>
 				<form action="" method="post">
 					<input type="hidden" name="token" value="9Kylnkoreo7zASjqMh4eEx0Hx9b4h5e2"></input>
 					<div class="login-form">
@@ -61,7 +63,7 @@ session_start();
 								</div>
 							</div>
 						</div>
-						<div class="form-group form-action-d-flex mb-3">
+						<div class="form-group form-action-d-flex mb-3" text-align="center">
 							<button type="submit" name="login" value="Login" class="btn btn-secondary col-md-5 float-right mt-3 mt-sm-0 fw-bold">Sign In</button>
 						</div>
 				</form>
@@ -70,46 +72,46 @@ session_start();
 					<!-- <a href="#" id="show-signup" class="link">Sign Up</a> -->
 					<br>
 					<?php
-    include 'config.php';
-    //include 'Bcrypt.php';
-    error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
+					include 'config.php';
+					//include 'Bcrypt.php';
+					error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
 
-    //$bcrypt = new Bcrypt(16);
-    
-    if($_POST['login']){
-      
-      $user = mysqli_real_escape_string($conn,$_POST['username']);
-      $pass = mysqli_real_escape_string($conn,$_POST['password']);
-      
-        if($user && $pass){
-        $cek = $conn->query("SELECT * FROM tb_user_company WHERE username = '$user'");
-        
-        if(mysqli_num_rows($cek) != 0){
-          $data = mysqli_fetch_assoc($cek);
-          $user_id = $data['id_user_company'];
-          $username = $data['username'];
-          $name = $data['user_fullname'];
-          $role = $data['user_type'];
-		  $id_company = $data['id_company'];
+					//$bcrypt = new Bcrypt(16);
 
-          $hash   = $data['password'];
-          $verify = password_verify($pass, $hash);
-          
-          if($user == $data['username'] && $verify == 1 ){
-            session_start();
-            $_SESSION['username'] = $username;
-            $_SESSION['id_user_company'] = $user_id;
-            $_SESSION['user_fullname'] = $name;
-            $_SESSION['user_type'] = $role;
-			$_SESSION['id_company'] = $id_company;
-			$_SESSION['login_status'] = "login";
-            
-            $length = 32;
-            $_SESSION['token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $length);
-            
-            //echo '<script language="javascript">document.location="index.php?page=dashboard";</script>';
-            if($role == "HRD"){
-              echo "
+					if ($_POST['login']) {
+
+						$user = mysqli_real_escape_string($conn, $_POST['username']);
+						$pass = mysqli_real_escape_string($conn, $_POST['password']);
+
+						if ($user && $pass) {
+							$cek = $conn->query("SELECT * FROM tb_user_company WHERE username = '$user'");
+
+							if (mysqli_num_rows($cek) != 0) {
+								$data = mysqli_fetch_assoc($cek);
+								$user_id = $data['id_user_company'];
+								$username = $data['username'];
+								$name = $data['user_fullname'];
+								$role = $data['user_type'];
+								$id_company = $data['id_company'];
+
+								$hash   = $data['password'];
+								$verify = password_verify($pass, $hash);
+
+								if ($user == $data['username'] && $verify == 1) {
+									session_start();
+									$_SESSION['username'] = $username;
+									$_SESSION['id_user_company'] = $user_id;
+									$_SESSION['user_fullname'] = $name;
+									$_SESSION['user_type'] = $role;
+									$_SESSION['id_company'] = $id_company;
+									$_SESSION['login_status'] = "login";
+
+									$length = 32;
+									$_SESSION['token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $length);
+
+									//echo '<script language="javascript">document.location="index.php?page=dashboard";</script>';
+									if ($role == "HRD") {
+										echo "
               <script type='text/javascript'>
                setTimeout(function () { 
                swal({
@@ -124,10 +126,9 @@ session_start();
                 window.location.replace('index.php?page=hrd-home');
                } ,3000); 
               </script>
-              "; 
-			} 
-			elseif($role == "supervisor"){
-				echo "
+              ";
+									} elseif ($role == "supervisor") {
+										echo "
 				<script type='text/javascript'>
 				 setTimeout(function () { 
 				 swal({
@@ -142,21 +143,19 @@ session_start();
 				  window.location.replace('index.php?page=spv-home');
 				 } ,3000); 
 				</script>
-				";   
-			  }       
-          }
-          else{
-            echo '<div class="alert alert-success" role="alert">Login Failed. Username and Password Wrong.</div>';
-          }
-        } 
-        else{
-          echo '<div class="alert alert-success" role="alert">Login Failed. Username not Registered</div>';
-        }
-      }else{
-        echo '<div class="error">ERROR.</div>';
-      }
-    }
-    ?>
+				";
+									}
+								} else {
+									echo '<div class="alert alert-success" role="alert">Login Failed. Username and Password Wrong.</div>';
+								}
+							} else {
+								echo '<div class="alert alert-success" role="alert">Login Failed. Username not Registered</div>';
+							}
+						} else {
+							echo '<div class="error">ERROR.</div>';
+						}
+					}
+					?>
 				</div>
 			</div>
 		</div>

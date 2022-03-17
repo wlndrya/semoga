@@ -5971,7 +5971,7 @@ label.error {
     cursor: default; }
 
 .scroll-textarea {
-  border: 1px solid #ccc;
+  border: 1px solid #ccc#554fad;
   border-top-color: #999; }
   .scroll-textarea > .scroll-content {
     overflow: hidden !important; }
