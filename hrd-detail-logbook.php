@@ -215,34 +215,77 @@ $token = $_SESSION['token'];
 							<th>
                                 <center>Documentation</center>
                             </th>
-                            <th style="width: 10px;">
-                                <center>Status</center>
-                            </th>
                         </tr>
                     </thead>
+				
 					<tbody>
-							<?php
-							include 'config.php';
-							error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-							$view = mysqli_query($conn, "SELECT * from tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE id_internship = '30'");
-							while ($data = mysqli_fetch_array($view)) {
-							echo "<tr>
-							<td>" . $data['week_num'] . "</td>
-							<td>" . $data['startdate'] . "</td>
-							<td>" . $data['enddate'] . "</td>
-							<td>" . $data['description'] . "</td>
-							<td>" . $data['documentation'] . "</td>
-							<td><center>
-							<a href = 'index.php?page=print_jobdesc&id=". $data['id_internship'] ."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
-							</center></td>
-							</tr>"
-							?>
+                                                <?php
+												include 'config.php';
+												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                                $id = $_GET['id'];
+												$nim = $_GET['nim'];
+												$view = mysqli_query($conn, "SELECT * FROM tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE tb_logbook.id_internship = $id;");
+												while ($data = mysqli_fetch_array($view)) {
+													// echo $id_company;
+												?>
+												<tr>
+													<td><center><?php echo $data['week_num']?></center></td>
+													<td><?php echo $data['startdate']?></td>
+													<td><?php echo $data['enddate']?></td>
+													<td><?php echo $data['description']?></td>
+													<td><center><?php echo "<button class='btn btn-modify text-white' data-target='#mymodal" . $data['id_logbook'] . "' data-toggle='modal'><i class='fas fa-eye'></i> View</button>"?></center></td>
+													<!-- <td>
+                                                        <center>
+                                                        <?php
+													if ($data['approval_spv'] == "Pending") {
+														echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+										data-target='#modal-approve' title=''>$data[approval_spv]</button>";
+													} elseif ($data['approval_spv'] == "Yes") {
+														echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+										data-target='' title=''><i class='fas fa-check'></i> APPROVED</button>";
+													} elseif ($data['approval_spv'] == "No") {
+														echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+										data-target='' title=''><i class='fas fa-times'></i> DECLINED</button>";
+													}
+                                                    ?>
+                                                        </center>
+                                                    </td> -->
+												</tr>
+
+												<!--Modal View Documentation-->
+												<div id="mymodal<?php echo $data['id_logbook'] ?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-lg">
+														<!-- Modal content-->
+														<div class="modal-content">
+															<div class="modal-header">
+																<h4 class="modal-title">Logbook Documentation</h4>
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+															</div>
+															<?php
+																if($data['documentation']) :
+															?>
+															<div class="modal-body" style="height: 600px">
+																<object type="application/pdf" data="berkas/<?php echo $data['documentation'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="false">
+																</object>
+															</div>
+															<?php
+															else :
+															?>
+															<h2 class="p-5 mx-auto">Documentation is not available!</h2>
+															<?php endif;?>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!--End Modal Documentation-->
+												
 												<?php //penutup perulangan while
 													$no++;
 												}
 												?>
-												<!--End Modal Delete-->
-											</tbody>
+                                            </tbody>
                 </table>
             </div>
 

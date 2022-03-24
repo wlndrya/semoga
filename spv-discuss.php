@@ -245,7 +245,7 @@ $token = $_SESSION['token'];
 														</button>
 													</div>
 
-													<form>
+													<form method="POST" action="proses_dummy_test.php?PageAction=add_discuss">
 														<div class="modal-body">
 															<!-- <div class="form-group">
 																<label>Today's Date</label>
@@ -256,39 +256,40 @@ $token = $_SESSION['token'];
 																	  </div>
 																  </div>
 															  </div> -->
-															  <div class="form-group">
+															  <input type="hidden" name="id_spv" value=<?= $user_id?>>
+															  <!-- <div class="form-group">
 																<label for="id_topic">Today's Date</label>
-																<input type="date" class="form-control" id="id_topic"
+																<input type="date" name="date" class="form-control" id="id_topic"
 																	placeholder="" required>
-															</div>
+															</div> -->
 															  <div class="form-group">
 																<label for="id_topic">Time</label>
-																<input type="text" readonly value="" class="form-control" id="time-now"
+																<input type="text" name="time" readonly value="" class="form-control" id="time-now"
 																	placeholder="" required>
 															</div>
 															<div class="form-group">
-																<label for="id_topic">What the topic?</label>
-																<input type="text" class="form-control" id="id_topic"
+																<label for="id_topic">What's the topic?</label>
+																<input type="text" name="title" class="form-control" id="id_topic"
 																	placeholder="" required>
 															</div>
-															<div class="form-group">
-																<label>Who is join with this discussion?</label>
+															<!-- <div class="form-group">
+																<label>Who will join in this discussion?</label>
 																<select class="form-control" id="id_user_company" name="id_user_company" value="0">
 																<option></option>
 																	<?php
-																	$sql = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company AND user_type = 'supervisor'");
-																	if (mysqli_num_rows($sql) != 0) {
-																	while ($row = mysqli_fetch_assoc($sql)) {
-																	echo '<option value=' . $row["id_user_company"] . '>' . $row['user_fullname'] . ' </option>';
-																		}
-																	}
+																	// $sql = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company AND user_type = 'supervisor'");
+																	// if (mysqli_num_rows($sql) != 0) {
+																	// while ($row = mysqli_fetch_assoc($sql)) {
+																	// echo '<option value=' . $row["id_user_company"] . '>' . $row['user_fullname'] . ' </option>';
+																	// 	}
+																	// }
 																	?>
 																</select>
-															</div>
+															</div> -->
 															<div class="form-group">
-																<label for="id_company">Discussion</label>
+																<label for="id_company">Discussion Content</label>
 																<textarea class="form-control" rows="10" cols="100"
-																	id="message-text"
+																	id="message-text" name="content"
 																	placeholder="Fill here..."></textarea>
 															</div>
 														</div>
@@ -309,25 +310,35 @@ $token = $_SESSION['token'];
 										<table class="table table-head-bg-white mb-3">
 											<thead>
 												<tr>
-													<th scope="col" style="width: 50%;">Discussion Title</th>
+													<th scope="col">Discussion Title</th>
 													<th scope="col">Topic</th>
 													<th scope="col">Date</th>
-													<th scope="col"><center>Member</center></th>
+													<th scope="col"><center>Started By</center></th>
 													<th scope="col"><center><i class="fas fa-eye fa-lg" title="Viewer"></i></center></th>
 													<th scope="col"><center><i class="fas fa-comments fa-lg" title="Comment"></i></center></th> 
 												</tr>
 											</thead> 
 											<tbody>
+											<?php
+
+												$query = mysqli_query($conn,"SELECT * FROM tb_discussion");
+												
+												while($data = mysqli_fetch_array($query)){
+													$id = json_decode($data['who_can_see']);
+													if(in_array($user_id,$id)){
+											?>
 												<tr>
-													<td><a href="spv-discuss2.php">Pembuatan Logbook</a></td>
-													<td>Logbook</td>
+													<td><a href="index.php?page=spv-discuss2&id_discuss=<?= $data['id_discuss']?>"><?= $data['title']?></a></td>
+													<td><?= $data['discuss']?></td>
 													<td>24/01/2022</td>
 													<td>
-														<center><i class="fas fa-user-circle fa-lg"
-																title="Cyntya Maharani Nurul Istiqomah"></i>
-															</center</td> <td>
-															<center><a
-																	class="btn btn-success btn-xs text-center text-white">6</a>
+														<div class="text-center">
+															<i class="fas fa-user-circle fa-lg"></i> <?= $data['started_by']?>
+															</div>
+														</td> 
+															<td>
+															<center>
+																<a class="btn btn-success btn-xs text-center text-white"><?= count($id)?></a>
 															</center>
 													</td>
 													<td>
@@ -336,25 +347,11 @@ $token = $_SESSION['token'];
 														</center>
 													</td>
 												</tr>
-												<tr>
-													<td><a href="spv-discuss3.php">Poin Kehadiran</a></td>
-													<td>Attendance</td>
-													<td>30/02/2022</td>
-													<td>
-														<center><i class="fas fa-user-circle fa-lg"
-																title="Yulia Wulandari"></i></center>
-													</td>
-													<td>
-														<center><a
-																class="btn btn-success btn-xs text-center text-white">3</a>
-														</center>
-													</td>
-													<td>
-														<center><a
-																class="btn btn-success btn-xs text-center text-white">0</a>
-														</center>
-													</td>
-												</tr>
+												
+												<?php
+												}
+											}
+												?>
 												</tbody>
 										</table>
 									</div>

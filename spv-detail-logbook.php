@@ -47,7 +47,19 @@ $token = $_SESSION['token'];
     </script>
 
 <script type="text/javascript">
-    
+            const checkbox = document.querySelectorAll('input[type="checkbox"]');
+            const button = document.getElementById('acc-btn');
+            checkbox.forEach((cb) => {
+                cb.addEventListener('change',checkButtonStatus);
+            })
+
+            function checkButtonStatus(){
+                const checkedCount = [...checkbox].filter((cb)=>cb.checked);
+                button.disabled = checkedCount.length !== checkbox.length
+            }
+
+            checkButtonStatus();
+
             function selects(){  
                 var ele=document.getElementsByName('approval_spv[]');  
                 // console.log('ele',ele);
@@ -68,27 +80,18 @@ $token = $_SESSION['token'];
                         return null;
                     }
 
-                    // if(ele[i].type == 'checkbox'){
-                    //     cons
-                    // }
-               
-                    // else{
-                    //     for(var i=0; i<ele.length; i++){
+            }
+            }
 
-                    //         console.log(ele[i].checked);
-                    //         ele[i].checked=false;
-                    //     }
-                    // }
-                // }
-                // for(var i=0; i<ele.length; i++){
-                //     if(ele[i].type=='checkbox'){  
-                //         console.log(ele[i].checked);
-                //             ele[i].checked=false; 
-                //     }
-                // }
+            var ebpDocumentCheckboxid = document.getElementById("select");
+            var btn = document.getElementById("acc-btn");
+
+            const onCheckboxChanged = ()=>{
+            btn.disabled = (ebpDocumentCheckboxid.checked);
             }
-            }
-            
+
+            ebpDocumentCheckboxid.onchange = onCheckboxChanged;
+
             // function deselects(){  
             //     var ele=document.getElementsByName('approval_spv[]');  
             //     // console.log('ele',ele);
@@ -203,7 +206,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-logbook">
+							<a class="nav-link" href="index.php?page=spv-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
@@ -243,8 +246,9 @@ $token = $_SESSION['token'];
                                 <div class="card-header">
                                     <div class="card-head-row">
                                         <h4 class="card-title intern-title">Detail Logbook</h4>
+                                        <!-- <input type="button" disabled="true" id="acc-btn" value="save"></input> -->
                                         <input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
-                                            Accept">
+                                            Accept" id="acc-btn" >
                                         </input>
                                         <br>
                                     </div>
@@ -256,16 +260,17 @@ $token = $_SESSION['token'];
                                             <thead>
                                                 <tr>
                                                     <th>Week</th>
-                                                    <th>Start Date</th>
-                                                    <th>End Date </th>
-                                                    <th style="width: 10px;">
+                                                    <th><center>Start Date</center></th>
+                                                    <th><center>End Date</center></th>
+                                                    <th>
                                                         <center>Detail of Activities</center>
                                                     </th>
                                                     <th style="width: 10px;">
                                                         <center>Documentation</center>
                                                     </th>
-                                                    <th >
+                                                    <th style="width: 10px;">
                                                     <span><center>Approval<br>
+                                                    <!-- <input type="checkbox" id="select-all"/> -->
                                                     <input type="checkbox" onclick="selects()" name="approval_spv" value="YES"></center>
                                                     <!-- <button onclick="deselects()" name="approval_spv">UnCheck All</center> -->
                                                     </span>
@@ -283,11 +288,11 @@ $token = $_SESSION['token'];
 													// echo $id_company;
 												?>
 												<tr>
-													<td><?php echo $data['week_num']?></td>
-													<td><?php echo $data['startdate']?></td>
-													<td><?php echo $data['enddate']?></td>
+													<td><center><?php echo $data['week_num']?></center></td>
+													<td><center><?php echo $data['startdate']?></center></td>
+													<td><center><?php echo $data['enddate']?></center></td>
 													<td><?php echo $data['description']?></td>
-                                                    <td><?php echo $data['documentation']?></td>
+                                                    <td><center><?php echo "<span class='btn btn-sm btn-modify text-white' data-target='#mymodal" . $data['id_logbook'] . "' data-toggle='modal'><i class='fas fa-eye'></i> View</span>"?></center></td>
 													<td>
                                                         <center>
                                                         <?php
@@ -297,27 +302,54 @@ $token = $_SESSION['token'];
                                                         <input type='checkbox' id='select' name='approval_spv[]' value='".$data['id_logbook']."'></input>
                                                         </td></center>";
                                                     }else{
-                                                        echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='' title='' disabled><i class='fa fa-check'></i> APPROVED</button>";
+                                                        echo "<span class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'data-target='' title='' disabled><i class='fa fa-check'></i> APPROVED</span>";
                                                     }
                                                     ?>
                                                         </center>
                                                     </td>
 												</tr>
+
+                                                <!--Modal View Documentation-->
+												<div id="mymodal<?php echo $data['id_logbook'] ?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-lg">
+														<!-- Modal content-->
+														<div class="modal-content">
+															<div class="modal-header">
+																<h4 class="modal-title">Logbook Documentation</h4>
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+															</div>
+															<?php
+																if($data['documentation']) :
+															?>
+															<div class="modal-body" style="height: 600px">
+																<object type="application/pdf" data="berkas/<?php echo $data['documentation'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="false">
+																</object>
+															</div>
+															<?php
+															else :
+															?>
+															<h2 class="p-5 mx-auto">Documentation is not available!</h2>
+															<?php endif;?>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!--End Modal Documentation-->
+                                                
 												<?php //penutup perulangan while
 													$no++;
 												}
 												?>
                                             </tbody>
-
                                         </table>
                                         </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    </div><!--div class table-responsive-->
+                                </div><!--div class card-body-->
+                            </div><!--div class card-->
+                        </div><!--div class col-md-12-->
+                    </div><!--div class row-->
                     </form>
                 </div>
                 <!--page inner-->

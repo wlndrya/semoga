@@ -218,7 +218,7 @@ $token = $_SESSION['token'];
 													<a href = 'index.php?page=hrd-detail-logbook&id=". $data['id_internship'] ."' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</td></center>"?></td>
 													<td><?php echo "<center>
-													<a href = 'index.php?page=hrd-detail-attendance' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = 'index.php?page=hrd-detail-attendance&id=". $data['id_internship'] ."' type='button' class='btn py-2 my-auto mx-auto rounded btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</td></center>"?></td>
 													<!-- <td>
 													<center><?php

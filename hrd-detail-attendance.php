@@ -197,72 +197,84 @@ $token = $_SESSION['token'];
                   <div class="card">
                                 <div class="card-header">
                                     <div class="card-head-row">
-                                        <h4 class="card-title intern-title">`Adam Firdaus` Attendance Recap</h4>
+                                        <h4 class="card-title intern-title">Attendance Recap</h4>
                                     </div>
                                 </div>
                                 <div class="card-body">
 
                                     <div class="table-responsive">
                                         <table id="basic-datatables" class="display table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <center>Week</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Present</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Absent</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Paid Leave</center>
-                                                    </th>
-                                                    <th>
-                                                        <center>Unpaid Leave</center>
-                                                    </th>
-                                                    <th style="width: 10px;">
-                                                        <center>Print</center>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><center>1</center></td>
-                                                    <td><center>5</center></td>
-													<td><center>0</center></td>
-													<td><center>0</center></td>
-													<td><center>0</center></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <!-- <a href="vattendance.php" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                                <i class="icon-magnifier"></i>
-                                                            </a> -->
-                                                            <button type="button" id="alert_demo_7" title="Print" class="btn btn-link btn-warning" data-original-title="Delete">
-                                                                <i class="icon-printer"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-													<td><center>2</center></td>
-                                                    <td><center>3</center></td>
-													<td><center>1</center></td>
-													<td><center>0</center></td>
-													<td><center>1</center></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <!-- <a href="vattendance.php" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-                                                                <i class="icon-magnifier"></i>
-                                                            </a> -->
-                                                            <button type="button" id="alert_demo_7" title="Print" class="btn btn-link btn-warning" data-original-title="Delete">
-                                                                <i class="icon-printer"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+										<thead>
+										<tr>
+											<th>
+												<center>Week</center>
+											</th>
+											<th>
+												<center>Present</center>
+											</th>
+											<th>
+												<center>Absent</center>
+											</th>
+											<th>
+												<center>Paid Leave</center>
+											</th>
+											<th>
+												<center>Unpaid Leave</center>
+											</th>
+											<!-- <th style="width: 10px;">
+												<center>Action</center>
+											</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										include 'config.php';
+										error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+										$id = $_GET['id'];
+										$view = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE tb_attendance.id_internship = $id GROUP BY tb_attendance.week;");
+										while ($data = mysqli_fetch_array($view)) {
+										?>
+											<tr>
+												<td><center><?php echo $data['week'] ?></center></td>
+												<td><center><?php
+												$week = $data['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Present' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
+													$hasil = mysqli_num_rows($query);
 
-                                            </tbody>
+													echo $hasil;
+													?>
+												</center></td>
+												<td><center><?php
+												$week = $data['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Absent' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
+													$hasil = mysqli_num_rows($query);
+
+													echo $hasil;
+													?>
+												</center></td>
+												<td><center><?php
+												$week = $data['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Paid Leave' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
+													$hasil = mysqli_num_rows($query);
+
+													echo $hasil;
+													?>
+												</center></td>
+												<td><center><?php
+												$week = $data['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Unpaid Leave' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
+													$hasil = mysqli_num_rows($query);
+
+													echo $hasil;
+													?>
+												</center></td>
+												<!-- <td><center><?php echo "<a href='index.php?page=hrd-detail2-attendance' type='button' class='btn btn-link btn-primary btn-lg' title='Attendance Detail'><i class='icon-magnifier'></i></a>"?></center></td> -->
+											</tr>
+										<?php //penutup perulangan while
+											$no++;
+										}
+										?>
+									</tbody>
                                         </table>
                                     </div>
 

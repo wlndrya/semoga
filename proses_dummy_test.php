@@ -177,24 +177,38 @@ if ($_GET['PageAction'] == "update_spv") {
       //echo $id_user_company;
 
       if ($update) {
-        echo '<script type="text/javascript">';
-        echo 'alert("Update Successfully"); document.location="index.php?page=spv-profile";</script>';
-      } else {
-        //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
         echo "
-                                     <script type='text/javascript'>
-                                      setTimeout(function () { 
-                                 Swal.fire({
-                                   type: 'error',
-                                   title: 'Data gagal diperbaharui',
-                                   showConfirmButton: false
-                                 });  
-                                      },10); 
-                                      window.setTimeout(function(){ 
-                                        window.history.back();
-                                      } ,3000); 
-                                     </script>
-                                 ";
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Success',
+            text: 'Updated Succcesfully!',
+            icon: 'success',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=spv-profile');
+         } ,2000); 
+        </script>
+        ";
+      } else {
+        // echo("Error description: " . $conn -> error);
+        echo "
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Error!',
+            text: 'Failed to updated!',
+            icon: 'error',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=spv-profile');
+         } ,3000); 
+        </script>
+        ";
       }
     } else {
       echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=spv-profile";</script>';
@@ -328,11 +342,7 @@ if ($_GET['PageAction'] == "approval_internship") {
     if ($_SESSION) {
       if ($status == "NO") {
         $updateStatus = mysqli_query($conn, "UPDATE `tb_internship` SET `status` = '$status' WHERE `id_internship` = $id_internship");
-        if ($updateStatus) {
-          $updateCompany = mysqli_query($conn, "UPDATE `tb_applicant` SET  `status_applicant` = '$status' WHERE `id_applicant` =  $id_applicant");
-        }
-        if ($updateCompany) {
-          echo "
+        echo "
         <script type='text/javascript'>
          setTimeout(function () { 
           swal({
@@ -347,9 +357,7 @@ if ($_GET['PageAction'] == "approval_internship") {
          } ,2000); 
         </script>
         ";
-        } else {
-          echo $conn->error;
-        }
+
       } else {
         $updateStatus = $conn->query("UPDATE `tb_internship` SET 
         `id_user_company` = '$id_user_company',
@@ -359,28 +367,65 @@ if ($_GET['PageAction'] == "approval_internship") {
         WHERE `id_internship` = $id_internship;");
 
         if ($updateStatus) {
-          $updateCompany = $conn->query("UPDATE `tb_applicant` SET
-          `status_applicant` = '$status'
-          WHERE `id_applicant` = $id_applicant;");
+            if($id_applicant){
+              $updateCompany = mysqli_query($conn, "UPDATE `tb_applicant` SET  `status_applicant` = '$status' WHERE `id_applicant` =  $id_applicant");
 
-          if ($updateCompany) {
-            echo "
-        <script type='text/javascript'>
-         setTimeout(function () { 
-          swal({
-            title: 'Success',
-            text: 'Approved Succcesfully!',
-            icon: 'success',
-            buttons: false
-          }); 
-         },10); 
-         window.setTimeout(function(){ 
-          window.location.replace('index.php?page=hrd-registration');
-         } ,2000); 
-        </script>
-        ";
-            // echo("Error description: " . $conn -> error);
-          }
+              if ($updateCompany) {
+                echo "
+              <script type='text/javascript'>
+               setTimeout(function () { 
+                swal({
+                  title: 'Success',
+                  text: 'Approved Succcesfully!',
+                  icon: 'success',
+                  buttons: false
+                }); 
+               },10); 
+               window.setTimeout(function(){ 
+                window.location.replace('index.php?page=hrd-registration');
+               } ,2000); 
+              </script>
+              ";
+              } else {
+                echo "
+              <script type='text/javascript'>
+               setTimeout(function () { 
+                swal({
+                  title: 'Error',
+                  text: 'Failed to approve!',
+                  icon: 'error',
+                  buttons: false
+                }); 
+               },10); 
+               window.setTimeout(function(){ 
+                window.location.replace('index.php?page=hrd-registration');
+               } ,3000); 
+              </script>
+              ";
+              }
+            }
+        //   $updateCompany = $conn->query("UPDATE `tb_applicant` SET
+        //   `status_applicant` = '$status'
+        //   WHERE `id_applicant` = $id_applicant;");
+
+        //   if ($updateCompany) {
+        //     echo "
+        // <script type='text/javascript'>
+        //  setTimeout(function () { 
+        //   swal({
+        //     title: 'Success',
+        //     text: 'Approved Succcesfully!',
+        //     icon: 'success',
+        //     buttons: false
+        //   }); 
+        //  },10); 
+        //  window.setTimeout(function(){ 
+        //   window.location.replace('index.php?page=hrd-registration');
+        //  } ,2000); 
+        // </script>
+        // ";
+        //     echo("Error description: " . $conn -> error);
+        //   }
         }
       }
     }
@@ -405,7 +450,7 @@ if ($_GET['PageAction'] == "update_hrd") {
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT); // hash password
 
-    if ($_SESSION) {
+    if ($password) {
       $update = $conn->query("UPDATE `tb_user_company` SET 
       `user_fullname` = '$name',
       `user_phone` = '$user_phone',
@@ -413,27 +458,48 @@ if ($_GET['PageAction'] == "update_hrd") {
       `username` = '$username',
       `password` = '$password_hash'
       WHERE `id_user_company` = $id_user_company;");
+    }else{
+      $update = $conn->query("UPDATE `tb_user_company` SET 
+      `user_fullname` = '$name',
+      `user_phone` = '$user_phone',
+      `user_email` = '$user_email',
+      `username` = '$username'
+      WHERE `id_user_company` = $id_user_company;");
     }
     // echo $id_user_company;
     if ($update) {
-      echo '<script type="text/javascript">';
-      echo 'alert("Successfully Update"); document.location="index.php?page=hrd-profile";</script>';
-    } else {
-      //echo '<script language="javascript">alert("Identitas Gagal di update"); document.location="index.php?page=identitas";</script>';
       echo "
-                                     <script type='text/javascript'>
-                                      setTimeout(function () { 
-                                 Swal.fire({
-                                   type: 'error',
-                                   title: 'Data gagal diperbaharui',
-                                   showConfirmButton: false
-                                 });  
-                                      },10); 
-                                      window.setTimeout(function(){ 
-                                        window.history.back();
-                                      } ,3000); 
-                                     </script>
-                                 ";
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Success',
+            text: 'Updated Succcesfully!',
+            icon: 'success',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=hrd-profile');
+         } ,2000); 
+        </script>
+        ";
+      } else {
+        // echo("Error description: " . $conn -> error);
+        echo "
+        <script type='text/javascript'>
+         setTimeout(function () { 
+          swal({
+            title: 'Error!',
+            text: 'Failed to updated!',
+            icon: 'error',
+            buttons: false
+          }); 
+         },10); 
+         window.setTimeout(function(){ 
+          window.location.replace('index.php?page=hrd-profile');
+         } ,3000); 
+        </script>
+        ";
     }
   } else {
     echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-profile";</script>';
@@ -481,7 +547,7 @@ if ($_GET['PageAction'] == "update_company") {
       `city` = '$city',
       `status` = '$status',
       `access_type` = '$access_type'
-      WHERErrr `id_company` = $id_company;");
+      WHERE `id_company` = $id_company;");
     }
     // echo $id_user_company;
     if ($update) {
@@ -517,10 +583,9 @@ if ($_GET['PageAction'] == "update_company") {
        } ,3000); 
       </script>
       ";
+    // echo("Error description: " . $conn -> error);
     }
-  } else {
-    echo '<script language="javascript">alert("Error: Data tidak boleh kosong"); document.location="index.php?page=hrd-company-profile";</script>';
-  }
+  } 
 }
 
 //Add Feedback from industry Supervisor
@@ -548,8 +613,21 @@ if ($_GET['PageAction'] == "add_feedback2") {
   if ($_SESSION) {
     $add = $conn->query("INSERT INTO tb_industry_feedback (id_industry_feedback, id_internship, catatan_utk_mahasiswa, catatan_utk_poltek, layak_diterima, langsung_diterima, nilai_akhir, etika, keahlian_kompetensi, keahlian_bahasa, penggunaan_ti, komunikasi, kerjasama, pengembangan_diri, date) VALUES (NULL,'$id','$catatan_utk_mahasiswa','$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima', '$nilai_akhir', '$etika', '$keahlian_kompetensi' , '$keahlian_bahasa', '$penggunaan_ti', '$komunikasi', '$kerjasama', '$pengembangan_diri', '$date');");
     if ($add) {
-      echo '<script type="text/javascript">';
-      echo 'alert("Successfully Added"); document.location="index.php?page=spv-studentlist";</script>';
+       echo "
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Success',
+          text: 'Added Succcesfully!',
+          icon: 'success',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.history.back();
+       } ,2000); 
+      </script>
+      ";
     } else {
       echo ("Error description: " . $conn->error);
       //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
@@ -582,8 +660,21 @@ if ($_GET['PageAction'] == "add_feedback2hrd") {
   if ($_SESSION) {
     $add = $conn->query("INSERT INTO tb_industry_feedback (id_industry_feedback, id_internship, catatan_utk_mahasiswa, catatan_utk_poltek, layak_diterima, langsung_diterima, nilai_akhir, etika, keahlian_kompetensi, keahlian_bahasa, penggunaan_ti, komunikasi, kerjasama, pengembangan_diri, date) VALUES (NULL,'$id','$catatan_utk_mahasiswa','$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima', '$nilai_akhir', '$etika', '$keahlian_kompetensi' , '$keahlian_bahasa', '$penggunaan_ti', '$komunikasi', '$kerjasama', '$pengembangan_diri', '$date');");
     if ($add) {
-      echo '<script type="text/javascript">';
-      echo 'alert("Successfully Added"); document.location="index.php?page=hrd-studentlist";</script>';
+      echo "
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Success',
+          text: 'Added Succcesfully!',
+          icon: 'success',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.history.back();
+       } ,2000); 
+      </script>
+      ";
     } else {
       echo ("Error description: " . $conn->error);
       //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
@@ -647,13 +738,111 @@ if ($_GET['PageAction'] == "add_approve") {
     }
     // echo $id_user_company;
     if ($update) {
-      echo '<script language="javascript">alert("Approved Successfully!"); window.history.back();</script>';
+      echo "
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Success',
+          text: 'Added Succcesfully!',
+          icon: 'success',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.history.back();
+       } ,2000); 
+      </script>
+      ";
     }
   } else {
     echo ("Error description: " . $conn->error);
   }
 }
 
+//add disscuss
+if($_GET['PageAction'] == "add_discuss"){
+  session_start();
+  date_default_timezone_set('Asia/Jakarta');
+  $token_session = $_SESSION['token'];
+  $id_spv = $_POST['id_spv'];
+  $title = $_POST['title'];
+  $content = $_POST['content'];
+  $started = $_SESSION['user_fullname'];
+  $date = date('Y-m-d H:i:s');
+
+  if($token_session){
+    $query = mysqli_query($conn,"SELECT * FROM (tb_internship LEFT JOIN tb_lecturer ON tb_internship.nik = tb_lecturer.nik) LEFT JOIN tb_student_internship ON tb_student_internship.nim = tb_internship.nim WHERE tb_internship.id_user_company='$id_spv'");
+    $inc = mysqli_num_rows($query);
+
+    while($data = mysqli_fetch_assoc($query)){
+      $json[] = $data['id_internship'];
+      $json[1] = $id_spv;
+      $json[] = $data['nik'];
+    }
+    $json = json_encode($json);
+    // echo "<p>";
+    // echo $title."<br/>";
+    // echo $content."<br/>";
+    // echo $id_own;
+    // echo "</p>";
+
+    $insert = mysqli_query($conn,"INSERT INTO tb_discussion VALUES (NULL,'$started','$date','$json','$title','$content')");
+
+    if($insert){
+      echo "
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Success',
+          text: 'Added Succcesfully!',
+          icon: 'success',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.history.back();
+       } ,2000); 
+      </script>
+      ";
+    }else{
+      echo ("Error description: " . $conn->error);
+    }
+    
+  }
+}
+
+if($_GET['PageAction'] == 'add_comment'){
+  session_start();
+  $id_diskusi = $_POST['id_diskusi'];
+  $started_by = $_SESSION['user_fullname'];
+  $komen = $_POST['komentar'];
+  $date = date('Y-m-d H:i:s');
+
+  $query = mysqli_query($conn,"INSERT INTO tb_comment_discussion VALUES (NULL,'$id_diskusi','$started_by','$komen','$date')");
+
+  if($query){
+    echo "
+    <script type='text/javascript'>
+     setTimeout(function () { 
+      swal({
+        title: 'Success',
+        text: 'Added Succcesfully!',
+        icon: 'success',
+        buttons: false
+      }); 
+     },10); 
+     window.setTimeout(function(){ 
+      window.history.back();
+     } ,2000); 
+    </script>
+    ";
+  }else{
+    echo ("Error description: " . $conn->error);
+  }
+  
+
+
+}
 // Email Information
 ?>
 

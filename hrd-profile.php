@@ -271,10 +271,10 @@ for (var i = 0; i < btns.length; i++) {
 										<div class="form-group form-show-validation row">
 											<label for="password"
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Password <span
-													class="required-label">*</span></label>
+													class="required-label"></span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="password" class="form-control" id="password"
-													name="password" placeholder="*****" disabled required>
+													name="password" placeholder="*****" disabled>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">

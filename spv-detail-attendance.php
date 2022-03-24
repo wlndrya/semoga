@@ -156,7 +156,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-logbook">
+							<a class="nav-link" href="index.php?page=spv-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
@@ -234,40 +234,43 @@ $token = $_SESSION['token'];
 										while ($data = mysqli_fetch_array($view)) {
 										?>
 											<tr>
-												<td><?php echo $data['week'] ?></td>
-												<td><?php
+												<td><center><?php echo $data['week'] ?></center></td>
+												<td><center><?php
 												$week = $data['week'];
 													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Present' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
 													$hasil = mysqli_num_rows($query);
 
 													echo $hasil;
 													?>
-												</td>
-												<td><?php
+												</center></td>
+												<td><center><?php
 												$week = $data['week'];
 													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Absent' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
 													$hasil = mysqli_num_rows($query);
 
 													echo $hasil;
 													?>
-												</td>
-												<td><?php
+												</center></td>
+												<td><center><?php
 												$week = $data['week'];
 													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Paid Leave' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
 													$hasil = mysqli_num_rows($query);
 
 													echo $hasil;
 													?>
-												</td>
-												<td><?php
+												</center></td>
+												<td><center><?php
 												$week = $data['week'];
 													$query = mysqli_query($conn, "SELECT * FROM tb_attendance INNER JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship WHERE type_attendance = 'Unpaid Leave' AND tb_attendance.id_internship = $id AND tb_attendance.week = $week;");
 													$hasil = mysqli_num_rows($query);
 
 													echo $hasil;
 													?>
-												</td>
+												</center></td>
 												<td>
+												<a href="index.php?page=spv-detail2-attendance&id=<?= $data['id_internship']?>&week=<?= $data['week'] ?>" title="Details" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
+                                                <i class="icon-magnifier"></i>
+                                                </a>
 												</td>
 												<td>
 												<center>

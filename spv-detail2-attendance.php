@@ -187,56 +187,45 @@ $token = $_SESSION['token'];
                                             <table id="attendance-datatables" class="display table table-striped table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th>No</th>
-                                                        <th>Date</th>
-                                                        <th>Check In</th>
-                                                        <th>Check Out</th>
+                                                        <th><center>Week</center></th>
+                                                        <th><center>Date</center></th>
+                                                        <th><center>Check In</center></th>
+                                                        <th><center>Check Out</center></th>
+														<th><center>Description</center></th>
+                                                        <th><center>Type Attendance</center></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>17 November 2021</td>
-                                                        <td>07.00</td>
-                                                        <td>17.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>18 November 2021</td>
-                                                        <td>07.00</td>
-                                                        <td>17.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>19 November 2021</td>
-                                                        <td>07.00</td>
-                                                        <td>17.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>20 November 2021</td>
-                                                        <td>07.00</td>
-                                                        <td>17.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>17 November 2021</td>
-                                                        <td>07.00</td>
-                                                        <td>17.00</td>
-                                                    </tr>
+													<?php
+													include 'config.php';
+													error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+													$id = $_GET['id'];
+													$week = $_GET['week'];
+													$query = mysqli_query($conn, "SELECT * FROM tb_attendance WHERE id_internship = $id AND week = $week;");
+													while ($data = mysqli_fetch_array($query)) {
+													?>
+													<tr>
+														<td><center><?php echo $data['week'] ?></center></td>
+														<td><center><?php echo $data['date'] ?></center></td>
+														<td><center><?php echo $data['check_in'] ?></center></td>
+														<td><center><?php echo $data['check_out'] ?></center></td>
+														<td><center><?php echo $data['description'] ?></center></td>
+														<td><center><?php echo $data['type_attendance'] ?></center></td>
+													</tr>
+
+													<!--Menutup Perulangan While-->
+													<?php
+													}
+													?>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
 
-                    
 				</div><!--page inner-->
 			</div><!--container-->
 		</div><!--main-panel-->

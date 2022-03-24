@@ -158,7 +158,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-logbook">
+							<a class="nav-link" href="index.php?page=spv-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
@@ -223,7 +223,7 @@ $token = $_SESSION['token'];
 										echo $hasil;
 										?>
 									</h1>
-									<p><b>APPROVE LOGBOOK</b></p>
+									<p><b>APPROVED LOGBOOK</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart2"><canvas width="327" height="70"
 												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
@@ -243,7 +243,7 @@ $token = $_SESSION['token'];
 										echo $hasil;
 										?>
 									</h1>
-									<p><b>APPROVE ATTENDANCE</b></p>
+									<p><b>APPROVED ATTENDANCE</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart3"><canvas width="327" height="70"
 												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>

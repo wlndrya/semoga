@@ -71,6 +71,7 @@ $token = $_SESSION['token'];
 <body>
 	<div class="wrapper horizontal-layout-2">
 
+	<!--Header Section-->
 		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
@@ -197,6 +198,7 @@ $token = $_SESSION['token'];
 			</div>
 			<!-- End Menu -->
 		</div>
+	<!--End Header Section-->
 
 		<!-- Main Content -->
 		<div class="main-panel">
@@ -213,6 +215,7 @@ $token = $_SESSION['token'];
 								</div>
 								<div class="card-body">
 
+									<!-- Datatables -->
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover">
 											<thead>
@@ -232,8 +235,11 @@ $token = $_SESSION['token'];
 												<?php
 												include 'config.php';
 												//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * FROM (tb_internship LEFT JOIN tb_applicant ON tb_internship.id_internship = tb_applicant.id_internship) LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE tb_internship.id_company = 1");
+												$view = mysqli_query($conn, "SELECT * FROM (tb_internship LEFT OUTER JOIN tb_applicant ON tb_internship.id_internship = tb_applicant.id_internship) LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE tb_internship.id_company = '$_SESSION[id_company]'");
 												while ($data = mysqli_fetch_array($view)) {
+													// echo "<pre>";
+													// print_r($data);
+													// echo "</pre>";
 													if ($data['id_applicant'] === NULL) {
 														$registration_status = "Mandiri";
 													} else {
@@ -241,14 +247,14 @@ $token = $_SESSION['token'];
 													}
 												?>
 													<tr>
-														<td><?php echo $data['date']; ?></td>
+														<td><?php echo $data['apply_date']; ?></td>
 														<td><?php echo $data['name']; ?></td>
 														<td><?php echo $registration_status ?></td>
 														<td>
 															<center><?php
 																	if ($data['status']) {
 																		echo "<button class='btn btn-modify py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-															data-target='#doc-detail" . $data['id_internship'] . "' ><i class='fas fa-eye'></i> VIEW</button>";
+															data-target='#doc-detail" . $data[0] . "' ><i class='fas fa-eye'></i> VIEW</button>";
 																	}
 																	?></center>
 														</td>
@@ -256,7 +262,7 @@ $token = $_SESSION['token'];
 															<center><?php
 																	if ($data['status'] == "PENDING") {
 																		echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='#modal-approve' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> $data[status]</button>";
+														data-target='#modal-approve$data[0]' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> $data[status]</button>";
 																	} elseif ($data['status'] == "YES") {
 																		echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
 														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
@@ -270,7 +276,7 @@ $token = $_SESSION['token'];
 
 
 													<!-- Modal Document Detail -->
-													<div class="modal fade" id="doc-detail<?= $data['id_internship'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+													<div class="modal fade" id="doc-detail<?= $data[0] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-centered" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -282,18 +288,17 @@ $token = $_SESSION['token'];
 																<div class="modal-body">
 																	<!-- button cta -->
 																	<div class="row">
-
 																		<div class="col-sm-4 p-2">
-																			<a href="#" type="button" class="btn btn-modify text-white" data-toggle="modal" data-target="#myModal1<?= $data['id_internship'] ?>" style="width: 100%;">CV</a>
+																			<a href="#" type="button" class="btn btn-modify text-white" data-toggle="modal" data-target="#myModal1<?= $data[0] ?>" style="width: 100%;">CV</a>
 																		</div>
 																		<div class="col-sm-4 p-2">
-																			<a href="#" type="button" class="btn btn-modify text-white" data-toggle="modal" data-target="#myModal2<?= $data['id_internship'] ?>" style="width: 100%;">Transcript</a>
+																			<a href="#" type="button" class="btn btn-modify text-white" data-toggle="modal" data-target="#myModal2<?= $data[0] ?>" style="width: 100%;">Transcript</a>
 																		</div>
 																		<div class="col-sm-4 p-2">
-																			<a href="#" type="button" class="btn btn-modify text-white" data-toggle="modal" data-target="#myModal3<?= $data['id_internship'] ?>" style="width: 100%;">Optional File</a>
+																			<a href="#" type="button" class="btn btn-modify text-white" data-toggle="modal" data-target="#myModal3<?= $data[0] ?>" style="width: 100%;">Optional File</a>
 																		</div>
 																		<div class="col-sm-4 p-2">
-																			<a href="#" type="button" class="btn btn-modify text-white" data-toggle="modal" data-target="#myModal4<?= $data['id_internship'] ?>" style="width: 100%;">Optional File</a>
+																			<a href="#" type="button" class="btn btn-modify text-white" data-toggle="modal" data-target="#myModal4<?= $data[0] ?>" style="width: 100%;">Optional File</a>
 																		</div>
 																	</div>
 																	<!-- end button cta -->
@@ -304,7 +309,7 @@ $token = $_SESSION['token'];
 													<!-- End Modal -->
 
 													<!--Modal View CV-->
-													<div id="myModal1<?= $data['id_internship'] ?>" class="modal fade" role="dialog">
+													<div id="myModal1<?= $data[0] ?>" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-lg">
 															<!-- Modal content-->
 															<div class="modal-content">
@@ -313,17 +318,17 @@ $token = $_SESSION['token'];
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
 																<?php
-																if($data['file1']) :
+																if ($data['file1']) :
 																?>
 																	<div class="modal-body" style="height: 600px">
 																		<object type="application/pdf" data="berkas/<?php echo $data['file1'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
 																		</object>
 																	</div>
-																	<?php
-																	else :
-																	?>
+																<?php
+																else :
+																?>
 																	<h2 class="p-5 mx-auto">CV is not available!</h2>
-																<?php endif;?>
+																<?php endif; ?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -333,7 +338,7 @@ $token = $_SESSION['token'];
 													<!--End Modal View CV-->
 
 													<!--Modal View Transcript-->
-													<div id="myModal2<?= $data['id_internship'] ?>" class="modal fade" role="dialog">
+													<div id="myModal2<?= $data[0] ?>" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-lg">
 															<!-- Modal content-->
 															<div class="modal-content">
@@ -342,17 +347,17 @@ $token = $_SESSION['token'];
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
 																<?php
-																if($data['file2']) :
+																if ($data['file2']) :
 																?>
-																<div class="modal-body" style="height: 600px">
-																	<object type="application/pdf" data="berkas/<?php echo $data['file2'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
-																	</object>
-																</div>
+																	<div class="modal-body" style="height: 600px">
+																		<object type="application/pdf" data="berkas/<?php echo $data['file2'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																		</object>
+																	</div>
 																<?php
-																	else :
-																	?>
+																else :
+																?>
 																	<h2 class="p-5 mx-auto">Transcript is not available!</h2>
-																<?php endif;?>
+																<?php endif; ?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -362,7 +367,7 @@ $token = $_SESSION['token'];
 													<!--End Modal View Transcript-->
 
 													<!--Modal View Optional Files 1-->
-													<div id="myModal3<?= $data['id_internship'] ?>" class="modal fade" role="dialog">
+													<div id="myModal3<?= $data[0] ?>" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-lg">
 															<!-- Modal content-->
 															<div class="modal-content">
@@ -371,17 +376,17 @@ $token = $_SESSION['token'];
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
 																<?php
-																if($data['file3']) :
+																if ($data['file3']) :
 																?>
-																<div class="modal-body" style="height: 600px">
-																	<object type="application/pdf" data="berkas/<?php echo $data['file3'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
-																	</object>
-																</div>
+																	<div class="modal-body" style="height: 600px">
+																		<object type="application/pdf" data="berkas/<?php echo $data['file3'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																		</object>
+																	</div>
 																<?php
-																	else :
-																	?>
+																else :
+																?>
 																	<h2 class="p-5 mx-auto">File is not available!</h2>
-																<?php endif;?>
+																<?php endif; ?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -391,7 +396,7 @@ $token = $_SESSION['token'];
 													<!--End Modal View Optional Files-->
 
 													<!--Modal View Optional Files 2-->
-													<div id="myModal4<?= $data['id_internship'] ?>" class="modal fade" role="dialog">
+													<div id="myModal4<?= $data[0] ?>" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-lg">
 															<!-- Modal content-->
 															<div class="modal-content">
@@ -400,17 +405,17 @@ $token = $_SESSION['token'];
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
 																<?php
-																if($data['file4']) :
+																if ($data['file4']) :
 																?>
-																<div class="modal-body" style="height: 600px">
-																	<object type="application/pdf" data="berkas/<?php echo $data['file4'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
-																	</object>
-																</div>
+																	<div class="modal-body" style="height: 600px">
+																		<object type="application/pdf" data="berkas/<?php echo $data['file4'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																		</object>
+																	</div>
 																<?php
-																	else :
-																	?>
-																	<h2 class="p-5 mx-auto">File is not available!</h2>
-																<?php endif;?>
+																else :
+																?>
+																<h2 class="p-5 mx-auto">File is not available!</h2>
+																<?php endif; ?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -420,7 +425,7 @@ $token = $_SESSION['token'];
 													<!--End Modal View Optional Files-->
 
 													<!-- Modal Approval Status -->
-													<div class="modal fade" id="modal-approve" role="dialog">
+													<div class="modal fade" id="modal-approve<?= $data[0] ?>" role="dialog">
 														<div class="modal-dialog modal-dialog-centered cascading-modal modal-lg" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -436,7 +441,7 @@ $token = $_SESSION['token'];
 																	<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
 																	<input type="hidden" id="id_company" name="id_company" value="<?php echo $data['id_company']; ?>">
 																	<input type="hidden" id="id_applicant" name="id_applicant" value="<?php echo $data['id_applicant']; ?>">
-																	<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $data['id_internship']; ?>">
+																	<input type="hidden" id="id_internship" name="id_internship" value="<?php echo $data[0]; ?>">
 																	<input type="hidden" id="id_offer" name="id_offer" value="<?php echo $data['id_offer']; ?>">
 																	<input type="hidden" id="status_applicant" name="status_applicant" value="<?php echo $data['status_applicant']; ?>">
 
@@ -489,18 +494,16 @@ $token = $_SESSION['token'];
 											</tbody>
 										</table>
 									</div>
+									<!--End Datatables-->
 								</div>
 							</div>
 						</div>
 					</div>
 					<!-- Modal Area -->
 
-				</div>
-				<!--page inner-->
-			</div>
-			<!--container-->
-		</div>
-		<!--main-panel-->
+				</div><!--page inner-->
+			</div><!--container-->
+		</div><!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->
@@ -515,7 +518,6 @@ $token = $_SESSION['token'];
 	</div>
 
 	<!--   Core JS Files   -->
-
 	<script src="assets/js/core/popper.min.js"></script>
 	<script src="assets/js/core/bootstrap.min.js"></script>
 
@@ -618,135 +620,7 @@ $token = $_SESSION['token'];
 			$('#addRowModal').modal('hide');
 
 		});
-
-		//SweetALert
-		var SweetAlert2Demo = function() {
-
-			var initDemos = function() {
-
-				$('#alert_demo_4').click(function(e) {
-					swal({
-						title: 'Accept this applicant?',
-						text: "",
-						type: 'warning',
-						buttons: {
-							confirm: {
-								text: 'Yes!',
-								className: 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					})
-				});
-
-				$('#alert_demo_5').click(function(e) {
-					swal({
-						title: 'Accept this applicant?',
-						text: "",
-						type: 'warning',
-						buttons: {
-							confirm: {
-								text: 'Yes!',
-								className: 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					})
-				});
-
-				$('#alert_demo_6').click(function(e) {
-					swal({
-						title: 'Accept this applicant?',
-						text: "",
-						type: 'warning',
-						buttons: {
-							confirm: {
-								text: 'Yes!',
-								className: 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					})
-				});
-
-				$('#alert_demo_7').click(function(e) {
-					swal({
-						title: 'Reject this applicant?',
-						text: "",
-						type: 'warning',
-						buttons: {
-							confirm: {
-								text: 'Yes!',
-								className: 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					})
-				});
-
-				$('#alert_demo_8').click(function(e) {
-					swal({
-						title: 'Reject this applicant?',
-						text: "",
-						type: 'warning',
-						buttons: {
-							confirm: {
-								text: 'Yes!',
-								className: 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					})
-				});
-
-				$('#alert_demo_9').click(function(e) {
-					swal({
-						title: 'Reject this applicant?',
-						text: "",
-						type: 'warning',
-						buttons: {
-							confirm: {
-								text: 'Yes!',
-								className: 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								className: 'btn btn-danger'
-							}
-						}
-					})
-				});
-			};
-
-			return {
-				//== Init
-				init: function() {
-					initDemos();
-				},
-			};
-		}();
-
-		//== Class Initialization
-		jQuery(document).ready(function() {
-			SweetAlert2Demo.init();
-		});
 	</script>
 
 </body>
-
 </html>

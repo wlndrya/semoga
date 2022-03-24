@@ -535,7 +535,7 @@ $token = $_SESSION['token'];
 						<!--End Tampilan View Data-->
 
 						
-						<!--Tampilan input data-->
+						<!--Insert Data-->
 							<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">Overall Comments</h3>
@@ -885,7 +885,7 @@ $token = $_SESSION['token'];
 						<?php
 						endif;
 						?>
-						<!--End Tampilan Input Data-->
+						<!--End Insert Data-->
 						</div>
 						
 					</form>

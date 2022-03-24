@@ -183,6 +183,7 @@ $token = $_SESSION['token'];
 									<div class="card-title"><b>Profile</b></div>
 									<div class="card-category"></a></div>
 								</div>
+								
 								<form id="form_profile" method="POST"  action="proses_dummy_test.php?PageAction=update_spv" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');">
 								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
                                 <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $_SESSION['id_user_company']; ?>">
@@ -237,7 +238,7 @@ $token = $_SESSION['token'];
 										<div class="form-group form-show-validation row">
 											<label for="password"
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Password <span
-													class="required-label">*</span></label>
+													class="required-label"></span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="password" class="form-control" id="password"
 													name="password" placeholder="*****" disabled>

@@ -192,38 +192,41 @@ $token = $_SESSION['token'];
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
+                                                        <?php
+                                                        
+                                                        $id_diskusi = $_GET['id_discuss'];
+
+                                                        $query = mysqli_query($conn,"SELECT * FROM tb_discussion WHERE id_discuss='$id_diskusi'");
+
+                                                        while($data = mysqli_fetch_assoc($query)){
+                                                            // print_r($data);
+                                                        
+                                                        
+                                                        ?>
                                     <div class="card-head-row">
-                                        <h4 class="card-title"><b>Pembuatan Logbook</b></h4>
+                                        <h4 class="card-title"><b><?= $data['title']?></b></h4>
                                         <div class="card-tools">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                    <div class="col-md-12">
                                             <div class="table-responsive table-hover table-sales">
                                                 <table class="table">
                                                     <tbody>
-                                                        <div class="card-header">
-                                                            <div class="icon"><i
-                                                                    class="fas fa-user-circle fa-2x ml-auto"></i>
-                                                                Cyntya Maharani (Student)
+                                                        <div class="card-header" style="display: flex; flex-direction:column;">
+                                                            <div class="icon"><p class="row ml-2" style="float: left;"><i
+                                                                    class="fas fa-user-circle fa-2x ml-auto"></i> &nbsp;
+                                                                <?= $data['started_by'] ?></p>
                                                             </div><br>
-                                                            <div style="text-align: justify;">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit, sed do eiusmod tempor incididunt ut labore et
-                                                                    dolore magna aliqua. Etiam erat velit scelerisque in
-                                                                    dictum non. Nunc eget lorem dolor sed viverra ipsum
-                                                                    nunc aliquet bibendum. Ornare arcu odio ut sem
-                                                                    nulla. Egestas quis ipsum suspendisse ultrices
-                                                                    gravida dictum fusce ut placerat. Purus ut faucibus
-                                                                    pulvinar elementum integer enim neque. Aliquam ut
-                                                                    porttitor leo a diam sollicitudin tempor. Leo urna
-                                                                    molestie at elementum eu facilisis sed odio morbi.
-                                                                    Viverra mauris in aliquam sem fringilla ut. Nunc sed
-                                                                    blandit libero volutpat sed cras ornare arcu.</p>
-                                                            </div>
+                                                                <div class="text pl-5">
+                                                                <p class="text-left"><?= $data['discuss'] ?></p>
+                                                                </div>
                                                         </div>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                                 <a class="btn btn-modify text-white col-md-12" data-toggle="modal"
@@ -232,16 +235,23 @@ $token = $_SESSION['token'];
                                                 <!--Modal Give Comments-->
                                                 <div class="modal fade" id="modal1" tabindex="-1" role="dialog"
                                                     aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg">
+                                                    <div class="modal-dialog  modal-dialog-centered modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h3 class="modal-title"><b>Give Comment</b></h3>
+                                                                <form action="proses_dummy_test.php?PageAction=add_comment" method="post">
                                                                 <button class="btn btn-modify btn-round ml-auto text-white">
                                                                     <i class="fas fa-paper-plane"></i> Send
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div id="summernote"></div>
+                                                                <!-- <div id="summernote"></div> -->
+                                                                    <input hidden type="text" name="id_diskusi" value="<?= $_GET['id_discuss']?>">
+                                                                    <label class="mb-2" for="">Comment</label>
+                                                                    <center>
+                                                                    <textarea name="komentar" id="" class="w-100 form-control" rows="10" placeholder="Write some comment . . ."></textarea>
+                                                                    </center>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -250,17 +260,26 @@ $token = $_SESSION['token'];
 
                                             </div>
                                             <tbody>
-                                                <div class="card-header">
-                                                    <div class="icon mt-2"><i class="fas fa-user-circle fa-2x"></i>
-                                                        Yulia Wulandari (Lecturer)
+                                                <?php
+                                                
+                                                $id_diskusi = $_GET['id_discuss'];
+                                                $query = mysqli_query($conn,"SELECT * FROM tb_comment_discussion WHERE id_discuss='$id_diskusi'");
+
+                                                while($data = mysqli_fetch_assoc($query)){
+                                                    // print_r($data);
+
+                                                ?>
+                                                <div class="card-header mt-2">
+                                                    <div class="icon mt-4"><i class="fas fa-user-circle fa-2x"></i>
+                                                        <?= $data['replied_by']?>
                                                     </div><br>
                                                     <div style="text-align: justify;">
-                                                        <p>Logbook dibuat setiap hari kerja, isinya kegiatan apa saja
-                                                            yang dilakukan dalam satu minggu.</p>
+                                                        <p><?= $data['comment']?></p>
                                                     </div>
                                                 </div>
+                                                <?php } ?>
                                             </tbody><br>
-                                            <tbody>
+                                            <!-- <tbody>
                                                 <div class="card-header">
                                                     <div class="icon"><i class="fas fa-user-circle fa-2x"></i>
                                                         Komaruddin (Supervisor)
@@ -270,7 +289,7 @@ $token = $_SESSION['token'];
                                                             kumpulkan pada saya untuk di acc.</p>
                                                     </div>
                                                 </div>
-                                            </tbody>
+                                            </tbody> -->
                                         </div>
                                     </div>
                                 </div>
