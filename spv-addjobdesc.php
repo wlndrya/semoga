@@ -2,14 +2,14 @@
 include 'config.php';
 
 session_start();
-if($_SESSION['login_status'] != 'login'){
-	echo "
+if ($_SESSION['login_status'] != 'login') {
+    echo "
 	<script>
 		alert('YOU ARE NOT LOGIN!');
 		window.location.replace('index.php?page=login');
 	</script>
-              "; 
-			}
+              ";
+}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -49,6 +49,18 @@ $token = $_SESSION['token'];
                 sessionStorage.fonts = true;
             }
         });
+
+        function timeNow() {
+            var currentdate = new Date();
+
+            var datetime =
+                currentdate.getHours() + ":" +
+                currentdate.getMinutes() + ":" +
+                currentdate.getSeconds();
+
+            console.log(datetime);
+            return document.getElementById("time-now").value = datetime;
+        }
     </script>
 
     <!-- CSS Files -->
@@ -126,53 +138,53 @@ $token = $_SESSION['token'];
             </div>
 
             <!-- Menu -->
-			<div class="nav-bottom">
-				<div class="container">
-					<ul class="nav page-navigation page-navigation-secondary bg-white">
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-book-open"></i>
-								<span class="menu-title">Profile</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="index.php?page=spv-profile">My Profile</a>
-									</li>
-									<li>
-										<a href="index.php?page=spv-company-profile">Company Profile</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-studentlist">
-								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Student Internship</span>
-							</a>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-logbook">
-								<i class="link-icon icon-folder-alt"></i>
-								<span class="menu-title">Internship Files</span>
-							</a>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-tutorial">
-								<i class="link-icon icon-screen-desktop"></i>
-								<span class="menu-title">Tutorial</span>
-							</a>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-information">
-								<i class="link-icon icon-question"></i>
-								<span class="menu-title">Information</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!-- End Menu -->
+            <div class="nav-bottom">
+                <div class="container">
+                    <ul class="nav page-navigation page-navigation-secondary bg-white">
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="#">
+                                <i class="link-icon icon-book-open"></i>
+                                <span class="menu-title">Profile</span>
+                            </a>
+                            <div class="navbar-dropdown animated fadeIn">
+                                <ul>
+                                    <li>
+                                        <a href="index.php?page=spv-profile">My Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=spv-company-profile">Company Profile</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=spv-studentlist">
+                                <i class="link-icon icon-layers"></i>
+                                <span class="menu-title">Student Internship</span>
+                            </a>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=spv-logbook">
+                                <i class="link-icon icon-folder-alt"></i>
+                                <span class="menu-title">Internship Files</span>
+                            </a>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=spv-tutorial">
+                                <i class="link-icon icon-screen-desktop"></i>
+                                <span class="menu-title">Tutorial</span>
+                            </a>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=spv-information">
+                                <i class="link-icon icon-question"></i>
+                                <span class="menu-title">Information</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End Menu -->
         </div>
 
         <!-- Main Content -->
@@ -180,561 +192,188 @@ $token = $_SESSION['token'];
             <div class="container">
                 <div class="page-inner">
 
-                <?php
-					include 'config.php';
-					$id = $_GET['id'];
-					$view = mysqli_query($conn, "SELECT * FROM tb_job_description WHERE id_internship = $id");
+                    <!--VIEW DATA-->
+
+                    <?php
+                    include 'config.php';
+                    $id = $_GET['id'];
+                    $view = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_jobdesc ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc WHERE id_internship = $id");
                     // $description_jobdesc = (count($_POST['description_jobdesc']) > 0) ? implode('-', $_POST['description_jobdesc']) : ""; 
-					 //print_r($view->num_rows);
-					if($view->num_rows > 0):
-					foreach($view as $data) :
-				?>
-                    <!--Tampilan View Data-->
-                    <!-- Task Type Parameter -->
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Task Type Parameter</h4>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <!-- <form id="job_description" method="POST" action="proses_dummy_test.php?PageAction=update_jobdesc" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');"> -->
-                            
-                            <div class="row">
-                                    <div class="col-sm-12">
-                                        <!-- text input -->
-                                        <div class="form-group">
-                                            <p>1. put a checklist in the checklist column on the appropriate type
-                                                    of work.</p>
-                                        </div>
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 10px">No</th>
-                                                    <th>Type of work</th>
-                                                    <th>
-                                                        <center>Checklist</center>
-                                                    </th><br>
-                                                </tr>
-                                            </thead>
-                                            <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
-                                                <input type="hidden" value="<?php echo $_GET['id']?>" name="id">
-                                                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-							                    <input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
-                                                <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $id_jobdesc ?>">
-                                            <tbody>
-                                                <tr>
-                                                    <td>1.</td>
-                                                    <td>Database</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="description_jobdesc[]" value="Database"
-                                                            <?php 
-                                                                if(in_array('Database',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck1">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2.</td>
-                                                    <td>Data Analysis</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck2" name="description_jobdesc[]" value="Data Analysis"
-                                                            <?php 
-                                                                if(in_array('Data Analysis',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck2">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3.</td>
-                                                    <td>Information Systems</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck3" name="description_jobdesc[]" value="Information Systems"
-                                                            <?php 
-                                                                if(in_array('Information Systems',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck3">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4.</td>
-                                                    <td>Desktop Apps</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck4" name="description_jobdesc[]" value="Desktop Apps"
-                                                            <?php 
-                                                                if(in_array('Desktop Apps',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck4">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5.</td>
-                                                    <td>Apps and Web Design</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck5" name="description_jobdesc[]" value="Apps and Web Design"
-                                                            <?php 
-                                                                if(in_array('Apps and Web Design',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck5">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6.</td>
-                                                    <td>Mobile Application</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck6" name="description_jobdesc[]" value="Mobile Application"
-                                                            <?php 
-                                                                if(in_array('Mobile Application',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck6">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>7.</td>
-                                                    <td>Apps Design</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck7" name="description_jobdesc[]" value="Apps Design"
-                                                            <?php 
-                                                                if(in_array('Apps Design',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck7">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>8.</td>
-                                                    <td>Use of Framework</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck8" name="description_jobdesc[]" value="Use of Framework"
-                                                            <?php 
-                                                                if(in_array('Use of Framework',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck8">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>9.</td>
-                                                    <td>Network</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck9" name="description_jobdesc[]" value="Network"
-                                                            <?php 
-                                                                if(in_array('Network',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck9">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10.</td>
-                                                    <td>Troubleshooting</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck10" name="description_jobdesc[]" value="Troubleshooting"
-                                                            <?php 
-                                                                if(in_array('Troubleshooting',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck10">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>11.</td>
-                                                    <td>Hardware</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck11" name="description_jobdesc[]" value="Hardware"
-                                                            <?php 
-                                                                if(in_array('Hardware',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck11">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>12.</td>
-                                                    <td>Multimedia and Simulation</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck12" name="description_jobdesc[]" value="Multimedia and Simulation"
-                                                            <?php 
-                                                                if(in_array('Multimedia and Simulation',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck12">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>13.</td>
-                                                    <td>Animation and Live Film making</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck13" name="description_jobdesc[]" value="Animation and live film making"
-                                                            <?php 
-                                                                if(in_array('Animation and live film making',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck13">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>14.</td>
-                                                    <td>Print or digital media layout design</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck14" name="description_jobdesc[]" value="Print or digital media layout design"
-                                                            <?php 
-                                                                if(in_array('Print or digital media layout design',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck14">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>15.</td>
-                                                    <td>Game Development</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck15" name="description_jobdesc[]" value="Game Development"
-                                                            <?php 
-                                                                if(in_array('Game Development',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck15">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>16.</td>
-                                                    <td>Broadcasting or Production crew</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck16" name="description_jobdesc[]" value="Broadcasting or production crew"
-                                                            <?php 
-                                                                if(in_array('Broadcasting or production crew',json_decode($data['description_jobdesc']))){
-                                                                    echo 'checked';
-                                                                }
-                                                            ?>>
-                                                            <label class="custom-control-label" for="customCheck16">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="form-group">
-                                            <p>2. To other work can be explained as follows : </p>
-                                            <textarea class="form-control" rows="3" id="another_jobdesc" name="another_jobdesc"><?php echo $data['another_jobdesc']; ?></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <p>3. During the internship process, students are expected to contribute in the form of : </p>
-                                            <textarea class="form-control" rows="3" id="expected_goal" name="expected_goal"><?php echo $data['expected_goal'] ?></textarea>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                            <!-- </form> -->
-                            </form>
+                    //print_r($view->num_rows);
+                    if ($view->num_rows > 0) :
+                        foreach ($view as $data) :
+                    ?>
 
-                        </div>
-                        <!--End Card Body-->
-                    </div>
-                    <!--End Evaluation Parameter-->
+                            <!-- Task Type Parameter -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Task Type Parameter</h4>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <!-- <form id="job_description" method="POST" action="proses_dummy_test.php?PageAction=update_jobdesc" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');"> -->
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <p>1. put a checklist in the checklist column on the appropriate type
+                                                    of work.</p>
+                                            </div>
+                                            <table class="table table-bordered" style="margin-top: -20px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 10px">No</th>
+                                                        <th>Type of work</th>
+                                                        <th>
+                                                            <center>Checklist</center>
+                                                        </th><br>
+                                                    </tr>
+                                                </thead>
+                                                <form>
+                                                    <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
+                                                    <input type="hidden" value="<?php echo $_GET['nim'] ?>" name="nim">
+                                                    <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                                    <input type="hidden" id="id_jobdesc_intern" name="id_jobdesc_intern" value="<?php echo $id_jobdesc_intern; ?>">
+                                                    <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
+                                                    <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
+                                                    <tbody>
+                                               
+                                            </tbody>
+                                            </table>
+                                            <div class="form-group">
+                                                <p>2. <?php echo $data['question_1'] ?></p>
+                                                <textarea class="form-control" rows="3" id="answer_1" name="answer_1" disabled><?php echo $data['answer_1']; ?></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>3. <?php echo $data['question_2'] ?> </p>
+                                                <textarea class="form-control" rows="3" id="answer_2" name="answer_2" disabled><?php echo $data['answer_2'] ?></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <!-- </form> -->
+                                    </form>
+
+                                </div>
+                                <!--End Card Body-->
+                            </div>
+                            <!--End Evaluation Parameter-->
+
+                        <?php
+                        endforeach;
+                    else :
+                        ?>
+
+                        <!--INSERT DATA-->
+
+                        <?php
+                        include 'config.php';
+                        $prodi_name = $_GET['study_program'];
+                        $view = mysqli_query($conn, "SELECT * FROM tb_detail_jobdesc INNER JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc WHERE prodi_name = '$prodi_name'");
+                        //print_r($view);
+                        $data = mysqli_fetch_array($view);
+                        ?>
+
+                            <!-- Task Type Parameter -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Task Type Parameter</h4>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <p>1. put a checklist in the checklist column on the appropriate type of work.</p>
+                                            </div>
+                                            <table class="table table-bordered" style="margin-top: -20px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Type of work</th>
+                                                        <th>Description</th>
+                                                        <th>
+                                                            <center>Checklist</center>
+                                                        </th><br>
+                                                    </tr>
+                                                </thead>
+                                                <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
+                                                    <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
+                                                    <input type="hidden" value="<?php echo $_GET['nim'] ?>" name="nim">
+                                                    <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                                    <input type="hidden" id="id_jobdesc_intern" name="id_jobdesc_intern" value="<?php echo $id_jobdesc_intern; ?>">
+                                                    <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
+                                                    <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
+
+                                                    <tbody>
+                                                        <?php
+                                                        echo "<tr>
+                                                        <td>" . $data['job_type'] . "</td>
+                                                        <td>" . $data['job_description'] . "</td>
+                                                        <td class='text-center'>
+                                                        <div class='custom-control custom-checkbox'>
+                                                        <input type='checkbox' class='custom-control-input' id='customCheck1' name='ceklis' value=''>
+                                                        <label class='custom-control-label' for='customCheck1'>Checked</label>
+                                                        </div>
+                                                       </td>
+                                                      </tr>"
+                                                        ?>
+                                                    </tbody>
+                                            </table>
+                                            <div class="form-group">
+                                                <p>2. <?php echo $data['question_1'] ?></p>
+                                                <textarea class="form-control" required rows="3" id="answer_1" name="answer_1"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>3. <?php echo $data['question_2'] ?></p>
+                                                <textarea class="form-control" rows="3" required id="answer_2" name="answer_2"></textarea>
+                                            </div>
+                                            <div>
+                                                <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry to determine what type of work will be provided to students during the internship</b></p>
+                                            </div>
+                                        </div>
+                                        <!--col-sm-12 -->
+                                    </div>
+                                    <!--row-->
+
+                                    <!--Button Submit-->
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <!-- <a class="btn btn-danger text-white" id="edit_btn" type="submit">Edit</a> -->
+                                        <button type="submit" class="btn btn-modify text-white"> Submit</button>
+                                    </div>
+                                    <!--End Button Submit-->
+
+                                    <!-- </form> -->
+                                    </form>
+                                </div>
+                                <!--End Card Body-->
+                            </div>
+                            <!--Card-->
 
                     <?php
-						endforeach;
-						else :
-						?>
-                
-                <!--Insert Data-->
-                <!-- Task Type Parameter -->
-                <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Task Type Parameter</h4>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <!-- <form id="job_description" method="POST" action="proses_dummy_test.php?PageAction=update_jobdesc" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');"> -->
-                            
-                            <div class="row">
-                                    <div class="col-sm-12">
-                                        <!-- text input -->
-                                        <div class="form-group">
-                                            <p>1. put a checklist in the checklist column on the appropriate type
-                                                    of work.</p>
-                                        </div>
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 10px">No</th>
-                                                    <th>Type of work</th>
-                                                    <th>
-                                                        <center>Checklist</center>
-                                                    </th><br>
-                                                </tr>
-                                            </thead>
-                                            <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
-                                                <input type="hidden" value="<?php echo $_GET['id']?>" name="id">
-                                                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-							                    <input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
-                                                <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $id_jobdesc ?>">
-                                            <tbody>
-                                                <tr>
-                                                    <td>1.</td>
-                                                    <td>Database</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="description_jobdesc[]" value="Database">
-                                                            <label class="custom-control-label" for="customCheck1">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2.</td>
-                                                    <td>Data Analysis</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck2" name="description_jobdesc[]" value="Data Analysis">
-                                                            <label class="custom-control-label" for="customCheck2">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3.</td>
-                                                    <td>Information Systems</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck3" name="description_jobdesc[]" value="Information Systems">
-                                                            <label class="custom-control-label" for="customCheck3">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4.</td>
-                                                    <td>Desktop Apps</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck4" name="description_jobdesc[]" value="Desktop Apps">
-                                                            <label class="custom-control-label" for="customCheck4">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5.</td>
-                                                    <td>Apps and Web Design</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck5" name="description_jobdesc[]" value="Apps and Web Design">
-                                                            <label class="custom-control-label" for="customCheck5">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6.</td>
-                                                    <td>Mobile Application</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck6" name="description_jobdesc[]" value="Mobile Application">
-                                                            <label class="custom-control-label" for="customCheck6">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>7.</td>
-                                                    <td>Apps Design</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck7" name="description_jobdesc[]" value="Apps Design">
-                                                            <label class="custom-control-label" for="customCheck7">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>8.</td>
-                                                    <td>Use of Framework</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck8" name="description_jobdesc[]" value="Use of Framework">
-                                                            <label class="custom-control-label" for="customCheck8">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>9.</td>
-                                                    <td>Network</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck9" name="description_jobdesc[]" value="Network">
-                                                            <label class="custom-control-label" for="customCheck9">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10.</td>
-                                                    <td>Troubleshooting</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck10" name="description_jobdesc[]" value="Troubleshooting">
-                                                            <label class="custom-control-label" for="customCheck10">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>11.</td>
-                                                    <td>Hardware</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck11" name="description_jobdesc[]" value="Hardware">
-                                                            <label class="custom-control-label" for="customCheck11">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>12.</td>
-                                                    <td>Multimedia and Simulation</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck12" name="description_jobdesc[]" value="Multimedia and Simulation">
-                                                            <label class="custom-control-label" for="customCheck12">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>13.</td>
-                                                    <td>Animation and Live Film making</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck13" name="description_jobdesc[]" value="Animation and live film making">
-                                                            <label class="custom-control-label" for="customCheck13">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>14.</td>
-                                                    <td>Print or digital media layout design</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck14" name="description_jobdesc[]" value="Print or digital media layout design">
-                                                            <label class="custom-control-label" for="customCheck14">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>15.</td>
-                                                    <td>Game Development</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck15" name="description_jobdesc[]" value="Game Development">
-                                                            <label class="custom-control-label" for="customCheck15">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>16.</td>
-                                                    <td>Broadcasting or Production crew</td>
-                                                    <td class="text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck16" name="description_jobdesc[]" value="Broadcasting or production crew">
-                                                            <label class="custom-control-label" for="customCheck16">Checked</label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="form-group">
-                                            <p>2. To other work can be explained as follows : </p>
-                                            <textarea class="form-control" required rows="3" id="another_jobdesc" name="another_jobdesc"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <p>3. During the internship process, students are expected to contribute in the form of : </p>
-                                            <textarea class="form-control" rows="3" required id="expected_goal" name="expected_goal"></textarea>
-                                        </div>
-                                        <div>
-                                            <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry
-                                                    to determine what type of work will be provided to students during the internship</b></p>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!--Button Submit-->
-                        <div class="modal-footer d-flex justify-content-center">
-                            <!-- <a class="btn btn-danger text-white" id="edit_btn" type="submit">Edit</a> -->
-                            <button type="submit" class="btn btn-modify text-white"> Submit</button>
-                        </div>
-                            <!--End Button Submit-->
-                            <!-- </form> -->
-                            </form>
-
-                        </div>
-                        <!--End Card Body-->
-                    </div>
-                    <!--End Evaluation Parameter-->
-
-                    <?php
-						endif;
-						?>
-						</div>
-
+                    endif;
+                    ?>
                 </div>
-                <!--page inner-->
+
+
             </div>
-            <!--container-->
+            <!--page inner-->
         </div>
-        <!--main-panel-->
-        <!-- End Main Content -->
+        <!--container-->
+    </div>
+    <!--main-panel-->
+    <!-- End Main Content -->
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="copyright ml-auto">
-                    2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
-                </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="copyright ml-auto">
+                2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="">PSTeam</a>
             </div>
-        </footer>
-        <!-- End Footer -->
+        </div>
+    </footer>
+    <!-- End Footer -->
     </div>
 
     <!--   Core JS Files   -->
@@ -832,69 +471,7 @@ $token = $_SESSION['token'];
             $('#addRowModal').modal('hide');
 
         });
-
-
-        //SweetALert
-        var SweetAlert2Demo = function() {
-            var initDemos = function() {
-
-
-                $('#alert_demo_7').click(function(e) {
-                    swal({
-                        title: 'Are you sure?',
-                        text: "Please check this Job Description to make sure that has been filled in correctly.",
-                        type: 'warning',
-                        buttons: {
-                            confirm: {
-                                text: 'Yes, Im Sure!',
-                                className: 'btn btn-success'
-                            },
-                            cancel: {
-                                visible: true,
-                                className: 'btn btn-danger'
-                            }
-                        }
-                    }).then((Delete) => {
-                        if (Delete) {
-                            swal({
-                                title: 'Successfull!',
-                                text: 'The Job Description has been published.',
-                                type: 'success',
-                                buttons: {
-                                    confirm: {
-                                        className: 'btn btn-success'
-                                    }
-                                }
-                            });
-                        } else {
-                            swal.close();
-                        }
-                    });
-                });
-
-            };
-
-            return {
-                //== Init
-                init: function() {
-                    initDemos();
-                },
-            };
-        }();
-
-        //== Class Initialization
-        jQuery(document).ready(function() {
-            SweetAlert2Demo.init();
-        });
     </script>
-    <!-- <script type="text/javascript">
-			jQuery(function($) {
-				var $inputs = $('#job_description :input').prop('disabled', true);
-				$('#edit_btn').click(function() {
-					$inputs.prop('disabled', false);
-				});
-			})
-		</script> -->
 
 </body>
 

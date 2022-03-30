@@ -47,6 +47,64 @@ $token = $_SESSION['token'];
 		});
 	</script>
 
+<script type="text/javascript">
+            const checkbox = document.querySelectorAll('input[type="checkbox"]');
+            const button = document.getElementById('acc-btn');
+            checkbox.forEach((cb) => {
+                cb.addEventListener('change',checkButtonStatus);
+            })
+
+            function checkButtonStatus(){
+                const checkedCount = [...checkbox].filter((cb)=>cb.checked);
+                button.disabled = checkedCount.length !== checkbox.length
+            }
+
+            checkButtonStatus();
+
+            function selects(){  
+                var ele=document.getElementsByName('approval_spv[]');  
+                // console.log('ele',ele);
+                for(var i=0; i<ele.length; i++){  
+                    if(ele[i].type=='checkbox' && ele[i].checked==false){  
+                        // if(ele.[i].checked=false){
+                        //     console.log('false');
+                        // }
+                        console.log(ele[i].checked);
+                            ele[i].checked=true; 
+                    }else if(ele[i].type=='checkbox' && ele[i].checked==true){  
+                        // if(ele.[i].checked=false){
+                        //     console.log('false');
+                        // }
+                        console.log(ele[i].checked);
+                            ele[i].checked=false; 
+                    }else{
+                        return null;
+                    }
+
+            }
+            }
+
+            var ebpDocumentCheckboxid = document.getElementById("select");
+            var btn = document.getElementById("acc-btn");
+
+            const onCheckboxChanged = ()=>{
+            btn.disabled = (ebpDocumentCheckboxid.checked);
+            }
+
+            ebpDocumentCheckboxid.onchange = onCheckboxChanged;
+
+            // function deselects(){  
+            //     var ele=document.getElementsByName('approval_spv[]');  
+            //     // console.log('ele',ele);
+            //     for(var i=0; i<ele.length; i++){  
+            //         if(ele[i].type=='checkbox'){  
+            //             console.log(ele[i].checked);
+            //                 ele[i].checked=false; 
+            //         }
+            //     }
+            // }        
+ </script>
+
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/atlantis2.css">
@@ -184,16 +242,22 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="page-inner">
 
+				<form action="proses_dummy_test.php?PageAction=add_approve_attendance" method="post">
+                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                <input type="hidden" value="<?php echo $_GET['id']?>" name="id">
+				<input type="hidden" id="id_logbook" name="id_logbook" value="<?php echo $data['id_logbook']; ?>">
+                <input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
+                <input type="hidden" id="nim" name="nim" value="<?php echo $data['nim']; ?>">
+
 					<!-- recap -->
 					<div class="card">
 						<div class="card-header">
 							<div class="card-head-row">
 								<h4 class="card-title intern-title">Attendance Recap</h4>
 								<input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
-                                            Accept">
+                                            Accept" id="acc-btn" >
 								</input>
 								<br>
-
 							</div>
 						</div>
 						<div class="card-body">
@@ -221,7 +285,11 @@ $token = $_SESSION['token'];
 												<center>Action</center>
 											</th>
 											<th style="width: 10px;">
-												<center>Approval</center>
+											<span><center>Approval<br>
+                                            	<!-- <input type="checkbox" id="select-all"/> -->
+                                                <input type="checkbox" onclick="selects()" name="approval_spv" value="YES"></center>
+                                                <!-- <button onclick="deselects()" name="approval_spv">UnCheck All</center> -->
+                                                </span>
 											</th>
 										</tr>
 									</thead>
@@ -280,8 +348,8 @@ $token = $_SESSION['token'];
                                                         <input type='checkbox' id='select' name='approval_spv[]' value='".$data['id_attendance']."'></input>
                                                         </td></center>";
                                                     }else{
-                                                        echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='' title='' disabled><i class='fa fa-check'></i> APPROVED</button>";
+                                                        echo "<span class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														data-target='' title='' disabled><i class='fa fa-check'></i> APPROVED</span>";
                                                     }
                                                     ?>
                                                         </center>
@@ -294,17 +362,12 @@ $token = $_SESSION['token'];
 									</tbody>
 								</table>
 							</div>
-
 						</div>
-					</div>
-					<!-- end recap -->
-
-				</div>
-				<!--page inner-->
-			</div>
-			<!--container-->
-		</div>
-		<!--main-panel-->
+					</div><!-- end recap -->
+				</form>
+				</div><!--page inner-->
+			</div><!--container-->
+		</div><!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->

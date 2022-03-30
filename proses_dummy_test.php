@@ -686,24 +686,39 @@ if ($_GET['PageAction'] == "add_feedback2hrd") {
 if ($_GET['PageAction'] == "add_jobdesc") {
 
   session_start();
-  $token_session = $_SESSION['token'];
-  $token_post    = mysqli_real_escape_string($conn, $_POST['token']);
-
-  $id                = mysqli_real_escape_string($conn, $_POST['id']);
-  $description     = $_POST['description_jobdesc'];
-  $another = $_POST['another_jobdesc'];
-  $goals = $_POST['expected_goal'];
-
-  $final_desc = json_encode($description);
+  date_default_timezone_set('Asia/Jakarta');
+  $token_session         = $_SESSION['token'];
+  $token_post            = mysqli_real_escape_string($conn, $_POST['token']);
+  $id                    = mysqli_real_escape_string($conn, $_POST['id']);
+  $id_jobdesc_intern     = $_POST['id_jobdesc_intern'];
+  $id_jobdesc            = $_POST['id_jobdesc'];
+  $nim                   = $_POST['nim'];
+  $answer_1              = $_POST['answer_1'];
+  $answer_2              = $_POST['answer_2'];
+  $date = date('Y-m-d H:i:s');
+  // $final_desc = json_encode($description);
   //$checked = explode(',',$description);
 
   //print_r($description);
 
   if ($_SESSION) {
-    $add = $conn->query("INSERT INTO tb_job_description (id_jobdesc,id_internship, description_jobdesc, another_jobdesc, expected_goal) VALUES (NULL,'$id','$final_desc','$another', '$goals');");
+    $add = $conn->query("INSERT INTO tb_jobdesc_intern (id_jobdesc_intern, id_internship, id_jobdesc, nim, answer_1, answer_2,timestamp_approval) VALUES ('','$id','$id_jobdesc','$nim', '$answer_1', '$answer_2','$date');");
     if ($add) {
-      echo '<script type="text/javascript">';
-      echo 'alert("Successfully Added"); document.location="index.php?page=spv-studentlist";</script>';
+      echo "
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Success',
+          text: 'Added Succcesfully!',
+          icon: 'success',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.history.back();
+       } ,2000); 
+      </script>
+      ";
     } else {
       echo ("Error description: " . $conn->error);
       //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
@@ -735,6 +750,53 @@ if ($_GET['PageAction'] == "add_approve") {
       $update = $conn->query("UPDATE `tb_logbook` SET 
         `approval_spv` = 'YES'
         WHERE `id_logbook` IN ($finalizado);");
+    }
+    // echo $id_user_company;
+    if ($update) {
+      echo "
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Success',
+          text: 'Added Succcesfully!',
+          icon: 'success',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.history.back();
+       } ,2000); 
+      </script>
+      ";
+    }
+  } else {
+    echo ("Error description: " . $conn->error);
+  }
+}
+
+//Update Approval Supervisor for Attendance
+if ($_GET['PageAction'] == "add_approve_attendance") {
+  session_start();
+  $token_session = $_SESSION['token'];
+  $token_post    = mysqli_real_escape_string($conn, $_POST['token']);
+  $id            = mysqli_real_escape_string($conn, $_POST['id_internship']);
+  $approval_spv  = $_POST['approval_spv'];
+  $finalizado    = implode(",", $approval_spv);
+
+  // echo "<pre>";
+  // print_r($id);
+  // echo "</pre>";
+
+  if ($token_session === $token_post) {
+
+
+    // $id_logbook      = mysqli_real_escape_string($conn,$_POST['id_logbook']);
+    // $approval_spv    = mysqli_real_escape_string($conn,$_POST['approval_spv']);
+
+    if ($_SESSION) {
+      $update = $conn->query("UPDATE `tb_attendance` SET 
+        `approval_spv` = 'YES'
+        WHERE `id_attendance` IN ($finalizado);");
     }
     // echo $id_user_company;
     if ($update) {

@@ -226,6 +226,7 @@ $token = $_SESSION['token'];
 										$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = $id_company");
 										$data = mysqli_fetch_array($view);
 										?>
+										
 										<div class="form-group form-show-validation row">
 											<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Name <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">

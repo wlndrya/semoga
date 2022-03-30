@@ -160,7 +160,7 @@ session_start();
 			</div>
 		</div>
 
-		<div class="container container-signup container-transparent animated fadeIn">
+		<!-- <div class="container container-signup container-transparent animated fadeIn">
 			<h3 class="text-center">Sign Up</h3>
 			<div class="login-form">
 				<div class="form-group">
@@ -204,7 +204,7 @@ session_start();
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 	</div>
 	<script src="assets/js/core/jquery.3.2.1.min.js"></script>

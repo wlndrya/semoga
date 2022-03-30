@@ -142,7 +142,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-logbook">
+							<a class="nav-link" href="index.php?page=spv-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
@@ -172,13 +172,26 @@ $token = $_SESSION['token'];
 
 					<section class="content">
 
+						<form onsubmit="sendEmail(); reset(); return false;">
+						<?php
+                        include 'config.php';
+                        error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                        $view = mysqli_query($conn, "SELECT * FROM tb_user_company LEFT JOIN tb_company ON tb_user_company.id_company = tb_company.id_company WHERE id_user_company = $user_id");
+                        $data = mysqli_fetch_array($view);
+						?>
+						<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                    	<input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $id_user_company; ?>">
+                        <input type="hidden" id="id_company" name="id_company" value="<?php echo $id_company; ?>">
+						<input type="hidden" id="user_fullname" name="user_fullname" value="<?php echo $data['user_fullname'];?>">
+						<input type="hidden" id="user_email" name="user_email" value="<?php echo $data['user_email']; ?>">
+
                         <!-- Default box -->
                         <div class="card">
                           <div class="card-body row">
                             <div class="col-5 text-center d-flex align-items-center justify-content-center">
                               <div class="">
 								  <p>
-									<img class="alignnone size-full wp-image-6948" style="width: auto; text-align: center;" src="assets/img/polibatamlogo.png" alt="" width="112" height="101">
+									<img class="align-none size-full wp-image-6948" style="width: auto; text-align: center;" src="assets/img/polibatamlogo.png" alt="" width="112" height="101">
 								  </p>
                                 <h2><strong>Politeknik Negeri Batam</strong></h2>
                                 <p class="lead mb-3">Jl. Ahmad Yani Batam Kota, Kota Batam, Kepulauan Riau<br>
@@ -191,23 +204,23 @@ $token = $_SESSION['token'];
                             <div class="col-7">
                               <div class="form-group">
                                 <label for="inputName">Name</label>
-                                <input type="text" id="inputName" class="form-control" />
+                                <input type="text" name="user_fullname" value="<?php echo $data['user_fullname']; ?>" class="form-control" disabled>
                               </div>
-                              <div class="form-group">
+                              <!-- <div class="form-group">
                                 <label for="inputSubject">Subject</label>
-                                <input type="text" id="inputSubject" class="form-control" />
-                              </div>
+                                <input type="text" name="subject" class="form-control" />
+                              </div> -->
                               <div class="form-group">
                                 <label for="inputMessage">Message</label>
-                                <textarea id="inputMessage" class="form-control" rows="4"></textarea>
+                                <textarea name="messages" id="messages"  class="form-control" rows="4"></textarea>
                               </div>
                               <div class="form-group">
-                                <input type="button" class="btn btn-modify text-white" value="Send message">
+                                <input type="submit" class="btn btn-modify text-white" value="Send message">
                               </div>
                             </div>
                           </div>
                         </div>
-                  
+						</form>
                       </section>
 			
 				</div><!--page inner-->
@@ -323,5 +336,24 @@ $token = $_SESSION['token'];
 		});
 	</script>
 
+	<script src="https://smtpjs.com/v3/smtp.js"></script>
+	<script>
+		function sendEmail(){
+			Email.send({
+    Host : "smtp.gmail.com",
+    Username : "yuliawulandari271@gmail.com",
+    Password : "ifjpuiejgqzylwnu",
+    To : 'yuliawulandari271@gmail.com',
+    From : document.getElementById("user_email").value,
+    Subject : "Internship Management System",
+    Body : "Name: " + document.getElementById("user_fullname").value
+	+ "<br> Email: " + document.getElementById("user_email").value
+	+ "<br> Company: " + document.getElementById("company_name").value
+	+ "<br> Messages: " + document.getElementById("messages").value
+}).then(
+  message => alert(messages)
+);
+		}
+	</script>
 </body>
 </html>

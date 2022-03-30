@@ -47,16 +47,16 @@ $token = $_SESSION['token'];
     </script>
 
 <script type="text/javascript">
-            const checkbox = document.querySelectorAll('input[type="checkbox"]');
-            const button = document.getElementById('acc-btn');
-            checkbox.forEach((cb) => {
-                cb.addEventListener('change',checkButtonStatus);
-            })
+            // const checkbox = document.querySelectorAll('input[type="checkbox"]');
+            // const button = document.getElementById('acc-btn');
+            // checkbox.forEach((cb) => {
+            //     cb.addEventListener('change',checkButtonStatus);
+            // })
 
-            function checkButtonStatus(){
-                const checkedCount = [...checkbox].filter((cb)=>cb.checked);
-                button.disabled = checkedCount.length !== checkbox.length
-            }
+            // function checkButtonStatus(){
+            //     const checkedCount = [...checkbox].filter((cb)=>cb.checked);
+            //     button.disabled = checkedCount.length !== checkbox.length
+            // }
 
             checkButtonStatus();
 
@@ -83,14 +83,14 @@ $token = $_SESSION['token'];
             }
             }
 
-            var ebpDocumentCheckboxid = document.getElementById("select");
-            var btn = document.getElementById("acc-btn");
+            // var ebpDocumentCheckboxid = document.getElementById("select");
+            // var btn = document.getElementById("acc-btn");
 
-            const onCheckboxChanged = ()=>{
-            btn.disabled = (ebpDocumentCheckboxid.checked);
-            }
+            // const onCheckboxChanged = ()=>{
+            // btn.disabled = (ebpDocumentCheckboxid.checked);
+            // }
 
-            ebpDocumentCheckboxid.onchange = onCheckboxChanged;
+            // ebpDocumentCheckboxid.onchange = onCheckboxChanged;
 
             // function deselects(){  
             //     var ele=document.getElementsByName('approval_spv[]');  
@@ -234,7 +234,7 @@ $token = $_SESSION['token'];
             <div class="container">
                 <div class="page-inner">
 
-                <form action="proses_dummy_test.php?PageAction=add_approve" method="post">
+                <form id="detail-logbook" action="proses_dummy_test.php?PageAction=add_approve" method="post">
                 <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
                 <input type="hidden" value="<?php echo $_GET['id']?>" name="id">
 				<input type="hidden" id="id_logbook" name="id_logbook" value="<?php echo $data['id_logbook']; ?>">
@@ -470,59 +470,6 @@ $token = $_SESSION['token'];
         $(document).ready(function() {
             $('#basic-datatables').DataTable({});
         });
-
-        //SweetAlert
-        var SweetAlert2Demo = function () {
-            var initDemos = function () {
-
-
-    $('#alert_demo_7').click(function(e) {
-        swal({
-            title: 'Accept this logbook?',
-            text: "",
-            type: 'warning',
-            buttons:{
-                confirm: {
-                    text : 'Yes, Accepted!',
-                    className : 'btn btn-success'
-                },
-                cancel: {
-                    visible: true,
-                    className: 'btn btn-danger'
-                }
-            }
-        }).then((Delete) => {
-            if (Delete) {
-                swal({
-                    title: 'Successfull!',
-                    text: 'The logbook has been accepted',
-                    type: 'success',
-                    buttons : {
-                        confirm: {
-                            className : 'btn btn-success'
-                        }
-                    }
-                });
-            } else {
-                swal.close();
-            }
-        });
-    });
-  
-};
-
-return {
-    //== Init
-    init: function () {
-        initDemos();
-    },
-};
-}();
-
-//== Class Initialization
-jQuery(document).ready(function () {
-SweetAlert2Demo.init();
-});
     </script>
 
 <script>
@@ -543,5 +490,14 @@ SweetAlert2Demo.init();
     });
 })()
 </script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+    var $inputs = $('#detail-logbook :input').prop('disabled', true);
+    $('#acc-btn').click(function () {
+        $inputs.prop('disabled', false);
+    });
+    })
+  </script>
 </body>
 </html>
