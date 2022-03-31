@@ -356,7 +356,6 @@ $token = $_SESSION['token'];
                     ?>
                 </div>
 
-
             </div>
             <!--page inner-->
         </div>
