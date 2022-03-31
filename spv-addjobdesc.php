@@ -164,7 +164,7 @@ $token = $_SESSION['token'];
                             </a>
                         </li>
                         <li class="nav-item submenu">
-                            <a class="nav-link" href="index.php?page=spv-logbook">
+                            <a class="nav-link" href="index.php?page=spv-document">
                                 <i class="link-icon icon-folder-alt"></i>
                                 <span class="menu-title">Internship Files</span>
                             </a>
@@ -197,7 +197,9 @@ $token = $_SESSION['token'];
                     <?php
                     include 'config.php';
                     $id = $_GET['id'];
-                    $view = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_jobdesc ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc WHERE id_internship = $id");
+                    $view = mysqli_query($conn, "SELECT * FROM (tb_jobdesc_intern LEFT JOIN tb_jobdesc ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc) 
+                    LEFT JOIN tb_detail_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail 
+                    WHERE id_internship = $id");
                     // $description_jobdesc = (count($_POST['description_jobdesc']) > 0) ? implode('-', $_POST['description_jobdesc']) : ""; 
                     //print_r($view->num_rows);
                     if ($view->num_rows > 0) :
@@ -238,8 +240,19 @@ $token = $_SESSION['token'];
                                                     <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
                                                     <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
                                                     <tbody>
-                                               
-                                            </tbody>
+                                                    <?php
+                                                        echo "<tr>
+                                                        <td>" . $data['job_type'] . "</td>
+                                                        <td>" . $data['job_description'] . "</td>
+                                                        <td class='text-center'>
+                                                        <div class='custom-control custom-checkbox'>
+                                                        <input type='checkbox' class='custom-control-input' id='customCheck1' name='ceklis[]' value=''>
+                                                        <label class='custom-control-label' for='customCheck1'>Checked</label>
+                                                        </div>
+                                                       </td>
+                                                      </tr>"
+                                                        ?>
+                                                    </tbody>
                                             </table>
                                             <div class="form-group">
                                                 <p>2. <?php echo $data['question_1'] ?></p>
@@ -268,11 +281,11 @@ $token = $_SESSION['token'];
                         <!--INSERT DATA-->
 
                         <?php
-                        include 'config.php';
-                        $prodi_name = $_GET['study_program'];
-                        $view = mysqli_query($conn, "SELECT * FROM tb_detail_jobdesc INNER JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc WHERE prodi_name = '$prodi_name'");
-                        //print_r($view);
-                        $data = mysqli_fetch_array($view);
+                        // include 'config.php';
+                        // $prodi_name = $_GET['study_program'];
+                        // $view = mysqli_query($conn, "SELECT * FROM tb_detail_jobdesc INNER JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc WHERE tb_detail_jobdesc.id_jobdesc = '2'");
+                        // //print_r($view);
+                        // $data = mysqli_fetch_array($view);
                         ?>
 
                             <!-- Task Type Parameter -->
@@ -304,23 +317,37 @@ $token = $_SESSION['token'];
                                                     <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
                                                     <input type="hidden" id="id_jobdesc_intern" name="id_jobdesc_intern" value="<?php echo $id_jobdesc_intern; ?>">
                                                     <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
+                                                    <input type="hidden" id="id_ceklis" name="id_ceklis" value="<?php echo $data['id_ceklis']; ?>">
+                                                    <input type="hidden" id="id_detail" name="id_detail" value="<?php echo $data['id_detail']; ?>">
                                                     <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
 
                                                     <tbody>
                                                         <?php
-                                                        echo "<tr>
-                                                        <td>" . $data['job_type'] . "</td>
-                                                        <td>" . $data['job_description'] . "</td>
-                                                        <td class='text-center'>
+                                                        include 'config.php';
+                                                        $prodi_name = $_GET['study_program'];
+                                                        $query = mysqli_query($conn,"SELECT * FROM tb_detail_jobdesc RIGHT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc WHERE tb_detail_jobdesc.id_jobdesc='2'");
+                                                        while($data = mysqli_fetch_assoc($query)) :
+                                                        
+                                                      ?>
+                                                      <tr>
+                                                            <td><?= $data['job_type']?></td>
+                                                            <td><?= $data['job_description']?></td>
+                                                          <td class='text-center'>
                                                         <div class='custom-control custom-checkbox'>
-                                                        <input type='checkbox' class='custom-control-input' id='customCheck1' name='ceklis' value=''>
+                                                        <input type='checkbox' class='custom-control-input' id='customCheck1' name='ceklis[]' value=''>
                                                         <label class='custom-control-label' for='customCheck1'>Checked</label>
                                                         </div>
                                                        </td>
-                                                      </tr>"
-                                                        ?>
+                                                      </tr>
+                                                      <?php endwhile;?>
                                                     </tbody>
-                                            </table>
+                                                </table>
+
+                                            <?php
+                                            $query = mysqli_query($conn,"SELECT * FROM tb_jobdesc WHERE id_jobdesc='2'");
+                                            $data = mysqli_fetch_assoc($query);
+                                            // print_r($data);
+                                            ?>
                                             <div class="form-group">
                                                 <p>2. <?php echo $data['question_1'] ?></p>
                                                 <textarea class="form-control" required rows="3" id="answer_1" name="answer_1"></textarea>
@@ -355,6 +382,7 @@ $token = $_SESSION['token'];
                     endif;
                     ?>
                 </div>
+
 
             </div>
             <!--page inner-->

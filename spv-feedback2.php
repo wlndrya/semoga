@@ -149,7 +149,7 @@ $token = $_SESSION['token'];
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-logbook">
+							<a class="nav-link" href="index.php?page=spv-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
@@ -210,26 +210,26 @@ $token = $_SESSION['token'];
 										<!-- textarea -->
 										<div class="form-group">
 											<p><b>1.Overall comments for the intern :</b></p>
-											<textarea class="form-control" rows="3" name="catatan_utk_mahasiswa" id="catatan_utk_mahasiswa"><?php echo $data['catatan_utk_mahasiswa'] ?></textarea>
+											<textarea class="form-control" rows="3" name="catatan_utk_mahasiswa" id="catatan_utk_mahasiswa" disabled><?php echo $data['catatan_utk_mahasiswa'] ?></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<p><b>2. Overall comments for Politeknik Negeri Batam :</b></p>
-											<textarea class="form-control" rows="3" name="catatan_utk_poltek" id="catatan_utk_poltek"><?php echo $data['catatan_utk_poltek'] ?></textarea>
+											<textarea class="form-control" rows="3" name="catatan_utk_poltek" id="catatan_utk_poltek" disabled><?php echo $data['catatan_utk_poltek'] ?></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<p><b>3. Does the student’s internship performance meet the requirement for being new employee in your company/institution?</b></p>
-											<textarea class="form-control" rows="3" name="layak_diterima" id="layak_diterima"><?php echo $data['layak_diterima'] ?></textarea>
+											<textarea class="form-control" rows="3" name="layak_diterima" id="layak_diterima" disabled><?php echo $data['layak_diterima'] ?></textarea>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<p><b>4. Does your company intend to recruit the intern immediately
 												he/she finished their internship?</b></p>
-											<textarea class="form-control" rows="3" name="langsung_diterima" id="langsung_diterima"><?php echo $data['langsung_diterima'] ?></textarea>
+											<textarea class="form-control" rows="3" name="langsung_diterima" id="langsung_diterima" disabled><?php echo $data['langsung_diterima'] ?></textarea>
 										</div>
 									</div>
 								</div><!-- Row -->
@@ -281,112 +281,112 @@ $token = $_SESSION['token'];
 													<td>1.</td>
 													<td>Ethics</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="etika" value="4" <?php if($data['etika']=='4') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="etika" value="4" <?php if($data['etika']=='4') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="etika" value="3" <?php if($data['etika']=='3') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="etika" value="3" <?php if($data['etika']=='3') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="etika" value="2" <?php if($data['etika']=='2') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="etika" value="2" <?php if($data['etika']=='2') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="etika" value="1" <?php if($data['etika']=='1') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="etika" value="1" <?php if($data['etika']=='1') echo 'checked'?> type="radio" disabled>
 													</td>
 												</tr>
 												<tr>
 													<td>2.</td>
 													<td>Core Competency Skills</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="4" <?php if($data['keahlian_kompetensi']=='4') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="4" <?php if($data['keahlian_kompetensi']=='4') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="3" <?php if($data['keahlian_kompetensi']=='3') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="3" <?php if($data['keahlian_kompetensi']=='3') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="2" <?php if($data['keahlian_kompetensi']=='2') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="2" <?php if($data['keahlian_kompetensi']=='2') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="1" <?php if($data['keahlian_kompetensi']=='1') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="keahlian_kompetensi" value="1" <?php if($data['keahlian_kompetensi']=='1') echo 'checked'?> type="radio" disabled>
 													</td>
 												</tr>
 												<tr>
 													<td>3.</td>
 													<td>Foreign Language Proficiency</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="keahlian_bahasa" value="4" <?php if($data['keahlian_bahasa']=='4') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="4" <?php if($data['keahlian_bahasa']=='4') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="keahlian_bahasa" value="3" <?php if($data['keahlian_bahasa']=='3') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="3" <?php if($data['keahlian_bahasa']=='3') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="keahlian_bahasa" value="2" <?php if($data['keahlian_bahasa']=='2') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="2" <?php if($data['keahlian_bahasa']=='2') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="keahlian_bahasa" value="1" <?php if($data['keahlian_bahasa']=='1') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="keahlian_bahasa" value="1" <?php if($data['keahlian_bahasa']=='1') echo 'checked'?> type="radio" disabled>
 													</td>
 												</tr>
 												<tr>
 													<td>4.</td>
 													<td>Information Technology Literacy</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="penggunaan_ti" value="4" <?php if($data['penggunaan_ti']=='4') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="4" <?php if($data['penggunaan_ti']=='4') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="penggunaan_ti" value="3" <?php if($data['penggunaan_ti']=='3') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="3" <?php if($data['penggunaan_ti']=='3') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="penggunaan_ti" value="2" <?php if($data['penggunaan_ti']=='2') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="2" <?php if($data['penggunaan_ti']=='2') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="penggunaan_ti" value="1" <?php if($data['penggunaan_ti']=='1') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="penggunaan_ti" value="1" <?php if($data['penggunaan_ti']=='1') echo 'checked'?> type="radio" disabled>
 													</td>
 												</tr>
 												<tr>
 													<td>5.</td>
 													<td>Communication Skill</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="komunikasi" value="4" <?php if($data['komunikasi']=='4') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="komunikasi" value="4" <?php if($data['komunikasi']=='4') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="komunikasi" value="3" <?php if($data['komunikasi']=='3') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="komunikasi" value="3" <?php if($data['komunikasi']=='3') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="komunikasi" value="2" <?php if($data['komunikasi']=='2') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="komunikasi" value="2" <?php if($data['komunikasi']=='2') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="komunikasi" value="1" <?php if($data['komunikasi']=='1') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="komunikasi" value="1" <?php if($data['komunikasi']=='1') echo 'checked'?> type="radio" disabled>
 													</td>
 												</tr>
 												<tr>
 													<td>6.</td>
 													<td>Teamwork</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="kerjasama" value="4" <?php if($data['kerjasama']=='4') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="kerjasama" value="4" <?php if($data['kerjasama']=='4') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="kerjasama" value="3" <?php if($data['kerjasama']=='3') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="kerjasama" value="3" <?php if($data['kerjasama']=='3') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="kerjasama" value="2" <?php if($data['kerjasama']=='2') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="kerjasama" value="2" <?php if($data['kerjasama']=='2') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="kerjasama" value="1" <?php if($data['kerjasama']=='1') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="kerjasama" value="1" <?php if($data['kerjasama']=='1') echo 'checked'?> type="radio" disabled>
 													</td>
 												</tr>
 												<tr>
 													<td>7.</td>
 													<td>Personal Development</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="pengembangan_diri" value="4" <?php if($data['pengembangan_diri']=='4') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="4" <?php if($data['pengembangan_diri']=='4') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="pengembangan_diri" value="3" <?php if($data['pengembangan_diri']=='3') echo 'checked'?>  type="radio">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="3" <?php if($data['pengembangan_diri']=='3') echo 'checked'?>  type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="pengembangan_diri" value="2" <?php if($data['pengembangan_diri']=='2') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="2" <?php if($data['pengembangan_diri']=='2') echo 'checked'?> type="radio" disabled>
 													</td>
 													<td class="text-center">
-														<input class="form-check-input ml-1" name="pengembangan_diri" value="1" <?php if($data['pengembangan_diri']=='1') echo 'checked'?> type="radio">
+														<input class="form-check-input ml-1" name="pengembangan_diri" value="1" <?php if($data['pengembangan_diri']=='1') echo 'checked'?> type="radio" disabled>
 													</td>
 												</tr>
 											</tbody>

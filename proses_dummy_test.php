@@ -692,6 +692,8 @@ if ($_GET['PageAction'] == "add_jobdesc") {
   $id                    = mysqli_real_escape_string($conn, $_POST['id']);
   $id_jobdesc_intern     = $_POST['id_jobdesc_intern'];
   $id_jobdesc            = $_POST['id_jobdesc'];
+  $id_ceklis             = $_POST['id_ceklis'];
+  $id_detail             = $_POST['id_detail'];
   $nim                   = $_POST['nim'];
   $answer_1              = $_POST['answer_1'];
   $answer_2              = $_POST['answer_2'];
@@ -704,7 +706,9 @@ if ($_GET['PageAction'] == "add_jobdesc") {
   if ($_SESSION) {
     $add = $conn->query("INSERT INTO tb_jobdesc_intern (id_jobdesc_intern, id_internship, id_jobdesc, nim, answer_1, answer_2,timestamp_approval) VALUES ('','$id','$id_jobdesc','$nim', '$answer_1', '$answer_2','$date');");
     if ($add) {
-      echo "
+      $add2 = $conn->query("INSERT INTO tb_ceklis_jobdesc_intern (id_ceklis, id_detail, id_jobdesc_intern, ceklis) VALUES ('', '$id_detail', '$id_jobdesc_intern', '$ceklis');");
+      if($add2) {
+        echo "
       <script type='text/javascript'>
        setTimeout(function () { 
         swal({
@@ -719,6 +723,7 @@ if ($_GET['PageAction'] == "add_jobdesc") {
        } ,2000); 
       </script>
       ";
+      }
     } else {
       echo ("Error description: " . $conn->error);
       //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
@@ -901,9 +906,6 @@ if($_GET['PageAction'] == 'add_comment'){
   }else{
     echo ("Error description: " . $conn->error);
   }
-  
-
-
 }
 // Email Information
 ?>
