@@ -251,7 +251,7 @@ $token = $_SESSION['token'];
 										<div class="form-group">
 											<p><b>1. Final grade for student based on overall internship process (range 1 –
 												100): </b></p>
-											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir" value="<?php echo $data['nilai_akhir'] ?>">
+											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir" value="<?php echo $data['nilai_akhir'] ?>" disabled>
 										</div>
 										<div class="form-group">
 											<p><b>2. Please select in the appropriate column in the following table

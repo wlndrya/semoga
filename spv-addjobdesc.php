@@ -193,190 +193,212 @@ $token = $_SESSION['token'];
                 <div class="page-inner">
 
                     <!--VIEW DATA-->
-
                     <?php
-                    include 'config.php';
-                    $id = $_GET['id'];
-                    $view = mysqli_query($conn, "SELECT * FROM (tb_jobdesc_intern LEFT JOIN tb_jobdesc ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc) 
-                    LEFT JOIN tb_detail_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail 
-                    WHERE id_internship = $id");
-                    // $description_jobdesc = (count($_POST['description_jobdesc']) > 0) ? implode('-', $_POST['description_jobdesc']) : ""; 
-                    //print_r($view->num_rows);
-                    if ($view->num_rows > 0) :
-                        foreach ($view as $data) :
-                    ?>
+                        include 'config.php';
+                        $id = $_GET['id'];
+                        $prodi_name = $_GET['study_program'];
+                        $id_jobdesc = $_GET['id_jobdesc'];
+                        $query = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern");
+                        //print_r($query);
+                        if ($query->num_rows > 0) :
+                        ?>
+                            <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
+                            <input type="hidden" value="<?php echo $_GET['nim'] ?>" name="nim">
+                            <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                            <input type="hidden" id="id_jobdesc_intern" name="id_jobdesc_intern" value="<?php echo $id_jobdesc_intern; ?>">
+                            <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
+                            <input type="hidden" id="id_ceklis" name="id_ceklis" value="<?php echo $data['id_ceklis']; ?>">
+                            <input type="hidden" id="id_detail" name="id_detail" value="<?php echo $data['id_detail']; ?>">
+                            <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
 
-                            <!-- Task Type Parameter -->
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Task Type Parameter</h4>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <!-- <form id="job_description" method="POST" action="proses_dummy_test.php?PageAction=update_jobdesc" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');"> -->
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <!-- text input -->
-                                            <div class="form-group">
-                                                <p>1. put a checklist in the checklist column on the appropriate type
-                                                    of work.</p>
-                                            </div>
-                                            <table class="table table-bordered" style="margin-top: -20px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 10px">No</th>
-                                                        <th>Type of work</th>
-                                                        <th>
-                                                            <center>Checklist</center>
-                                                        </th><br>
-                                                    </tr>
-                                                </thead>
-                                                <form>
-                                                    <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
-                                                    <input type="hidden" value="<?php echo $_GET['nim'] ?>" name="nim">
-                                                    <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                                                    <input type="hidden" id="id_jobdesc_intern" name="id_jobdesc_intern" value="<?php echo $id_jobdesc_intern; ?>">
-                                                    <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
-                                                    <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
-                                                    <tbody>
-                                                    <?php
-                                                        echo "<tr>
-                                                        <td>" . $data['job_type'] . "</td>
-                                                        <td>" . $data['job_description'] . "</td>
-                                                        <td class='text-center'>
-                                                        <div class='custom-control custom-checkbox'>
-                                                        <input type='checkbox' class='custom-control-input' id='customCheck1' name='ceklis[]' value=''>
-                                                        <label class='custom-control-label' for='customCheck1'>Checked</label>
-                                                        </div>
-                                                       </td>
-                                                      </tr>"
-                                                        ?>
-                                                    </tbody>
-                                            </table>
-                                            <div class="form-group">
-                                                <p>2. <?php echo $data['question_1'] ?></p>
-                                                <textarea class="form-control" rows="3" id="answer_1" name="answer_1" disabled><?php echo $data['answer_1']; ?></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <p>3. <?php echo $data['question_2'] ?> </p>
-                                                <textarea class="form-control" rows="3" id="answer_2" name="answer_2" disabled><?php echo $data['answer_2'] ?></textarea>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <!-- </form> -->
-                                    </form>
-
-                                </div>
-                                <!--End Card Body-->
+                       <!-- Task Type Parameter -->
+                       <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Task Type Parameter</h4>
                             </div>
-                            <!--End Evaluation Parameter-->
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <p>1. put a checklist in the checklist column on the appropriate type of work.</p>
+                                        </div>
+                                        <table class="table table-bordered" style="margin-top: -20px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type of work</th>
+                                                    <th>Description</th>
+                                                    <th><center>Checklist</center>
+                                                    </th><br>
+                                                </tr>
+                                            </thead>
+                                            <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
+                                                <tbody>
+                                                    <?php
+                                                    include 'config.php';
+                                                    $prodi_name = $_GET['study_program'];
+                                                    $id_jobdesc = $_GET['id_jobdesc'];
+                                                    $query = mysqli_query($conn, "SELECT * FROM (tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc) LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail WHERE tb_detail_jobdesc.id_jobdesc = $id_jobdesc");
+                                                    //print_r($query);
+                                                    while ($data = mysqli_fetch_assoc($query)) :
+                                                    ?>
+                                                        <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
+                                                        <input type="hidden" value="<?php echo $_GET['nim'] ?>" name="nim">
+                                                        <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                                        <input type="hidden" id="id_jobdesc_intern" name="id_jobdesc_intern" value="<?php echo $id_jobdesc_intern; ?>">
+                                                        <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
+                                                        <input type="hidden" id="id_ceklis" name="id_ceklis" value="<?php echo $data['id_ceklis']; ?>">
+                                                        <input type="hidden" id="id_detail" name="id_detail" value="<?php echo $data['id_detail']; ?>">
+                                                        <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
+
+                                                        <tr>
+                                                            <td><?= $data['job_type'] ?></td>
+                                                            <td><?= $data['job_description'] ?></td>
+                                                            <td class='text-center'>
+                                                            <div class='custom-control custom-checkbox'>
+                                                                    <input type='checkbox' id='customCheck1' name='ceklis[]' value='<?= $data['id_detail']?>'  <?php if ($data['id_detail']) echo 'checked="checked" disabled="disabled"'; ?>>
+                                                                    <label>Checked</label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endwhile; ?>
+                                                </tbody>
+                                        </table>
+
+                                        <?php
+                                        $id_jobdesc = $_GET['id_jobdesc'];
+                                        //print_r($id_jobdesc);
+                                        $query = mysqli_query($conn, "SELECT * FROM tb_jobdesc INNER JOIN tb_jobdesc_intern ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc WHERE tb_jobdesc.id_jobdesc = $id_jobdesc;");
+                                        $data = mysqli_fetch_assoc($query);
+                                        //print_r($query);
+                                        ?>
+                                        <div class="form-group">
+                                            <p>2. <?php echo $data['question_1'] ?></p>
+                                            <textarea class="form-control" required rows="3" id="answer_1" name="answer_1" disabled><?php echo $data['answer_1'] ?></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>3. <?php echo $data['question_2'] ?></p>
+                                            <textarea class="form-control" rows="3" required id="answer_2" name="answer_2" disabled><?php echo $data['answer_2'] ?></textarea>
+                                        </div>
+                                        <div>
+                                            <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry to determine what type of work will be provided to students during the internship</b></p>
+                                        </div>
+                                    </div>
+                                    <!--col-sm-12 -->
+                                </div>
+                                <!--row-->
+
+                                <!--Button Submit-->
+                                <!-- <div class="modal-footer d-flex justify-content-center"> -->
+                                    <!-- <a class="btn btn-danger text-white" id="edit_btn" type="submit">Edit</a> -->
+                                    <!-- <button type="submit" class="btn btn-modify text-white"> Submit</button>
+                                </div> -->
+                                <!--End Button Submit-->
+
+                                <!-- </form> -->
+                                </form>
+                            </div>
+                            <!--End Card Body-->
+                        </div>
+                        <!--Card-->
 
                         <?php
-                        endforeach;
                     else :
                         ?>
 
                         <!--INSERT DATA-->
 
-                        <?php
-                        // include 'config.php';
-                        // $prodi_name = $_GET['study_program'];
-                        // $view = mysqli_query($conn, "SELECT * FROM tb_detail_jobdesc INNER JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc WHERE tb_detail_jobdesc.id_jobdesc = '2'");
-                        // //print_r($view);
-                        // $data = mysqli_fetch_array($view);
-                        ?>
-
-                            <!-- Task Type Parameter -->
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Task Type Parameter</h4>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <!-- text input -->
-                                            <div class="form-group">
-                                                <p>1. put a checklist in the checklist column on the appropriate type of work.</p>
-                                            </div>
-                                            <table class="table table-bordered" style="margin-top: -20px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Type of work</th>
-                                                        <th>Description</th>
-                                                        <th>
-                                                            <center>Checklist</center>
-                                                        </th><br>
-                                                    </tr>
-                                                </thead>
-                                                <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
-                                                    <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
-                                                    <input type="hidden" value="<?php echo $_GET['nim'] ?>" name="nim">
-                                                    <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                                                    <input type="hidden" id="id_jobdesc_intern" name="id_jobdesc_intern" value="<?php echo $id_jobdesc_intern; ?>">
-                                                    <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
-                                                    <input type="hidden" id="id_ceklis" name="id_ceklis" value="<?php echo $data['id_ceklis']; ?>">
-                                                    <input type="hidden" id="id_detail" name="id_detail" value="<?php echo $data['id_detail']; ?>">
-                                                    <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
-
-                                                    <tbody>
-                                                        <?php
-                                                        include 'config.php';
-                                                        $prodi_name = $_GET['study_program'];
-                                                        $query = mysqli_query($conn,"SELECT * FROM tb_detail_jobdesc RIGHT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc WHERE tb_detail_jobdesc.id_jobdesc='2'");
-                                                        while($data = mysqli_fetch_assoc($query)) :
-                                                        
-                                                      ?>
-                                                      <tr>
-                                                            <td><?= $data['job_type']?></td>
-                                                            <td><?= $data['job_description']?></td>
-                                                          <td class='text-center'>
-                                                        <div class='custom-control custom-checkbox'>
-                                                        <input type='checkbox' class='custom-control-input' id='customCheck1' name='ceklis[]' value=''>
-                                                        <label class='custom-control-label' for='customCheck1'>Checked</label>
-                                                        </div>
-                                                       </td>
-                                                      </tr>
-                                                      <?php endwhile;?>
-                                                    </tbody>
-                                                </table>
-
-                                            <?php
-                                            $query = mysqli_query($conn,"SELECT * FROM tb_jobdesc WHERE id_jobdesc='2'");
-                                            $data = mysqli_fetch_assoc($query);
-                                            // print_r($data);
-                                            ?>
-                                            <div class="form-group">
-                                                <p>2. <?php echo $data['question_1'] ?></p>
-                                                <textarea class="form-control" required rows="3" id="answer_1" name="answer_1"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <p>3. <?php echo $data['question_2'] ?></p>
-                                                <textarea class="form-control" rows="3" required id="answer_2" name="answer_2"></textarea>
-                                            </div>
-                                            <div>
-                                                <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry to determine what type of work will be provided to students during the internship</b></p>
-                                            </div>
-                                        </div>
-                                        <!--col-sm-12 -->
-                                    </div>
-                                    <!--row-->
-
-                                    <!--Button Submit-->
-                                    <div class="modal-footer d-flex justify-content-center">
-                                        <!-- <a class="btn btn-danger text-white" id="edit_btn" type="submit">Edit</a> -->
-                                        <button type="submit" class="btn btn-modify text-white"> Submit</button>
-                                    </div>
-                                    <!--End Button Submit-->
-
-                                    <!-- </form> -->
-                                    </form>
-                                </div>
-                                <!--End Card Body-->
+                        <!-- Task Type Parameter -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Task Type Parameter</h4>
                             </div>
-                            <!--Card-->
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <p>1. put a checklist in the checklist column on the appropriate type of work.</p>
+                                        </div>
+                                        <table class="table table-bordered" style="margin-top: -20px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type of work</th>
+                                                    <th>Description</th>
+                                                    <th>
+                                                        <center>Checklist</center>
+                                                    </th><br>
+                                                </tr>
+                                            </thead>
+                                            <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
+                                                <tbody>
+                                                    <?php
+                                                    include 'config.php';
+                                                    $prodi_name = $_GET['study_program'];
+                                                    $id_jobdesc = $_GET['id_jobdesc'];
+                                                    $query = mysqli_query($conn, "SELECT * FROM tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc WHERE tb_detail_jobdesc.id_jobdesc = $id_jobdesc");
+                                                    //print_r($query);
+                                                    while ($data = mysqli_fetch_assoc($query)) :
+                                                    ?>
+                                                        <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
+                                                        <input type="hidden" value="<?php echo $_GET['nim'] ?>" name="nim">
+                                                        <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                                                        <input type="hidden" id="id_jobdesc_intern" name="id_jobdesc_intern" value="<?php echo $id_jobdesc_intern; ?>">
+                                                        <input type="hidden" id="id_jobdesc" name="id_jobdesc" value="<?php echo $data['id_jobdesc']; ?>">
+                                                        <input type="hidden" id="id_ceklis" name="id_ceklis" value="<?php echo $data['id_ceklis']; ?>">
+                                                        <input type="hidden" id="id_detail" name="id_detail" value="<?php echo $data['id_detail']; ?>">
+                                                        <input type="hidden" name="time" readonly value="" class="form-control" id="time-now">
+
+                                                        <tr>
+                                                            <td><?= $data['job_type'] ?></td>
+                                                            <td><?= $data['job_description'] ?></td>
+                                                            <td class='text-center'>
+                                                                <div class='custom-control custom-checkbox'>
+                                                                    <input type='checkbox' id='customCheck1' name='ceklis[]' value='<?= $data['id_detail']?>'>
+                                                                    <label>Checked</label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endwhile; ?>
+                                                </tbody>
+                                        </table>
+
+                                        <?php
+                                        $query = mysqli_query($conn, "SELECT * FROM tb_jobdesc WHERE id_jobdesc=$id_jobdesc;");
+                                        $data = mysqli_fetch_assoc($query);
+                                        // print_r($data);
+                                        ?>
+                                        <div class="form-group">
+                                            <p>2. <?php echo $data['question_1'] ?></p>
+                                            <textarea class="form-control" required rows="3" id="answer_1" name="answer_1"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>3. <?php echo $data['question_2'] ?></p>
+                                            <textarea class="form-control" rows="3" required id="answer_2" name="answer_2"></textarea>
+                                        </div>
+                                        <div>
+                                            <p><b>**NOTES : This form must be filled out by the student internship supervisor from the industry to determine what type of work will be provided to students during the internship</b></p>
+                                        </div>
+                                    </div>
+                                    <!--col-sm-12 -->
+                                </div>
+                                <!--row-->
+
+                                <!--Button Submit-->
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <!-- <a class="btn btn-danger text-white" id="edit_btn" type="submit">Edit</a> -->
+                                    <button type="submit" class="btn btn-modify text-white"> Submit</button>
+                                </div>
+                                <!--End Button Submit-->
+
+                                <!-- </form> -->
+                                </form>
+                            </div>
+                            <!--End Card Body-->
+                        </div>
+                        <!--Card-->
 
                     <?php
                     endif;

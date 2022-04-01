@@ -230,7 +230,7 @@ $token = $_SESSION['token'];
 												<?php
 												include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * from (tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) WHERE id_user_company = $user_id");
+												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program WHERE id_user_company = $user_id");
 												while ($data = mysqli_fetch_array($view)) {
 													echo "<tr>
 													<td>" . $data['name'] . "</td>
@@ -243,7 +243,7 @@ $token = $_SESSION['token'];
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['id_internship'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													<td><center>
-													<a href = 'index.php?page=spv-addjobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
+													<a href = 'index.php?page=spv-addjobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
 													</center></td>
 													<td><center>
 													<a href = 'index.php?page=spv-feedback2&id=" . $data['id_internship'] . "' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>

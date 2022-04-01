@@ -3,14 +3,14 @@
 include 'config.php';
 
 session_start();
-if($_SESSION['login_status'] != 'login'){
+if ($_SESSION['login_status'] != 'login') {
 	echo "
 	<script>
 		alert('YOU ARE NOT LOGIN!');
 		window.location.replace('index.php?page=login');
 	</script>
-              "; 
-			}
+              ";
+}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -22,18 +22,24 @@ $token = $_SESSION['token'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Sistem Informasi Pengelolaan Magang</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
-			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css']},
+			google: {
+				"families": ["Lato:300,400,700,900"]
+			},
+			custom: {
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+				urls: ['assets/css/fonts.min.css']
+			},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -50,9 +56,10 @@ $token = $_SESSION['token'];
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
+
 <body>
 	<div class="wrapper horizontal-layout-2">
-		
+
 		<div class="main-header" data-background-color="purple">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
@@ -92,7 +99,7 @@ $token = $_SESSION['token'];
 									</a>
 								</li>
 								<div class="title-name mt-2 text-white">
-									<h5><b>Hi, <?php echo $user;?></b></h5>
+									<h5><b>Hi, <?php echo $user; ?></b></h5>
 								</div>
 								<li class="nav-item dropdown hidden-caret">
 									<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
@@ -185,123 +192,147 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="page-inner">
 
-                <div class="row">
+					<div class="row">
 
-<div class="col-md-12">
-    <div class="card">
-        <div class="card-header">
-            <div class="card-head-row">
-                <h4 class="card-title intern-title">Detail Logbook</h4>
-            </div>
-        </div>
-        <div class="card-body">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-head-row">
+										<h4 class="card-title intern-title">Detail Logbook</h4>
+									</div>
+								</div>
+								<div class="card-body">
 
-            <div class="table-responsive">
-                <table id="basic-datatables" class="display table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <center>Week</center>
-                            </th>
-                            <th>
-                                <center>Start Date</center>
-                            </th>
-                            <th>
-                                <center>End Date</center>
-                            </th>
-							<th>
-                                <center>Details of Activities</center>
-                            </th>
-							<th>
-                                <center>Documentation</center>
-                            </th>
-                        </tr>
-                    </thead>
-				
-					<tbody>
-                                                <?php
+									<div class="table-responsive">
+										<table id="basic-datatables" class="display table table-striped table-hover">
+											<thead>
+												<tr>
+													<th>
+														<center>Week</center>
+													</th>
+													<th>
+														<center>Start Date</center>
+													</th>
+													<th>
+														<center>End Date</center>
+													</th>
+													<th>
+														<center>Details of Activities</center>
+													</th>
+													<th>
+														<center>Documentation</center>
+													</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<?php
 												include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                $id = $_GET['id'];
+												$id = $_GET['id'];
 												$nim = $_GET['nim'];
 												$view = mysqli_query($conn, "SELECT * FROM tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE tb_logbook.id_internship = $id;");
 												while ($data = mysqli_fetch_array($view)) {
 													// echo $id_company;
 												?>
-												<tr>
-													<td><center><?php echo $data['week_num']?></center></td>
-													<td><?php echo $data['startdate']?></td>
-													<td><?php echo $data['enddate']?></td>
-													<td><?php echo $data['description']?></td>
-													<td><center><?php echo "<button class='btn btn-modify text-white' data-target='#mymodal" . $data['id_logbook'] . "' data-toggle='modal'><i class='fas fa-eye'></i> View</button>"?></center></td>
-													<!-- <td>
+													<tr>
+														<td>
+															<center><?php echo $data['week_num'] ?></center>
+														</td>
+														<td><?php echo $data['startdate'] ?></td>
+														<td><?php echo $data['enddate'] ?></td>
+														<td> <center><?php echo "<span class='btn btn-sm btn-modify text-white' data-target='#logbook_desc" . $data['id_logbook'] . "' data-toggle='modal'><i class='fas fa-eye'></i> View</span>" ?></center></td>
+														<td><center><?php echo "<button class='btn btn-sm btn-modify text-white' data-target='#mymodal" . $data['id_logbook'] . "' data-toggle='modal'><i class='fas fa-eye'></i> View</button>" ?></center>
+														</td>
+														<!-- <td>
                                                         <center>
                                                         <?php
-													if ($data['approval_spv'] == "Pending") {
-														echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														if ($data['approval_spv'] == "Pending") {
+															echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
 										data-target='#modal-approve' title=''>$data[approval_spv]</button>";
-													} elseif ($data['approval_spv'] == "Yes") {
-														echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														} elseif ($data['approval_spv'] == "Yes") {
+															echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
 										data-target='' title=''><i class='fas fa-check'></i> APPROVED</button>";
-													} elseif ($data['approval_spv'] == "No") {
-														echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
+														} elseif ($data['approval_spv'] == "No") {
+															echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
 										data-target='' title=''><i class='fas fa-times'></i> DECLINED</button>";
-													}
-                                                    ?>
+														}
+														?>
                                                         </center>
                                                     </td> -->
-												</tr>
+													</tr>
 
-												<!--Modal View Documentation-->
-												<div id="mymodal<?php echo $data['id_logbook'] ?>" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-lg">
-														<!-- Modal content-->
-														<div class="modal-content">
-															<div class="modal-header">
-																<h4 class="modal-title">Logbook Documentation</h4>
-																<button type="button" class="close" data-dismiss="modal">&times;</button>
-															</div>
-															<?php
-																if($data['documentation']) :
-															?>
-															<div class="modal-body" style="height: 600px">
-																<object type="application/pdf" data="berkas/<?php echo $data['documentation'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="false">
-																</object>
-															</div>
-															<?php
-															else :
-															?>
-															<h2 class="p-5 mx-auto">Documentation is not available!</h2>
-															<?php endif;?>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													<!--Modal View Documentation-->
+													<div id="mymodal<?php echo $data['id_logbook'] ?>" class="modal fade" role="dialog">
+														<div class="modal-dialog modal-lg">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title">Logbook Documentation</h4>
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																</div>
+																<?php
+																if ($data['documentation']) :
+																?>
+																	<div class="modal-body" style="height: 600px">
+																		<object type="application/pdf" data="berkas/<?php echo $data['documentation'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="false">
+																		</object>
+																	</div>
+																<?php
+																else :
+																?>
+																	<h2 class="p-5 mx-auto">Documentation is not available!</h2>
+																<?php endif; ?>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<!--End Modal Documentation-->
-												
+													<!--End Modal Documentation-->
+
+													<!--Modal Description Logbook-->
+													<div class="modal fade" id="logbook_desc<?php echo $data['id_logbook'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalScrollableTitle">Logbook Description</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<?php echo $data['description']; ?>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!--End Modal Description Logbook-->
+
 												<?php //penutup perulangan while
 													$no++;
 												}
 												?>
-                                            </tbody>
-                </table>
-            </div>
+											</tbody>
+										</table>
+									</div>
 
-        </div>
-    </div>
-
-
-
-</div>
+								</div>
+							</div>
 
 
-</div>
 
-				</div><!--page inner-->
-			</div><!--container-->
-		</div><!--main-panel-->
+						</div>
+
+
+					</div>
+
+				</div>
+				<!--page inner-->
+			</div>
+			<!--container-->
+		</div>
+		<!--main-panel-->
 		<!-- End Main Content -->
 
 		<!-- Footer -->
@@ -309,7 +340,7 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="copyright ml-auto">
 					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
-				</div>				
+				</div>
 			</div>
 		</footer>
 		<!-- End Footer -->
@@ -400,7 +431,7 @@ $token = $_SESSION['token'];
 		var action =
 			'<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
-		$('#addRowButton').click(function () {
+		$('#addRowButton').click(function() {
 			$('#add-row').dataTable().fnAddData([
 				$("#addName").val(),
 				$("#addPosition").val(),
@@ -411,10 +442,11 @@ $token = $_SESSION['token'];
 
 		});
 
-        $(document).ready(function() {
-            $('#basic-datatables').DataTable({});
-        });
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({});
+		});
 	</script>
 
 </body>
+
 </html>

@@ -697,7 +697,10 @@ if ($_GET['PageAction'] == "add_jobdesc") {
   $nim                   = $_POST['nim'];
   $answer_1              = $_POST['answer_1'];
   $answer_2              = $_POST['answer_2'];
+  $ceklis = $_POST['ceklis'];
   $date = date('Y-m-d H:i:s');
+
+  print_r($ceklis);
   // $final_desc = json_encode($description);
   //$checked = explode(',',$description);
 
@@ -705,25 +708,36 @@ if ($_GET['PageAction'] == "add_jobdesc") {
 
   if ($_SESSION) {
     $add = $conn->query("INSERT INTO tb_jobdesc_intern (id_jobdesc_intern, id_internship, id_jobdesc, nim, answer_1, answer_2,timestamp_approval) VALUES ('','$id','$id_jobdesc','$nim', '$answer_1', '$answer_2','$date');");
+    $idjobin = mysqli_insert_id($conn);
     if ($add) {
-      $add2 = $conn->query("INSERT INTO tb_ceklis_jobdesc_intern (id_ceklis, id_detail, id_jobdesc_intern, ceklis) VALUES ('', '$id_detail', '$id_jobdesc_intern', '$ceklis');");
-      if($add2) {
-        echo "
-      <script type='text/javascript'>
-       setTimeout(function () { 
-        swal({
-          title: 'Success',
-          text: 'Added Succcesfully!',
-          icon: 'success',
-          buttons: false
-        }); 
-       },10); 
-       window.setTimeout(function(){ 
-        window.history.back();
-       } ,2000); 
-      </script>
-      ";
+      // $popimp = implode(',', $_POST['ceklis']);
+      $cekArr=array();
+      $cekArr=$_POST['ceklis'];
+      foreach($cekArr as $cekid)
+      {
+        $add2 = $conn->query("INSERT INTO tb_ceklis_jobdesc_intern (id_ceklis, id_detail, id_jobdesc_intern) VALUES ('', '$cekid', '$idjobin');");
+      //your Insert code here with the insert query ie INSERT INTO bpl_club (club_name) VALUES ('$ClubName')
       }
+      if(!$add2){
+        echo $conn->error;
+      }
+      // if($add2) {
+      //   echo "
+      // <script type='text/javascript'>
+      //  setTimeout(function () { 
+      //   swal({
+      //     title: 'Success',
+      //     text: 'Added Succcesfully!',
+      //     icon: 'success',
+      //     buttons: false
+      //   }); 
+      //  },10); 
+      //  window.setTimeout(function(){ 
+      //   window.history.back();
+      //  } ,2000); 
+      // </script>
+      // ";
+      // }
     } else {
       echo ("Error description: " . $conn->error);
       //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';

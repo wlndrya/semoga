@@ -3,14 +3,14 @@
 include 'config.php';
 
 session_start();
-if($_SESSION['login_status'] != 'login'){
-	echo "
+if ($_SESSION['login_status'] != 'login') {
+    echo "
 	<script>
 		alert('YOU ARE NOT LOGIN!');
 		window.location.replace('index.php?page=login');
 	</script>
-              "; 
-			}
+              ";
+}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -46,63 +46,63 @@ $token = $_SESSION['token'];
         });
     </script>
 
-<script type="text/javascript">
-            // const checkbox = document.querySelectorAll('input[type="checkbox"]');
-            // const button = document.getElementById('acc-btn');
-            // checkbox.forEach((cb) => {
-            //     cb.addEventListener('change',checkButtonStatus);
-            // })
+    <script type="text/javascript">
+        // const checkbox = document.querySelectorAll('input[type="checkbox"]');
+        // const button = document.getElementById('acc-btn');
+        // checkbox.forEach((cb) => {
+        //     cb.addEventListener('change',checkButtonStatus);
+        // })
 
-            // function checkButtonStatus(){
-            //     const checkedCount = [...checkbox].filter((cb)=>cb.checked);
-            //     button.disabled = checkedCount.length !== checkbox.length
-            // }
+        // function checkButtonStatus(){
+        //     const checkedCount = [...checkbox].filter((cb)=>cb.checked);
+        //     button.disabled = checkedCount.length !== checkbox.length
+        // }
 
-            checkButtonStatus();
+        checkButtonStatus();
 
-            function selects(){  
-                var ele=document.getElementsByName('approval_spv[]');  
-                // console.log('ele',ele);
-                for(var i=0; i<ele.length; i++){  
-                    if(ele[i].type=='checkbox' && ele[i].checked==false){  
-                        // if(ele.[i].checked=false){
-                        //     console.log('false');
-                        // }
-                        console.log(ele[i].checked);
-                            ele[i].checked=true; 
-                    }else if(ele[i].type=='checkbox' && ele[i].checked==true){  
-                        // if(ele.[i].checked=false){
-                        //     console.log('false');
-                        // }
-                        console.log(ele[i].checked);
-                            ele[i].checked=false; 
-                    }else{
-                        return null;
-                    }
+        function selects() {
+            var ele = document.getElementsByName('approval_spv[]');
+            // console.log('ele',ele);
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].type == 'checkbox' && ele[i].checked == false) {
+                    // if(ele.[i].checked=false){
+                    //     console.log('false');
+                    // }
+                    console.log(ele[i].checked);
+                    ele[i].checked = true;
+                } else if (ele[i].type == 'checkbox' && ele[i].checked == true) {
+                    // if(ele.[i].checked=false){
+                    //     console.log('false');
+                    // }
+                    console.log(ele[i].checked);
+                    ele[i].checked = false;
+                } else {
+                    return null;
+                }
 
             }
-            }
+        }
 
-            // var ebpDocumentCheckboxid = document.getElementById("select");
-            // var btn = document.getElementById("acc-btn");
+        // var ebpDocumentCheckboxid = document.getElementById("select");
+        // var btn = document.getElementById("acc-btn");
 
-            // const onCheckboxChanged = ()=>{
-            // btn.disabled = (ebpDocumentCheckboxid.checked);
-            // }
+        // const onCheckboxChanged = ()=>{
+        // btn.disabled = (ebpDocumentCheckboxid.checked);
+        // }
 
-            // ebpDocumentCheckboxid.onchange = onCheckboxChanged;
+        // ebpDocumentCheckboxid.onchange = onCheckboxChanged;
 
-            // function deselects(){  
-            //     var ele=document.getElementsByName('approval_spv[]');  
-            //     // console.log('ele',ele);
-            //     for(var i=0; i<ele.length; i++){  
-            //         if(ele[i].type=='checkbox'){  
-            //             console.log(ele[i].checked);
-            //                 ele[i].checked=false; 
-            //         }
-            //     }
-            // }        
- </script>
+        // function deselects(){  
+        //     var ele=document.getElementsByName('approval_spv[]');  
+        //     // console.log('ele',ele);
+        //     for(var i=0; i<ele.length; i++){  
+        //         if(ele[i].type=='checkbox'){  
+        //             console.log(ele[i].checked);
+        //                 ele[i].checked=false; 
+        //         }
+        //     }
+        // }        
+    </script>
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -179,54 +179,54 @@ $token = $_SESSION['token'];
                 </div>
             </div>
 
-           <!-- Menu -->
-			<div class="nav-bottom">
-				<div class="container">
-					<ul class="nav page-navigation page-navigation-secondary bg-white">
-						<li class="nav-item submenu">
-							<a class="nav-link" href="#">
-								<i class="link-icon icon-book-open"></i>
-								<span class="menu-title">Profile</span>
-							</a>
-							<div class="navbar-dropdown animated fadeIn">
-								<ul>
-									<li>
-										<a href="index.php?page=spv-profile">My Profile</a>
-									</li>
-									<li>
-										<a href="index.php?page=spv-company-profile">Company Profile</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-studentlist">
-								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Student Internship</span>
-							</a>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-document">
-								<i class="link-icon icon-folder-alt"></i>
-								<span class="menu-title">Internship Files</span>
-							</a>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-tutorial">
-								<i class="link-icon icon-screen-desktop"></i>
-								<span class="menu-title">Tutorial</span>
-							</a>
-						</li>
-						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-information">
-								<i class="link-icon icon-question"></i>
-								<span class="menu-title">Information</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!-- End Menu -->
+            <!-- Menu -->
+            <div class="nav-bottom">
+                <div class="container">
+                    <ul class="nav page-navigation page-navigation-secondary bg-white">
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="#">
+                                <i class="link-icon icon-book-open"></i>
+                                <span class="menu-title">Profile</span>
+                            </a>
+                            <div class="navbar-dropdown animated fadeIn">
+                                <ul>
+                                    <li>
+                                        <a href="index.php?page=spv-profile">My Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=spv-company-profile">Company Profile</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=spv-studentlist">
+                                <i class="link-icon icon-layers"></i>
+                                <span class="menu-title">Student Internship</span>
+                            </a>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=spv-document">
+                                <i class="link-icon icon-folder-alt"></i>
+                                <span class="menu-title">Internship Files</span>
+                            </a>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=spv-tutorial">
+                                <i class="link-icon icon-screen-desktop"></i>
+                                <span class="menu-title">Tutorial</span>
+                            </a>
+                        </li>
+                        <li class="nav-item submenu">
+                            <a class="nav-link" href="index.php?page=spv-information">
+                                <i class="link-icon icon-question"></i>
+                                <span class="menu-title">Information</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End Menu -->
         </div>
 
         <!-- Main Content -->
@@ -234,122 +234,161 @@ $token = $_SESSION['token'];
             <div class="container">
                 <div class="page-inner">
 
-                <form id="detail-logbook" action="proses_dummy_test.php?PageAction=add_approve" method="post">
-                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                <input type="hidden" value="<?php echo $_GET['id']?>" name="id">
-				<input type="hidden" id="id_logbook" name="id_logbook" value="<?php echo $data['id_logbook']; ?>">
-                <input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
-                <input type="hidden" id="nim" name="nim" value="<?php echo $data['nim']; ?>">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-head-row">
-                                        <h4 class="card-title intern-title">Detail Logbook</h4>
-                                        <!-- <input type="button" disabled="true" id="acc-btn" value="save"></input> -->
-                                        <input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
-                                            Accept" id="acc-btn" >
-                                        </input>
-                                        <br>
+                    <form id="detail-logbook" action="proses_dummy_test.php?PageAction=add_approve" method="post">
+                        <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+                        <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
+                        <input type="hidden" id="id_logbook" name="id_logbook" value="<?php echo $data['id_logbook']; ?>">
+                        <input type="hidden" id="id_internship" name="id_internship" value="<?php echo $id_internship; ?>">
+                        <input type="hidden" id="nim" name="nim" value="<?php echo $data['nim']; ?>">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-head-row">
+                                            <h4 class="card-title intern-title">Detail Logbook</h4>
+                                            <!-- <input type="button" disabled="true" id="acc-btn" value="save"></input> -->
+                                            <input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
+                                            Accept" id="acc-btn">
+                                            </input>
+                                            <br>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <form>
-                                        <table id="basic-datatables" class="display table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Week</th>
-                                                    <th><center>Start Date</center></th>
-                                                    <th><center>End Date</center></th>
-                                                    <th>
-                                                        <center>Detail of Activities</center>
-                                                    </th>
-                                                    <th style="width: 10px;">
-                                                        <center>Documentation</center>
-                                                    </th>
-                                                    <th style="width: 10px;">
-                                                    <span><center>Approval<br>
-                                                    <!-- <input type="checkbox" id="select-all"/> -->
-                                                    <input type="checkbox" onclick="selects()" name="approval_spv" value="YES"></center>
-                                                    <!-- <button onclick="deselects()" name="approval_spv">UnCheck All</center> -->
-                                                    </span>
-                                                    </th>
-                                                </tr>
-                                            </thead>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <form>
+                                                <table id="basic-datatables" class="display table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Week</th>
+                                                            <th>
+                                                                <center>Start Date</center>
+                                                            </th>
+                                                            <th>
+                                                                <center>End Date</center>
+                                                            </th>
+                                                            <th>
+                                                                <center>Detail of Activities</center>
+                                                            </th>
+                                                            <th style="width: 10px;">
+                                                                <center>Documentation</center>
+                                                            </th>
+                                                            <th style="width: 10px;">
+                                                                <span>
+                                                                    <center>Approval<br>
+                                                                        <!-- <input type="checkbox" id="select-all"/> -->
+                                                                        <input type="checkbox" onclick="selects()" name="approval_spv" value="YES">
+                                                                    </center>
+                                                                    <!-- <button onclick="deselects()" name="approval_spv">UnCheck All</center> -->
+                                                                </span>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
 
-                                            <tbody>
-                                                <?php
-												include 'config.php';
-												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                $id = $_GET['id'];
-												$view = mysqli_query($conn, "SELECT * FROM tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE tb_logbook.id_internship = $id;");
-												while ($data = mysqli_fetch_array($view)) {
-													// echo $id_company;
-												?>
-												<tr>
-													<td><center><?php echo $data['week_num']?></center></td>
-													<td><center><?php echo $data['startdate']?></center></td>
-													<td><center><?php echo $data['enddate']?></center></td>
-													<td><?php echo $data['description']?></td>
-                                                    <td><center><?php echo "<span class='btn btn-sm btn-modify text-white' data-target='#mymodal" . $data['id_logbook'] . "' data-toggle='modal'><i class='fas fa-eye'></i> View</span>"?></center></td>
-													<td>
-                                                        <center>
+                                                    <tbody>
                                                         <?php
-                                                    
-                                                    if($data['approval_spv'] == "Pending"){
-                                                        echo "<center>
-                                                        <input type='checkbox' id='select' name='approval_spv[]' value='".$data['id_logbook']."'></input>
-                                                        </td></center>";
-                                                    }else{
-                                                        echo "<span class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'data-target='' title='' disabled><i class='fa fa-check'></i> APPROVED</span>";
-                                                    }
-                                                    ?>
-                                                        </center>
-                                                    </td>
-												</tr>
+                                                        include 'config.php';
+                                                        error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                                        $id = $_GET['id'];
+                                                        $view = mysqli_query($conn, "SELECT * FROM tb_logbook INNER JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship WHERE tb_logbook.id_internship = $id;");
+                                                        while ($data = mysqli_fetch_array($view)) {
+                                                            // echo $id_company;
+                                                        ?>
+                                                            <tr>
+                                                                <td>
+                                                                    <center><?php echo $data['week_num'] ?></center>
+                                                                </td>
+                                                                <td>
+                                                                    <center><?php echo $data['startdate'] ?></center>
+                                                                </td>
+                                                                <td>
+                                                                    <center><?php echo $data['enddate'] ?></center>
+                                                                </td>
+                                                                <td>
+                                                                    <center><?php echo "<span class='btn btn-sm btn-modify text-white' data-target='#logbook_desc" . $data['id_logbook'] . "' data-toggle='modal'><i class='fas fa-eye'></i> View</span>" ?></center>
+                                                                </td>
+                                                                <td>
+                                                                    <center><?php echo "<span class='btn btn-sm btn-modify text-white' data-target='#mymodal" . $data['id_logbook'] . "' data-toggle='modal'><i class='fas fa-eye'></i> View</span>" ?></center>
+                                                                </td>
+                                                                <td>
+                                                                    <center>
+                                                                        <?php
 
-                                                <!--Modal View Documentation-->
-												<div id="mymodal<?php echo $data['id_logbook'] ?>" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-lg">
-														<!-- Modal content-->
-														<div class="modal-content">
-															<div class="modal-header">
-																<h4 class="modal-title">Logbook Documentation</h4>
-																<button type="button" class="close" data-dismiss="modal">&times;</button>
-															</div>
-															<?php
-																if($data['documentation']) :
-															?>
-															<div class="modal-body" style="height: 600px">
-																<object type="application/pdf" data="berkas/<?php echo $data['documentation'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="false">
-																</object>
-															</div>
-															<?php
-															else :
-															?>
-															<h2 class="p-5 mx-auto">Documentation is not available!</h2>
-															<?php endif;?>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-															</div>
-														</div>
-													</div>
-												</div>
-												<!--End Modal Documentation-->
-                                                
-												<?php //penutup perulangan while
-													$no++;
-												}
-												?>
-                                            </tbody>
-                                        </table>
-                                        </form>
-                                    </div><!--div class table-responsive-->
-                                </div><!--div class card-body-->
-                            </div><!--div class card-->
-                        </div><!--div class col-md-12-->
-                    </div><!--div class row-->
+                                                                        if ($data['approval_spv'] == "Pending") {
+                                                                            echo "<center>
+                                                        <input type='checkbox' id='select' name='approval_spv[]' value='" . $data['id_logbook'] . "'></input>
+                                                        </td></center>";
+                                                                        } else {
+                                                                            echo "<span class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'data-target='' title='' disabled><i class='fa fa-check'></i> APPROVED</span>";
+                                                                        }
+                                                                        ?>
+                                                                    </center>
+                                                                </td>
+                                                            </tr>
+
+                                                            <!--Modal View Documentation-->
+                                                            <div id="mymodal<?php echo $data['id_logbook'] ?>" class="modal fade" role="dialog">
+                                                                <div class="modal-dialog modal-lg">
+                                                                    <!-- Modal content-->
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">Logbook Documentation</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        </div>
+                                                                        <?php
+                                                                        if ($data['documentation']) :
+                                                                        ?>
+                                                                            <div class="modal-body" style="height: 600px">
+                                                                                <object type="application/pdf" data="berkas/<?php echo $data['documentation'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="false">
+                                                                                </object>
+                                                                            </div>
+                                                                        <?php
+                                                                        else :
+                                                                        ?>
+                                                                            <h2 class="p-5 mx-auto">Documentation is not available!</h2>
+                                                                        <?php endif; ?>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--End Modal Documentation-->
+
+                                                            <!--Modal Description Logbook-->
+                                                            <div class="modal fade" id="logbook_desc<?php echo $data['id_logbook'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Logbook Description</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <?php echo $data['description']; ?>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--End Modal Description Logbook-->
+
+                                                        <?php //penutup perulangan while
+                                                            $no++;
+                                                        }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <!--div class table-responsive-->
+                                    </div>
+                                    <!--div class card-body-->
+                                </div>
+                                <!--div class card-->
+                            </div>
+                            <!--div class col-md-12-->
+                        </div>
+                        <!--div class row-->
                     </form>
                 </div>
                 <!--page inner-->
@@ -472,32 +511,33 @@ $token = $_SESSION['token'];
         });
     </script>
 
-<script>
-(function() {
-    $('form > input#select').keyup(function() {
-        var empty = false;
-        $('form > input').each(function() {
-            if ($(this).val() == '') {
-                empty = true;
-            }
-        });
+    <script>
+        (function() {
+            $('form > input#select').keyup(function() {
+                var empty = false;
+                $('form > input').each(function() {
+                    if ($(this).val() == '') {
+                        empty = true;
+                    }
+                });
 
-        if (empty) {
-            $('#acc_data').attr('disabled', 'disabled');
-        } else {
-            $('#acc_data').removeAttr('disabled');
-        }
-    });
-})()
-</script>
+                if (empty) {
+                    $('#acc_data').attr('disabled', 'disabled');
+                } else {
+                    $('#acc_data').removeAttr('disabled');
+                }
+            });
+        })()
+    </script>
 
-<script type="text/javascript">
+    <!-- <script type="text/javascript">
     jQuery(function ($) {
     var $inputs = $('#detail-logbook :input').prop('disabled', true);
     $('#acc-btn').click(function () {
         $inputs.prop('disabled', false);
     });
     })
-  </script>
+  </script> -->
 </body>
+
 </html>
