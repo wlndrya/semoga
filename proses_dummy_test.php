@@ -697,10 +697,12 @@ if ($_GET['PageAction'] == "add_jobdesc") {
   $nim                   = $_POST['nim'];
   $answer_1              = $_POST['answer_1'];
   $answer_2              = $_POST['answer_2'];
+  $date_start            = $_POST['date_start'];
+  $date_end              = $_POST['date_end'];
   $ceklis = $_POST['ceklis'];
   $date = date('Y-m-d H:i:s');
 
-  print_r($ceklis);
+  //print_r($ceklis);
   // $final_desc = json_encode($description);
   //$checked = explode(',',$description);
 
@@ -715,11 +717,25 @@ if ($_GET['PageAction'] == "add_jobdesc") {
       $cekArr=$_POST['ceklis'];
       foreach($cekArr as $cekid)
       {
-        $add2 = $conn->query("INSERT INTO tb_ceklis_jobdesc_intern (id_ceklis, id_detail, id_jobdesc_intern) VALUES ('', '$cekid', '$idjobin');");
+        $add2 = $conn->query("INSERT INTO tb_ceklis_jobdesc_intern (id_ceklis, id_detail, id_jobdesc_intern, date_start, date_end) VALUES ('', '$cekid', '$idjobin', '$date_start', '$date_end');");
       //your Insert code here with the insert query ie INSERT INTO bpl_club (club_name) VALUES ('$ClubName')
       }
-      if(!$add2){
-        echo $conn->error;
+      if($add2){
+        echo "
+      <script type='text/javascript'>
+      setTimeout(function () { 
+      swal({
+      title: 'Success',
+      text: 'Added Succcesfully!',
+      icon: 'success',
+      buttons: false
+      }); 
+      },10); 
+      window.setTimeout(function(){ 
+      window.history.back();
+      } ,2000); 
+      </script>
+      ";
       }
       // if($add2) {
       //   echo "

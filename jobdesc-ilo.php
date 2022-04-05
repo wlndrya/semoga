@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 session_start();
 if ($_SESSION['login_status'] != 'login') {
 	echo "
@@ -185,17 +185,26 @@ $token = $_SESSION['token'];
 		<div class="main-panel">
 			<div class="container">
 				<div class="page-inner">
-
 					<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title"><b>JOB DESCRIPTION</b></h4>
-                                        <button class="btn btn-modify btn-round ml-auto text-white" data-toggle="modal" data-target="#modaladdspv">
-                                            <i class="fa fa-plus"></i>
-                                            Add Job Description
-                                        </button>
+										<?php
+										$id = $_GET['id'];
+										$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) 
+										LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program WHERE id_user_company = $user_id");
+										$data = mysqli_fetch_array($view);
+
+										echo "
+										<a class='btn btn-modify btn-round ml-auto text-white' href='index.php?page=addjobdesc-ilo&id=" . $_GET['id'] . "
+										&nim=". $_GET['nim']."&id_jobdesc=". $_GET['id_jobdesc']."' type='submit'>
+										<i class='fa fa-plus'></i>
+										Add Job Description
+										</a>
+										"
+										?>
 									</div>
 								</div>
 								<div class="card-body">
@@ -218,14 +227,17 @@ $token = $_SESSION['token'];
 											<tbody>
 												<?php
 												include 'config.php';
+												$id_jobdesc = $_GET['id_jobdesc'];
+												$id_jobdesc_intern = $_GET['id_jobdesc_intern'];
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_jobdesc_intern = tb_jobdesc_intern.id_jobdesc_intern");
+												$view = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_jobdesc_intern = tb_jobdesc_intern.id_jobdesc_intern WHERE tb_jobdesc_intern.id_jobdesc = $id_jobdesc");
+												//print_r($id_jobdesc_intern);
 												while ($data = mysqli_fetch_array($view)) {
 													echo "<tr>
 													<td><center>" . $data['date_start'] . "</center></td>
-													<td><center?>" . $data['date_end'] . "</center></td>
+													<td><center>" . $data['date_end'] . "</center></td>
 													<td><center>
-													<a href = '#' type='button' data-toggle='modal' data-target='#doc-detail" . $data['id_internship'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = 'index.php?page=viewjobdesc-ilo&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "&id_jobdesc_intern=". $data['id_jobdesc_intern']."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													</tr>"
 												?>

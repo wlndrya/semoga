@@ -243,7 +243,7 @@ $token = $_SESSION['token'];
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['id_internship'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													<td><center>
-													<a href = 'index.php?page=spv-addjobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
+													". ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=jobdesc-ilo&id=" . $data['id_internship'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>" : "<a href = 'index.php?page=spv-addjobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>") ."
 													</center></td>
 													<td><center>
 													<a href = 'index.php?page=spv-feedback2&id=" . $data['id_internship'] . "' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
@@ -252,7 +252,7 @@ $token = $_SESSION['token'];
 												?>
 
 													<div id="mymodal<?php echo $data['id_internship'] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">
@@ -314,7 +314,7 @@ $token = $_SESSION['token'];
 
 													<!--Modal View CV-->
 													<div id="myModal1<?= $data['id_internship'] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">
@@ -343,7 +343,7 @@ $token = $_SESSION['token'];
 
 													<!--Modal View Transcript-->
 													<div id="myModal2<?= $data['id_internship'] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">
@@ -372,7 +372,7 @@ $token = $_SESSION['token'];
 
 													<!--Modal View Optional Files 1-->
 													<div id="myModal3<?= $data['id_internship'] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">
@@ -401,7 +401,7 @@ $token = $_SESSION['token'];
 
 													<!--Modal View Optional Files 2-->
 													<div id="myModal4<?= $data['id_internship'] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">

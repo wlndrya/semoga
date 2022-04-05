@@ -172,7 +172,7 @@ $token = $_SESSION['token'];
 
 					<section class="content">
 
-						<form onsubmit="sendEmail(); reset(); return false;">
+						<form action="send_email.php" method="POST">
 						<?php
                         include 'config.php';
                         error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
@@ -212,7 +212,7 @@ $token = $_SESSION['token'];
                               </div> -->
                               <div class="form-group">
                                 <label for="inputMessage">Message</label>
-                                <textarea name="messages" id="messages"  class="form-control" rows="4"></textarea>
+                                <textarea name="messages" id="messages" class="form-control" rows="4"></textarea>
                               </div>
                               <div class="form-group">
                                 <input type="submit" class="btn btn-modify text-white" value="Send message">
@@ -337,7 +337,7 @@ $token = $_SESSION['token'];
 	</script>
 
 	<script src="https://smtpjs.com/v3/smtp.js"></script>
-	<script>
+	<!-- <script>
 		function sendEmail(){
 			Email.send({
     Host : "smtp.gmail.com",
@@ -354,6 +354,6 @@ $token = $_SESSION['token'];
   message => alert(messages)
 );
 		}
-	</script>
+	</script> -->
 </body>
 </html>

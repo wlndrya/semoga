@@ -43,7 +43,23 @@ $mail->Body = $mailContent;
 if(!$mail->send()){ 
     echo 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo; 
 }else{ 
-    echo 'Message has been sent.'; 
+    echo "
+    <script type='text/javascript'>
+               setTimeout(function () { 
+                swal({
+                  title: 'Success',
+                  text: 'Email has been sent',
+                  icon: 'success',
+                  buttons: false
+                }); 
+               },10); 
+               window.setTimeout(function(){ 
+                window.location.replace('index.php?page=hrd-information');
+               } ,2000); 
+              </script>
+              "; 
 }
-
 ?>
+
+<!-- Sweet Alert -->
+<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>

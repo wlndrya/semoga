@@ -310,7 +310,7 @@ $token = $_SESSION['token'];
 
 													<!--Modal View CV-->
 													<div id="myModal1<?= $data[0] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">
@@ -339,7 +339,7 @@ $token = $_SESSION['token'];
 
 													<!--Modal View Transcript-->
 													<div id="myModal2<?= $data[0] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">
@@ -368,7 +368,7 @@ $token = $_SESSION['token'];
 
 													<!--Modal View Optional Files 1-->
 													<div id="myModal3<?= $data[0] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">
@@ -397,7 +397,7 @@ $token = $_SESSION['token'];
 
 													<!--Modal View Optional Files 2-->
 													<div id="myModal4<?= $data[0] ?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-lg">
+														<div class="modal-dialog modal-lg modal-dialog-centered">
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">

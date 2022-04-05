@@ -97,11 +97,20 @@ if (isset($_GET['page'])) {
     case 'spv-discuss':
       include "spv-discuss.php";
       break;
-  case 'spv-discuss2':
+    case 'spv-discuss2':
       include "spv-discuss2.php";
       break;
     case 'print_jobdesc':
       include "print_jobdesc.php";
+      break;
+    case 'jobdesc-ilo':
+      include "jobdesc-ilo.php";
+      break;
+    case 'addjobdesc-ilo':
+      include "addjobdesc-ilo.php";
+      break;
+    case 'viewjobdesc-ilo':
+      include "viewjobdesc-ilo.php";
       break;
     default:
       include "errorpage404.html";
