@@ -198,7 +198,7 @@ $token = $_SESSION['token'];
                         $id = $_GET['id'];
                         $prodi_name = $_GET['study_program'];
                         $id_jobdesc = $_GET['id_jobdesc'];
-                        $query = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_jobdesc_intern = tb_jobdesc_intern.id_jobdesc_intern");
+                        $query = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_jobdesc_intern = tb_jobdesc_intern.id_jobdesc_intern INNER JOIN tb_student_internship ON tb_jobdesc_intern.nim=tb_student_internship.nim WHERE tb_student_internship.study_program <> 'Logistik' ");
                         //print_r($query);
                         if ($query->num_rows > 0) :
                         ?>
@@ -214,7 +214,7 @@ $token = $_SESSION['token'];
                        <!-- Task Type Parameter -->
                        <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Task Type Parameter</h4>
+                                <h4 class="card-title"M>Task Type Parameter</h4>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -241,6 +241,9 @@ $token = $_SESSION['token'];
                                                     $id_jobdesc = $_GET['id_jobdesc'];
                                                     $query = mysqli_query($conn, "SELECT * FROM (tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc) LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail WHERE tb_detail_jobdesc.id_jobdesc = $id_jobdesc");
                                                     //print_r($id_jobdesc_intern);
+                                                    if(!$query){
+                                                        echo $conn->err;
+                                                    }
                                                     while ($data = mysqli_fetch_assoc($query)) :
                                                     ?>
                                                         <input type="hidden" value="<?php echo $_GET['id'] ?>" name="id">
@@ -262,7 +265,8 @@ $token = $_SESSION['token'];
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                    <?php endwhile; ?>
+                                                        <?php endwhile; ?>
+                                                        
                                                 </tbody>
                                         </table>
 
@@ -319,6 +323,9 @@ $token = $_SESSION['token'];
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <!-- text input -->
+                                        <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
+                                        
+
                                         <div class="form-group">
                                         <p><b>PART 1 : Enter The Term Date Of The Job Description</b></p>
 											<label for="date">Start Date</label>
@@ -330,6 +337,7 @@ $token = $_SESSION['token'];
                                         </div><br><br>
                                         <div class="form-group">
                                             <p><b>PART 2 : Put a Checklist In The Checkbox On The Appropriate Type Of Work</b></p>
+                                            <p class="text-danger">* Must be selected, minimum one job !</p>
                                         </div>
                                         <table class="table table-bordered" style="margin-top: -20px;">
                                             <thead>
@@ -341,7 +349,6 @@ $token = $_SESSION['token'];
                                                     </th><br>
                                                 </tr>
                                             </thead>
-                                            <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
                                                 <tbody>
                                                     <?php
                                                     include 'config.php';
@@ -366,11 +373,21 @@ $token = $_SESSION['token'];
                                                             <td class='text-center'>
                                                                 <div class='custom-control custom-checkbox'>
                                                                     <input type='checkbox' id='customCheck1' name='ceklis[]' value='<?= $data['id_detail']?>'>
-                                                                    <label>Checked</label>
+                                                                    <label>Check <span class="text-danger fa-2x">*</span></label>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     <?php endwhile; ?>
+                                                    <!-- <tr>
+                                                            <td>Tidak Ada Pekerjaan</td>
+                                                            <td>-</td>
+                                                            <td class='text-center'>
+                                                            <div class='custom-control custom-checkbox'>
+                                                                    <input type='checkbox' id='customCheck1' name='ceklis' value='999'  <?php if ($data['id_detail']) echo 'checked="checked" disabled="disabled"'; ?>>
+                                                                    <label>Checked</label>
+                                                                </div>
+                                                            </td>
+                                                        </tr> -->
                                                 </tbody>
                                         </table><br>
 

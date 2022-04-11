@@ -6,15 +6,14 @@ require 'config.php';
 
 ob_start();
 	$id = $_GET['id'];
-	$nim = $_GET['nim'];
+	$id_jobdesc_intern = $_GET['id_jobdesc_intern'];
 	include 'config.php';
 		$view = mysqli_query($conn, "SELECT * FROM (tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc) 
 		LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail 
 		LEFT JOIN tb_jobdesc_intern ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc 
 		LEFT JOIN tb_student_internship ON tb_student_internship.nim = tb_jobdesc_intern.nim 
 		LEFT JOIN tb_internship ON tb_internship.id_internship = tb_jobdesc_intern.id_internship 
-		LEFT JOIN tb_company ON tb_company.id_company = tb_internship.id_company 
-		WHERE tb_student_internship.nim = $nim");
+		LEFT JOIN tb_company ON tb_company.id_company = tb_internship.id_company WHERE tb_jobdesc_intern.id_jobdesc_intern=$id_jobdesc_intern");
 		if($view->num_rows > 0) :
 ?>
 
@@ -95,14 +94,14 @@ ob_start();
 			<p class='sub-heading'>1. Type of Work :</p><br>
 				<p class='sub-content'>
 					<?php 
-					
+					$id_jobdesc_intern = $_GET['id_jobdesc_intern'];
 					$query = mysqli_query($conn, "SELECT * FROM (tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc) 
 					LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail 
 					LEFT JOIN tb_jobdesc_intern ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc 
 					LEFT JOIN tb_student_internship ON tb_student_internship.nim = tb_jobdesc_intern.nim 
 					LEFT JOIN tb_internship ON tb_internship.id_internship = tb_jobdesc_intern.id_internship 
 					LEFT JOIN tb_company ON tb_company.id_company = tb_internship.id_company 
-					WHERE tb_student_internship.nim = $nim");
+					WHERE tb_jobdesc_intern.id_jobdesc_intern = $id_jobdesc_intern  GROUP BY tb_ceklis_jobdesc_intern.id_detail HAVING COUNT(tb_ceklis_jobdesc_intern.id_detail) > 1");
 
 
 					while($datas = mysqli_fetch_assoc($query)){
@@ -111,10 +110,14 @@ ob_start();
 						$arr = explode(",",trim($arrs));
 
 						foreach($arr as $text){
-
+							// $mytext[] = array_merge($text);
 							$dataz = $text.', ';
-							echo $dataz;
+
 						};
+						// $text = $dataz;
+						print_r($dataz);
+						//echo gettype($text);
+                        // print_r($datas['job_type']);
 					}
 
 					

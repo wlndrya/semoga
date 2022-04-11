@@ -225,7 +225,9 @@ $token = $_SESSION['token'];
 												<?php
 												include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) LEFT JOIN tb_user_company ON tb_user_company.id_user_company = tb_internship.id_user_company WHERE status='YES' AND tb_user_company.id_company = '$_SESSION[id_company]' ");
+												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) LEFT JOIN tb_user_company ON tb_user_company.id_user_company = tb_internship.id_user_company 
+												LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program
+												WHERE status='YES' AND tb_user_company.id_company = '$_SESSION[id_company]' ");
 												$no = 1;
 												while ($data = mysqli_fetch_array($view)) {
 													echo "<tr>
@@ -234,7 +236,7 @@ $token = $_SESSION['token'];
 													<td>" . $data['end_date'] . "</td>
 													<td>" . $data['user_fullname'] . "</td>
 													<td><center>
-													<a href = 'index.php?page=print_jobdesc&id=". $data['id_internship'] ."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													". ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=hrd-jobdesc-ilo&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>" : "<a href = 'index.php?page=print_jobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."' type='button' data-toggle='' data-target='' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>") ."
 													</center></td>
 													<td><center>
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>

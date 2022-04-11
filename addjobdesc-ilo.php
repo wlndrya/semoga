@@ -204,6 +204,16 @@ $token = $_SESSION['token'];
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <!-- text input -->
+                                        <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
+                                        <?php
+                                           include 'config.php';
+                                            error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                                           $prodi_name = $_GET['study_program'];
+                                             $id_jobdesc = $_GET['id_jobdesc'];
+                                            $query = mysqli_query($conn, "SELECT * FROM tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc WHERE tb_detail_jobdesc.id_jobdesc = $id_jobdesc");
+                                            //print_r($prodi_name);
+                                            $data = mysqli_fetch_assoc($query);
+                                        ?>
                                         <div class="form-group">
                                         <p><b>PART 1 : Enter The Term Date Of The Job Description</b></p>
 											<label for="date">Start Date</label>
@@ -226,7 +236,7 @@ $token = $_SESSION['token'];
                                                     </th><br>
                                                 </tr>
                                             </thead>
-                                            <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
+                                            
                                                 <tbody>
                                                     <?php
                                                     include 'config.php';
@@ -251,7 +261,7 @@ $token = $_SESSION['token'];
                                                             <td><?= $data['job_description'] ?></td>
                                                             <td class='text-center'>
                                                                 <div class='custom-control custom-checkbox'>
-                                                                    <input type='checkbox' id='customCheck1' name='ceklis[]' value='<?= $data['id_detail']?>' required>
+                                                                    <input type='checkbox' id='customCheck1' name='ceklis[]' value='<?= $data['id_detail']?>'>
                                                                     <label>Checked</label>
                                                                 </div>
                                                             </td>

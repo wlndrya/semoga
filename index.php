@@ -112,6 +112,12 @@ if (isset($_GET['page'])) {
     case 'viewjobdesc-ilo':
       include "viewjobdesc-ilo.php";
       break;
+    case 'hrd-jobdesc-ilo':
+      include "hrd-jobdesc-ilo.php";
+      break;
+    case 'print_jobdesc_ilo':
+      include "print_jobdesc_ilo.php";
+      break;  
     default:
       include "errorpage404.html";
       break;

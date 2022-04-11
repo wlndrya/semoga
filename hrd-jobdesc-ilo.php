@@ -1,15 +1,15 @@
 <?php
 include 'config.php';
-
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 session_start();
-if($_SESSION['login_status'] != 'login'){
+if ($_SESSION['login_status'] != 'login') {
 	echo "
 	<script>
 		alert('YOU ARE NOT LOGIN!');
 		window.location.replace('index.php?page=login');
 	</script>
-              "; 
-			}
+              ";
+}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -21,7 +21,6 @@ $token = $_SESSION['token'];
 // session_unset();
 // session_destroy();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +38,9 @@ $token = $_SESSION['token'];
 				"families": ["Lato:300,400,700,900"]
 			},
 			custom: {
-				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+					"simple-line-icons"
+				],
 				urls: ['assets/css/fonts.min.css']
 			},
 			active: function() {
@@ -58,6 +59,7 @@ $token = $_SESSION['token'];
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
+
 <body>
 	<div class="wrapper horizontal-layout-2">
 
@@ -72,7 +74,7 @@ $token = $_SESSION['token'];
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
-						<img src="assets/img/profile1.png" height="60" alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -109,6 +111,14 @@ $token = $_SESSION['token'];
 									</div>
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
+								<!-- Profil -->
+								<!-- <li class="nav-item dropdown hidden-caret">
+									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+										<div class="avatar-sm">
+											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
+										</div>
+									</a>
+								</li> -->
 								<li class="nav-item dropdown hidden-caret">
 									<a class="nav-link dropdown-toggle" href="index.php?page=logout" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
@@ -133,34 +143,50 @@ $token = $_SESSION['token'];
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="index.php?page=spv-profile">My Profile</a>
+										<a href="index.php?page=hrd-profile">My Profile</a>
 									</li>
 									<li>
-										<a href="index.php?page=spv-company-profile">Company Profile</a>
+										<a href="index.php?page=hrd-company-profile">Company Profile</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-studentlist">
+							<a class="nav-link" href="#">
+								<i class="link-icon icon-grid"></i>
+								<span class="menu-title">HRD Menu</span>
+							</a>
+							<div class="navbar-dropdown animated fadeIn">
+								<ul>
+									<li class="link-to">
+										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
+									</li>
+									<li>
+										<a href="index.php?page=hrd-registration">Internship Registration</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=hrd-studentlist">
 								<i class="link-icon icon-layers"></i>
 								<span class="menu-title">Student Internship</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-document">
+							<a class="nav-link" href="index.php?page=hrd-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title">Internship Files</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-tutorial">
+							<a class="nav-link" href="index.php?page=hrd-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-information">
+							<a class="nav-link" href="index.php?page=hrd-information">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title">Information</span>
 							</a>
@@ -175,95 +201,70 @@ $token = $_SESSION['token'];
 		<div class="main-panel">
 			<div class="container">
 				<div class="page-inner">
-
-				<div class="row">
+					<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title"><b>Profile</b></div>
-									<div class="card-category"></a></div>
-								</div>
-								
-								<form id="form_profile" method="POST"  action="proses_dummy_test.php?PageAction=update_spv" onsubmit="return confirm('You will make profile changes. If you are sure that all the fields are correct, then continue?');">
-								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-                                <input type="hidden" id="id_user_company" name="id_user_company" value="<?php echo $_SESSION['id_user_company']; ?>">
-                                <input type="hidden" id="id_company" name="id_company" value="<?php echo $_SESSION['id_company']; ?>">
-
-									<div class="card-body">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title"><b>JOB DESCRIPTION</b></h4>
 										<?php
-										include 'config.php';
-										//error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                        $view = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_user_company = $user_id AND id_company = $id_company");
+										$id = $_GET['id'];
+										$id_jobdesc = $_GET['id_jobdesc'];
+										//print_r($id);
+										$view = mysqli_query($conn, "SELECT * FROM (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) 
+										LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program
+										LEFT JOIN tb_jobdesc_intern ON tb_jobdesc_intern.id_internship = tb_internship.id_internship 
+										GROUP BY tb_ceklis_jobdesc_intern.start_date
+										WHERE tb_jobdesc_intern.id_internship = $id");
 										$data = mysqli_fetch_array($view);
 										?>
-										
-										<div class="form-group form-show-validation row">
-											<label for="fullname"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Fullname<span
-													class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" name="user_fullname"
-													value="<?php echo $data['user_fullname'] ?>" disabled>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="phone"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone/Whatsapp Number <span
-													class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" name="user_phone"
-												value="<?php echo $data['user_phone'] ?>" disabled>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="email"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address
-												<span class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="email" class="form-control" name="user_email"
-												value="<?php echo $data['user_email'] ?>" disabled>
-												<small id="emailHelp" class="form-text text-muted">We'll never share
-													your email with anyone else.</small>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="username"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Username <span
-													class="required-label">*</span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" name="username"
-												value="<?php echo $data['username'] ?>" disabled>
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="password"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Password <span
-													class="required-label"></span></label>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="password" class="form-control" id="password"
-													name="password" placeholder="*****" disabled value="">
-											</div>
-										</div>
-										<div class="form-group form-show-validation row">
-											<label for="user_type"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">User type<span
-													class="required-label">*</span></label>
-													<div class="col-lg-4 col-md-9 col-sm-8">
-													<select class="form-control" id="user_type" name="user_type" disabled>
-														<option value="supervisor"><b>Supervisor</b></option>
-													  </select>
-													  </div>
-										</div>
-									</div><!-- card body -->
-									<div class="card-action">
-										<div class="row">
-											<div class="col-md-12">
-												<a class="btn btn-danger text-white" id="edit_btn" type="submit">Edit</a>
-												<input class="btn btn-success" id="btn-save" type="submit" value="Save">
-											</div>
-										</div>
 									</div>
-								</form>
+								</div>
+								<div class="card-body">
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover">
+											<thead>
+												<tr>
+													<th>
+														<center>Start Date</center>
+													</th>
+													<th>
+														<center>End Date</center>
+													</th>
+													<th>
+														<center>View Jobdesc</center>
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php
+												include 'config.php';
+												$id_jobdesc = $_GET['id_jobdesc'];
+												$id_jobdesc_intern = $_GET['id_jobdesc_intern'];
+												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												$view = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_jobdesc_intern = tb_jobdesc_intern.id_jobdesc_intern WHERE tb_jobdesc_intern.id_jobdesc = $id_jobdesc GROUP BY tb_ceklis_jobdesc_intern.id_jobdesc_intern HAVING COUNT(tb_ceklis_jobdesc_intern.id_jobdesc_intern) > 1");
+												//print_r($id_jobdesc_intern);
+												while ($data = mysqli_fetch_array($view)) {
+													echo "<tr>
+													<td><center>" . $data['date_start'] . "</center></td>
+													<td><center>" . $data['date_end'] . "</center></td>
+													<td><center>
+													<a href = 'index.php?page=print_jobdesc_ilo&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "&id_jobdesc_intern=". $data['id_jobdesc_intern']."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													</center></td>
+													</tr>"
+												?>
+
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
+												<!-- End Modal -->
+
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -286,7 +287,6 @@ $token = $_SESSION['token'];
 		</footer>
 		<!-- End Footer -->
 	</div>
-	<!--wrapper horizontal-layout-2-->
 
 	<!--   Core JS Files   -->
 	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
@@ -362,7 +362,7 @@ $token = $_SESSION['token'];
 	<script src="assets/js/demo.js"></script>
 
 	<!-- AdminLTE App -->
-	<script src="dist/js/adminlte.min.js"></script>
+	<script src="../../dist/js/adminlte.min.js"></script>
 
 	<script>
 		// Add Row
@@ -384,15 +384,6 @@ $token = $_SESSION['token'];
 
 		});
 	</script>
-
-<script type="text/javascript">
-    jQuery(function ($) {
-    var $inputs = $('#form_profile :input').prop('disabled', true);
-    $('#edit_btn').click(function () {
-        $inputs.prop('disabled', false);
-    });
-    })
-  </script>
 
 </body>
 

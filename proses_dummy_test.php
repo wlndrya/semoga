@@ -164,7 +164,21 @@ if ($_GET['PageAction'] == "update_spv") {
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT); // hash password
 
+
     if ($_SESSION['id_user_company'] && $_SESSION['username']) {
+
+      if(!$password){
+        $update = $conn->query("UPDATE `tb_user_company` SET 
+        `user_fullname` = '$name',
+        `user_phone` = '$user_phone',
+        `user_email` = '$user_email',
+        `username` = '$username',
+        `user_type` = '$role'
+        WHERE `id_user_company` = $id_user_company;");
+      }
+
+      if($password){
+
       $update = $conn->query("UPDATE `tb_user_company` SET 
       `user_fullname` = '$name',
       `user_phone` = '$user_phone',
@@ -173,6 +187,8 @@ if ($_GET['PageAction'] == "update_spv") {
       `password` = '$password_hash',
       `user_type` = '$role'
       WHERE `id_user_company` = $id_user_company;");
+
+      }
 
       //echo $id_user_company;
 
@@ -449,7 +465,7 @@ if ($_GET['PageAction'] == "update_hrd") {
     $password        = mysqli_real_escape_string($conn, $_POST['password']);
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT); // hash password
-
+    
     if ($password) {
       $update = $conn->query("UPDATE `tb_user_company` SET 
       `user_fullname` = '$name',
@@ -708,6 +724,8 @@ if ($_GET['PageAction'] == "add_jobdesc") {
 
   //print_r($description);
 
+  // ss
+
   if ($_SESSION) {
     $add = $conn->query("INSERT INTO tb_jobdesc_intern (id_jobdesc_intern, id_internship, id_jobdesc, nim, answer_1, answer_2,timestamp_approval) VALUES ('','$id','$id_jobdesc','$nim', '$answer_1', '$answer_2','$date');");
     $idjobin = mysqli_insert_id($conn);
@@ -736,6 +754,24 @@ if ($_GET['PageAction'] == "add_jobdesc") {
       } ,2000); 
       </script>
       ";
+    }
+    if(!$add2){
+        echo "
+      <script type='text/javascript'>
+      setTimeout(function () { 
+      swal({
+      title: 'Success',
+      text: 'Added Succcesfully!',
+      icon: 'success',
+      buttons: false
+      }); 
+      },10); 
+      window.setTimeout(function(){ 
+      window.history.back();
+      } ,2000); 
+      </script>
+      ";
+
       }
       // if($add2) {
       //   echo "
