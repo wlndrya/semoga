@@ -347,7 +347,7 @@ if ($_GET['PageAction'] == "approval_internship") {
 
     $id_company      = mysqli_real_escape_string($conn, $_POST['id_company']);
     $id_user_company = mysqli_real_escape_string($conn, $_POST['id_user_company']);
-    $status          = mysqli_escape_string($conn, $_POST['status']);
+    $status_intern   = mysqli_escape_string($conn, $_POST['status_intern']);
     // $status_applicant = mysqli_escape_string($conn,$_POST['status_applicant']);
     $id_applicant    = mysqli_real_escape_string($conn, $_POST['id_applicant']);
     $id_internship   = mysqli_escape_string($conn, $_POST['id_internship']);
@@ -356,35 +356,79 @@ if ($_GET['PageAction'] == "approval_internship") {
 
 
     if ($_SESSION) {
-      if ($status == "NO") {
-        $updateStatus = mysqli_query($conn, "UPDATE `tb_internship` SET `status` = '$status' WHERE `id_internship` = $id_internship");
-        echo "
-        <script type='text/javascript'>
-         setTimeout(function () { 
-          swal({
-            title: 'Success',
-            text: 'Approved Succcesfully!',
-            icon: 'success',
-            buttons: false
-          }); 
-         },10); 
-         window.setTimeout(function(){ 
-          window.location.replace('index.php?page=hrd-registration');
-         } ,2000); 
-        </script>
-        ";
+      if ($status_intern == "NO") {
+        $updateStatus = mysqli_query($conn, "UPDATE `tb_internship` SET `status_intern` = '$status_intern' WHERE `id_internship` = $id_internship");
+        if($updateStatus) {
+          echo "
+              <script type='text/javascript'>
+               setTimeout(function () { 
+                swal({
+                  title: 'Success',
+                  text: 'Approved Succcesfully!',
+                  icon: 'success',
+                  buttons: false
+                }); 
+               },10); 
+               window.setTimeout(function(){ 
+                window.location.replace('index.php?page=hrd-registration');
+               } ,2000); 
+              </script>
+              ";
+        }
+        
+        if($updateStatus) {
+          if($id_applicant) {
+            $updateCompanyNO = mysqli_query($conn, "UPDATE `tb_applicant` SET  `status_applicant` = '$status_intern' WHERE `id_applicant` =  $id_applicant");
+            if ($updateCompanyNO) {
+              echo "
+              <script type='text/javascript'>
+               setTimeout(function () { 
+                swal({
+                  title: 'Success',
+                  text: 'Approved Succcesfully!',
+                  icon: 'success',
+                  buttons: false
+                }); 
+               },10); 
+               window.setTimeout(function(){ 
+                window.location.replace('index.php?page=hrd-registration');
+               } ,2000); 
+              </script>
+              ";
+            }
+          }
+        }
+        
 
       } else {
         $updateStatus = $conn->query("UPDATE `tb_internship` SET 
         `id_user_company` = '$id_user_company',
         `start_date` = '$start_date',
         `end_date` = '$end_date',
-        `status` = '$status'
+        `status_intern` = '$status_intern'
         WHERE `id_internship` = $id_internship;");
+
+        if($updateStatus) {
+          echo "
+              <script type='text/javascript'>
+               setTimeout(function () { 
+                swal({
+                  title: 'Success',
+                  text: 'Approved Succcesfully!',
+                  icon: 'success',
+                  buttons: false
+                }); 
+               },10); 
+               window.setTimeout(function(){ 
+                window.location.replace('index.php?page=hrd-registration');
+               } ,2000); 
+              </script>
+              ";
+        }
 
         if ($updateStatus) {
             if($id_applicant){
-              $updateCompany = mysqli_query($conn, "UPDATE `tb_applicant` SET  `status_applicant` = '$status' WHERE `id_applicant` =  $id_applicant");
+              $updateCompany = mysqli_query($conn, "UPDATE `tb_applicant` SET  `status_applicant` = '$status_intern' WHERE `id_applicant` =  $id_applicant");
 
               if ($updateCompany) {
                 echo "

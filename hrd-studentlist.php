@@ -227,7 +227,7 @@ $token = $_SESSION['token'];
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) LEFT JOIN tb_user_company ON tb_user_company.id_user_company = tb_internship.id_user_company 
 												LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program
-												WHERE status='YES' AND tb_user_company.id_company = '$_SESSION[id_company]' ");
+												WHERE status_intern='YES' AND tb_user_company.id_company = '$_SESSION[id_company]' ");
 												$no = 1;
 												while ($data = mysqli_fetch_array($view)) {
 													echo "<tr>

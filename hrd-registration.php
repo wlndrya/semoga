@@ -241,7 +241,7 @@ $token = $_SESSION['token'];
 													// print_r($data);
 													// echo "</pre>";
 													if ($data['id_applicant'] === NULL) {
-														$registration_status = "Mandiri";
+														$registration_status = "Independent";
 													} else {
 														$registration_status = "Offer";
 													}
@@ -252,7 +252,7 @@ $token = $_SESSION['token'];
 														<td><?php echo $registration_status ?></td>
 														<td>
 															<center><?php
-																	if ($data['status']) {
+																	if ($data['status_intern']) {
 																		echo "<button class='btn btn-modify py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
 															data-target='#doc-detail" . $data[0] . "' ><i class='fas fa-eye'></i> VIEW</button>";
 																	}
@@ -260,13 +260,13 @@ $token = $_SESSION['token'];
 														</td>
 														<td>
 															<center><?php
-																	if ($data['status'] == "PENDING") {
+																	if ($data['status_intern'] == "PENDING") {
 																		echo "<button class='btn btn-warning py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
-														data-target='#modal-approve$data[0]' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> $data[status]</button>";
-																	} elseif ($data['status'] == "YES") {
+														data-target='#modal-approve$data[0]' title='Click to Approve'><i class='fa fa-spinner fa-spin'></i> $data[status_intern]</button>";
+																	} elseif ($data['status_intern'] == "YES") {
 																		echo "<button class='btn btn-success py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
 														data-target='' title=''><i class='fa fa-check'></i> APPROVED</button>";
-																	} elseif ($data['status'] == "NO") {
+																	} elseif ($data['status_intern'] == "NO") {
 																		echo "<button class='btn btn-danger py-2 my-auto mx-auto rounded text-center text-white' data-toggle='modal'
 														data-target='' title=''><i class='fa fa-times'></i> DECLINED</button>";
 																	}
@@ -447,8 +447,8 @@ $token = $_SESSION['token'];
 
 																	<div class="modal-body">
 																		<div class="form-group">
-																			<label for="status">Approval</label>
-																			<select class="form-control" id="status" name="status" required>
+																			<label for="status_intern">Approval</label>
+																			<select class="form-control" id="status_intern" name="status_intern" required>
 																				<option value="YES">Yes</option>
 																				<option value="NO">No</option>
 																			</select>
@@ -594,7 +594,7 @@ $token = $_SESSION['token'];
 
 	<script>
 		//change value
-		$('select#status').change(function() {
+		$('select#status_intern').change(function() {
 
 			var className = "date-approve option-" + $(this).val();
 
