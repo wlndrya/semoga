@@ -311,7 +311,7 @@ $token = $_SESSION['token'];
 											<thead>
 												<tr>
 													<th scope="col">Discussion Title</th>
-													<th scope="col">Topic</th>
+													<th scope="col">Discuss</th>
 													<th scope="col">Date</th>
 													<th scope="col"><center>Started By</center></th>
 													<th scope="col"><center><i class="fas fa-eye fa-lg" title="Viewer"></i></center></th>

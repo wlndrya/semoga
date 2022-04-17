@@ -222,6 +222,9 @@ $token = $_SESSION['token'];
 														<center>Job Description</center>
 													</th>
 													<th>
+														<center>Student Competency</center>
+													</th>
+													<th>
 														<center>Feedback</center>
 													</th>
 												</tr>
@@ -230,7 +233,8 @@ $token = $_SESSION['token'];
 												<?php
 												include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program WHERE id_user_company = $user_id");
+												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) 
+												LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program WHERE id_user_company = $user_id");
 												while ($data = mysqli_fetch_array($view)) {
 													echo "<tr>
 													<td>" . $data['name'] . "</td>
@@ -243,7 +247,10 @@ $token = $_SESSION['token'];
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['id_internship'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													<td><center>
-													". ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=jobdesc-ilo&id=" . $data['id_internship'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>" : "<a href = 'index.php?page=spv-addjobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>") ."
+													" . ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=jobdesc-ilo&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>" : "<a href = 'index.php?page=spv-addjobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>") . "
+													</center></td>
+													<td><center>
+													" . ($data['study_program'] == "Logistik" ? "<a href = '#' type='button' data-toggle='modal' data-target='#modalselect" . $data['id_internship'] . "' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>" : "<a href = '#' type='button' data-toggle='modal' data-target='#modalnot" . $data['id_internship'] . "' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>") . "
 													</center></td>
 													<td><center>
 													<a href = 'index.php?page=spv-feedback2&id=" . $data['id_internship'] . "' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
@@ -322,17 +329,17 @@ $token = $_SESSION['token'];
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
 																<?php
-																if($data['file1']) :
+																if ($data['file1']) :
 																?>
 																	<div class="modal-body" style="height: 600px">
 																		<object type="application/pdf" data="berkas/<?php echo $data['file1'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
 																		</object>
 																	</div>
-																	<?php
-																	else :
-																	?>
+																<?php
+																else :
+																?>
 																	<h2 class="p-5 mx-auto">CV is not available!</h2>
-																<?php endif;?>
+																<?php endif; ?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -351,17 +358,17 @@ $token = $_SESSION['token'];
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
 																<?php
-																if($data['file2']) :
+																if ($data['file2']) :
 																?>
-																<div class="modal-body" style="height: 600px">
-																	<object type="application/pdf" data="berkas/<?php echo $data['file2'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
-																	</object>
-																</div>
+																	<div class="modal-body" style="height: 600px">
+																		<object type="application/pdf" data="berkas/<?php echo $data['file2'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																		</object>
+																	</div>
 																<?php
-																	else :
-																	?>
+																else :
+																?>
 																	<h2 class="p-5 mx-auto">Transcript is not available!</h2>
-																<?php endif;?>
+																<?php endif; ?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -380,17 +387,17 @@ $token = $_SESSION['token'];
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
 																<?php
-																if($data['file3']) :
+																if ($data['file3']) :
 																?>
-																<div class="modal-body" style="height: 600px">
-																	<object type="application/pdf" data="berkas/<?php echo $data['file3'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
-																	</object>
-																</div>
+																	<div class="modal-body" style="height: 600px">
+																		<object type="application/pdf" data="berkas/<?php echo $data['file3'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																		</object>
+																	</div>
 																<?php
-																	else :
-																	?>
+																else :
+																?>
 																	<h2 class="p-5 mx-auto">File is not available!</h2>
-																<?php endif;?>
+																<?php endif; ?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -409,17 +416,17 @@ $token = $_SESSION['token'];
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
 																<?php
-																if($data['file4']) :
+																if ($data['file4']) :
 																?>
-																<div class="modal-body" style="height: 600px">
-																	<object type="application/pdf" data="berkas/<?php echo $data['file4'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
-																	</object>
-																</div>
+																	<div class="modal-body" style="height: 600px">
+																		<object type="application/pdf" data="berkas/<?php echo $data['file4'] ?>" width="100%" height="100%" frameborder="0" allowtransparency="true">
+																		</object>
+																	</div>
 																<?php
-																	else :
-																	?>
+																else :
+																?>
 																	<h2 class="p-5 mx-auto">File is not available!</h2>
-																<?php endif;?>
+																<?php endif; ?>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
@@ -427,6 +434,69 @@ $token = $_SESSION['token'];
 														</div>
 													</div>
 													<!--End Modal View Optional Files-->
+
+													<!--Modal Choose Job Profile-->
+													<div class="modal fade" id="modalselect<?= $data['id_internship'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Job Profile</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="form-group">
+																		<!-- <form action="index.php?page=student_competency" method="get"> -->
+																		<select class="id form-control" id="">
+																			<option>Choose One</option>
+																			<?php
+																			$sql = mysqli_query($conn, "SELECT * FROM tb_profile_jobdesc INNER JOIN tb_student_internship ON tb_profile_jobdesc.kode_prodi = tb_student_internship.study_program
+																			WHERE tb_profile_jobdesc.kode_prodi = 'Logistik'");
+																			if (mysqli_num_rows($sql) != 0) {
+																				while ($row = mysqli_fetch_assoc($sql)) {
+																					echo '<option value=' . $row["id_profile_jobdesc"] . '>' . $row['nama_profile'] . ' </option>';
+																				}
+																			}
+																			?>
+																		</select>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																	<a href="index.php?page=student_competency&id_profile_jobdesc=id" class="btn btn-modify text-white">Apply</a>
+																	<!-- </form> -->
+																</div>
+
+																<!-- <form action="proses_dummy_test.php?PageAction=delete_supervisor" method="post">
+																	<input type="hidden" name="id_user_company" value="<?php echo $data['id_user_company'] ?>">
+																	<div class="modal-footer">
+																		<button type="submit" class="btn btn-danger">Delete</button>
+																		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																	</div>
+																</form> -->
+															</div>
+														</div>
+													</div>
+
+													<!-- Modal Information -->
+													<div class="modal fade" id="modalnot<?= $data['id_internship'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">INFORMATION</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	THIS STUDENT IS NOT FROM LOGISTIC STUDY PROGRAM, SO YOU CAN'T ADD STUDENT COMPETENCY.
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-modify text-white" data-dismiss="modal">OK</button>
+																</div>
+															</div>
+														</div>
+													</div>
 
 
 												<?php //penutup perulangan while
@@ -538,6 +608,12 @@ $token = $_SESSION['token'];
 	<script src="../../dist/js/adminlte.min.js"></script>
 
 	<script>
+		$(document).ready(function(){
+        $("select.id").change(function(){
+            var selectedid  = $(".id option:selected").val();
+            $('a').attr('href','index.php?page=student_competency&id_profile_jobdesc='+selectedid);
+        });
+    });
 		// Add Row
 		$('#add-row').DataTable({
 			"pageLength": 5,

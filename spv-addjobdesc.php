@@ -325,7 +325,6 @@ $token = $_SESSION['token'];
                                         <!-- text input -->
                                         <form action="proses_dummy_test.php?PageAction=add_jobdesc" method="post">
                                         
-
                                         <div class="form-group">
                                         <p><b>PART 1 : Enter The Term Date Of The Job Description</b></p>
 											<label for="date">Start Date</label>

@@ -261,7 +261,7 @@ $token = $_SESSION['token'];
 											<label for="status" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Status</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<div class="input-group">
-													<input type="text" class="form-control is-valid" placeholder="" aria-label="status" aria-describedby="" readonly id="status" name="status" value="<?php echo $data['status'] ?>" disabled><i class="fas fa-check" style="color: green;"></i>
+													<input type="text" class="form-control is-valid" placeholder="" aria-label="status" aria-describedby="" readonly id="status" name="status" value="<?php echo $data['status'] ?>" disabled></i>
 												</div>
 											</div>
 										</div>

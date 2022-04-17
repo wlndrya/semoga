@@ -254,9 +254,9 @@ $token = $_SESSION['token'];
 						<div class="card-header">
 							<div class="card-head-row">
 								<h4 class="card-title intern-title">Attendance Recap</h4>
-								<input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
+								<!-- <input type="submit" class="btn btn-modify btn-round ml-auto text-white" value="
                                             Accept" id="acc-btn" >
-								</input>
+								</input> -->
 								<br>
 							</div>
 						</div>
@@ -284,13 +284,13 @@ $token = $_SESSION['token'];
 											<th style="width: 10px;">
 												<center>Action</center>
 											</th>
-											<th style="width: 10px;">
-											<span><center>Approval<br>
+											<!-- <th style="width: 10px;">
+											<span><center>Approval<br> -->
                                             	<!-- <input type="checkbox" id="select-all"/> -->
-                                                <input type="checkbox" onclick="selects()" name="approval_spv" value="YES"></center>
+                                                <!-- <input type="checkbox" onclick="selects()" name="approval_spv" value="YES"></center> -->
                                                 <!-- <button onclick="deselects()" name="approval_spv">UnCheck All</center> -->
-                                                </span>
-											</th>
+                                                <!-- </span>
+											</th> -->
 										</tr>
 									</thead>
 									<tbody>
@@ -340,7 +340,7 @@ $token = $_SESSION['token'];
                                                 <i class="icon-magnifier"></i>
                                                 </a>
 												</td>
-												<td>
+												<!-- <td>
 												<center>
                                                         <?php
                                                     if($data['approval_spv'] == "Pending"){
@@ -353,7 +353,7 @@ $token = $_SESSION['token'];
                                                     }
                                                     ?>
                                                         </center>
-												</td>
+												</td> -->
 											</tr>
 										<?php //penutup perulangan while
 											$no++;

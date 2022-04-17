@@ -101,7 +101,7 @@ ob_start();
 					LEFT JOIN tb_student_internship ON tb_student_internship.nim = tb_jobdesc_intern.nim 
 					LEFT JOIN tb_internship ON tb_internship.id_internship = tb_jobdesc_intern.id_internship 
 					LEFT JOIN tb_company ON tb_company.id_company = tb_internship.id_company 
-					WHERE tb_jobdesc_intern.id_jobdesc_intern = $id_jobdesc_intern  GROUP BY tb_ceklis_jobdesc_intern.id_detail HAVING COUNT(tb_ceklis_jobdesc_intern.id_detail) > 1");
+					WHERE tb_jobdesc_intern.id_jobdesc_intern = $id_jobdesc_intern  GROUP BY tb_ceklis_jobdesc_intern.id_detail HAVING COUNT(tb_ceklis_jobdesc_intern.id_detail) >= 1");
 
 
 					while($datas = mysqli_fetch_assoc($query)){

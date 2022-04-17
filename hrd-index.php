@@ -226,7 +226,7 @@ $token = $_SESSION['token'];
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
 									<?php
-										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company = $id_company AND status = 'PENDING'");
+										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company = $id_company AND status_intern = 'PENDING'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
@@ -262,7 +262,7 @@ $token = $_SESSION['token'];
 								<div class="card-body pb-0">
 									<h1 class="mb-2">
 										<?php
-										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company = $id_company AND status='YES'");
+										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company = $id_company AND status_intern ='YES'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
@@ -388,7 +388,7 @@ $token = $_SESSION['token'];
 										<?php
                                                 include 'config.php';
                                                 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                $view = mysqli_query($conn, "SELECT * FROM tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE id_company = $id_company AND status = 'YES'");
+                                                $view = mysqli_query($conn, "SELECT * FROM tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE id_company = $id_company AND status_intern = 'YES'");
                                                 while ($data = mysqli_fetch_array($view)) {
                                                     echo "<tr>
                                                         <td>" . $data['name'] . "</td>

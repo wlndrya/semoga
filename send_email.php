@@ -30,7 +30,7 @@ $mail->addAddress('yuliawulandari271@gmail.com');
 // $mail->addBCC('bcc@example.com'); 
  
 // Email subject 
-$mail->Subject = 'Internship Test Email'; 
+$mail->Subject = 'SISTEM INFORMASI PENGELOLAAN MAGANG POLIBATAM'; 
  
 // Set email format to HTML 
 $mail->isHTML(true); 
@@ -48,13 +48,13 @@ if(!$mail->send()){
                setTimeout(function () { 
                 swal({
                   title: 'Success',
-                  text: 'Email has been sent',
+                  text: 'Email has been sent. Please check your inbox at gmail',
                   icon: 'success',
                   buttons: false
                 }); 
                },10); 
                window.setTimeout(function(){ 
-                window.location.replace('index.php?page=hrd-information');
+                window.history.back();
                } ,2000); 
               </script>
               "; 

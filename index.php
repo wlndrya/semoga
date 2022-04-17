@@ -117,6 +117,9 @@ if (isset($_GET['page'])) {
       break;
     case 'print_jobdesc_ilo':
       include "print_jobdesc_ilo.php";
+      break;
+    case 'student_competency':
+      include "student_competency.php";
       break;  
     default:
       include "errorpage404.html";

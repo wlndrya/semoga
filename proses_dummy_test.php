@@ -1017,7 +1017,48 @@ if($_GET['PageAction'] == 'add_comment'){
     echo ("Error description: " . $conn->error);
   }
 }
-// Email Information
+
+// Add Student Competency
+//Add Feedback from industry Supervisor
+if ($_GET['PageAction'] == "add_student_competency") {
+
+  session_start();
+  $token_session = $_SESSION['token'];
+  $token_post    = mysqli_real_escape_string($conn, $_POST['token']);
+
+  $id_student_detail_profile = mysqli_real_escape_string($conn, $_POST['id_student_detail_profile']);
+  $id_profile_jobdesc        = mysqli_real_escape_string($conn, $_POST['id_profile_jobdesc']);
+  $id_detail_profile         = mysqli_real_escape_string($conn, $_POST['id_detail_profile']);
+  $nim                       = mysqli_real_escape_string($conn, $_POST['nim']);
+  $id_detail_unit            = mysqli_real_escape_string($conn, $_POST['id_detail_unit']);
+  $nilai                     = mysqli_real_escape_string($conn, $_POST['nilai']);
+  $tgl_mulai                 = mysqli_real_escape_string($conn, $_POST['tgl_mulai']);
+  $tgl_selesai               = mysqli_real_escape_string($conn, $_POST['tgl_selesai']);
+
+  if ($_SESSION) {
+    $add = $conn->query("INSERT INTO tb_student_detail_profile (id_student_detail_profile, id_profile_jobdesc, id_detail_profile, catatan_utk_poltek, layak_diterima, langsung_diterima, nilai_akhir, etika, keahlian_kompetensi, keahlian_bahasa, penggunaan_ti, komunikasi, kerjasama, pengembangan_diri, date) VALUES (NULL,'$id','$catatan_utk_mahasiswa','$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima', '$nilai_akhir', '$etika', '$keahlian_kompetensi' , '$keahlian_bahasa', '$penggunaan_ti', '$komunikasi', '$kerjasama', '$pengembangan_diri', '$date');");
+    if ($add) {
+       echo "
+      <script type='text/javascript'>
+       setTimeout(function () { 
+        swal({
+          title: 'Success',
+          text: 'Added Succcesfully!',
+          icon: 'success',
+          buttons: false
+        }); 
+       },10); 
+       window.setTimeout(function(){ 
+        window.history.back();
+       } ,2000); 
+      </script>
+      ";
+    } else {
+      echo ("Error description: " . $conn->error);
+      //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
+    }
+  }
+}
 ?>
 
   

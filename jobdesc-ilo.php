@@ -230,7 +230,7 @@ $token = $_SESSION['token'];
 												$id_jobdesc = $_GET['id_jobdesc'];
 												$id_jobdesc_intern = $_GET['id_jobdesc_intern'];
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_jobdesc_intern = tb_jobdesc_intern.id_jobdesc_intern WHERE tb_jobdesc_intern.id_jobdesc = $id_jobdesc GROUP BY tb_ceklis_jobdesc_intern.id_jobdesc_intern HAVING COUNT(tb_ceklis_jobdesc_intern.id_jobdesc_intern) > 1");
+												$view = mysqli_query($conn, "SELECT * FROM tb_jobdesc_intern INNER JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_jobdesc_intern = tb_jobdesc_intern.id_jobdesc_intern WHERE tb_jobdesc_intern.id_jobdesc = $id_jobdesc GROUP BY tb_ceklis_jobdesc_intern.id_jobdesc_intern HAVING COUNT(tb_ceklis_jobdesc_intern.id_jobdesc_intern) >= 1");
 												//print_r($id_jobdesc_intern);
 												while ($data = mysqli_fetch_array($view)) {
 													echo "<tr>
