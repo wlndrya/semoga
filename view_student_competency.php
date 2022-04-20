@@ -177,20 +177,8 @@ $token = $_SESSION['token'];
 			<div class="container">
 				<div class="page-inner">
 
-				<!--Tampilan View Data-->
-					<form method="POST" action="proses_dummy_test.php?PageAction=add_student_competency">
-					<?php
-						include 'config.php';
-						$id_profile_jobdesc = $_GET['id_profile_jobdesc'];
-						$view = mysqli_query($conn, "SELECT * FROM tb_student_detail_profile WHERE id_profile_jobdesc = $id_profile_jobdesc");
-						//print_r($view->num_rows);
-						$data = mysqli_fetch_assoc($view);
-						if($view->num_rows > 0):
-						// foreach($view as $data) :
-						?>
-							<!-- <pre><?php 
-							// print_r($data)
-							?></pre>  -->
+				<!--VIEW DATA-->
+				
 							<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">STUDENT COMPETENCY</h3>
@@ -209,6 +197,15 @@ $token = $_SESSION['token'];
 								<input type="hidden" id="id_detail_profile" name="id_detail_profile" value="<?php echo $data['id_detail_profile'] ?>">
 								<input type="hidden" id="nim" name="nim" value="<?php echo $data['nim'] ?>">
 								<input type="hidden" id="id_detail_unit" name="id_detail_unit" value="<?php echo $data['id_detail_unit'] ?>">
+
+								<?php
+								$id_profile_jobdesc = $_GET['id_profile_jobdesc'];
+								//print_r($id_profile_jobdesc);
+
+								$query = mysqli_query($conn, "SELECT * FROM (tb_profile_detail_comp LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile) LEFT JOIN tb_student_detail_profile ON tb_student_detail_profile.id_detail_profile = tb_profile_detail_comp.id_detail_profile WHERE tb_student_detail_profile.tgl_mulai = '$_GET[tgl_mulai]' AND tb_student_detail_profile.tgl_selesai = '$_GET[tgl_selesai]' GROUP BY tb_profile_detail_comp.id_detail_profile");
+								$data = mysqli_fetch_assoc($query);
+								//print_r($query);
+								?>
 
 								<div class="row">
 									<div class="col-sm-6">
@@ -263,7 +260,7 @@ $token = $_SESSION['token'];
 											<?php $i = 1;
                                                 include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                $view = mysqli_query($conn, "SELECT * FROM (tb_profile_detail_comp LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile) LEFT JOIN tb_student_detail_profile ON tb_student_detail_profile.id_detail_profile = tb_profile_detail_comp.id_detail_profile WHERE tb_profile_detail_comp.id_profile_jobdesc = '$_GET[id_profile_jobdesc]' GROUP BY tb_profile_detail_comp.id_detail_profile");
+                                                $view = mysqli_query($conn, "SELECT * FROM (tb_profile_detail_comp LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile) LEFT JOIN tb_student_detail_profile ON tb_student_detail_profile.id_detail_profile = tb_profile_detail_comp.id_detail_profile WHERE tb_student_detail_profile.tgl_mulai = '$_GET[tgl_mulai]' AND tb_student_detail_profile.tgl_selesai = '$_GET[tgl_selesai]' GROUP BY tb_profile_detail_comp.id_detail_profile");
 												while ($data = mysqli_fetch_assoc($view)) :
 													// echo '<pre>';
 													// print_r($data);
@@ -318,153 +315,6 @@ $token = $_SESSION['token'];
 									<!-- /.card-body -->
 								</div>
 							</div>
-						<?php
-						// endforeach;
-						else :
-						?>
-						<!--End Tampilan View Data-->
-
-						
-						<!--Insert Data-->
-							<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">STUDENT COMPETENCY</h3>
-							</div>
-							<!-- /.card-header -->
-							<div class="card-body">
-
-								<?php
-								$id_profile_jobdesc = $_GET['id_profile_jobdesc'];
-								//print_r($id_profile_jobdesc);
-
-								$query = mysqli_query($conn, "SELECT * FROM (tb_profile_jobdesc LEFT JOIN tb_profile_detail_comp ON tb_profile_detail_comp.id_profile_jobdesc = tb_profile_jobdesc.id_profile_jobdesc) LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile LEFT JOIN tb_student_internship ON tb_student_internship.study_program = tb_profile_jobdesc.kode_prodi
-								WHERE tb_profile_jobdesc.id_profile_jobdesc = $id_profile_jobdesc");
-								$data = mysqli_fetch_assoc($query);
-								//print_r($query);
-								?>
-
-								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
-								<input type="hidden" id="id_student_detail_profile" name="id_student_detail_profile" value="<?php echo $id_student_detail_profile; ?>">
-								<input type="hidden" id="id_profile_jobdesc" name="id_profile_jobdesc" value="<?php echo $_GET['id_profile_jobdesc']; ?>">
-								<input type="hidden" id="id_detail_profile" name="id_detail_profile" value="<?php echo $data['id_detail_profile'] ?>">
-								<input type="hidden" id="nim" name="nim" value="<?php echo $data['nim'] ?>">
-								<input type="hidden" id="id_detail_unit" name="id_detail_unit" value="<?php echo $data['id_detail_unit'] ?>">
-								<!-- <?php
-								$mydate = getdate(date("U"));
-								?>
-								<input type="hidden" id="date" name="date" value="<?php echo "$mydate[year]-$mydate[mon]-$mydate[mday]"; ?>"> -->
-
-								<div class="row">
-									<div class="col-sm-6">
-										<!-- textarea -->
-										<div class="form-group">
-											<p><b>Start Date</b><span class="required-label">*</span> :</p>
-											<input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" required></input>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
-											<p><b>End Date</b><span class="required-label">*</span> :</p>
-											<input type="date" class="form-control" name="tgl_selesai" id="tgl_selesai" required></input>
-										</div>
-                                </div>
-								</div><!-- Row -->
-
-							</div>
-						</div>
-						<!--End Overall Comments -->
-
-						<!-- Evaluation Parameter -->
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title">Evaluation Parameter</h4>
-							</div>
-							<!-- /.card-header -->
-							<div class="card-body">
-								<div class="row">
-									<div class="col-sm-12">
-										<!-- text input -->
-										<table class="table table-bordered">
-											<thead>
-												<tr>
-													<th style="width: 10px">NO</th>
-													<th>COMPETENCE UNITS</th>
-													<th style="width: 40px"><br>
-														<center>4</center>
-													</th>
-													<th style="width: 40px"><br>
-														<center>3</center>
-													</th>
-													<th style="width: 40px"><br>
-														<center>2</center>
-													</th>
-													<th style="width: 40px"><br>
-														<center>1</center>
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-                                                <?php $i = 1;
-                                                include 'config.php';
-												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                $view = mysqli_query($conn, "SELECT * FROM (tb_profile_jobdesc LEFT JOIN tb_profile_detail_comp ON tb_profile_detail_comp.id_profile_jobdesc = tb_profile_jobdesc.id_profile_jobdesc) LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile LEFT JOIN tb_student_internship ON tb_student_internship.study_program = tb_profile_jobdesc.kode_prodi
-												WHERE tb_profile_jobdesc.id_profile_jobdesc = $id_profile_jobdesc");
-												while ($data = mysqli_fetch_assoc($view)) :
-													// echo '<pre>';
-													// print_r($data);
-													// echo '</pre>';
-												?>
-												<tr>
-															<td><?= $i++; ?></td>
-                                                            <td><?= $data['unit_kompetensi'] ?>
-															<ul>
-															<?php
-															$id_detail_profile = $data['id_detail_profile'];
-															$query = mysqli_query($conn, "SELECT * FROM tb_profile_detail_unit WHERE id_detail_profile=$id_detail_profile");
-															// $views = mysqli_fetch_array($query);
-															// echo "<pre>";
-															// print_r($views);
-															// echo "</pre>";
-															while($detail = mysqli_fetch_assoc($query)){
-																
-																echo "<li>";
-																echo $detail['detail_unit'];
-																echo "</li>";
-															}
-															?>
-															</ul>
-														</td>
-														<input type="hidden" name="id_detail_profile[]" value="<?= $data['id_detail_profile']?>">
-                                                    <td class="text-center">
-														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="4" type="radio">
-													</td>
-													<td class="text-center">
-														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="3" type="radio">
-													</td>
-													<td class="text-center">
-														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="2" type="radio">
-													</td>
-													<td class="text-center">
-														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="1" type="radio">
-													</td>
-                                                        </tr>
-														<?php endwhile; ?>
-											</tbody>
-										</table>
-									</div>
-									<!-- /.card-body -->
-								</div>
-							</div>
-
-							<!--Button Submit-->
-							<div class="modal-footer d-flex justify-content-center">
-								<button type="submit" class="btn btn-modify text-white" name="btn-submit" id="btn-submit">SUBMIT</button>
-							</div>
-							<!--End Button Submit-->
-							
-						<?php
-						endif;
-						?>
 						<!--End Insert Data-->
 						</div>
 						

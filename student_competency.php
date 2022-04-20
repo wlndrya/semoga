@@ -280,7 +280,7 @@ $token = $_SESSION['token'];
 													<td><center>" . $data['tgl_mulai'] . "</center></td>
 													<td><center>" . $data['tgl_selesai'] . "</center></td>
 													<td><center>
-													<a href = 'index.php?page=view_student_competency&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "&id_jobdesc_intern=". $data['id_jobdesc_intern']."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = 'index.php?page=view_student_competency&id_profile_jobdesc=" . $data['id_profile_jobdesc'] . "&nim=" . $data['nim'] . "&tgl_mulai=" . $data['tgl_mulai'] . "&tgl_selesai=". $data['tgl_selesai']."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													</tr>"
 												?>
