@@ -38,9 +38,7 @@ $token = $_SESSION['token'];
 				"families": ["Lato:300,400,700,900"]
 			},
 			custom: {
-				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-					"simple-line-icons"
-				],
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
 				urls: ['assets/css/fonts.min.css']
 			},
 			active: function() {
@@ -112,13 +110,6 @@ $token = $_SESSION['token'];
 								</li>
 								<!-- end gatau fungsinya untuk apa -->
 								<!-- Profil -->
-								<!-- <li class="nav-item dropdown hidden-caret">
-									<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
-										<div class="avatar-sm">
-											<img src="assets/img/Ulan.jpg" alt="..." class="avatar-img rounded-circle">
-										</div>
-									</a>
-								</li> -->
 								<li class="nav-item dropdown hidden-caret">
 									<a class="nav-link dropdown-toggle" href="index.php?page=logout" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-out-alt" title="Logout"></i>
 									</a>
@@ -185,121 +176,149 @@ $token = $_SESSION['token'];
 		<div class="main-panel">
 			<div class="container">
 				<div class="page-inner">
-					<div class="row row-card-no-pd">
-						<div class="col-md-12">
+
+					<form method="POST" action="proses_dummy_test.php?PageAction=add_student_competency">
+
+						<!--Insert Data-->
 							<div class="card">
-								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title"><b>STUDENT COMPETENCY</b></h4>
-										<?php
-										$id = $_GET['id'];
-										$nim = $_GET['nim'];
-										//print_r($nim);
-										$view = mysqli_query($conn, "SELECT * FROM (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) 
-										LEFT JOIN tb_student_detail_profile ON tb_student_detail_profile.nim = tb_student_internship.nim WHERE id_user_company = $user_id");
-										$data = mysqli_fetch_array($view);
+							<div class="card-header">
+								<h3 class="card-title">STUDENT COMPETENCY</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
 
-										echo "
-										<a class='btn btn-modify btn-round ml-auto text-white' type='submit' data-toggle='modal' data-target='#modalselect" . $data['id_internship'] . "'>
-										<i class='fa fa-plus'></i>
-										Add Student Competency
-										</a>
-										"
-										?>
+								<?php
+								$id_profile_jobdesc = $_GET['id_profile_jobdesc'];
+								//print_r($id_profile_jobdesc);
 
-											<!--Modal Choose Job Profile-->
-											<div class="modal fade" id="modalselect<?= $data['id_internship'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Job Profile</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="modal-body">
-																	<div class="form-group">
-																		<!-- <form action="index.php?page=student_competency" method="get"> -->
-																		<select class="id form-control" id="">
-																			<option>Choose One</option>
-																			<?php
-																			$sql = mysqli_query($conn, "SELECT * FROM tb_profile_jobdesc INNER JOIN tb_student_internship ON tb_profile_jobdesc.kode_prodi = tb_student_internship.study_program
-																			WHERE tb_profile_jobdesc.kode_prodi = 'Logistik'");
-																			if (mysqli_num_rows($sql) != 0) {
-																				while ($row = mysqli_fetch_assoc($sql)) {
-																					echo '<option value=' . $row["id_profile_jobdesc"] . '>' . $row['nama_profile'] . ' </option>';
-																				}
-																			}
-																			?>
-																		</select>
-																	</div>
-																</div>
-																<div class="modal-footer">
-																	<a href="index.php?page=add_student_competency&id_profile_jobdesc=id" class="btn btn-modify text-white">Apply</a>
-																	<!-- </form> -->
-																</div>
+								$query = mysqli_query($conn, "SELECT * FROM (tb_profile_jobdesc LEFT JOIN tb_profile_detail_comp ON tb_profile_detail_comp.id_profile_jobdesc = tb_profile_jobdesc.id_profile_jobdesc) LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile LEFT JOIN tb_student_internship ON tb_student_internship.study_program = tb_profile_jobdesc.kode_prodi
+								WHERE tb_profile_jobdesc.id_profile_jobdesc = $id_profile_jobdesc");
+								$data = mysqli_fetch_assoc($query);
+								//print_r($query);
+								?>
 
-																<!-- <form action="proses_dummy_test.php?PageAction=delete_supervisor" method="post">
-																	<input type="hidden" name="id_user_company" value="<?php echo $data['id_user_company'] ?>">
-																	<div class="modal-footer">
-																		<button type="submit" class="btn btn-danger">Delete</button>
-																		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																	</div>
-																</form> -->
-															</div>
-														</div>
-													</div>
+								<input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+								<input type="hidden" id="id_student_detail_profile" name="id_student_detail_profile" value="<?php echo $id_student_detail_profile; ?>">
+								<input type="hidden" id="id_profile_jobdesc" name="id_profile_jobdesc" value="<?php echo $_GET['id_profile_jobdesc']; ?>">
+								<input type="hidden" id="id_detail_profile" name="id_detail_profile" value="<?php echo $data['id_detail_profile'] ?>">
+								<input type="hidden" id="nim" name="nim" value="<?php echo $data['nim'] ?>">
+								<input type="hidden" id="id_detail_unit" name="id_detail_unit" value="<?php echo $data['id_detail_unit'] ?>">
+								<!-- <?php
+								$mydate = getdate(date("U"));
+								?>
+								<input type="hidden" id="date" name="date" value="<?php echo "$mydate[year]-$mydate[mon]-$mydate[mday]"; ?>"> -->
+
+								<div class="row">
+									<div class="col-sm-6">
+										<!-- textarea -->
+										<div class="form-group">
+											<p><b>Start Date</b><span class="required-label">*</span> :</p>
+											<input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" required></input>
+										</div>
 									</div>
-								</div>
-								<div class="card-body">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p><b>End Date</b><span class="required-label">*</span> :</p>
+											<input type="date" class="form-control" name="tgl_selesai" id="tgl_selesai" required></input>
+										</div>
+                                </div>
+								</div><!-- Row -->
 
-									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover">
+							</div>
+						</div>
+						<!--End Overall Comments -->
+
+						<!-- Evaluation Parameter -->
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Evaluation Parameter</h4>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-12">
+										<!-- text input -->
+										<table class="table table-bordered">
 											<thead>
 												<tr>
-													<th>
-														<center>Start Date</center>
+													<th style="width: 10px">NO</th>
+													<th>COMPETENCE UNITS</th>
+													<th style="width: 40px"><br>
+														<center>4</center>
 													</th>
-													<th>
-														<center>End Date</center>
+													<th style="width: 40px"><br>
+														<center>3</center>
 													</th>
-													<th>
-														<center>View Student Competency</center>
+													<th style="width: 40px"><br>
+														<center>2</center>
+													</th>
+													<th style="width: 40px"><br>
+														<center>1</center>
 													</th>
 												</tr>
 											</thead>
 											<tbody>
-												<?php
-												include 'config.php';
-												$id_profile_jobdesc = $_GET['id_profile_jobdesc'];
+											<?php $i = 1;
+                                                include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-												$view = mysqli_query($conn, "SELECT * FROM tb_profile_jobdesc INNER JOIN tb_student_detail_profile ON tb_student_detail_profile.id_profile_jobdesc = tb_profile_jobdesc.id_profile_jobdesc GROUP BY tb_student_detail_profile.tgl_mulai HAVING COUNT(tb_student_detail_profile.tgl_mulai) >= 1");
-												//print_r($id_jobdesc_intern);
-												while ($data = mysqli_fetch_array($view)) {
-													echo "<tr>
-													<td><center>" . $data['tgl_mulai'] . "</center></td>
-													<td><center>" . $data['tgl_selesai'] . "</center></td>
-													<td><center>
-													<a href = 'index.php?page=view_student_competency&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "&id_jobdesc_intern=". $data['id_jobdesc_intern']."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
-													</center></td>
-													</tr>"
+                                                $view = mysqli_query($conn, "SELECT * FROM (tb_profile_detail_comp LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile) LEFT JOIN tb_student_detail_profile ON tb_student_detail_profile.id_detail_profile = tb_profile_detail_comp.id_detail_profile WHERE tb_profile_detail_comp.id_profile_jobdesc = '$_GET[id_profile_jobdesc]' GROUP BY tb_profile_detail_comp.id_detail_profile");
+												while ($data = mysqli_fetch_assoc($view)) :
+													// echo '<pre>';
+													// print_r($data);
+													// echo '</pre>';
 												?>
-
-												<?php //penutup perulangan while
-													$no++;
-												}
-												?>
-												<!-- End Modal -->
-
+												<tr>
+															<td><?= $i++; ?></td>
+                                                            <td><?= $data['unit_kompetensi'] ?>
+															<ul>
+															<?php
+															$id_detail_profile = $data['id_detail_profile'];
+															$query = mysqli_query($conn, "SELECT * FROM tb_profile_detail_unit WHERE id_detail_profile=$id_detail_profile");
+															// $views = mysqli_fetch_array($query);
+															// echo "<pre>";
+															// print_r($views);
+															// echo "</pre>";
+															while($detail = mysqli_fetch_assoc($query)){
+																
+																echo "<li>";
+																echo $detail['detail_unit'];
+																echo "</li>";
+															}
+															?>
+															</ul>
+														</td>
+													<input type="hidden" name="id_detail_profile[]" value="<?= $data['id_detail_profile']?>">
+                                                    <td class="text-center">
+														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="4" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="3" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="2" type="radio">
+													</td>
+													<td class="text-center">
+														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="1" type="radio">
+													</td>
+													<?php endwhile;?>
+                                                        </tr>
 											</tbody>
 										</table>
 									</div>
+									<!-- /.card-body -->
 								</div>
 							</div>
-						</div>
-					</div>
 
-				</div>
+							<!--Button Submit-->
+							<div class="modal-footer d-flex justify-content-center">
+								<button type="submit" class="btn btn-modify text-white" name="btn-submit" id="btn-submit">SUBMIT</button>
+							</div>
+							<!--End Button Submit-->
+
+						<!--End Insert Data-->
+						</div>
+						
+					</form>
 				<!--page inner-->
 			</div>
 			<!--container-->
@@ -395,12 +414,6 @@ $token = $_SESSION['token'];
 	<script src="../../dist/js/adminlte.min.js"></script>
 
 	<script>
-		$(document).ready(function(){
-        $("select.id").change(function(){
-            var selectedid  = $(".id option:selected").val();
-            $('a').attr('href','index.php?page=add_student_competency&id_profile_jobdesc='+selectedid);
-        });
-    });
 		// Add Row
 		$('#add-row').DataTable({
 			"pageLength": 5,
@@ -418,6 +431,59 @@ $token = $_SESSION['token'];
 			]);
 			$('#addRowModal').modal('hide');
 
+		});
+
+		//SweetALert
+		var SweetAlert2Demo = function() {
+			var initDemos = function() {
+
+
+				$('#alert_demo_7').click(function(e) {
+					swal({
+						title: 'Are you sure?',
+						text: "Please check this Feedback to make sure that has been filled in correctly.",
+						type: 'warning',
+						buttons: {
+							confirm: {
+								text: 'Yes, Im Sure!',
+								className: 'btn btn-success'
+							},
+							cancel: {
+								visible: true,
+								className: 'btn btn-danger'
+							}
+						}
+					}).then((Delete) => {
+						if (Delete) {
+							swal({
+								title: 'Successfull!',
+								text: 'The Feedback has been published.',
+								type: 'success',
+								buttons: {
+									confirm: {
+										className: 'btn btn-success'
+									}
+								}
+							});
+						} else {
+							swal.close();
+						}
+					});
+				});
+
+			};
+
+			return {
+				//== Init
+				init: function() {
+					initDemos();
+				},
+			};
+		}();
+
+		//== Class Initialization
+		jQuery(document).ready(function() {
+			SweetAlert2Demo.init();
 		});
 	</script>
 

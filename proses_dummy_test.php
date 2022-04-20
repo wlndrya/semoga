@@ -1031,34 +1031,39 @@ if ($_GET['PageAction'] == "add_student_competency") {
   $id_detail_profile         = mysqli_real_escape_string($conn, $_POST['id_detail_profile']);
   $nim                       = mysqli_real_escape_string($conn, $_POST['nim']);
   $id_detail_unit            = mysqli_real_escape_string($conn, $_POST['id_detail_unit']);
-  $nilai                     = mysqli_real_escape_string($conn, $_POST['nilai']);
+  // $nilai                     = mysqli_real_escape_string($conn, $_POST['nilai']);
   $tgl_mulai                 = mysqli_real_escape_string($conn, $_POST['tgl_mulai']);
   $tgl_selesai               = mysqli_real_escape_string($conn, $_POST['tgl_selesai']);
 
-  if ($_SESSION) {
-    $add = $conn->query("INSERT INTO tb_student_detail_profile (id_student_detail_profile, id_profile_jobdesc, id_detail_profile, catatan_utk_poltek, layak_diterima, langsung_diterima, nilai_akhir, etika, keahlian_kompetensi, keahlian_bahasa, penggunaan_ti, komunikasi, kerjasama, pengembangan_diri, date) VALUES (NULL,'$id','$catatan_utk_mahasiswa','$catatan_utk_poltek', '$layak_diterima', '$langsung_diterima', '$nilai_akhir', '$etika', '$keahlian_kompetensi' , '$keahlian_bahasa', '$penggunaan_ti', '$komunikasi', '$kerjasama', '$pengembangan_diri', '$date');");
-    if ($add) {
-       echo "
-      <script type='text/javascript'>
-       setTimeout(function () { 
-        swal({
-          title: 'Success',
-          text: 'Added Succcesfully!',
-          icon: 'success',
-          buttons: false
-        }); 
-       },10); 
-       window.setTimeout(function(){ 
-        window.history.back();
-       } ,2000); 
-      </script>
-      ";
-    } else {
-      echo ("Error description: " . $conn->error);
-      //echo '<script language="javascript">alert("Added Failure"); document.location="index.php?page=spv-addjobdesc";</script>';
-    }
+  // echo "<pre>";
+  // print_r($_POST['nilai']);
+  // // print_r(array_keys($_POST['nilai']));
+  // // print_r($_POST['id_detail_profile']);
+  // echo "</pre>";
+
+  foreach($_POST['nilai'] as $id_detail_profile => $nilai){
+    $add = $conn->query("INSERT INTO tb_student_detail_profile (id_profile_jobdesc, id_detail_profile, nim, nilai, tgl_mulai, tgl_selesai) VALUES ('$id_profile_jobdesc','$id_detail_profile','$nim', '$nilai', '$tgl_mulai', '$tgl_selesai');");
+    // echo $id .">". $nilai ."<br/>";
   }
-}
+
+  if($add){
+    echo "
+       <script type='text/javascript'>
+        setTimeout(function () { 
+         swal({
+           title: 'Success',
+           text: 'Added Succcesfully!',
+           icon: 'success',
+           buttons: false
+         }); 
+        },10); 
+        window.setTimeout(function(){ 
+         window.history.back();
+        } ,2000); 
+       </script>
+       ";
+  } 
+    }
 ?>
 
   

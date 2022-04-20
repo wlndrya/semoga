@@ -250,7 +250,7 @@ $token = $_SESSION['token'];
 													" . ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=jobdesc-ilo&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>" : "<a href = 'index.php?page=spv-addjobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>") . "
 													</center></td>
 													<td><center>
-													" . ($data['study_program'] == "Logistik" ? "<a href = '#' type='button' data-toggle='modal' data-target='#modalselect" . $data['id_internship'] . "' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>" : "<a href = '#' type='button' data-toggle='modal' data-target='#modalnot" . $data['id_internship'] . "' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>") . "
+													" . ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=student_competency&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "' type='button' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>" : "<a href = '#' type='button' data-toggle='modal' data-target='#modalnot" . $data['id_internship'] . "' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>") . "
 													</center></td>
 													<td><center>
 													<a href = 'index.php?page=spv-feedback2&id=" . $data['id_internship'] . "' type='button' data-toggle='' data-target='' class='btn btn-link btn-secondary'><i class='fa fa-edit'></i></a>
@@ -434,49 +434,6 @@ $token = $_SESSION['token'];
 														</div>
 													</div>
 													<!--End Modal View Optional Files-->
-
-													<!--Modal Choose Job Profile-->
-													<div class="modal fade" id="modalselect<?= $data['id_internship'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Job Profile</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="modal-body">
-																	<div class="form-group">
-																		<!-- <form action="index.php?page=student_competency" method="get"> -->
-																		<select class="id form-control" id="">
-																			<option>Choose One</option>
-																			<?php
-																			$sql = mysqli_query($conn, "SELECT * FROM tb_profile_jobdesc INNER JOIN tb_student_internship ON tb_profile_jobdesc.kode_prodi = tb_student_internship.study_program
-																			WHERE tb_profile_jobdesc.kode_prodi = 'Logistik'");
-																			if (mysqli_num_rows($sql) != 0) {
-																				while ($row = mysqli_fetch_assoc($sql)) {
-																					echo '<option value=' . $row["id_profile_jobdesc"] . '>' . $row['nama_profile'] . ' </option>';
-																				}
-																			}
-																			?>
-																		</select>
-																	</div>
-																</div>
-																<div class="modal-footer">
-																	<a href="index.php?page=student_competency&id_profile_jobdesc=id" class="btn btn-modify text-white">Apply</a>
-																	<!-- </form> -->
-																</div>
-
-																<!-- <form action="proses_dummy_test.php?PageAction=delete_supervisor" method="post">
-																	<input type="hidden" name="id_user_company" value="<?php echo $data['id_user_company'] ?>">
-																	<div class="modal-footer">
-																		<button type="submit" class="btn btn-danger">Delete</button>
-																		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																	</div>
-																</form> -->
-															</div>
-														</div>
-													</div>
 
 													<!-- Modal Information -->
 													<div class="modal fade" id="modalnot<?= $data['id_internship'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
