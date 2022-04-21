@@ -230,13 +230,14 @@ $token = $_SESSION['token'];
 												WHERE status_intern='YES' AND tb_user_company.id_company = '$_SESSION[id_company]' ");
 												$no = 1;
 												while ($data = mysqli_fetch_array($view)) {
+													
 													echo "<tr>
 													<td>" . $data['name'] . "</td>
 													<td>" . $data['start_date'] . "</td>
 													<td>" . $data['end_date'] . "</td>
 													<td>" . $data['user_fullname'] . "</td>
 													<td><center>
-													". ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=hrd-jobdesc-ilo&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>" : "<a href = 'index.php?page=print_jobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."' type='button' data-toggle='' data-target='' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>") ."
+													". ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=hrd-jobdesc-ilo&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>" : "<a href = 'index.php?page=print_jobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&start_date=".$data['start_date']."' type='button' data-toggle='' data-target='' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>") ."
 													</center></td>
 													<td><center>
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>

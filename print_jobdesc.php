@@ -95,25 +95,32 @@ ob_start();
 			<p class='sub-heading'>1. Type of Work :</p><br>
 				<p class='sub-content'>
 					<?php 
-					
-					$query = mysqli_query($conn, "SELECT * FROM (tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc) 
-					LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail 
-					LEFT JOIN tb_jobdesc_intern ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc 
-					LEFT JOIN tb_student_internship ON tb_student_internship.nim = tb_jobdesc_intern.nim 
-					LEFT JOIN tb_internship ON tb_internship.id_internship = tb_jobdesc_intern.id_internship 
-					LEFT JOIN tb_company ON tb_company.id_company = tb_internship.id_company 
-					WHERE tb_student_internship.nim = $nim");
+					$date_start = $_GET['start_date'];
+					// $query = mysqli_query($conn, "SELECT * FROM (tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc) LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail LEFT JOIN tb_jobdesc_intern ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc 
+					// LEFT JOIN tb_student_internship ON tb_student_internship.nim = tb_jobdesc_intern.nim 
+					// LEFT JOIN tb_internship ON tb_internship.id_internship = tb_jobdesc_intern.id_internship 
+					// LEFT JOIN tb_company ON tb_company.id_company = tb_internship.id_company 
+					// WHERE tb_student_internship.nim = $nim");
+					$query = mysqli_query($conn, "SELECT * FROM (tb_ceklis_jobdesc_intern LEFT JOIN tb_detail_jobdesc ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail) LEFT JOIN tb_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_jobdesc_intern=tb_jobdesc_intern.id_jobdesc_intern WHERE tb_jobdesc_intern.nim=$nim");
 
+					// if(!$query){
+					// 	echo $conn->error;
+					// }else{
+					// 	echo "<pre>";
+					// print_r(mysqli_fetch_array($query));
+					// echo "</pre>";
+					// }
 
 					while($datas = mysqli_fetch_assoc($query)){
+						// echo $datas['job_type'];
 
-						$arrs = preg_replace("([A-Z])"," $0",$datas['job_type']);
+						$arrs = preg_replace("([A-Z])","$0",$datas['job_type']);
 						$arr = explode(",",trim($arrs));
 
 						foreach($arr as $text){
 
-							$dataz = $text.', ';
-							echo $dataz;
+							$datas2 = $text.', ';
+							echo $datas2;
 						};
 					}
 

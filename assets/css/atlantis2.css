@@ -4087,8 +4087,8 @@ label.error {
     border-color: #B0C4DE !important; }
 
 .btn-modify {
-  background: #554fad !important;
-  border-color: #554fad !important; }
+  background: #21277b !important;
+  border-color: #21277b !important; }
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:disabled {
   background: #554fad !important;
   border-color: #554fad !important; }
@@ -5971,7 +5971,7 @@ label.error {
     cursor: default; }
 
 .scroll-textarea {
-  border: 1px solid #ccc#554fad;
+  border: 1px solid #ccc #554fad;
   border-top-color: #999; }
   .scroll-textarea > .scroll-content {
     overflow: hidden !important; }

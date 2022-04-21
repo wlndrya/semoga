@@ -76,7 +76,7 @@ $token = $_SESSION['token'];
 <body>
 	<div class="wrapper horizontal-layout-2">
 
-		<div class="main-header" data-background-color="purple">
+		<div class="main-header" data-background-color="bluedark">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +87,7 @@ $token = $_SESSION['token'];
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
-						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/logoMI.png" height="50 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -151,7 +151,7 @@ $token = $_SESSION['token'];
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
-								<span class="menu-title">Profile</span>
+								<span class="menu-title text-desc">Profile</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
@@ -167,7 +167,7 @@ $token = $_SESSION['token'];
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">HRD Menu</span>
+								<span class="menu-title text-desc">HRD Menu</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
@@ -183,25 +183,25 @@ $token = $_SESSION['token'];
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-studentlist">
 								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Student Internship</span>
+								<span class="menu-title text-desc">Student Internship</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-document">
 								<i class="link-icon icon-folder-alt"></i>
-								<span class="menu-title">Internship Files</span>
+								<span class="menu-title text-desc">Internship Files</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
-								<span class="menu-title">Tutorial</span>
+								<span class="menu-title text-desc">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-information&id_user_company=<?php echo $user_id; ?>">
 								<i class="link-icon icon-question"></i>
-								<span class="menu-title">Information</span>
+								<span class="menu-title text-desc">Information</span>
 							</a>
 						</li>
 					</ul>
@@ -224,15 +224,15 @@ $token = $_SESSION['token'];
 						<div class="col-md-4">
 							<div class="card card-dark card-menu-left text-center">
 								<div class="card-body pb-0">
-									<h1 class="mb-2">
+									<h1 class="mb-2"><b>
 									<?php
 										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company = $id_company AND status_intern = 'PENDING'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
 										?>
-									</h1>
-									<p><b>APPLICANT</b></p>
+									</b></h1>
+									<p style="font-size:15px""><b>APPLICANT</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas></div>
 									</div>
@@ -242,15 +242,15 @@ $token = $_SESSION['token'];
 						<div class="col-md-4">
 							<div class="card card-dark card-menu-center text-center">
 								<div class="card-body pb-0">
-									<h1 class="mb-2">
+									<h1 class="mb-2"><b>
 										<?php
 										$query = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE user_type='supervisor'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
 										?>
-									</h1>
-									<p><b>SUPERVISOR</b></p>
+									</b></h1>
+									<p style="font-size:15px"><b>SUPERVISOR</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas></div>
 									</div>
@@ -260,15 +260,15 @@ $token = $_SESSION['token'];
 						<div class="col-md-4">
 							<div class="card card-dark card-menu-right text-center">
 								<div class="card-body pb-0">
-									<h1 class="mb-2">
+									<h1 class="mb-2"><b>
 										<?php
 										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_company = $id_company AND status_intern ='YES'");
 										$hasil = mysqli_num_rows($query);
 
 										echo $hasil;
 										?>
-									</h1>
-									<p><b>INTERNSHIP STUDENTS</b></p>
+									</b></h1>
+									<p style="font-size:15px"><b>INTERNSHIP</b></p>
 									<div class="pull-in sparkline-fix chart-as-background">
 										<div id="lineChart"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas></div>
 									</div>
@@ -301,10 +301,10 @@ $token = $_SESSION['token'];
 															error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 															$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = '$_SESSION[id_company]'");
 															while ($data = mysqli_fetch_array($view)) {
-																echo $data['description'];
+																echo "<p class='text-desc'>".$data['description']."</p>";
 																// echo "</br></br><a type='button' class='btn btn-sm btn-secondary ml-auto btn-style' href='#' data-toggle='modal' data-target='#mymodalcv'> Modal CV</a>";
-																echo "</br></br><a type='button' class='btn btn-sm btn-modify ml-auto text-white' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'> Edit
-																	Description</a>";
+																echo "<a type='button' class='btn btn-sm btn-modify ml-auto text-white' href='#' data-toggle='modal' data-target='#modaledit" . $data['id_company'] . "'><b>Edit
+																	Description</b></a>";
 															?>
 
 																<!-- Modal Edit Company Profile-->
@@ -380,8 +380,8 @@ $token = $_SESSION['token'];
 									<table id="add-row" class="display table table-striped table-hover">
 										<thead>
 											<tr>
-												<th>STUDENT NAME</th>
-												<th>STUDY PROGRAM</th>
+												<th class="text-desc">STUDENT NAME</th>
+												<th class="text-desc">STUDY PROGRAM</th>
 											</tr>
 										</thead>
 										<tbody>

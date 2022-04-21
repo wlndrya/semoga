@@ -95,13 +95,14 @@ ob_start();
 				<p class='sub-content'>
 					<?php 
 					$id_jobdesc_intern = $_GET['id_jobdesc_intern'];
+					$date_start = $_GET['date_start'];
 					$query = mysqli_query($conn, "SELECT * FROM (tb_detail_jobdesc LEFT JOIN tb_jobdesc ON tb_detail_jobdesc.id_jobdesc = tb_jobdesc.id_jobdesc) 
 					LEFT JOIN tb_ceklis_jobdesc_intern ON tb_ceklis_jobdesc_intern.id_detail = tb_detail_jobdesc.id_detail 
 					LEFT JOIN tb_jobdesc_intern ON tb_jobdesc_intern.id_jobdesc = tb_jobdesc.id_jobdesc 
 					LEFT JOIN tb_student_internship ON tb_student_internship.nim = tb_jobdesc_intern.nim 
 					LEFT JOIN tb_internship ON tb_internship.id_internship = tb_jobdesc_intern.id_internship 
 					LEFT JOIN tb_company ON tb_company.id_company = tb_internship.id_company 
-					WHERE tb_jobdesc_intern.id_jobdesc_intern = $id_jobdesc_intern  GROUP BY tb_ceklis_jobdesc_intern.id_detail HAVING COUNT(tb_ceklis_jobdesc_intern.id_detail) >= 1");
+					WHERE tb_jobdesc_intern.id_jobdesc_intern = $id_jobdesc_intern AND tb_ceklis_jobdesc_intern.date_start='$date_start' GROUP BY tb_ceklis_jobdesc_intern.id_detail HAVING COUNT(tb_ceklis_jobdesc_intern.id_detail) >= 1");
 
 
 					while($datas = mysqli_fetch_assoc($query)){

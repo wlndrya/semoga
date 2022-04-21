@@ -73,7 +73,7 @@ $token = $_SESSION['token'];
 					</button>
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
-					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
+					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
 						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
@@ -250,7 +250,7 @@ $token = $_SESSION['token'];
 													<td><center>" . $data['date_start'] . "</center></td>
 													<td><center>" . $data['date_end'] . "</center></td>
 													<td><center>
-													<a href = 'index.php?page=print_jobdesc_ilo&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "&id_jobdesc_intern=". $data['id_jobdesc_intern']."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													<a href = 'index.php?page=print_jobdesc_ilo&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "&id_jobdesc=" . $data['id_jobdesc'] . "&id_jobdesc_intern=". $data['id_jobdesc_intern']."&date_start=".$data['date_start']."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
 													</center></td>
 													</tr>"
 												?>
