@@ -945,10 +945,10 @@ body {
   border-top: 1px solid #eee;
   padding: 15px;
   background: #ffffff;
-  width: 100%; }
-  .footer .container, .footer .container-fluid {
+  }
+  /* .footer .container, .footer .container-fluid {
     display: flex;
-    align-items: center; }
+    align-items: center; } */
 
 .quick_sidebar_open .quick-sidebar {
   right: 0px !important; }
@@ -13539,12 +13539,14 @@ img.mfp-img {
       position: absolute;
       right: 0px; }
 
-  .footer .container-fluid {
+  /* .footer .container-fluid {
     flex-direction: column; }
     .footer .container-fluid .copyright {
       margin-left: 0 !important;
       margin-top: 10px;
-      margin-bottom: 15px; } }
+      margin-bottom: 15px; } 
+      */
+    } 
 @media screen and (max-width: 576px) {
   #chart-container {
     min-height: 250px; }
