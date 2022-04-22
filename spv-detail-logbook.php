@@ -118,7 +118,7 @@ $token = $_SESSION['token'];
 <body>
     <div class="wrapper horizontal-layout-2">
 
-        <div class="main-header" data-background-color="purple">
+        <div class="main-header" data-background-color="bluedark">
             <div class="nav-top">
                 <div class="container d-flex flex-row">
                     <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,7 +129,7 @@ $token = $_SESSION['token'];
                     <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
                     <!-- Logo SEMOGA -->
                     <a href="index.php?page=spv-home" class="logo d-flex align-items-center">
-                        <img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
+                        <img src="assets/img/logoMI.png" height="50" alt="navbar brand" class="navbar-brand">
                     </a>
                     <!-- End Logo SEMOGA -->
 
@@ -181,51 +181,51 @@ $token = $_SESSION['token'];
 
             <!-- Menu -->
             <div class="nav-bottom">
-                <div class="container">
-                    <ul class="nav page-navigation page-navigation-secondary bg-white">
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon icon-book-open"></i>
-                                <span class="menu-title">Profile</span>
-                            </a>
-                            <div class="navbar-dropdown animated fadeIn">
-                                <ul>
-                                    <li>
-                                        <a href="index.php?page=spv-profile">My Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="index.php?page=spv-company-profile">Company Profile</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="index.php?page=spv-studentlist">
-                                <i class="link-icon icon-layers"></i>
-                                <span class="menu-title">Student Internship</span>
-                            </a>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="index.php?page=spv-document">
-                                <i class="link-icon icon-folder-alt"></i>
-                                <span class="menu-title">Internship Files</span>
-                            </a>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="index.php?page=spv-tutorial">
-                                <i class="link-icon icon-screen-desktop"></i>
-                                <span class="menu-title">Tutorial</span>
-                            </a>
-                        </li>
-                        <li class="nav-item submenu">
-                            <a class="nav-link" href="index.php?page=spv-information">
-                                <i class="link-icon icon-question"></i>
-                                <span class="menu-title">Information</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+				<div class="container">
+					<ul class="nav page-navigation page-navigation-secondary bg-white">
+						<li class="nav-item submenu">
+							<a class="nav-link" href="#">
+								<i class="link-icon icon-book-open"></i>
+								<span class="menu-title text-desc">Profile</span>
+							</a>
+							<div class="navbar-dropdown animated fadeIn">
+								<ul>
+									<li>
+										<a href="index.php?page=spv-profile">My Profile</a>
+									</li>
+									<li>
+										<a href="index.php?page=spv-company-profile">Company Profile</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=spv-studentlist">
+								<i class="link-icon icon-layers"></i>
+								<span class="menu-title text-desc">Student Internship</span>
+							</a>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=spv-document">
+								<i class="link-icon icon-folder-alt"></i>
+								<span class="menu-title text-desc">Internship Files</span>
+							</a>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=spv-tutorial">
+								<i class="link-icon icon-screen-desktop"></i>
+								<span class="menu-title text-desc">Tutorial</span>
+							</a>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=spv-information">
+								<i class="link-icon icon-question"></i>
+								<span class="menu-title text-desc">Information</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
             <!-- End Menu -->
         </div>
 
@@ -259,20 +259,20 @@ $token = $_SESSION['token'];
                                                 <table id="basic-datatables" class="display table table-striped table-hover">
                                                     <thead>
                                                         <tr>
-                                                            <th>Week</th>
-                                                            <th>
+                                                            <th class="text-desc">Week</th>
+                                                            <th class="text-desc">
                                                                 <center>Start Date</center>
                                                             </th>
-                                                            <th>
+                                                            <th class="text-desc">
                                                                 <center>End Date</center>
                                                             </th>
-                                                            <th>
+                                                            <th class="text-desc">
                                                                 <center>Detail of Activities</center>
                                                             </th>
-                                                            <th style="width: 10px;">
+                                                            <th style="width: 10px;" class="text-desc">
                                                                 <center>Documentation</center>
                                                             </th>
-                                                            <th style="width: 10px;">
+                                                            <th style="width: 10px;" class="text-desc">
                                                                 <span>
                                                                     <center>Approval<br>
                                                                         <!-- <input type="checkbox" id="select-all"/> -->
@@ -399,13 +399,29 @@ $token = $_SESSION['token'];
         <!-- End Main Content -->
 
         <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="copyright ml-auto">
-                    2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
-                </div>
-            </div>
-        </footer>
+        <footer style="background-color: white; padding: 10px; border-top: 1px solid #eee; padding-top: 20px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 my-auto" style="display: flex; flex-direction: row;">
+						<a href="">
+							<img src="assets/img/ILO1.png" height="50" alt="navbar brand" class="">
+						</a>
+						<a href="#" class="logo d-flex align-items-center">
+							<img src="assets/img/Indonesia.png" style="margin-left: 12px;" height="50" alt="navbar brand" class="">
+						</a>
+						<a href="#" class="logo d-flex align-items-center">
+							<img src="assets/img/BEJ.png" height="70" alt="navbar brand" class="">
+						</a>
+					</div>
+					<div class="col-md-5"></div>
+					<div class="col-md-3">
+						<div class="copyright ml-auto">
+							2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="#">PSTeam</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
         <!-- End Footer -->
     </div>
 

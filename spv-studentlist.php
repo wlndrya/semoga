@@ -63,7 +63,7 @@ $token = $_SESSION['token'];
 <body>
 	<div class="wrapper horizontal-layout-2">
 
-		<div class="main-header" data-background-color="purple">
+		<div class="main-header" data-background-color="bluedark">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@ $token = $_SESSION['token'];
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
-						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/logoMI.png" height="50" alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -138,7 +138,7 @@ $token = $_SESSION['token'];
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
-								<span class="menu-title">Profile</span>
+								<span class="menu-title text-desc">Profile</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
@@ -154,25 +154,25 @@ $token = $_SESSION['token'];
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=spv-studentlist">
 								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Student Internship</span>
+								<span class="menu-title text-desc">Student Internship</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=spv-document">
 								<i class="link-icon icon-folder-alt"></i>
-								<span class="menu-title">Internship Files</span>
+								<span class="menu-title text-desc">Internship Files</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=spv-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
-								<span class="menu-title">Tutorial</span>
+								<span class="menu-title text-desc">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=spv-information">
 								<i class="link-icon icon-question"></i>
-								<span class="menu-title">Information</span>
+								<span class="menu-title text-desc">Information</span>
 							</a>
 						</li>
 					</ul>
@@ -205,26 +205,26 @@ $token = $_SESSION['token'];
 										<table id="add-row" class="display table table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Student Name</th>
-													<th>
+													<th class="text-desc">Student Name</th>
+													<th class="text-desc">
 														<center>Start Date</center>
 													</th>
-													<th>
+													<th class="text-desc">
 														<center>End Date</center>
 													</th>
-													<th>
+													<th class="text-desc">
 														<center>Registration File</center>
 													</th>
-													<th>
+													<th class="text-desc">
 														<center>Final Report</center>
 													</th>
-													<th>
+													<th class="text-desc">
 														<center>Job Description</center>
 													</th>
-													<th>
+													<th class="text-desc">
 														<center>Student Competency</center>
 													</th>
-													<th>
+													<th class="text-desc">
 														<center>Feedback</center>
 													</th>
 												</tr>
@@ -234,7 +234,7 @@ $token = $_SESSION['token'];
 												include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 												$view = mysqli_query($conn, "SELECT * from (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) 
-												LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program WHERE id_user_company = $user_id");
+												LEFT JOIN tb_jobdesc ON tb_jobdesc.prodi_name = tb_student_internship.study_program WHERE id_user_company = $user_id AND tb_internship.status_intern='YES'");
 												while ($data = mysqli_fetch_array($view)) {
 													echo "<tr>
 													<td>" . $data['name'] . "</td>
@@ -478,10 +478,26 @@ $token = $_SESSION['token'];
 		<!-- End Main Content -->
 
 		<!-- Footer -->
-		<footer class="footer">
+		<footer style="background-color: white; padding: 10px; border-top: 1px solid #eee; padding-top: 20px;">
 			<div class="container">
-				<div class="copyright ml-auto">
-					2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">PSTeam</a>
+				<div class="row">
+					<div class="col-md-4 my-auto" style="display: flex; flex-direction: row;">
+						<a href="">
+							<img src="assets/img/ILO1.png" height="50" alt="navbar brand" class="">
+						</a>
+						<a href="#" class="logo d-flex align-items-center">
+							<img src="assets/img/Indonesia.png" style="margin-left: 12px;" height="50" alt="navbar brand" class="">
+						</a>
+						<a href="#" class="logo d-flex align-items-center">
+							<img src="assets/img/BEJ.png" height="70" alt="navbar brand" class="">
+						</a>
+					</div>
+					<div class="col-md-5"></div>
+					<div class="col-md-3">
+						<div class="copyright ml-auto">
+							2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="#">PSTeam</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</footer>
