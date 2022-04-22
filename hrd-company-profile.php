@@ -74,7 +74,7 @@ $token = $_SESSION['token'];
 <body>
 	<div class="wrapper horizontal-layout-2">
 
-		<div class="main-header" data-background-color="purple">
+		<div class="main-header" data-background-color="bluedark">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@ $token = $_SESSION['token'];
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
-						<img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/logoMI.png" height="50 " alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -142,7 +142,7 @@ $token = $_SESSION['token'];
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-book-open"></i>
-								<span class="menu-title">Profile</span>
+								<span class="menu-title text-desc">Profile</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
@@ -158,7 +158,7 @@ $token = $_SESSION['token'];
 						<li class="nav-item submenu">
 							<a class="nav-link" href="#">
 								<i class="link-icon icon-grid"></i>
-								<span class="menu-title">HRD Menu</span>
+								<span class="menu-title text-desc">HRD Menu</span>
 							</a>
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
@@ -174,25 +174,25 @@ $token = $_SESSION['token'];
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-studentlist">
 								<i class="link-icon icon-layers"></i>
-								<span class="menu-title">Student Internship</span>
+								<span class="menu-title text-desc">Student Internship</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-document">
 								<i class="link-icon icon-folder-alt"></i>
-								<span class="menu-title">Internship Files</span>
+								<span class="menu-title text-desc">Internship Files</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
 							<a class="nav-link" href="index.php?page=hrd-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
-								<span class="menu-title">Tutorial</span>
+								<span class="menu-title text-desc">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=hrd-information">
+							<a class="nav-link" href="index.php?page=hrd-information&id_user_company=<?php echo $user_id; ?>">
 								<i class="link-icon icon-question"></i>
-								<span class="menu-title">Information</span>
+								<span class="menu-title text-desc">Information</span>
 							</a>
 						</li>
 					</ul>
