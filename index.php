@@ -121,11 +121,17 @@ if (isset($_GET['page'])) {
     case 'student_competency':
       include "student_competency.php";
       break;
+    case 'hrd_student_competency':
+      include "hrd_student_competency.php";
+      break;
     case 'add_student_competency':
       include "add_student_competency.php";
       break;
     case 'view_student_competency':
       include "view_student_competency.php";
+      break;
+    case 'view_hrd_student_competency':
+      include "view_hrd_student_competency.php";
       break;   
     default:
       include "errorpage404.html";

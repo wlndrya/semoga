@@ -217,6 +217,7 @@ $token = $_SESSION['token'];
 													<th class="text-desc"><center>End Date</center></th>
 													<th class="text-desc"><center>Supervisor</center></th>
 													<th class="text-desc"><center>Job Description</center></th>
+													<th class="text-desc"><center>Student Competency</center></th>
 													<th class="text-desc"><center>Final Report</center></th>
 													<th class="text-desc"><center>Feedback</center></th>
 												</tr>
@@ -238,6 +239,9 @@ $token = $_SESSION['token'];
 													<td>" . $data['user_fullname'] . "</td>
 													<td><center>
 													". ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=hrd-jobdesc-ilo&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&id_jobdesc=". $data['id_jobdesc']."' type='button' data-toggle='' data-target='' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>" : "<a href = 'index.php?page=print_jobdesc&id=" . $data['id_internship'] . "&study_program=" . $data['study_program'] . "&nim=". $data['nim']."&start_date=".$data['start_date']."' type='button' data-toggle='' data-target='' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>") ."
+													</center></td>
+													<td><center>
+													" . ($data['study_program'] == "Logistik" ? "<a href = 'index.php?page=hrd_student_competency&id=" . $data['id_internship'] . "&nim=" . $data['nim'] . "' type='button' class='btn btn-sm btn-modify text-white'><i class='fa fa-eye'></i> View</a>" : "<a href = '#' type='button' data-toggle='modal' data-target='#modalnot" . $data['id_internship'] . "' class='btn btn-sm btn-modify text-white'><i class='fa fa-eye'></i> View</a>") . "
 													</center></td>
 													<td><center>
 													<a href = '#' type='button' data-toggle='modal' data-target='#mymodal" . $data['nim'] . "' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
@@ -273,6 +277,27 @@ $token = $_SESSION['token'];
 														</div>
 													</div>
 												</div>
+
+												<!-- Modal Information -->
+												<div class="modal fade" id="modalnot<?= $data['id_internship'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">INFORMATION</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	THIS STUDENT IS NOT FROM LOGISTIC STUDY PROGRAM, SO YOU CAN'T ADD STUDENT COMPETENCY.
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-modify text-white" data-dismiss="modal">OK</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- End Modal Information -->
 													<!--Modal Add Supervisor Name-->
 													<!-- <td><center>
 													<a href = '#' data-toggle = 'modal' type = 'button' title = 'Add Supervisor' class = 'btn btn-link btn-secondary' data-original-title = 'Add Supervisor' data-target = '#modal-edit" . $data['id_internship'] . "'><i class='fa fa-edit fa-md'></i></a>

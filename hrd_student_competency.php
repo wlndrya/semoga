@@ -1,15 +1,15 @@
 <?php
 include 'config.php';
-
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 session_start();
-if($_SESSION['login_status'] != 'login'){
+if ($_SESSION['login_status'] != 'login') {
 	echo "
 	<script>
 		alert('YOU ARE NOT LOGIN!');
 		window.location.replace('index.php?page=login');
 	</script>
-              "; 
-			}
+              ";
+}
 $user = $_SESSION['user_fullname'];
 $id_company = $_SESSION['id_company'];
 $role = $_SESSION['user_type'];
@@ -43,7 +43,7 @@ $token = $_SESSION['token'];
 				],
 				urls: ['assets/css/fonts.min.css']
 			},
-			active: function () {
+			active: function() {
 				sessionStorage.fonts = true;
 			}
 		});
@@ -63,7 +63,7 @@ $token = $_SESSION['token'];
 <body>
 	<div class="wrapper horizontal-layout-2">
 
-	<div class="main-header" data-background-color="bluedark">
+		<div class="main-header" data-background-color="bluedark">
 			<div class="nav-top">
 				<div class="container d-flex flex-row">
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@ $token = $_SESSION['token'];
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=spv-home" class="logo d-flex align-items-center">
-						<img src="assets/img/logoMI.png" height="50 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/logoMI.png" height="50" alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 
@@ -143,34 +143,50 @@ $token = $_SESSION['token'];
 							<div class="navbar-dropdown animated fadeIn">
 								<ul>
 									<li>
-										<a href="index.php?page=spv-profile">My Profile</a>
+										<a href="index.php?page=hrd-profile">My Profile</a>
 									</li>
 									<li>
-										<a href="index.php?page=spv-company-profile">Company Profile</a>
+										<a href="index.php?page=hrd-company-profile">Company Profile</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-studentlist">
+							<a class="nav-link" href="#">
+								<i class="link-icon icon-grid"></i>
+								<span class="menu-title text-desc">HRD Menu</span>
+							</a>
+							<div class="navbar-dropdown animated fadeIn">
+								<ul>
+									<li class="link-to">
+										<a href="index.php?page=hrd-addsupervisor">Add Supervisor</a>
+									</li>
+									<li>
+										<a href="index.php?page=hrd-registration">Internship Registration</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item submenu">
+							<a class="nav-link" href="index.php?page=hrd-studentlist">
 								<i class="link-icon icon-layers"></i>
 								<span class="menu-title text-desc">Student Internship</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-document">
+							<a class="nav-link" href="index.php?page=hrd-document">
 								<i class="link-icon icon-folder-alt"></i>
 								<span class="menu-title text-desc">Internship Files</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-tutorial">
+							<a class="nav-link" href="index.php?page=hrd-tutorial">
 								<i class="link-icon icon-screen-desktop"></i>
 								<span class="menu-title text-desc">Tutorial</span>
 							</a>
 						</li>
 						<li class="nav-item submenu">
-							<a class="nav-link" href="index.php?page=spv-information">
+							<a class="nav-link" href="index.php?page=hrd-information&id_user_company=<?php echo $user_id; ?>">
 								<i class="link-icon icon-question"></i>
 								<span class="menu-title text-desc">Information</span>
 							</a>
@@ -185,158 +201,119 @@ $token = $_SESSION['token'];
 		<div class="main-panel">
 			<div class="container">
 				<div class="page-inner">
-
-					<!-- Overall Statistics -->
-					<!-- <div class="font-header">
-					<p>Overall Statistics</p>
-					</div> -->
-					<div class="row">
-						<div class="col-md-4">
-							<div class="card card-dark card-menu-left text-center">
-								<div class="card-body pb-0">
-									<h1 class="mb-2">
-									<?php
-										$query = mysqli_query($conn, "SELECT * FROM tb_internship WHERE id_user_company = $user_id AND status_intern = 'YES'");
-										$hasil = mysqli_num_rows($query);
-
-										echo $hasil;
-										?>
-									</h1>
-									<p><b>INTERNSHIP STUDENTS</b></p>
-									<div class="pull-in sparkline-fix chart-as-background">
-										<div id="lineChart"><canvas width="327" height="70"
-												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card card-dark card-menu-center text-center">
-								<div class="card-body pb-0">
-									<div class="h1 fw-bold float-right"></div>
-									<h1 class="mb-2">
-									<?php
-										$query = mysqli_query($conn, "SELECT * FROM (tb_logbook LEFT JOIN tb_internship ON tb_logbook.id_internship = tb_internship.id_internship)  WHERE approval_spv = 'Pending' AND tb_internship.id_user_company = $user_id");
-										$hasil = mysqli_num_rows($query);
-
-										echo $hasil;
-										?>
-									</h1>
-									<p><b>APPROVED LOGBOOK</b></p>
-									<div class="pull-in sparkline-fix chart-as-background">
-										<div id="lineChart2"><canvas width="327" height="70"
-												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card card-dark card-menu-right text-center">
-								<div class="card-body pb-0">
-									<h1 class="mb-2">
-									<?php
-										$query = mysqli_query($conn, "SELECT * FROM (tb_attendance LEFT JOIN tb_internship ON tb_attendance.id_internship = tb_internship.id_internship) WHERE approval_spv = 'Pending' AND tb_internship.id_user_company = $user_id");
-										$hasil = mysqli_num_rows($query);
-
-										echo $hasil;
-										?>
-									</h1>
-									<p><b>APPROVED ATTENDANCE</b></p>
-									<div class="pull-in sparkline-fix chart-as-background">
-										<div id="lineChart3"><canvas width="327" height="70"
-												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Overall Statisctics -->
-
-					<!-- Company Profile -->
 					<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-head-row">
-										<h4 class="card-title"><b>COMPANY PROFILE</b></h4>
-										<div class="card-tools">
-										</div>
+									<div class="d-flex align-items-center">
+										<h4 class="card-title"><b>STUDENT COMPETENCY</b></h4>
+										<?php
+										// $id = $_GET['id'];
+										// $nim = $_GET['nim'];
+										// //print_r($nim);
+										// $view = mysqli_query($conn, "SELECT * FROM (tb_internship LEFT JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim) 
+										// LEFT JOIN tb_student_detail_profile ON tb_student_detail_profile.nim = tb_student_internship.nim WHERE id_user_company = $user_id");
+										// $data = mysqli_fetch_array($view);
+
+										// echo "
+										// <a class='btn btn-modify btn-round ml-auto text-white' type='submit' data-toggle='modal' data-target='#modalselect" . $data['id_internship'] . "'>
+										// <i class='fa fa-plus'></i>
+										// Add Student Competency
+										// </a>
+										// "
+										?>
+
+											<!--Modal Choose Job Profile-->
+											<div class="modal fade" id="modalselect<?= $data['id_internship'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Job Profile</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="form-group">
+																		<!-- <form action="index.php?page=student_competency" method="get"> -->
+																		<select class="id form-control" id="">
+																			<option>Choose One</option>
+																			<?php
+																			$sql = mysqli_query($conn, "SELECT * FROM tb_profile_jobdesc INNER JOIN tb_student_internship ON tb_profile_jobdesc.kode_prodi = tb_student_internship.study_program
+																			WHERE tb_profile_jobdesc.kode_prodi = 'Logistik'");
+																			if (mysqli_num_rows($sql) != 0) {
+																				while ($row = mysqli_fetch_assoc($sql)) {
+																					echo '<option value=' . $row["id_profile_jobdesc"] . '>' . $row['nama_profile'] . ' </option>';
+																				}
+																			}
+																			?>
+																		</select>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																	<a href="index.php?page=add_student_competency&id_profile_jobdesc=id" class="btn btn-modify text-white">Apply</a>
+																	<!-- </form> -->
+																</div>
+
+																<!-- <form action="proses_dummy_test.php?PageAction=delete_supervisor" method="post">
+																	<input type="hidden" name="id_user_company" value="<?php echo $data['id_user_company'] ?>">
+																	<div class="modal-footer">
+																		<button type="submit" class="btn btn-danger">Delete</button>
+																		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																	</div>
+																</form> -->
+															</div>
+														</div>
+													</div>
 									</div>
 								</div>
 								<div class="card-body">
-									<div class="row">
-										<div class="col-md-12">
-											<div style="text-align: justify;">
-												<div class="table-responsive table-hover table-sales">
-													<table class="table">
-														<tbody>
-															<?php
-															include 'config.php';
-															error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-															$view = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_company = '$_SESSION[id_company]'");
-															while ($data = mysqli_fetch_array($view)) {
-																echo "<p class='text-desc'>".$data['description']."</p>";
-															?>
-																<!-- End Modal Company Profile -->
-															<?php //penutup perulangan while
-															}
-															?>
-												</div>
-												</tbody>
-												</table>
-											</div>
-										</div>
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover">
+											<thead>
+												<tr>
+													<th class="text-desc">
+														<center>Start Date</center>
+													</th>
+													<th class="text-desc">
+														<center>End Date</center>
+													</th>
+													<th class="text-desc">
+														<center>View Student Competency</center>
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												include 'config.php';
+												$id_profile_jobdesc = $_GET['id_profile_jobdesc'];
+												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+												$view = mysqli_query($conn, "SELECT * FROM tb_profile_jobdesc INNER JOIN tb_student_detail_profile ON tb_student_detail_profile.id_profile_jobdesc = tb_profile_jobdesc.id_profile_jobdesc GROUP BY tb_student_detail_profile.tgl_mulai HAVING COUNT(tb_student_detail_profile.tgl_mulai) >= 1");
+												//print_r($id_jobdesc_intern);
+												while ($data = mysqli_fetch_array($view)) {
+													echo "<tr>
+													<td><center>" . $data['tgl_mulai'] . "</center></td>
+													<td><center>" . $data['tgl_selesai'] . "</center></td>
+													<td><center>
+													<a href = 'index.php?page=view_hrd_student_competency&id_profile_jobdesc=" . $data['id_profile_jobdesc'] . "&nim=" . $data['nim'] . "&tgl_mulai=" . $data['tgl_mulai'] . "&tgl_selesai=". $data['tgl_selesai']."' type='button' class='btn btn-sm btn-modify text-white'><i class='fas fa-eye'></i> View</a>
+													</center></td>
+													</tr>"
+												?>
+
+												<?php //penutup perulangan while
+													$no++;
+												}
+												?>
+												<!-- End Modal -->
+
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- End Company Profile -->
-					</div>
-
-					<!--Internship-->
-					<div class="row row-card-no-pd">
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-header">
-								<div class="d-flex align-items-center">
-									<h4 class="card-title"><b>STUDENT INTERNSHIP</b></h4>
-								</div>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="add-row" class="display table table-striped table-hover">
-										<thead>
-											<tr>
-												<th class="text-desc">STUDENT NAME</th>
-												<th class="text-desc">STUDY PROGRAM</th>
-											</tr>
-										</thead>
-										<tbody>
-										<?php
-                                                include 'config.php';
-                                                error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                $view = mysqli_query($conn, "SELECT * FROM tb_internship INNER JOIN tb_student_internship ON tb_internship.nim = tb_student_internship.nim WHERE id_user_company = $user_id");
-                                                while ($data = mysqli_fetch_array($view)) {
-                                                    echo "<tr>
-                                                        <td>" . $data['name'] . "</td>
-                                                        <td>" . $data['study_program'] . "</td>
-                                                      </tr>"
-                                                ?>
-																<?php //penutup perulangan while
-															}
-															?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-					<!--End Internship-->
 
 				</div>
 				<!--page inner-->
@@ -370,9 +347,6 @@ $token = $_SESSION['token'];
 				</div>
 			</div>
 		</footer>
-		<a class="float" href="index.php?page=spv-discuss" style="text-decoration: none; color: white; cursor: pointer;">
-			<span><i class="far fa-comments my-float"></i></span>
-			</a>
 		<!-- End Footer -->
 	</div>
 
@@ -453,6 +427,12 @@ $token = $_SESSION['token'];
 	<script src="../../dist/js/adminlte.min.js"></script>
 
 	<script>
+		$(document).ready(function(){
+        $("select.id").change(function(){
+            var selectedid  = $(".id option:selected").val();
+            $('a').attr('href','index.php?page=add_student_competency&id_profile_jobdesc='+selectedid);
+        });
+    });
 		// Add Row
 		$('#add-row').DataTable({
 			"pageLength": 5,
@@ -461,7 +441,7 @@ $token = $_SESSION['token'];
 		var action =
 			'<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
-		$('#addRowButton').click(function () {
+		$('#addRowButton').click(function() {
 			$('#add-row').dataTable().fnAddData([
 				$("#addName").val(),
 				$("#addPosition").val(),

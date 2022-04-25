@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2022 at 06:51 AM
+-- Generation Time: Apr 25, 2022 at 07:10 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -36,13 +36,6 @@ CREATE TABLE `tb_applicant` (
   `status_applicant` enum('YES','NO','PENDING') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_applicant`
---
-
-INSERT INTO `tb_applicant` (`id_applicant`, `id_offer`, `id_internship`, `id_company`, `nim`, `status_applicant`) VALUES
-(98, 4, 48, 1, '4311901038', 'NO');
-
 -- --------------------------------------------------------
 
 --
@@ -63,24 +56,6 @@ CREATE TABLE `tb_attendance` (
   `approval_dpm` enum('Yes','No','Pending') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_attendance`
---
-
-INSERT INTO `tb_attendance` (`id_attendance`, `id_internship`, `nim`, `type_attendance`, `description`, `date`, `week`, `check_in`, `check_out`, `approval_spv`, `approval_dpm`) VALUES
-(13, 48, '4311901038', 'Present', '', '2022-01-01', '1', '2022-04-11 05:36:11', '2022-04-11 05:36:11', 'Yes', 'Pending'),
-(14, 48, '4311901038', 'Paid Leave', 'cuti', '2022-01-02', '1', '2022-04-11 05:38:15', '2022-04-11 05:38:15', 'Yes', 'Pending'),
-(15, 48, '4311901038', 'Unpaid Leave', 'sakit', '2022-01-09', '2', '2022-04-11 05:39:04', '2022-04-11 05:39:04', 'Yes', 'Pending'),
-(16, 47, '3311901044', 'Paid Leave', 'cuti', '2022-03-01', '1', '2022-04-11 05:40:10', '2022-04-11 05:40:10', 'Yes', 'Pending'),
-(17, 47, '3311901044', 'Present', '', '2022-01-14', '1', '2022-04-11 05:41:14', '2022-04-11 05:41:14', 'Yes', 'Pending'),
-(18, 47, '3311901044', 'Unpaid Leave', 'sakit', '2022-03-19', '2', '2022-04-11 05:41:40', '2022-04-11 05:41:40', 'Yes', 'Pending'),
-(19, 47, '3311901044', 'Unpaid Leave', 'sakit', '2022-01-14', '2', '2022-04-11 05:42:31', '2022-04-11 05:42:31', 'Yes', 'Pending'),
-(20, 47, '3311901044', 'Present', '', '2022-01-13', '1', '2022-04-11 05:43:11', '2022-04-11 05:43:11', 'Yes', 'Pending'),
-(21, 48, '4311901038', 'Present', '', '2022-01-13', '1', '2022-04-11 07:13:54', '2022-04-11 07:13:54', 'Yes', 'Pending'),
-(22, 49, '3311901088', 'Paid Leave', 'cuti', '2022-01-13', '1', '2022-04-11 08:59:54', '2022-04-11 08:59:54', 'Yes', 'Pending'),
-(23, 49, '3311901088', 'Present', '', '2022-01-13', '2', '2022-04-11 09:04:54', '2022-04-11 09:04:54', 'Yes', 'Pending'),
-(24, 49, '3311901088', 'Present', '', '2022-03-01', '2', '2022-04-11 09:05:16', '2022-04-11 09:05:16', 'Yes', 'Pending');
-
 -- --------------------------------------------------------
 
 --
@@ -95,14 +70,6 @@ CREATE TABLE `tb_ceklis_jobdesc_intern` (
   `date_end` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_ceklis_jobdesc_intern`
---
-
-INSERT INTO `tb_ceklis_jobdesc_intern` (`id_ceklis`, `id_detail`, `id_jobdesc_intern`, `date_start`, `date_end`) VALUES
-(121, 1, 115, '2022-04-22', '2022-04-28'),
-(122, 2, 115, '2022-04-22', '2022-04-28');
-
 -- --------------------------------------------------------
 
 --
@@ -116,22 +83,6 @@ CREATE TABLE `tb_comment_discussion` (
   `comment` text NOT NULL,
   `replied_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_comment_discussion`
---
-
-INSERT INTO `tb_comment_discussion` (`id_comment`, `id_discuss`, `replied_by`, `comment`, `replied_at`) VALUES
-(1, 15, 'Kim Seungmina', 'sadasd', '2022-03-23 10:28:37'),
-(2, 15, 'Kim Seungmina', 'sadsadasd', '2022-03-23 10:33:47'),
-(3, 15, 'Kim Seungmina', 'asdsadsaxc', '2022-03-23 10:35:04'),
-(4, 15, 'Kim Seungmina', 'sadasd', '2022-03-23 10:36:33'),
-(5, 16, 'Kim Seungmina', 'Kamu bohong !', '2022-03-23 10:38:13'),
-(6, 16, 'Kim Seungmina', 'Kamu yang bohong !', '2022-03-23 10:38:24'),
-(7, 16, 'Anjay', 'Kamu yang paling bohong !', '2022-03-23 10:38:44'),
-(8, 15, 'Kim Seungmina', 'Testing kirim komentar', '2022-04-07 08:59:33'),
-(9, 20, 'Lee Min Ho', 'oh iya juga ya', '2022-04-13 07:33:13'),
-(10, 22, 'Lee Min Ho', 'Sok hebat kali mahasiswanya', '2022-04-22 09:58:36');
 
 -- --------------------------------------------------------
 
@@ -179,19 +130,6 @@ CREATE TABLE `tb_detail_jobdesc` (
   `job_description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_detail_jobdesc`
---
-
-INSERT INTO `tb_detail_jobdesc` (`id_detail`, `id_jobdesc`, `job_type`, `job_description`) VALUES
-(1, 2, 'Coding', 'Membuat program '),
-(2, 2, 'Multimedia', 'Mengedit gambar dan video'),
-(3, 5, 'Disassamble the machine', 'Bongkar mesin lalu dirangkai kembali'),
-(4, 5, 'Set up machine', 'polopolo'),
-(5, 6, 'Desain poster', 'Mendesain suatu poster'),
-(6, 6, 'Edit Video', 'Editing video'),
-(7, 6, 'IoT', 'membuat program android');
-
 -- --------------------------------------------------------
 
 --
@@ -205,30 +143,6 @@ CREATE TABLE `tb_discussion` (
   `who_can_see` varchar(255) NOT NULL,
   `title` varchar(50) NOT NULL,
   `discuss` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_discussion`
---
-
-INSERT INTO `tb_discussion` (`id_discuss`, `started_by`, `date_posted`, `who_can_see`, `title`, `discuss`) VALUES
-(15, 'Kim Seungmina', '2022-03-23 14:43:49', '[\"44\",\"7\",\"117175\",\"45\",\"117175\"]', 'asddddddddddddddddd', 'asdddddddddddddddsadsa'),
-(16, 'Kim Seungmina', '2022-03-23 16:37:07', '[\"44\",\"7\",\"117175\",\"45\",\"117175\"]', 'Anjay', 'Kamu yang anjay !'),
-(18, 'Seo Changbin', '2022-03-23 16:56:07', '[\"44\",\"6\",\"117175\"]', 'Logbook', 'Berikut adalah aturan pengisian logbook :\r\n1. Datang\r\n2. Kerjakan\r\n3. Pulang\r\n4. Makan\r\n5. Tidur\r\n6. Nonton Drama Business Proposal dan Twenty Five Twenty One'),
-(19, 'Lee Min Ho', '2022-04-11 12:22:57', '[\"48\",\"8\",null]', 'Logbook and Attendance', 'Perihal logbook dan absensi jangan lupa untuk dikirimkan pada saya setiap minggu. Jika ada kendala dalam pengumpulannya hubungi saya, Terima kasih'),
-(20, 'Lee Min Ho', '2022-04-13 12:32:28', '[\"48\",\"8\",null,\"49\",null]', 'Logbook', 'kenapa logbook blabla'),
-(21, 'Christoper', '2022-04-20 13:45:39', 'null', 'Attendance', 'Dimana upload file absensi ya? saya mau cek\r\n'),
-(22, 'Lee Min Ho', '2022-04-22 14:57:56', '[\"47\",\"8\",null,\"48\",null,\"49\",null]', 'Netflix Clone', 'Mahasiswa gabisa bikin sesuai yang diharapkan. Disuruh bikin Netflix, malah beli perusahaannya langsung.');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_document`
---
-
-CREATE TABLE `tb_document` (
-  `id` int(11) NOT NULL,
-  `file` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -255,13 +169,6 @@ CREATE TABLE `tb_industry_feedback` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_industry_feedback`
---
-
-INSERT INTO `tb_industry_feedback` (`id_industry_feedback`, `id_internship`, `catatan_utk_mahasiswa`, `catatan_utk_poltek`, `layak_diterima`, `langsung_diterima`, `nilai_akhir`, `etika`, `keahlian_kompetensi`, `keahlian_bahasa`, `penggunaan_ti`, `komunikasi`, `kerjasama`, `pengembangan_diri`, `date`) VALUES
-(49, 47, 'asasas', 'asas', 'asasa', 'sasasa', '100', 4, 3, 3, 3, 4, 4, 4, '2022-04-22');
-
 -- --------------------------------------------------------
 
 --
@@ -287,15 +194,6 @@ CREATE TABLE `tb_internship` (
   `internship_period` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_internship`
---
-
-INSERT INTO `tb_internship` (`id_internship`, `nim`, `id_company`, `id_user_company`, `nik`, `start_date`, `end_date`, `apply_date`, `status_intern`, `file1`, `file2`, `file3`, `file4`, `date_finalreport`, `final_report`, `internship_period`) VALUES
-(47, '3311901044', 1, 8, NULL, '2022-04-01', '2023-06-10', '2022-03-21', 'YES', 'CV - 3311901044 - Yulia Wulandari.pdf', 'TRANSKRIP - 3311901044 - Yulia Wulandari.pdf', 'KTM - 3311901044- Yulia Wulandari.pdf', 'KTP.pdf', NULL, 'CyntyaMaharani_Borang PBM - Pendaftaran Magang.pdf', '8'),
-(48, '4311901038', 1, 8, NULL, '2022-04-11', '2023-04-11', '2022-03-22', 'NO', 'CV - 3311801031 - Yudhi Arma Mustika.pdf', 'CV-3311901053-Silvi Salputri.pdf', 'scan transkrip ulan gabungan.pdf', 'CV - 3311801042 - Andre Tamini Putra.pdf', NULL, 'All Chapter New 28 april.pdf', '8'),
-(49, '3311901088', 1, 9, NULL, '2022-04-15', '2022-04-29', '2022-03-21', 'YES', '', '', '', '', NULL, NULL, '8');
-
 -- --------------------------------------------------------
 
 --
@@ -309,16 +207,6 @@ CREATE TABLE `tb_jobdesc` (
   `question_1` text NOT NULL,
   `question_2` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_jobdesc`
---
-
-INSERT INTO `tb_jobdesc` (`id_jobdesc`, `prodi_name`, `nik`, `question_1`, `question_2`) VALUES
-(2, 'Informatika', 117175, 'Apa yang dimaksud hujan petir?', 'Kenapa hujan turun air bukan turun batu? jelaskan!'),
-(4, 'Mesin', 117176, 'Apa itu mesin?', 'Apa itu apa?'),
-(5, 'Logistik', 117175, 'Apa itu Logistik?', 'Kenapa hari ini sangat mengantuk?'),
-(6, 'Multimedia', 117175, 'Apa yang dipelajari selain opsi?', 'Desain/Video?');
 
 -- --------------------------------------------------------
 
@@ -334,27 +222,6 @@ CREATE TABLE `tb_jobdesc_intern` (
   `timestamp_approval` datetime NOT NULL,
   `answer_1` text NOT NULL,
   `answer_2` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_jobdesc_intern`
---
-
-INSERT INTO `tb_jobdesc_intern` (`id_jobdesc_intern`, `id_jobdesc`, `id_internship`, `nim`, `timestamp_approval`, `answer_1`, `answer_2`) VALUES
-(115, 2, 47, '3311901044', '2022-04-22 14:45:36', 'AKWOKAKWAOKOWKAOKWOK', 'AOWKOAOWKOAKWOKAOWKOAWKO');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_job_description`
---
-
-CREATE TABLE `tb_job_description` (
-  `id_jobdesc` int(11) NOT NULL,
-  `id_internship` int(11) NOT NULL,
-  `description_jobdesc` varchar(1000) NOT NULL,
-  `another_jobdesc` varchar(1000) NOT NULL,
-  `expected_goal` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -374,14 +241,6 @@ CREATE TABLE `tb_lecturer` (
   `status` enum('active','not_active') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_lecturer`
---
-
-INSERT INTO `tb_lecturer` (`nik`, `name_lecturer`, `program_study`, `email_polibatam`, `other_email`, `lecturer_phone`, `user_type`, `status`) VALUES
-(117175, 'Hamdani Arif', 'Informatika', 'hamdani@polibatam.ac.id', 'hamdani@gmail.com', '082172452323', 'pembimbing', 'active'),
-(117176, 'Supardianto', 'Mesin', 'supardianto@gmail.com', 'supardianto@polibatam.id', '082189765423', 'koordinator', 'active');
-
 -- --------------------------------------------------------
 
 --
@@ -400,16 +259,6 @@ CREATE TABLE `tb_logbook` (
   `approval_spv` enum('Pending','Yes','No') NOT NULL,
   `approval_dpm` enum('Pending','Yes','No') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_logbook`
---
-
-INSERT INTO `tb_logbook` (`id_logbook`, `id_internship`, `nim`, `description`, `documentation`, `startdate`, `enddate`, `week_num`, `approval_spv`, `approval_dpm`) VALUES
-(18, 47, '3311901044', 'Selasa, 01 Maret 2022 \r\n 1. Memperbaiki tampilan pada Job Description\r\n 2. Memperbaiki tampilan pada modal registration file\r\nRabu, 02 Maret 2022\r\n1. Mengerjakan function deselect\r\n2. Mengerjakan PHPMail\r\nKamis, 03 Maret 2022\r\nHari Raya Nyepi\r\nJumat, 04 Maret 2022\r\n1. Mengerjakan PHPMail\r\n', 'YULIA WULANDARI.pdf', '2022-02-02', '2022-02-06', '1', 'Yes', 'Pending'),
-(19, 47, '3311901044', 'Selasa, 01 Maret 2022 \r\n 1. Memperbaiki tampilan pada Job Description\r\n 2. Memperbaiki tampilan pada modal registration file\r\n', 'M2-Logbook-Yulia Wulandari.pdf', '2022-02-09', '2022-02-13', '2', 'Yes', 'Pending'),
-(20, 48, '4311901038', 'SAFDHFGJYGKII', 'Januari -3311901044-Yulia Wulandari.pdf', '2022-02-02', '2022-02-06', '1', 'Yes', 'Pending'),
-(21, 48, '4311901038', 'HEY TAYO', 'M6-Logbook-Yulia Wulandari.pdf', '2022-02-02', '2022-02-06', '2', 'Yes', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -453,19 +302,6 @@ CREATE TABLE `tb_profile_detail_comp` (
   `matkul` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_profile_detail_comp`
---
-
-INSERT INTO `tb_profile_detail_comp` (`id_detail_profile`, `id_profile_jobdesc`, `unit_kompetensi`, `kode_matkul`, `matkul`) VALUES
-(1, 1, 'Manage the delivery of goods/loads/cargo', 'a', 'Distribution and Transportation'),
-(2, 1, 'Use the system to manage stock', 'b', 'Warehousing and Inventory'),
-(3, 1, 'Monitor storage facilities', 'b', 'Warehousing and Inventory'),
-(4, 1, 'Follow security procedures when handling goods/loads/cargo', 'a', 'Distribution and Transportation'),
-(5, 1, 'Consolidate Shipments', 'b', 'Warehousing and Inventory'),
-(6, 1, 'Assess and Confirm Customers Transportation Needs', 'a', 'Distribution and Transportation'),
-(7, 2, 'Complete and Check Import/Export Documents', 'c', 'Freight Forwarding');
-
 -- --------------------------------------------------------
 
 --
@@ -478,21 +314,6 @@ CREATE TABLE `tb_profile_detail_unit` (
   `detail_unit` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_profile_detail_unit`
---
-
-INSERT INTO `tb_profile_detail_unit` (`id_detail_unit`, `id_detail_profile`, `detail_unit`) VALUES
-(1, 1, 'Plan the delivery of goods/loads/cargo'),
-(2, 1, 'Organize, store, and deliver goods/loads/cargo'),
-(3, 1, 'Complete documentation'),
-(4, 2, 'Identity stock control systems used in the workplace'),
-(5, 2, 'Use the reorder procedure to maintain stock'),
-(6, 2, 'Manage regular stock counts and report discrepancies or discrepancies'),
-(7, 2, 'Make reports on the function of storage records and stock functions'),
-(8, 3, 'Define workplace functions and operations'),
-(9, 3, 'Monitor storage activities');
-
 -- --------------------------------------------------------
 
 --
@@ -504,20 +325,6 @@ CREATE TABLE `tb_profile_jobdesc` (
   `kode_prodi` varchar(10) NOT NULL,
   `nama_profile` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_profile_jobdesc`
---
-
-INSERT INTO `tb_profile_jobdesc` (`id_profile_jobdesc`, `kode_prodi`, `nama_profile`) VALUES
-(1, 'Logistik', 'WAREHOUSE SUPERVISOR'),
-(2, 'Logistik', 'FREIGHT FORWARDER/FREIGHT EXPERTS'),
-(3, 'Logistik', 'SUPPLY CHAIN STAFF/SUPERVISOR'),
-(4, 'Logistik', 'ENTREPRENEURS'),
-(5, 'Logistik', 'EXPORT/IMPORT STAFF'),
-(6, 'Logistik', 'EXPORT/IMPORT SUPERVISOR'),
-(7, 'Logistik', 'PROCUREMENT SUPERVISOR/STAFF'),
-(8, 'Logistik', 'PPIC-PRODUCTION PLANNING AND INVENTORY CONTROL STAFF');
 
 -- --------------------------------------------------------
 
@@ -534,24 +341,6 @@ CREATE TABLE `tb_student_detail_profile` (
   `tgl_mulai` date NOT NULL,
   `tgl_selesai` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_student_detail_profile`
---
-
-INSERT INTO `tb_student_detail_profile` (`id_student_detail_profile`, `id_profile_jobdesc`, `id_detail_profile`, `nim`, `nilai`, `tgl_mulai`, `tgl_selesai`) VALUES
-(23, 1, 1, '3311901088', '2', '2022-04-07', '2022-04-23'),
-(24, 1, 2, '3311901088', '3', '2022-04-07', '2022-04-23'),
-(25, 1, 3, '3311901088', '1', '2022-04-07', '2022-04-23'),
-(26, 1, 1, '3311901088', '4', '2022-04-16', '2022-04-29'),
-(27, 1, 2, '3311901088', '3', '2022-04-16', '2022-04-29'),
-(28, 1, 3, '3311901088', '4', '2022-04-16', '2022-04-29'),
-(29, 1, 4, '3311901088', '2', '2022-04-16', '2022-04-29'),
-(30, 1, 1, '3311901088', '2', '2022-04-22', '2022-04-30'),
-(31, 1, 2, '3311901088', '4', '2022-04-22', '2022-04-30'),
-(32, 1, 3, '3311901088', '2', '2022-04-22', '2022-04-30'),
-(33, 1, 4, '3311901088', '3', '2022-04-22', '2022-04-30'),
-(34, 1, 5, '3311901088', '3', '2022-04-22', '2022-04-30');
 
 -- --------------------------------------------------------
 
@@ -619,9 +408,7 @@ CREATE TABLE `tb_user_company` (
 
 INSERT INTO `tb_user_company` (`id_user_company`, `id_company`, `user_fullname`, `user_phone`, `user_email`, `username`, `password`, `user_type`) VALUES
 (1, 1, 'Christoper Columbus', '081267053138', 'bangchrist@gmail.com', 'HRD.PSTEAM', '$2y$10$V71GlEXMDG.c8EiJKL8SC.9071yvkoef1jrsOma.QvBopDXnKC89K', 'HRD'),
-(7, 1, 'Kim Seungmin', '0865423157', 'kimseung@gmail.php', 'SUPERVISOR1', '$2y$10$LRUYL8gahOoxofcW34P/v.eYIPh6jc93graSSab0QbPtTMMDh4UYi', 'supervisor'),
-(8, 1, 'Lee Min Ho', '085156430801', 'leeminhoactor@gmail.com', 'SUPERVISOR2', '$2y$10$xCXnC9xlkoOFMLfpaZfWUuFesVCdKKdSW3i.6oyIuY0L7HZO1DtTK', 'supervisor'),
-(9, 1, 'Adam Firdaus', '085156430801', 'adamhehe@gmail.com', 'ADAM.EW', '$2y$10$6E0jYemUoG033/3.MIW5P.qkfhqsSJzvolVRNNy6k7iZEVl6U.Xxm', 'supervisor');
+(8, 1, 'Lee Min Ho', '085156430801', 'leeminhoactor@gmail.com', 'SUPERVISOR2', '$2y$10$xCXnC9xlkoOFMLfpaZfWUuFesVCdKKdSW3i.6oyIuY0L7HZO1DtTK', 'supervisor');
 
 --
 -- Indexes for dumped tables
@@ -681,12 +468,6 @@ ALTER TABLE `tb_discussion`
   ADD PRIMARY KEY (`id_discuss`);
 
 --
--- Indexes for table `tb_document`
---
-ALTER TABLE `tb_document`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tb_industry_feedback`
 --
 ALTER TABLE `tb_industry_feedback`
@@ -716,13 +497,6 @@ ALTER TABLE `tb_jobdesc`
 ALTER TABLE `tb_jobdesc_intern`
   ADD PRIMARY KEY (`id_jobdesc_intern`),
   ADD KEY `id_jobdesc` (`id_jobdesc`),
-  ADD KEY `id_internship` (`id_internship`);
-
---
--- Indexes for table `tb_job_description`
---
-ALTER TABLE `tb_job_description`
-  ADD PRIMARY KEY (`id_jobdesc`),
   ADD KEY `id_internship` (`id_internship`);
 
 --
@@ -842,12 +616,6 @@ ALTER TABLE `tb_discussion`
   MODIFY `id_discuss` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `tb_document`
---
-ALTER TABLE `tb_document`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT for table `tb_industry_feedback`
 --
 ALTER TABLE `tb_industry_feedback`
@@ -870,12 +638,6 @@ ALTER TABLE `tb_jobdesc`
 --
 ALTER TABLE `tb_jobdesc_intern`
   MODIFY `id_jobdesc_intern` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
-
---
--- AUTO_INCREMENT for table `tb_job_description`
---
-ALTER TABLE `tb_job_description`
-  MODIFY `id_jobdesc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tb_lecturer`
@@ -997,12 +759,6 @@ ALTER TABLE `tb_jobdesc`
 ALTER TABLE `tb_jobdesc_intern`
   ADD CONSTRAINT `tb_jobdesc_intern_ibfk_1` FOREIGN KEY (`id_jobdesc`) REFERENCES `tb_jobdesc` (`id_jobdesc`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_jobdesc_intern_ibfk_2` FOREIGN KEY (`id_internship`) REFERENCES `tb_internship` (`id_internship`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tb_job_description`
---
-ALTER TABLE `tb_job_description`
-  ADD CONSTRAINT `tb_job_description_ibfk_1` FOREIGN KEY (`id_internship`) REFERENCES `tb_internship` (`id_internship`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_logbook`
