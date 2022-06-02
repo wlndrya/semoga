@@ -952,7 +952,7 @@ if($_GET['PageAction'] == "add_discuss"){
     $inc = mysqli_num_rows($query);
 
     while($data = mysqli_fetch_assoc($query)){
-      $json[] = $data['id_internship'];
+      $json[] = $data['nim'];
       $json[1] = $id_spv;
       $json[] = $data['nik'];
     }
@@ -962,6 +962,7 @@ if($_GET['PageAction'] == "add_discuss"){
     // echo $content."<br/>";
     // echo $id_own;
     // echo "</p>";
+    // print_r($json);
 
     $insert = mysqli_query($conn,"INSERT INTO tb_discussion VALUES (NULL,'$started','$date','$json','$title','$content')");
 

@@ -610,7 +610,7 @@ $token = $_SESSION['token'];
 										<div class="form-group">
 											<p>1. Final grade for student based on overall internship process (range 1 –
 												100): </p>
-											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir">
+											<input type="text" class="form-control" name="nilai_akhir" id="nilai_akhir" required>
 										</div>
 										<div class="form-group">
 											<p>2. Please select in the appropriate column in the following table
