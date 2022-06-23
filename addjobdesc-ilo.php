@@ -77,7 +77,7 @@ $token = $_SESSION['token'];
 <body>
     <div class="wrapper horizontal-layout-2">
 
-        <div class="main-header" data-background-color="purple">
+        <div class="main-header" data-background-color="bluedark">
             <div class="nav-top">
                 <div class="container d-flex flex-row">
                     <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@ $token = $_SESSION['token'];
                     <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
                     <!-- Logo SEMOGA -->
                     <a href="index.php?page=spv-home" class="logo d-flex align-items-center">
-                        <img src="assets/img/profile1.png" height="60 " alt="navbar brand" class="navbar-brand">
+                        <img src="assets/img/semogav211.png" height="65" alt="navbar brand" class="navbar-brand">
                     </a>
                     <!-- End Logo SEMOGA -->
 
@@ -262,7 +262,7 @@ $token = $_SESSION['token'];
                                                             <td class='text-center'>
                                                                 <div class='custom-control custom-checkbox'>
                                                                     <input type='checkbox' id='customCheck1' name='ceklis[]' value='<?= $data['id_detail']?>'>
-                                                                    <label>Checked</label>
+                                                                    <label></label>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -277,11 +277,11 @@ $token = $_SESSION['token'];
                                         ?>
                                         <div class="form-group">
                                         <p><b>PART 3 : Fill the Answer Column</b></p>
-                                            <p>2. <?php echo $data['question_1'] ?></p>
+                                            <p>1. <?php echo $data['question_1'] ?></p>
                                             <textarea class="form-control" required rows="3" id="answer_1" name="answer_1"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <p>3. <?php echo $data['question_2'] ?></p>
+                                            <p>2. <?php echo $data['question_2'] ?></p>
                                             <textarea class="form-control" rows="3" required id="answer_2" name="answer_2"></textarea>
                                         </div>
                                         <div><br>
@@ -315,13 +315,29 @@ $token = $_SESSION['token'];
     <!-- End Main Content -->
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="copyright ml-auto">
-                2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="">PSTeam</a>
-            </div>
-        </div>
-    </footer>
+    <footer style="background-color: white; padding: 10px; border-top: 1px solid #eee; padding-top: 15px; padding-bottom: 10px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 my-auto" style="display: flex; flex-direction: row;">
+                            <a href="">
+                                <img src="assets/img/ILO1.png" height="50" alt="navbar brand" class="">
+                            </a>
+                            <a href="#" class="logo d-flex align-items-center">
+                                <img src="assets/img/Indonesia.png" style="margin-left: 12px;" height="50" alt="navbar brand" class="">
+                            </a>
+                            <a href="#" class="logo d-flex align-items-center">
+                                <img src="assets/img/BEJ.png" height="70" alt="navbar brand" class="">
+                            </a>
+                        </div>
+                        <div class="col-md-5"></div>
+                        <div class="col-md-3">
+                            <div class="copyright ml-auto">
+                                2021, made with <i class="fa fa-heart heart text-danger"></i> by <a href="#">PSTeam</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
     <!-- End Footer -->
     </div>
 

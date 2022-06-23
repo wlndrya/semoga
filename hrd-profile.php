@@ -89,7 +89,7 @@ for (var i = 0; i < btns.length; i++) {
 					<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 					<!-- Logo SEMOGA -->
 					<a href="index.php?page=hrd-home" class="logo d-flex align-items-center">
-						<img src="assets/img/logoMI.png" height="50 " alt="navbar brand" class="navbar-brand">
+						<img src="assets/img/semogav211.png" height="65" alt="navbar brand" class="navbar-brand">
 					</a>
 					<!-- End Logo SEMOGA -->
 

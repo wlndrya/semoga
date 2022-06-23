@@ -88,7 +88,7 @@ $token = $_SESSION['token'];
                     <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
                     <!-- Logo SEMOGA -->
                     <a href="index.php?page=spv-home" class="logo d-flex align-items-center">
-                        <img src="assets/img/logoMI.png" height="50" alt="navbar brand" class="navbar-brand">
+                        <img src="assets/img/semogav211.png" height="65" alt="navbar brand" class="navbar-brand">
                     </a>
                     <!-- End Logo SEMOGA -->
 
@@ -372,7 +372,7 @@ $token = $_SESSION['token'];
                                                             <td class='text-center'>
                                                                 <div class='custom-control custom-checkbox'>
                                                                     <input type='checkbox' id='customCheck1' name='ceklis[]' value='<?= $data['id_detail']?>'>
-                                                                    <label>Check <span class="text-danger fa-2x">*</span></label>
+                                                                    <label><span class="text-danger fa-2x"></span></label>
                                                                 </div>
                                                             </td>
                                                         </tr>
