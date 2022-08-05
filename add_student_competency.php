@@ -274,10 +274,14 @@ $token = $_SESSION['token'];
 												</tr>
 											</thead>
 											<tbody>
-											<?php $i = 1;
+											<?php 
+												$i = 1;
                                                 include 'config.php';
 												error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-                                                $view = mysqli_query($conn, "SELECT * FROM (tb_profile_detail_comp LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile) LEFT JOIN tb_student_detail_profile ON tb_student_detail_profile.id_detail_profile = tb_profile_detail_comp.id_detail_profile WHERE tb_profile_detail_comp.id_profile_jobdesc = '$_GET[id_profile_jobdesc]' GROUP BY tb_profile_detail_comp.id_detail_profile");
+                                                // $views = mysqli_query($conn, "SELECT * FROM (tb_profile_detail_comp LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile) LEFT JOIN tb_student_detail_profile ON tb_student_detail_profile.id_detail_profile = tb_profile_detail_comp.id_detail_profile WHERE tb_profile_detail_comp.id_profile_jobdesc = '$_GET[id_profile_jobdesc]' GROUP BY tb_profile_detail_comp.id_detail_profile");
+
+												$view = mysqli_query($conn, "SELECT * FROM tb_profile_detail_comp LEFT JOIN tb_profile_detail_unit ON tb_profile_detail_unit.id_detail_profile = tb_profile_detail_comp.id_detail_profile WHERE tb_profile_detail_comp.id_profile_jobdesc = '$_GET[id_profile_jobdesc]' GROUP BY tb_profile_detail_comp.id_detail_profile");
+
 												while ($data = mysqli_fetch_assoc($view)) :
 													// echo '<pre>';
 													// print_r($data);
@@ -288,19 +292,19 @@ $token = $_SESSION['token'];
                                                             <td><?= $data['unit_kompetensi'] ?>
 															<ul>
 															<?php
-															$id_detail_profile = $data['id_detail_profile'];
-															$query = mysqli_query($conn, "SELECT * FROM tb_profile_detail_unit WHERE id_detail_profile=$id_detail_profile");
-															// $views = mysqli_fetch_array($query);
-															// echo "<pre>";
-															// print_r($views);
-															// echo "</pre>";
-															while($detail = mysqli_fetch_assoc($query)){
-																
-																echo "<li>";
-																echo $detail['detail_unit'];
-																echo "</li>";
-															}
-															?>
+																$id_detail_profile = $data['id_detail_profile'];
+																$query = mysqli_query($conn, "SELECT * FROM tb_profile_detail_unit WHERE id_detail_profile=$id_detail_profile");
+																$views = mysqli_fetch_array($query);
+																// echo "<pre>";
+																// print_r($views);
+																// echo "</pre>";
+																while($detail = mysqli_fetch_assoc($query)){
+																	
+																	echo "<li>";
+																	echo $detail['detail_unit'];
+																	echo "</li>";
+																}
+																?>
 															</ul>
 														</td>
 													<input type="hidden" name="id_detail_profile[]" value="<?= $data['id_detail_profile']?>">
@@ -315,9 +319,9 @@ $token = $_SESSION['token'];
 													</td>
 													<td class="text-center">
 														<input class="form-check-input ml-1" name="nilai[<?= $data['id_detail_profile']?>]" value="1" type="radio">
-													</td>
+													</td>	
 													<?php endwhile;?>
-                                                        </tr>
+                                                </tr>
 											</tbody>
 										</table>
 									</div>

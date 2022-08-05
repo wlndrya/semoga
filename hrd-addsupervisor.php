@@ -78,6 +78,11 @@ $token = $_SESSION['token'];
             flex-direction: row;
             justify-content: space-evenly;
         }
+        a.disabled{
+            pointer-events: none;
+            cursor:default;
+
+        }
     </style>
 </head>
 
@@ -312,7 +317,11 @@ $token = $_SESSION['token'];
                                                 include 'config.php';
                                                 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
                                                 $view = mysqli_query($conn, "SELECT * FROM tb_user_company WHERE id_company = $id_company AND user_type = 'supervisor'");
+                                               
                                                 $no = 1;
+                                                // echo "<pre>";
+                                                // print_r(mysqli_fetch_array($view));
+                                                // echo "</pre>";
                                                 while ($data = mysqli_fetch_array($view)) {
                                                     echo "<tr>
                                                         <td>" . $data['username'] . "</td>
@@ -321,8 +330,8 @@ $token = $_SESSION['token'];
                                                         <td>" . $data['user_email'] . "</td>
                                                         <td class='btn-act mt-3'>
                                                         <a data-toggle = 'modal' type = 'button' title = 'Edit' class = 'btn btn-link btn-secondary' data-original-title = 'Edit' data-target = '#modaledit" . $data['id_user_company'] . "'><i class='fa fa-edit fa-lg'></i></a>
-                                                        <a data-toggle = 'modal' data-target = '#modaldelete$no' title = 'Delete' class = 'btn btn-link btn-danger' data-original-title = 'Delete'><i class='fa fa-times fa-lg'></i></a>
-                                                       </td>
+                                                        <a data-toggle = 'modal' data-target = '#modaldelete$no' title = 'Delete' class = 'btn btn-link btn-danger ' data-original-title = 'Delete'><i class='fa fa-times fa-lg'></i></a>
+                                                       </td>                       
                                                       </tr>"
                                                 ?>
 

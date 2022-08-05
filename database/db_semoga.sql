@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2022 at 06:51 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.3.29
+-- Generation Time: Aug 02, 2022 at 04:24 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,13 +36,6 @@ CREATE TABLE `tb_applicant` (
   `status_applicant` enum('YES','NO','PENDING') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_applicant`
---
-
-INSERT INTO `tb_applicant` (`id_applicant`, `id_offer`, `id_internship`, `id_company`, `nim`, `status_applicant`) VALUES
-(98, 4, 48, 1, '4311901038', 'NO');
-
 -- --------------------------------------------------------
 
 --
@@ -68,18 +61,8 @@ CREATE TABLE `tb_attendance` (
 --
 
 INSERT INTO `tb_attendance` (`id_attendance`, `id_internship`, `nim`, `type_attendance`, `description`, `date`, `week`, `check_in`, `check_out`, `approval_spv`, `approval_dpm`) VALUES
-(13, 48, '4311901038', 'Present', '', '2022-01-01', '1', '2022-04-11 05:36:11', '2022-04-11 05:36:11', 'Yes', 'Pending'),
-(14, 48, '4311901038', 'Paid Leave', 'cuti', '2022-01-02', '1', '2022-04-11 05:38:15', '2022-04-11 05:38:15', 'Yes', 'Pending'),
-(15, 48, '4311901038', 'Unpaid Leave', 'sakit', '2022-01-09', '2', '2022-04-11 05:39:04', '2022-04-11 05:39:04', 'Yes', 'Pending'),
-(16, 47, '3311901044', 'Paid Leave', 'cuti', '2022-03-01', '1', '2022-04-11 05:40:10', '2022-04-11 05:40:10', 'Yes', 'Pending'),
-(17, 47, '3311901044', 'Present', '', '2022-01-14', '1', '2022-04-11 05:41:14', '2022-04-11 05:41:14', 'Yes', 'Pending'),
-(18, 47, '3311901044', 'Unpaid Leave', 'sakit', '2022-03-19', '2', '2022-04-11 05:41:40', '2022-04-11 05:41:40', 'Yes', 'Pending'),
-(19, 47, '3311901044', 'Unpaid Leave', 'sakit', '2022-01-14', '2', '2022-04-11 05:42:31', '2022-04-11 05:42:31', 'Yes', 'Pending'),
-(20, 47, '3311901044', 'Present', '', '2022-01-13', '1', '2022-04-11 05:43:11', '2022-04-11 05:43:11', 'Yes', 'Pending'),
-(21, 48, '4311901038', 'Present', '', '2022-01-13', '1', '2022-04-11 07:13:54', '2022-04-11 07:13:54', 'Yes', 'Pending'),
-(22, 49, '3311901088', 'Paid Leave', 'cuti', '2022-01-13', '1', '2022-04-11 08:59:54', '2022-04-11 08:59:54', 'Yes', 'Pending'),
-(23, 49, '3311901088', 'Present', '', '2022-01-13', '2', '2022-04-11 09:04:54', '2022-04-11 09:04:54', 'Yes', 'Pending'),
-(24, 49, '3311901088', 'Present', '', '2022-03-01', '2', '2022-04-11 09:05:16', '2022-04-11 09:05:16', 'Yes', 'Pending');
+(1, 3, '3311901044', 'Present', 'hadir', '2022-04-01', '1', '2022-05-24 06:18:30', '2022-05-24 06:18:30', 'Pending', 'Yes'),
+(2, 3, '3311901044', 'Paid Leave', 'libur', '2022-05-24', '2', '2022-05-24 07:11:41', '2022-05-24 07:11:41', 'Pending', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -100,8 +83,7 @@ CREATE TABLE `tb_ceklis_jobdesc_intern` (
 --
 
 INSERT INTO `tb_ceklis_jobdesc_intern` (`id_ceklis`, `id_detail`, `id_jobdesc_intern`, `date_start`, `date_end`) VALUES
-(121, 1, 115, '2022-04-22', '2022-04-28'),
-(122, 2, 115, '2022-04-22', '2022-04-28');
+(1, 18, 1, '2022-06-08', '2022-06-30');
 
 -- --------------------------------------------------------
 
@@ -122,16 +104,13 @@ CREATE TABLE `tb_comment_discussion` (
 --
 
 INSERT INTO `tb_comment_discussion` (`id_comment`, `id_discuss`, `replied_by`, `comment`, `replied_at`) VALUES
-(1, 15, 'Kim Seungmina', 'sadasd', '2022-03-23 10:28:37'),
-(2, 15, 'Kim Seungmina', 'sadsadasd', '2022-03-23 10:33:47'),
-(3, 15, 'Kim Seungmina', 'asdsadsaxc', '2022-03-23 10:35:04'),
-(4, 15, 'Kim Seungmina', 'sadasd', '2022-03-23 10:36:33'),
-(5, 16, 'Kim Seungmina', 'Kamu bohong !', '2022-03-23 10:38:13'),
-(6, 16, 'Kim Seungmina', 'Kamu yang bohong !', '2022-03-23 10:38:24'),
-(7, 16, 'Anjay', 'Kamu yang paling bohong !', '2022-03-23 10:38:44'),
-(8, 15, 'Kim Seungmina', 'Testing kirim komentar', '2022-04-07 08:59:33'),
-(9, 20, 'Lee Min Ho', 'oh iya juga ya', '2022-04-13 07:33:13'),
-(10, 22, 'Lee Min Ho', 'Sok hebat kali mahasiswanya', '2022-04-22 09:58:36');
+(11, 46, 'Hamdani Arif, S.Pd., M.Sc', 'dikumpulkan segera ya', '2022-05-24 09:33:02'),
+(12, 47, 'Hamdani Arif, S.Pd., M.Sc', 'dfvdvd', '2022-06-07 11:31:16'),
+(13, 46, 'Hamdani Arif, S.Pd., M.Sc', 'tolong dikumpulkan tepat waktu\r\n', '2022-06-07 11:31:40'),
+(14, 47, 'Hamdani Arif, S.Pd., M.Sc', 'jadi gini', '2022-06-10 06:14:12'),
+(15, 49, 'Hamdani Arif, S.Pd., M.Sc', 'gini caranya', '2022-06-21 15:45:30'),
+(16, 46, 'Hamdani Arif, S.Pd., M.Sc', 'gini gini', '2022-06-21 15:46:06'),
+(17, 50, 'Hamdani Arif, S.Pd., M.Sc', 'apa yang akan di periksa pak dalam pembuatannya?', '2022-06-27 14:49:15');
 
 -- --------------------------------------------------------
 
@@ -164,7 +143,7 @@ CREATE TABLE `tb_company` (
 
 INSERT INTO `tb_company` (`id_company`, `company_name`, `type`, `phone`, `email`, `website`, `facebook`, `twitter`, `instagram`, `header`, `address`, `province`, `city`, `description`, `status`, `access_type`) VALUES
 (1, 'Stark Industries', 'engineering', '0778-1256-7890', 'starkindustries@stark.company', 'psteam.ac.id', 'polibatam software team', '@polibatamsoftwareteam', '@PSTEAM.id', 'I\'m Iron Man !', 'Rumah Adam', 'USA', 'Manhattan City', 'What is Lorem Ipsum?^^\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. \r\nThe point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. ', 'VERIFIED', ''),
-(3, 'Sumitomo', '', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'Hello, this is sumitomo description', '', '1');
+(3, 'Sumitomo', 'others', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'Hello, this is sumitomo description', 'VERIFIED', '');
 
 -- --------------------------------------------------------
 
@@ -184,13 +163,7 @@ CREATE TABLE `tb_detail_jobdesc` (
 --
 
 INSERT INTO `tb_detail_jobdesc` (`id_detail`, `id_jobdesc`, `job_type`, `job_description`) VALUES
-(1, 2, 'Coding', 'Membuat program '),
-(2, 2, 'Multimedia', 'Mengedit gambar dan video'),
-(3, 5, 'Disassamble the machine', 'Bongkar mesin lalu dirangkai kembali'),
-(4, 5, 'Set up machine', 'polopolo'),
-(5, 6, 'Desain poster', 'Mendesain suatu poster'),
-(6, 6, 'Edit Video', 'Editing video'),
-(7, 6, 'IoT', 'membuat program android');
+(18, 17, 'php', 'bahasa pemograman yang banyak dikuasai oleh programer');
 
 -- --------------------------------------------------------
 
@@ -212,24 +185,11 @@ CREATE TABLE `tb_discussion` (
 --
 
 INSERT INTO `tb_discussion` (`id_discuss`, `started_by`, `date_posted`, `who_can_see`, `title`, `discuss`) VALUES
-(15, 'Kim Seungmina', '2022-03-23 14:43:49', '[\"44\",\"7\",\"117175\",\"45\",\"117175\"]', 'asddddddddddddddddd', 'asdddddddddddddddsadsa'),
-(16, 'Kim Seungmina', '2022-03-23 16:37:07', '[\"44\",\"7\",\"117175\",\"45\",\"117175\"]', 'Anjay', 'Kamu yang anjay !'),
-(18, 'Seo Changbin', '2022-03-23 16:56:07', '[\"44\",\"6\",\"117175\"]', 'Logbook', 'Berikut adalah aturan pengisian logbook :\r\n1. Datang\r\n2. Kerjakan\r\n3. Pulang\r\n4. Makan\r\n5. Tidur\r\n6. Nonton Drama Business Proposal dan Twenty Five Twenty One'),
-(19, 'Lee Min Ho', '2022-04-11 12:22:57', '[\"48\",\"8\",null]', 'Logbook and Attendance', 'Perihal logbook dan absensi jangan lupa untuk dikirimkan pada saya setiap minggu. Jika ada kendala dalam pengumpulannya hubungi saya, Terima kasih'),
-(20, 'Lee Min Ho', '2022-04-13 12:32:28', '[\"48\",\"8\",null,\"49\",null]', 'Logbook', 'kenapa logbook blabla'),
-(21, 'Christoper', '2022-04-20 13:45:39', 'null', 'Attendance', 'Dimana upload file absensi ya? saya mau cek\r\n'),
-(22, 'Lee Min Ho', '2022-04-22 14:57:56', '[\"47\",\"8\",null,\"48\",null,\"49\",null]', 'Netflix Clone', 'Mahasiswa gabisa bikin sesuai yang diharapkan. Disuruh bikin Netflix, malah beli perusahaannya langsung.');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_document`
---
-
-CREATE TABLE `tb_document` (
-  `id` int(11) NOT NULL,
-  `file` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(46, 'Hamdani Arif, S.Pd., M.Sc', '2022-05-24 14:23:33', '[\"50\",\"117175\",\"8\",\"52\",\"8\"]', 'Pembuatan Logbook', 'Tolong kumpulkan logbook nya yaa, saya tunggu'),
+(47, 'Hamdani Arif, S.Pd., M.Sc', '2022-05-24 18:49:37', '[\"50\",\"117175\",\"8\",\"52\",\"8\"]', 'yaaa', 'kenapa?\r\n'),
+(48, 'Hamdani Arif, S.Pd., M.Sc', '2022-06-10 11:14:55', '[\"1\",\"117175\",\"1\",\"50\",\"8\"]', 'Pemjelasan TA', 'Jadi TA merupakan hal yang wajib untuk lulus'),
+(49, 'Hamdani Arif, S.Pd., M.Sc', '2022-06-21 20:45:15', '[\"1\",\"117175\",\"1\",\"3\",\"1\",\"12\",\"1\",\"50\",\"8\"]', 'Presensi', 'gimana caranya?'),
+(50, 'Hamdani Arif, S.Pd., M.Sc', '2022-06-27 19:48:42', '[\"1\",\"117175\",\"8\",\"3\",\"1\"]', 'pembuatan Logbook mingguan', 'apa yang harus saya isi?');
 
 -- --------------------------------------------------------
 
@@ -260,7 +220,8 @@ CREATE TABLE `tb_industry_feedback` (
 --
 
 INSERT INTO `tb_industry_feedback` (`id_industry_feedback`, `id_internship`, `catatan_utk_mahasiswa`, `catatan_utk_poltek`, `layak_diterima`, `langsung_diterima`, `nilai_akhir`, `etika`, `keahlian_kompetensi`, `keahlian_bahasa`, `penggunaan_ti`, `komunikasi`, `kerjasama`, `pengembangan_diri`, `date`) VALUES
-(49, 47, 'asasas', 'asas', 'asasa', 'sasasa', '100', 4, 3, 3, 3, 4, 4, 4, '2022-04-22');
+(1, 12, 'baik', 'baik', 'ya', 'ya', '90', 4, 4, 3, 3, 4, 4, 4, '2022-06-21'),
+(2, 3, 'agar lebih baik lagi kedepan', 'agar dapat tetap bekerjasama dengan perusahaan kami di tahun berikutnya', 'ya layak', 'ya ', '90', 4, 3, 3, 3, 4, 4, 4, '2022-04-01');
 
 -- --------------------------------------------------------
 
@@ -292,9 +253,11 @@ CREATE TABLE `tb_internship` (
 --
 
 INSERT INTO `tb_internship` (`id_internship`, `nim`, `id_company`, `id_user_company`, `nik`, `start_date`, `end_date`, `apply_date`, `status_intern`, `file1`, `file2`, `file3`, `file4`, `date_finalreport`, `final_report`, `internship_period`) VALUES
-(47, '3311901044', 1, 8, NULL, '2022-04-01', '2023-06-10', '2022-03-21', 'YES', 'CV - 3311901044 - Yulia Wulandari.pdf', 'TRANSKRIP - 3311901044 - Yulia Wulandari.pdf', 'KTM - 3311901044- Yulia Wulandari.pdf', 'KTP.pdf', NULL, 'CyntyaMaharani_Borang PBM - Pendaftaran Magang.pdf', '8'),
-(48, '4311901038', 1, 8, NULL, '2022-04-11', '2023-04-11', '2022-03-22', 'NO', 'CV - 3311801031 - Yudhi Arma Mustika.pdf', 'CV-3311901053-Silvi Salputri.pdf', 'scan transkrip ulan gabungan.pdf', 'CV - 3311801042 - Andre Tamini Putra.pdf', NULL, 'All Chapter New 28 april.pdf', '8'),
-(49, '3311901088', 1, 9, NULL, '2022-04-15', '2022-04-29', '2022-03-21', 'YES', '', '', '', '', NULL, NULL, '8');
+(1, '3311901088', 1, 8, 117175, '2022-06-10', '2022-06-30', '0000-00-00', 'YES', '', '', '', '', NULL, '', ''),
+(3, '3311901045', 3, 1, 117175, '2022-01-12', '2022-05-31', '2022-05-24', 'YES', 'CV_dan_Portofolio_Kezia Angelina Sinaga_3311901045.pdf', 'Transkip Nilai_Kezia Angelina Sinaga_3311901045.pdf', 'Kezia Angelina Sinaga - Borang PBM - Pendaftaran Magang.pdf', 'KTM__Kezia Angelina Sinaga_3311901045.pdf', NULL, '06-3311901045_Laporan Akhir Magang.pdf', ''),
+(12, '3311901053', 1, 8, 107051, '2022-06-21', '2022-06-30', '2022-06-21', 'YES', '', '', '', '', NULL, '', ''),
+(50, '3311901044', 1, 8, 107051, '2022-05-17', '2022-05-31', '2022-05-24', 'YES', '', '', '', '', NULL, '', ''),
+(53, '3311901045', 3, NULL, NULL, '2022-07-23', '2022-07-22', '0000-00-00', 'PENDING', '', '', '', '', NULL, NULL, '1');
 
 -- --------------------------------------------------------
 
@@ -315,10 +278,7 @@ CREATE TABLE `tb_jobdesc` (
 --
 
 INSERT INTO `tb_jobdesc` (`id_jobdesc`, `prodi_name`, `nik`, `question_1`, `question_2`) VALUES
-(2, 'Informatika', 117175, 'Apa yang dimaksud hujan petir?', 'Kenapa hujan turun air bukan turun batu? jelaskan!'),
-(4, 'Mesin', 117176, 'Apa itu mesin?', 'Apa itu apa?'),
-(5, 'Logistik', 117175, 'Apa itu Logistik?', 'Kenapa hari ini sangat mengantuk?'),
-(6, 'Multimedia', 117175, 'Apa yang dipelajari selain opsi?', 'Desain/Video?');
+(17, 'Informatic Engineering', 117175, 'Apa yang kamu kuasai?', 'bahasa pemograman apa yang kamu bisa?');
 
 -- --------------------------------------------------------
 
@@ -341,21 +301,7 @@ CREATE TABLE `tb_jobdesc_intern` (
 --
 
 INSERT INTO `tb_jobdesc_intern` (`id_jobdesc_intern`, `id_jobdesc`, `id_internship`, `nim`, `timestamp_approval`, `answer_1`, `answer_2`) VALUES
-(115, 2, 47, '3311901044', '2022-04-22 14:45:36', 'AKWOKAKWAOKOWKAOKWOK', 'AOWKOAOWKOAKWOKAOWKOAWKO');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_job_description`
---
-
-CREATE TABLE `tb_job_description` (
-  `id_jobdesc` int(11) NOT NULL,
-  `id_internship` int(11) NOT NULL,
-  `description_jobdesc` varchar(1000) NOT NULL,
-  `another_jobdesc` varchar(1000) NOT NULL,
-  `expected_goal` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(1, 17, 3, '3311901045', '2022-06-27 14:15:44', 'php, java script', 'java script, laravel');
 
 -- --------------------------------------------------------
 
@@ -370,7 +316,7 @@ CREATE TABLE `tb_lecturer` (
   `email_polibatam` varchar(100) NOT NULL,
   `other_email` varchar(100) NOT NULL,
   `lecturer_phone` varchar(15) NOT NULL,
-  `user_type` enum('koordinator','pembimbing') NOT NULL,
+  `user_type` enum('coordinator','supervisor') NOT NULL,
   `status` enum('active','not_active') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -379,8 +325,8 @@ CREATE TABLE `tb_lecturer` (
 --
 
 INSERT INTO `tb_lecturer` (`nik`, `name_lecturer`, `program_study`, `email_polibatam`, `other_email`, `lecturer_phone`, `user_type`, `status`) VALUES
-(117175, 'Hamdani Arif', 'Informatika', 'hamdani@polibatam.ac.id', 'hamdani@gmail.com', '082172452323', 'pembimbing', 'active'),
-(117176, 'Supardianto', 'Mesin', 'supardianto@gmail.com', 'supardianto@polibatam.id', '082189765423', 'koordinator', 'active');
+(107051, 'Agus Fatulloh, S.T, M.T', 'Cyber Security Engineering', 'agusf@polibatam.ac.id', 'agusf@polibatam.ac.id', '087835236790', 'supervisor', 'active'),
+(117175, 'Hamdani Arif, S.Pd., M.Ss', 'Informatic Engineering', 'hamdaniarif@polibatam.ac.id', 'hamdaniarif@polibatam.ac.id', '087835775178', 'coordinator', 'active');
 
 -- --------------------------------------------------------
 
@@ -406,10 +352,30 @@ CREATE TABLE `tb_logbook` (
 --
 
 INSERT INTO `tb_logbook` (`id_logbook`, `id_internship`, `nim`, `description`, `documentation`, `startdate`, `enddate`, `week_num`, `approval_spv`, `approval_dpm`) VALUES
-(18, 47, '3311901044', 'Selasa, 01 Maret 2022 \r\n 1. Memperbaiki tampilan pada Job Description\r\n 2. Memperbaiki tampilan pada modal registration file\r\nRabu, 02 Maret 2022\r\n1. Mengerjakan function deselect\r\n2. Mengerjakan PHPMail\r\nKamis, 03 Maret 2022\r\nHari Raya Nyepi\r\nJumat, 04 Maret 2022\r\n1. Mengerjakan PHPMail\r\n', 'YULIA WULANDARI.pdf', '2022-02-02', '2022-02-06', '1', 'Yes', 'Pending'),
-(19, 47, '3311901044', 'Selasa, 01 Maret 2022 \r\n 1. Memperbaiki tampilan pada Job Description\r\n 2. Memperbaiki tampilan pada modal registration file\r\n', 'M2-Logbook-Yulia Wulandari.pdf', '2022-02-09', '2022-02-13', '2', 'Yes', 'Pending'),
-(20, 48, '4311901038', 'SAFDHFGJYGKII', 'Januari -3311901044-Yulia Wulandari.pdf', '2022-02-02', '2022-02-06', '1', 'Yes', 'Pending'),
-(21, 48, '4311901038', 'HEY TAYO', 'M6-Logbook-Yulia Wulandari.pdf', '2022-02-02', '2022-02-06', '2', 'Yes', 'Pending');
+(1, 50, '3311901044', '', '', '2022-05-24', '2022-02-28', '1', 'Pending', 'Yes'),
+(5, 12, '3311901053', 'saya mengerjakan ini', '', '2022-06-21', '2022-06-21', '1', 'Yes', ''),
+(23, 3, '3311901044', '1. membuat form login\n2. Membuat profile\n', 'KTP_Kezia Angelina Sinaga_3311901045.pdf', '2022-05-01', '2022-05-31', '1', 'Pending', 'Yes'),
+(24, 3, '3311901045', '<p>dvdfvfvdfvvfvdfvdfv</p>', 'Halaman Judul.pdf', '2022-07-27', '2022-07-30', '1', 'Pending', 'Pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_login_lecturer`
+--
+
+CREATE TABLE `tb_login_lecturer` (
+  `id_login_lecturer` int(11) NOT NULL,
+  `nik` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_login_lecturer`
+--
+
+INSERT INTO `tb_login_lecturer` (`id_login_lecturer`, `nik`, `username`, `password`) VALUES
+(1, 117145, 'Kezia', '$2y$10$PpbWFhq1tyAX6y..9ngwxerRqDjuN4e1nRhXatDTlFq2OaaWBBNPC');
 
 -- --------------------------------------------------------
 
@@ -458,13 +424,7 @@ CREATE TABLE `tb_profile_detail_comp` (
 --
 
 INSERT INTO `tb_profile_detail_comp` (`id_detail_profile`, `id_profile_jobdesc`, `unit_kompetensi`, `kode_matkul`, `matkul`) VALUES
-(1, 1, 'Manage the delivery of goods/loads/cargo', 'a', 'Distribution and Transportation'),
-(2, 1, 'Use the system to manage stock', 'b', 'Warehousing and Inventory'),
-(3, 1, 'Monitor storage facilities', 'b', 'Warehousing and Inventory'),
-(4, 1, 'Follow security procedures when handling goods/loads/cargo', 'a', 'Distribution and Transportation'),
-(5, 1, 'Consolidate Shipments', 'b', 'Warehousing and Inventory'),
-(6, 1, 'Assess and Confirm Customers Transportation Needs', 'a', 'Distribution and Transportation'),
-(7, 2, 'Complete and Check Import/Export Documents', 'c', 'Freight Forwarding');
+(15, 1, 'Manage the delivery of goods/loads/cargo', '', 'WiFi Penetration');
 
 -- --------------------------------------------------------
 
@@ -477,21 +437,6 @@ CREATE TABLE `tb_profile_detail_unit` (
   `id_detail_profile` int(11) NOT NULL,
   `detail_unit` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_profile_detail_unit`
---
-
-INSERT INTO `tb_profile_detail_unit` (`id_detail_unit`, `id_detail_profile`, `detail_unit`) VALUES
-(1, 1, 'Plan the delivery of goods/loads/cargo'),
-(2, 1, 'Organize, store, and deliver goods/loads/cargo'),
-(3, 1, 'Complete documentation'),
-(4, 2, 'Identity stock control systems used in the workplace'),
-(5, 2, 'Use the reorder procedure to maintain stock'),
-(6, 2, 'Manage regular stock counts and report discrepancies or discrepancies'),
-(7, 2, 'Make reports on the function of storage records and stock functions'),
-(8, 3, 'Define workplace functions and operations'),
-(9, 3, 'Monitor storage activities');
 
 -- --------------------------------------------------------
 
@@ -510,14 +455,7 @@ CREATE TABLE `tb_profile_jobdesc` (
 --
 
 INSERT INTO `tb_profile_jobdesc` (`id_profile_jobdesc`, `kode_prodi`, `nama_profile`) VALUES
-(1, 'Logistik', 'WAREHOUSE SUPERVISOR'),
-(2, 'Logistik', 'FREIGHT FORWARDER/FREIGHT EXPERTS'),
-(3, 'Logistik', 'SUPPLY CHAIN STAFF/SUPERVISOR'),
-(4, 'Logistik', 'ENTREPRENEURS'),
-(5, 'Logistik', 'EXPORT/IMPORT STAFF'),
-(6, 'Logistik', 'EXPORT/IMPORT SUPERVISOR'),
-(7, 'Logistik', 'PROCUREMENT SUPERVISOR/STAFF'),
-(8, 'Logistik', 'PPIC-PRODUCTION PLANNING AND INVENTORY CONTROL STAFF');
+(1, 'Informatic', 'Wirehouse program');
 
 -- --------------------------------------------------------
 
@@ -534,24 +472,6 @@ CREATE TABLE `tb_student_detail_profile` (
   `tgl_mulai` date NOT NULL,
   `tgl_selesai` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_student_detail_profile`
---
-
-INSERT INTO `tb_student_detail_profile` (`id_student_detail_profile`, `id_profile_jobdesc`, `id_detail_profile`, `nim`, `nilai`, `tgl_mulai`, `tgl_selesai`) VALUES
-(23, 1, 1, '3311901088', '2', '2022-04-07', '2022-04-23'),
-(24, 1, 2, '3311901088', '3', '2022-04-07', '2022-04-23'),
-(25, 1, 3, '3311901088', '1', '2022-04-07', '2022-04-23'),
-(26, 1, 1, '3311901088', '4', '2022-04-16', '2022-04-29'),
-(27, 1, 2, '3311901088', '3', '2022-04-16', '2022-04-29'),
-(28, 1, 3, '3311901088', '4', '2022-04-16', '2022-04-29'),
-(29, 1, 4, '3311901088', '2', '2022-04-16', '2022-04-29'),
-(30, 1, 1, '3311901088', '2', '2022-04-22', '2022-04-30'),
-(31, 1, 2, '3311901088', '4', '2022-04-22', '2022-04-30'),
-(32, 1, 3, '3311901088', '2', '2022-04-22', '2022-04-30'),
-(33, 1, 4, '3311901088', '3', '2022-04-22', '2022-04-30'),
-(34, 1, 5, '3311901088', '3', '2022-04-22', '2022-04-30');
 
 -- --------------------------------------------------------
 
@@ -571,6 +491,15 @@ CREATE TABLE `tb_student_feedback` (
   `kendala` text NOT NULL,
   `masukan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_student_feedback`
+--
+
+INSERT INTO `tb_student_feedback` (`id_student_feedback`, `id_internship`, `date`, `posisi`, `ilmu_dari_poltek`, `ilmu_baru`, `data_magang`, `kesan`, `kendala`, `masukan`) VALUES
+(1, 50, '2022-04-01', 4, 4, 3, 4, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\n\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.\n\n5\n	paragraphs\n	words\n	bytes\n	lists\n	Start with \'Lorem\nipsum dolor sit amet...\'\n'),
+(2, 1, '2022-06-21', 3, 4, 3, 4, 'sangat puas', 'jauh', 'seneng'),
+(3, 3, '2022-04-01', 4, 3, 3, 4, 'sangat teratur dan sangat ramah dilingkungan kantor', 'tidak ada kendala apapun dalam pengerjaan', 'wifinya sedikit di percepat untuk memaksimalkan kerja mahasiswa magang');
 
 -- --------------------------------------------------------
 
@@ -592,9 +521,10 @@ CREATE TABLE `tb_student_internship` (
 --
 
 INSERT INTO `tb_student_internship` (`nim`, `name`, `study_program`, `email`, `other_email`, `phone`) VALUES
-('3311901044', 'Yulia Wulandari', 'Informatika', 'yulia@gmail.com', 'googlingmyname@gmail.com', '0878812674'),
-('3311901088', 'Cyntya Maharani', 'Logistik', 'cyntyamaharani@gmail.com', 'cyncyn@gmail.com', '0878812674'),
-('4311901038', 'Adam Firdaus', 'Multimedia', 'adamfrdsid@gmail.com', 'googlingmyname@gmail.com', '0878812674');
+('3311901044', 'Yulia Wulandari', 'Cyber Security Engineering', 'googlingmyname@gmail.com', 'liony@polibatam.ac.id', '081278903456'),
+('3311901045', 'Kezia Angelina Sinaga', 'Informatic Engineering', 'kezia@gmail.com', 'kezia@gmail.com', '081278910123'),
+('3311901053', 'Silvi Salputri', 'Cyber Security Engineering', 'silvi@gmail.com', 'silvi@gmail.com', '53453453'),
+('3311901088', 'Cyntya Maharani', 'Geomatic Engineering', 'cyntyamaharani@gmail.com', 'cyncyn@gmail.com', '0878812674');
 
 -- --------------------------------------------------------
 
@@ -618,10 +548,8 @@ CREATE TABLE `tb_user_company` (
 --
 
 INSERT INTO `tb_user_company` (`id_user_company`, `id_company`, `user_fullname`, `user_phone`, `user_email`, `username`, `password`, `user_type`) VALUES
-(1, 1, 'Christoper Columbus', '081267053138', 'bangchrist@gmail.com', 'HRD.PSTEAM', '$2y$10$V71GlEXMDG.c8EiJKL8SC.9071yvkoef1jrsOma.QvBopDXnKC89K', 'HRD'),
-(7, 1, 'Kim Seungmin', '0865423157', 'kimseung@gmail.php', 'SUPERVISOR1', '$2y$10$LRUYL8gahOoxofcW34P/v.eYIPh6jc93graSSab0QbPtTMMDh4UYi', 'supervisor'),
-(8, 1, 'Lee Min Ho', '085156430801', 'leeminhoactor@gmail.com', 'SUPERVISOR2', '$2y$10$xCXnC9xlkoOFMLfpaZfWUuFesVCdKKdSW3i.6oyIuY0L7HZO1DtTK', 'supervisor'),
-(9, 1, 'Adam Firdaus', '085156430801', 'adamhehe@gmail.com', 'ADAM.EW', '$2y$10$6E0jYemUoG033/3.MIW5P.qkfhqsSJzvolVRNNy6k7iZEVl6U.Xxm', 'supervisor');
+(1, 1, 'Christoper Columbus', '081267053138', 'bangchrist@gmail.com', 'HRD.PSTEAM', '$2y$10$V71GlEXMDG.c8EiJKL8SC.9071yvkoef1jrsOma.QvBopDXnKC89K', 'supervisor'),
+(8, 3, 'Lee Min Ho', '085156430801', 'leeminhoactor@gmail.com', 'SUPERVISOR2', '$2y$10$xCXnC9xlkoOFMLfpaZfWUuFesVCdKKdSW3i.6oyIuY0L7HZO1DtTK', 'supervisor');
 
 --
 -- Indexes for dumped tables
@@ -681,12 +609,6 @@ ALTER TABLE `tb_discussion`
   ADD PRIMARY KEY (`id_discuss`);
 
 --
--- Indexes for table `tb_document`
---
-ALTER TABLE `tb_document`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tb_industry_feedback`
 --
 ALTER TABLE `tb_industry_feedback`
@@ -719,13 +641,6 @@ ALTER TABLE `tb_jobdesc_intern`
   ADD KEY `id_internship` (`id_internship`);
 
 --
--- Indexes for table `tb_job_description`
---
-ALTER TABLE `tb_job_description`
-  ADD PRIMARY KEY (`id_jobdesc`),
-  ADD KEY `id_internship` (`id_internship`);
-
---
 -- Indexes for table `tb_lecturer`
 --
 ALTER TABLE `tb_lecturer`
@@ -738,6 +653,13 @@ ALTER TABLE `tb_logbook`
   ADD PRIMARY KEY (`id_logbook`),
   ADD KEY `id_internship` (`id_internship`),
   ADD KEY `nim` (`nim`);
+
+--
+-- Indexes for table `tb_login_lecturer`
+--
+ALTER TABLE `tb_login_lecturer`
+  ADD PRIMARY KEY (`id_login_lecturer`),
+  ADD KEY `nik` (`nik`);
 
 --
 -- Indexes for table `tb_offer`
@@ -809,19 +731,19 @@ ALTER TABLE `tb_applicant`
 -- AUTO_INCREMENT for table `tb_attendance`
 --
 ALTER TABLE `tb_attendance`
-  MODIFY `id_attendance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_attendance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `tb_ceklis_jobdesc_intern`
 --
 ALTER TABLE `tb_ceklis_jobdesc_intern`
-  MODIFY `id_ceklis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id_ceklis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT for table `tb_comment_discussion`
 --
 ALTER TABLE `tb_comment_discussion`
-  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tb_company`
@@ -833,19 +755,13 @@ ALTER TABLE `tb_company`
 -- AUTO_INCREMENT for table `tb_detail_jobdesc`
 --
 ALTER TABLE `tb_detail_jobdesc`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tb_discussion`
 --
 ALTER TABLE `tb_discussion`
-  MODIFY `id_discuss` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT for table `tb_document`
---
-ALTER TABLE `tb_document`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_discuss` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tb_industry_feedback`
@@ -857,13 +773,13 @@ ALTER TABLE `tb_industry_feedback`
 -- AUTO_INCREMENT for table `tb_internship`
 --
 ALTER TABLE `tb_internship`
-  MODIFY `id_internship` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_internship` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `tb_jobdesc`
 --
 ALTER TABLE `tb_jobdesc`
-  MODIFY `id_jobdesc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_jobdesc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tb_jobdesc_intern`
@@ -872,22 +788,22 @@ ALTER TABLE `tb_jobdesc_intern`
   MODIFY `id_jobdesc_intern` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
--- AUTO_INCREMENT for table `tb_job_description`
---
-ALTER TABLE `tb_job_description`
-  MODIFY `id_jobdesc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
 -- AUTO_INCREMENT for table `tb_lecturer`
 --
 ALTER TABLE `tb_lecturer`
-  MODIFY `nik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117177;
+  MODIFY `nik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24232324;
 
 --
 -- AUTO_INCREMENT for table `tb_logbook`
 --
 ALTER TABLE `tb_logbook`
-  MODIFY `id_logbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_logbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `tb_login_lecturer`
+--
+ALTER TABLE `tb_login_lecturer`
+  MODIFY `id_login_lecturer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_offer`
@@ -899,13 +815,13 @@ ALTER TABLE `tb_offer`
 -- AUTO_INCREMENT for table `tb_profile_detail_comp`
 --
 ALTER TABLE `tb_profile_detail_comp`
-  MODIFY `id_detail_profile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_detail_profile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_profile_detail_unit`
 --
 ALTER TABLE `tb_profile_detail_unit`
-  MODIFY `id_detail_unit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_detail_unit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_profile_jobdesc`
@@ -923,7 +839,7 @@ ALTER TABLE `tb_student_detail_profile`
 -- AUTO_INCREMENT for table `tb_student_feedback`
 --
 ALTER TABLE `tb_student_feedback`
-  MODIFY `id_student_feedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_student_feedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_user_company`
@@ -997,12 +913,6 @@ ALTER TABLE `tb_jobdesc`
 ALTER TABLE `tb_jobdesc_intern`
   ADD CONSTRAINT `tb_jobdesc_intern_ibfk_1` FOREIGN KEY (`id_jobdesc`) REFERENCES `tb_jobdesc` (`id_jobdesc`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_jobdesc_intern_ibfk_2` FOREIGN KEY (`id_internship`) REFERENCES `tb_internship` (`id_internship`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tb_job_description`
---
-ALTER TABLE `tb_job_description`
-  ADD CONSTRAINT `tb_job_description_ibfk_1` FOREIGN KEY (`id_internship`) REFERENCES `tb_internship` (`id_internship`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_logbook`

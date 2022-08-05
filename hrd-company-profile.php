@@ -230,13 +230,13 @@ $token = $_SESSION['token'];
 										<div class="form-group form-show-validation row">
 											<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Name <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="company_name" name="company_name" value="<?php echo $data['company_name'] ?>" disabled>
+												<input type="text" class="form-control" id="company_name" name="company_name" value="<?php echo $data['company_name'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Type <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<select class="form-control" id="type" name="type" value="0">
+												<select class="form-control" id="type" name="type" value="0" disabled required>
 													<option value="agency" <?php if ($data['type'] == "agency") echo 'selected="selected"'; ?>>Agency</option>
 													<option value="design" <?php if ($data['type'] == "design") echo 'selected="selected"'; ?>>Design</option>
 													<option value="education" <?php if ($data['type'] == "education") echo 'selected="selected"'; ?>>Education</option>
@@ -255,39 +255,39 @@ $token = $_SESSION['token'];
 										<div class="form-group form-show-validation row">
 											<label for="phone" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone Number <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="phone" name="phone" value="<?php echo $data['phone'] ?>" disabled>
+												<input type="text" class="form-control" id="phone" name="phone" value="<?php echo $data['phone'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address
 												<span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="email" class="form-control" id="email" name="email" value="<?php echo $data['email'] ?>" disabled>
+												<input type="email" class="form-control" id="email" name="email" value="<?php echo $data['email'] ?>" disabled required>
 												<small id="emailHelp" class="form-text text-muted"></small>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label for="header" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Header <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="header" name="header" value="<?php echo $data['header'] ?>" disabled>
+												<input type="text" class="form-control" id="header" name="header" value="<?php echo $data['header'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label for="address" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Address <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="address" name="address" value="<?php echo $data['address'] ?>" disabled>
+												<input type="text" class="form-control" id="address" name="address" value="<?php echo $data['address'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label for="province" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Province <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="province" name="province" value="<?php echo $data['province'] ?>" disabled>
+												<input type="text" class="form-control" id="province" name="province" value="<?php echo $data['province'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label for="city" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">City <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="city" name="city" value="<?php echo $data['city'] ?>" disabled>
+												<input type="text" class="form-control" id="city" name="city" value="<?php echo $data['city'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">
@@ -303,7 +303,7 @@ $token = $_SESSION['token'];
 										<div class="form-group form-show-validation row">
 											<label for="website" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Company Website <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="website" name="website" value="<?php echo $data['website'] ?>" disabled>
+												<input type="text" class="form-control" id="website" name="website" value="<?php echo $data['website'] ?>" disabled required>
 											</div>
 										</div>
 										<div class="form-group form-show-validation row">

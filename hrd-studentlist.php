@@ -207,7 +207,6 @@ $token = $_SESSION['token'];
 									</div>
 								</div>
 								<div class="card-body">
-
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover">
 											<thead>
